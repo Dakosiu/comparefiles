@@ -2565,7 +2565,6 @@ bool Game::playerUseItemEx(uint32_t playerId, const Position& fromPos, int16_t f
 	}
 
 	player->setIdleTime(0);
-	player->setNextActionTask(NULL);
 	return g_actions->useItemEx(player, fromPos, toPos, toStackpos, item, isHotkey);
 }
 
@@ -2632,7 +2631,6 @@ bool Game::playerUseItem(uint32_t playerId, const Position& pos, int16_t stackpo
 	}
 
 	player->setIdleTime(0);
-	player->setNextActionTask(NULL);
 	return g_actions->useItem(player, pos, index, item);
 }
 
@@ -2709,7 +2707,6 @@ bool Game::playerUseBattleWindow(uint32_t playerId, const Position& fromPos, int
 	}
 
 	player->setIdleTime(0);
-	player->setNextActionTask(NULL);
 	return g_actions->useItemEx(player, fromPos, creature->getPosition(),
 		creature->getParent()->__getIndexOfThing(creature), item, isHotkey, creatureId);
 }

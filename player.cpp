@@ -1573,7 +1573,6 @@ bool Player::canShopItem(uint16_t itemId, uint8_t subType, ShopEvent_t event)
 void Player::onWalk(Direction& dir)
 {
 	Creature::onWalk(dir);
-	setNextActionTask(NULL);
 }
 
 void Player::onCreatureMove(const Creature* creature, const Tile* newTile, const Position& newPos,
@@ -3515,19 +3514,10 @@ void Player::doAttacking(uint32_t)
 	Item* item = getWeapon(false);
 	if(const Weapon* _weapon = g_weapons->getWeapon(item))
 	{
-		if(_weapon->interruptSwing() && !canDoAction())
-		{
-			SchedulerTask* task = createSchedulerTask(getNextActionTime(),
-				boost::bind(&Game::checkCreatureAttack, &g_game, getID()));
-			setNextActionTask(task);
-		}
-		else
-		{
-			if((!_weapon->hasExhaustion() || !hasCondition(CONDITION_EXHAUST, EXHAUST_COMBAT)) && _weapon->useWeapon(this, item, attackedCreature))
-				lastAttack = OTSYS_TIME();
+		if((!_weapon->hasExhaustion() || !hasCondition(CONDITION_EXHAUST, EXHAUST_COMBAT)) && _weapon->useWeapon(this, item, attackedCreature))
+			lastAttack = OTSYS_TIME();
 
-			updateWeapon();
-		}
+		updateWeapon();
 	}
 	else if(Weapon::useFist(this, attackedCreature))
 		lastAttack = OTSYS_TIME();
