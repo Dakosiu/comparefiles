@@ -34,24 +34,26 @@
 	<talkaction words="/town" access="2" filter="first word" script="teleporttotown.lua"/>
 	<talkaction words="/summon" access="2" filter="first word" script="placesummon.lua"/>
 	<talkaction words="/refreshmap" access="2" filter="first word" script="refreshmap.lua"/>
-	<talkaction words="/bc" access="2" filter="first word" script="broadcastclass.lua"/>
 	<talkaction words="/invisible" access="2" filter="first word" script="gminvisible.lua"/>
 	<talkaction words="/info" access="2" filter="first word" script="getinfo.lua"/>
 	<talkaction words="/z" access="2" filter="first word" script="testeffect.lua"/>
 
 	<!-- Tutors -->
+	<talkaction words="/bc" access="1" filter="first word" script="broadcastclass.lua"/>
 	<talkaction words="/serverinfo" access="1" script="serverinfo.lua"/>
 	<talkaction words="/getonline" access="1" filter="first word" script="accessonlinelist.lua"/>
 	<talkaction words="/gethouse" access="1" filter="first word" script="gethouse.lua"/>
 
 	<!-- Players -->
+	<talkaction words="!aol" acces="0" script="aol.lua"/>
+	<talkaction words="!share" acces="0" script="shareexp.lua"/>
+	<talkaction words="!spells" acces="0" script="spellbook.lua"/>
 	<talkaction words="!sellhouse" access="0" filter="first word" function="sellHouse"/>
 	<talkaction words="!buyhouse" access="0" script="buyhouse.lua"/>
 	<talkaction words="!leavehouse" access="0" script="leavehouse.lua"/>
 	<talkaction words="!houseinfo" access="0" script="houseinfo.lua"/>
 	<talkaction words="!online" access="0" script="onlinelist.lua"/>
 	<talkaction words="!frags" access="0" script="frags.lua"/>
-	<talkaction words="!share" access="0" script="shareexp.lua"/>
 	<talkaction words="!canshare" access="0" script="canuseshare.lua"/>
 	<talkaction words="!war" access="0" filter="first word" script="war.lua"/>
 </talkactions>
