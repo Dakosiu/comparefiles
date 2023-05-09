@@ -2,12 +2,77 @@
 <actions>
 	<!-- Quest System (based on map editor) -->
 	<action actionid="2000" script="system.lua"/>
+	<action actionid="2004" script="dailyboss.lua"/>
+	<action actionid="2005" script="dailybosss.lua"/>
+	<action actionid="2006" script="dailybossss.lua"/>
+	<action actionid="63001" script="kod.lua"/>
+	<action actionid="63002" script="kod.lua"/>
+	<action actionid="63003" script="kod.lua"/>
+	<action actionid="63004" script="drzwi.lua"/>
+	<action actionid="63005" script="accesdrzwi.lua"/>
+	<action actionid="63007" script="ani2.lua"/>
+	<action actionid="63008" script="ani2.lua"/>
+	<action actionid="63009" script="ani2.lua"/>
+	<action actionid="63010" script="bagquest.lua"/>
+	<action actionid="63011" script="bagquest.lua"/>
+	<action actionid="63012" script="bagquest.lua"/>
+	<action actionid="63013" script="bagquest.lua"/>
+	<action actionid="63014" script="armorquest.lua"/>
+	<action actionid="63015" script="armorquest.lua"/>
+	<action actionid="63016" script="legsquest.lua"/>
+	<action actionid="63017" script="legsquest.lua"/>
+	<action actionid="63018" script="helmetquest.lua"/>
+	<action actionid="63019" script="helmetquest.lua"/>
+	<action actionid="63020" script="bootsquest.lua"/>
+	<action actionid="63021" script="bootsquest.lua"/>
+	<action actionid="63022" script="accesnowyshop.lua"/>
+	<action actionid="63023" script="nowyshop.lua"/>
+
+
+
+
+
+
+
 	
 	<!-- Helmet of the ancients -->
+	<action itemid="2345" script="accesscroll.lua"/>
+	<action itemid="2294" script="supermr.lua"/>
+	<action itemid="2275" script="superuh.lua"/>
+	<action itemid="2270" script="manarune.lua"/>
 	<action itemid="2342" script="enchanting.lua"/>
+	<action itemid="2153" script="expgem.lua"/>
+	<action itemid="2557" script="upgradesword.lua"/>
+	<action itemid="2556" script="upgradeclub.lua"/>
+	<action itemid="2559" script="upgradeaxe.lua"/>
+	<action itemid="2558" script="upgradebolt.lua"/>
+	<action itemid="2158" script="bluegem.lua"/>
+	<action itemid="2422" script="upgradearrow.lua"/>
+	<action itemid="2273" script="uh.lua"/>
+	<action itemid="2298" script="hpmana.lua"/>
+	<action itemid="2284" script="yupgradearrow.lua"/>
+	<action itemid="2312" script="yupgradesword.lua"/>
+	<action itemid="2276" script="yupgradeclub.lua"/>
+	<action itemid="2307" script="yupgradeaxe.lua"/>
+	<action itemid="2299" script="yupgradebolt.lua"/>
+	<action itemid="2280" script="ymagearmor.lua"/>
+	<action itemid="2282" script="ymagelegs.lua"/>
+	<action itemid="2281" script="ymagehelmet.lua"/>
+	<action itemid="2551" script="ywarriorarmor.lua"/>
+	<action itemid="2548" script="ywarriorlegs.lua"/>
+	<action itemid="2552" script="ywarriorhelmet.lua"/>
+
+
+
 	
 	<!-- Tools -->
 	<action itemid="2120" script="rope.lua"/>
+	<action itemid="1990" script="presentbox.lua"/>
+	<action itemid="1994" script="presentbag.lua"/>
+	<action itemid="1991" script="armorbag.lua"/>
+	<action itemid="1995" script="legsbag.lua"/>
+	<action itemid="1997" script="helmetbag.lua"/>
+
 	<action itemid="2554" script="shovel.lua"/>
 	<action itemid="2420" script="machete.lua"/>
 	<action itemid="2442" script="machete.lua"/>
@@ -17,6 +82,9 @@
 	
 	<!-- Spellbooks -->
 	<action itemid="2175" script="spellbook.lua"/>
+   	<action itemid="2148" script="changegold.lua"/>
+    	<action itemid="2152" script="changegold.lua"/>
+    	<action itemid="2160" script="changegold.lua"/>
 
 	<!-- Watches and Clocks -->
 	<action itemid="1728" script="watch_clock.lua"/>
