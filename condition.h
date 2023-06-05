@@ -1,21 +1,5 @@
-/**
- * The Forgotten Server - a free and open-source MMORPG server emulator
- * Copyright (C) 2019  Mark Samman <mark.samman@gmail.com>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */
+// Copyright 2022 The Forgotten Server Authors. All rights reserved.
+// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
 
 #ifndef FS_CONDITION_H_F92FF8BDDD5B4EA59E2B1BB5C9C0A086
 #define FS_CONDITION_H_F92FF8BDDD5B4EA59E2B1BB5C9C0A086
@@ -51,7 +35,6 @@ enum ConditionAttr_t {
 	CONDITIONATTR_SOULGAIN,
 	CONDITIONATTR_SKILLS,
 	CONDITIONATTR_STATS,
-	CONDITIONATTR_BUFFS,
 	CONDITIONATTR_OUTFIT,
 	CONDITIONATTR_PERIODDAMAGE,
 	CONDITIONATTR_ISBUFF,
@@ -59,6 +42,7 @@ enum ConditionAttr_t {
 	CONDITIONATTR_ISAGGRESSIVE,
 	CONDITIONATTR_DISABLEDEFENSE,
 	CONDITIONATTR_SPECIALSKILLS,
+	CONDITIONATTR_BUFFS,
 
 	//reserved for serialization
 	CONDITIONATTR_END = 254,
@@ -177,24 +161,21 @@ class ConditionAttributes final : public ConditionGeneric
 		int32_t skills[SKILL_LAST + 1] = {};
 		int32_t skillsPercent[SKILL_LAST + 1] = {};
 		int32_t specialSkills[SPECIALSKILL_LAST + 1] = {};
+		int32_t buffs[BUFF_LAST + 1] = {};
+		
 		int32_t stats[STAT_LAST + 1] = {};
 		int32_t statsPercent[STAT_LAST + 1] = {};
 		int32_t currentSkill = 0;
 		int32_t currentSpecialSkill = 0;
 		int32_t currentStat = 0;
+        int32_t currentBuff = 0;
 		
-		int32_t buffsPercent[BUFF_LAST + 1] = {};
-    	int32_t buffs[BUFF_LAST + 1] = {};
-    	int32_t currentBuff = 0;
-
 		bool disableDefense = false;
 
 		void updatePercentStats(Player* player);
 		void updateStats(Player* player);
 		void updatePercentSkills(Player* player);
 		void updateSkills(Player* player);
-		void updatePercentBuffs(Creature* creature);
-    	void updateBuffs(Creature* creature);
 };
 
 class ConditionRegeneration final : public ConditionGeneric
