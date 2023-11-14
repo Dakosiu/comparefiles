@@ -1,0 +1,3499 @@
+Evotronus Server - Version 1.0
+
+Compiled with GNU C++ version 9.4.0
+Compiled on Oct 25 2023 17:37:58 for platform x64
+Linked with LuaJIT 2.1.0-beta3 for Lua support
+
+A server developed by The Evotronus Team
+Visit our forum for updates, support, and resources: https://otland.net/.
+
+>> Loading config
+> Loaded proxy with id: 1, ip: testingz.servegame.com, port: 7172, name: TestServer
+>> Loading RSA key 
+>> Establishing database connection... MySQL 8.0.34
+>> Running database manager
+>> Loading vocations
+>> Loading items
+[Warning - Items::parseItemNode] Unknown key value: ticks
+[Warning - Items::parseItemNode] Unknown key value: count
+[Warning - Items::parseItemNode] Unknown key value: damage
+[Warning - Items::parseItemNode] Unknown key value: ticks
+[Warning - Items::parseItemNode] Unknown key value: count
+[Warning - Items::parseItemNode] Unknown key value: damage
+[Warning - Items::parseItemNode] Unknown key value: ticks
+[Warning - Items::parseItemNode] Unknown key value: count
+[Warning - Items::parseItemNode] Unknown key value: damage
+[Warning - Items::parseItemNode] Duplicate item with id: 13946
+[Warning - Items::parseItemNode] Duplicate item with id: 21699
+[Warning - Items::parseItemNode] Duplicate item with id: 21252
+>> Loading script systems
+>> Using LuaJIT 2.1.0-beta3
+>> Loading lua libs
+> 07-Item Stats.lua [loaded]
+> 08-ItemRarity.lua [loaded]
+> OracleModal.lua [loaded]
+> create_functions.lua [loaded]
+> defaults_move_event.lua [loaded]
+> event_callbacks.lua [loaded]
+> helper_constructors.lua [loaded]
+> register_monster_type.lua [loaded]
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+
+Lua Script Error: [Test Interface] 
+data/actions/scripts/other/itemdoesntattackmonsters.lua
+data/actions/scripts/other/itemdoesntattackmonsters.lua:4: attempt to index global 'Storage' (a nil value)
+stack traceback:
+	[C]: in function '__index'
+	data/actions/scripts/other/itemdoesntattackmonsters.lua:4: in main chunk
+[Warning - Event::checkScript] Can not load script: scripts/other/itemdoesntattackmonsters.lua
+
+[Warning - Event::checkScript] Can not load script: scripts/ownertp.lua
+cannot open data/movements/scripts/ownertp.lua: No such file or directory
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+>> Loading lua scripts
+> #example.lua [disabled]
+> #example.lua [disabled]
+> 10LvlChest.lua [loaded]
+> DailyQuests.lua [loaded]
+> FridayChest.lua [loaded]
+> GlobalBuffs.lua [loaded]
+> MarketLevers.lua [loaded]
+> add Speed.lua [loaded]
+> add bpSlots.lua [loaded]
+> addBounce.lua [loaded]
+> autoTools.lua [loaded]
+> bossLevers.lua [loaded]
+> craftSpells.lua [loaded]
+> experienceBag.lua [loaded]
+> fragTimeRemover.lua [loaded]
+> levelItemBag.lua [loaded]
+> openTeleport.lua [loaded]
+> protecLossItems.lua [loaded]
+> randomChair.lua [loaded]
+> randomTeleport.lua [loaded]
+> randomregeneq.lua [loaded]
+> statsPointItems.lua [loaded]
+> surprisegreenbox.lua [loaded]
+> teleporTo.lua [loaded]
+> transformItem.lua [loaded]
+> unlockSpells.lua [loaded]
+> warriorcoinsbag.lua [loaded]
+> addExtraHealth.lua [loaded]
+> addExtraRegeneration.lua [loaded]
+> addon doll.lua [loaded]
+> banana.lua [loaded]
+> blessTemple.lua [loaded]
+> gods fruit.lua [loaded]
+> gods fruit2.lua [loaded]
+> itemstats.lua [loaded]
+> itemsystem.lua [loaded]
+> itemthathealsonstandon.lua [loaded]
+> mount doll.lua [loaded]
+> stamina.lua [loaded]
+> walkspeedrune.lua [loaded]
+> walkspeedrune2.lua [loaded]
+> afflicted_outfit.lua [loaded]
+> belongings_of_a_deceased.lua [loaded]
+> belongings_of_a_deceased_ravager.lua [loaded]
+> belongings_of_a_deceased_shargon.lua [loaded]
+> blessing_charms.lua [loaded]
+> blue_surprise_bag.lua [loaded]
+> carpets.lua [loaded]
+> christmas_bundle.lua [loaded]
+> clay_lump.lua [loaded]
+> costume_bag.lua [loaded]
+> crate_usable.lua [loaded]
+> cup_of_molten_gold.lua [loaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 6566 in range from id: 24331, to id: 20624
+> dolls.lua [loaded]
+> doors.lua [loaded]
+> explosive_present.lua [loaded]
+> ferumbras_amulet.lua [loaded]
+> ferumbras_mana_keg.lua [loaded]
+> ferumbras_staff.lua [loaded]
+> flower_pot.lua [loaded]
+> glooth_bag.lua [loaded]
+> gnomish_supply_package.lua [loaded]
+> gnomish_voucher_types.lua [loaded]
+> goldfish_bowl.lua [loaded]
+> gooey_mass.lua [loaded]
+> hive_gate.lua [loaded]
+> ice_flower.lua [loaded]
+> insectoid_cell.lua [loaded]
+> juicy_root.lua [loaded]
+> lottery_ticket.lua [loaded]
+> melting_horn.lua [loaded]
+[Warning - Actions::registerLuaEvent] There is no id / aid / uid set for this event
+> muck_remover.lua [loaded]
+> music_box.lua [loaded]
+> mysterious_remains.lua [loaded]
+> nail_case.lua [loaded]
+> painted_gourd_rattle.lua [loaded]
+> peppermoon_bells.lua [loaded]
+> premium_scroll.lua [loaded]
+> premium_scroll14days.lua [loaded]
+> premium_scroll30days.lua [loaded]
+> premium_scroll3days.lua [loaded]
+> premium_scroll7days.lua [loaded]
+> premium_scrollday.lua [loaded]
+> red_surprise_bag.lua [loaded]
+> roasted_meat.lua [loaded]
+> scroll_of_ascension.lua [loaded]
+> shaggy_ogre_bag.lua [loaded]
+> spellbook.lua [loaded]
+> spellwand.lua [loaded]
+> spider_egg.lua [loaded]
+> sugar_oat.lua [loaded]
+> surprise_cube.lua [loaded]
+> surprise_nest.lua [loaded]
+> suspicious_surprise_bag.lua [loaded]
+> sweetheart_ring.lua [loaded]
+> taming.lua [loaded]
+> tinder_box.lua [loaded]
+> transforms.lua [loaded]
+> usable_mount_items.lua [loaded]
+> voodoo_doll.lua [loaded]
+> windows.lua [loaded]
+> sarahupgrade.lua [loaded]
+> dustRemover.lua [loaded]
+> miningSystem.lua [loaded]
+> removeItem-onClick.lua [loaded]
+> runesSystem.lua [loaded]
+> check_bless.lua [loaded]
+> claw_of_the_noxious_spawn.lua [loaded]
+> firebug.lua [loaded]
+> gold_converter.lua [loaded]
+> juice_squeezer.lua [loaded]
+> rust_remover.lua [loaded]
+> saw.lua [loaded]
+> skinning.lua [loaded]
+> bossroom1.lua [loaded]
+> bossroomgoblins1.lua [loaded]
+> bossroomgoblins2.lua [loaded]
+> lineroll1.lua [loaded]
+> lineroll2.lua [loaded]
+> lineroll3.lua [loaded]
+> lineroll4.lua [loaded]
+> lineroll5.lua [loaded]
+> lineroll6.lua [loaded]
+> lineroll7.lua [loaded]
+> lineroll8.lua [loaded]
+> lineroll9.lua [loaded]
+> Bublet.lua [loaded]
+> DPSCounter.lua [loaded]
+> Dark Torturer Deluxe.lua [loaded]
+> Demon Deluxe.lua [loaded]
+> Destroyer Deluxe.lua [loaded]
+> OracleModal.lua [loaded]
+> mapText.lua [loaded]
+> sendTitles.lua [loaded]
+> deathChannel.lua [loaded]
+> dropItems.lua [loaded]
+> fire devil deluxe.lua [loaded]
+> gs_wyda_death.lua [loaded]
+> northern_pike_death.lua [loaded]
+> onLoginMapMark.lua [loaded]
+> scarab_death.lua [loaded]
+> softboots quest dragon lord.lua [loaded]
+> arenaDeath.lua [loaded]
+> outfitBonusSystem.lua [loaded]
+> summonFollow.lua [loaded]
+> taskSystem.lua [loaded]
+> wild_horse_death.lua [loaded]
+> add cap.lua [loaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 18422 in range from id: 18422, to id: 18422
+> add premium.lua [loaded]
+> bosses.lua [loaded]
+> cursed chest.lua [loaded]
+> dodge.lua [loaded]
+> expGems.lua [loaded]
+> phoenix event.lua [loaded]
+> rings.lua [loaded]
+> summblast3.lua [loaded]
+> summblast4.lua [loaded]
+> teleport-removeItem.lua [loaded]
+> teleporter.lua [loaded]
+> time remover.lua [loaded]
+> default_onDropLoot.lua [loaded]
+> default_onLook.lua [loaded]
+> default_onLookInBattleList.lua [loaded]
+> default_onMoveItem.lua [loaded]
+> default_onReportBug.lua [loaded]
+> default_onReportRuleViolation.lua [loaded]
+> firestorm.lua [loaded]
+> snakeevent.lua [loaded]
+> FixSpells.lua [loaded]
+> HealArea.lua [loaded]
+> Lottery.lua [loaded]
+> OnlinePlayers.lua [loaded]
+> TimeEffect.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> antiRollback.lua [loaded]
+> duplicateStorages.lua [loaded]
+> trapSystem.lua [loaded]
+> jail system.lua [loaded]
+> Base.lua [loaded]
+> BensMarket.lua [loaded]
+> Sofa.lua [loaded]
+> StorageVerifier.lua [loaded]
+> Trainers.lua [loaded]
+> Tutorial.lua [loaded]
+> claw_of_the_noxious_spawn.lua [loaded]
+> dailyroompremiummashine.lua [loaded]
+> dragon lord deluxe softquestentrance.lua [loaded]
+> fridayquest.lua [loaded]
+> huntteleportsexlusive.lua [loaded]
+> huntteleportsexlusive2.lua [loaded]
+> onEquipStorage.lua [loaded]
+> passagetofirstdesert.lua [loaded]
+> poison tile.lua [loaded]
+> questroompremiummashine1.lua [loaded]
+> questroompremiummashine2.lua [loaded]
+> questroompremiummashine3.lua [loaded]
+> rookgaard-finish.lua [loaded]
+> scarab tile.lua [loaded]
+> seeds.lua [loaded]
+> basinTransformSystem.lua [loaded]
+> staminaTile.lua [loaded]
+> templepremiummashine.lua [loaded]
+> yellow_pillow.lua [loaded]
+> sacrafice.lua [loaded]
+> ferumbrasdoll.lua [loaded]
+> herobossdoll.lua [loaded]
+> PoxStrike.lua [loaded]
+> bounce Summoner1.lua [loaded]
+> exura hyper vita.lua [loaded]
+> exura super vita.lua [loaded]
+> intense_summon_healing.lua [loaded]
+> burtaskazkokas.lua [loaded]
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/spells/plantMasRes.lua
+/home/ots/data/scripts/spells/plantMasRes.lua:73: attempt to call global 'vocation' (a nil value)
+stack traceback:
+	[C]: in function 'vocation'
+	/home/ots/data/scripts/spells/plantMasRes.lua:73: in main chunk
+> plantMasRes.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> don mr.lua [loaded]
+> don uh.lua [loaded]
+> frostrune.lua [loaded]
+> healthrunewarriorcoin1.lua [loaded]
+> healthrunewarriorcoin2.lua [loaded]
+> healthrunewarriorcoin3.lua [loaded]
+> manarunewarriorcoin1.lua [loaded]
+> manarunewarriorcoin2.lua [loaded]
+> manarunewarriorcoin3.lua [loaded]
+> quest mana.lua [loaded]
+> quest uh.lua [loaded]
+> spiritrunewarriorcoin1.lua [loaded]
+> spiritrunewarriorcoin2.lua [loaded]
+> spiritrunewarriorcoin3.lua [loaded]
+> sudden death rune.lua [loaded]
+[Warning - Spells::registerInstantLuaEvent] Duplicate registered instant spell with words: exori test
+> exori test.lua [loaded]
+> utamo knight strong.lua [loaded]
+> utamo knight.lua [loaded]
+> utamo mage strong.lua [loaded]
+> utamo mega strong.lua [loaded]
+> utamo sorc strong.lua [loaded]
+> utamo sorc super strong.lua [loaded]
+> utamo strong.lua [loaded]
+> utamo super strong.lua [loaded]
+> utevo remove.lua [loaded]
+> MonstersIncreaseDamage.lua [loaded]
+> RarityOnLoot.lua [loaded]
+> Unique Positions System.lua [loaded]
+> addStatPointsChest.lua [loaded]
+> addons.lua [loaded]
+> anti mc.lua [loaded]
+> antiPvpLoot.lua [loaded]
+> autoloot.lua [loaded]
+> afkProtection.lua [loaded]
+> explosion.lua [loaded]
+> fishing.lua [loaded]
+> onlineTime.lua [loaded]
+> taskSystem.lua [loaded]
+> trainweapons.lua [loaded]
+> trappedEnergy.lua [loaded]
+> bosses.lua [loaded]
+> bossesStatsPoint.lua [loaded]
+> bossspellswarningTEST.lua [loaded]
+> deleteGroundItem.lua [loaded]
+> eternal flame.lua [loaded]
+> extraHealing.lua [loaded]
+> extraHealth.lua [loaded]
+> extraHealthRegenerate.lua [loaded]
+> extraMana.lua [loaded]
+> extraManaRegenerate.lua [loaded]
+> itemShaders.lua [loaded]
+> mounts.lua [loaded]
+> protectionAllBase.lua [loaded]
+> quest system.lua [loaded]
+> rookgard.lua [loaded]
+> boostedCreatureSystem.lua [loaded]
+> add stats points.lua [loaded]
+> point_stat_system.lua [loaded]
+> summonsDamage.lua [loaded]
+> ModalShopMinorCrystallineTokens.lua [loaded]
+> addAura.lua [loaded]
+> addMount.lua [loaded]
+> addOutfit.lua [loaded]
+> addShader.lua [loaded]
+> addWing.lua [loaded]
+> animatedText.lua [loaded]
+> attribute.lua [loaded]
+> disableEffects.lua [loaded]
+> gift.lua [loaded]
+> goToTestServer.lua [loaded]
+> position.lua [loaded]
+> quitDungeons.lua [loaded]
+> rank.lua [loaded]
+> repairSoft.lua [loaded]
+> sayOpen.lua [loaded]
+> storagesManage.lua [loaded]
+> stuck.lua [loaded]
+> talkactions.lua [loaded]
+> toLearn.lua [loaded]
+> diamond_arrow.lua [loaded]
+> explosion.lua [loaded]
+> ricochet.lua [loaded]
+>> Loading monsters
+>> Loading lua monsters
+> #example.lua [disabled]
+>> Loading outfits
+>> Checking world type... PVP
+>> Loading map
+> Map size: 7799x7799.[Warning - IOMap::loadMap] Moveable item with ID: 1774, in house: 1375, at position [x: 1345, y: 1088, z: 5].
+Duplicate unique id: 2264
+Duplicate unique id: 2428
+Duplicate unique id: 2463
+> Map loading time: 34228.4 seconds.
+[1;31m>>>> Long file @/home/ots/data/scripts/weapons/ricochet.lua executed in 45856.801 ms[0m
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (necromantic robe)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (compound eye)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (crawler head plating)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling breaktime snack)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling ridge)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling scales)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling warts)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deeptags)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (eye of a deepling)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (key to the Drowned Library)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spellsinger's seal)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spidris mandible)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spitter nose)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (swarmer antenna)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid wing)
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning - Monsters::loadMonster] Unknown race type physical. data/monster/training light.xml
+[Warning - Monsters::loadMonster] Unknown loot item "demonbone". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/morgaroth.xml
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning - Monsters::loadMonster] Non-unique loot item "silver goblet". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/lost_soul.xml
+[Warning - Monsters::loadMonster] Unknown loot item "fish remains". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/frazzlemaw.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Vexclaw.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral masterblade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Gloom Wolf.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Ghost Wolf.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "26004". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/1090/Hellflayer.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Clomp.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Bone Capsule.xml
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (necromantic robe)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (compound eye)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (crawler head plating)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling breaktime snack)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling ridge)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling scales)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling warts)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deeptags)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (eye of a deepling)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (key to the Drowned Library)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spellsinger's seal)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spidris mandible)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spitter nose)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (swarmer antenna)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid wing)
+[Warning - Spawn::addMonster] Can not find Bullwark
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning - Spawn::addMonster] Can not find Warrior Specter
+[Warning - Monsters::loadMonster] Unknown loot item id "46114". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46115". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46116". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46117". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46033". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46034". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46035". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46036". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42287". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42286". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42285". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42284". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42295". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42296". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42297". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42298". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "pure energy". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/energy_overlord.xml
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Can't connect to MySQL server on '127.0.0.1:3306' (111)
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: SELECT `id`, `owner`, `paid`, `warnings` FROM `houses`
+Message: Lost connection to MySQL server during query
+Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46115". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46116". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46117". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown race type physical. data/monster/training light.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46033". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46034". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46035". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46036". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Vexclaw.xml
+> Fixed Spells
+Vanagas [1;32mhas logged in.[0m
+Bolek [1;32mhas logged in.[0m
+Invoker Supreme [1;32mhas logged in.[0m
+Cassidy [1;32mhas logged in.[0m
+Hellion [1;32mhas logged in.[0m
+Dakson [1;31mhas logged out.[0m
+Dakson [1;32mhas logged in.[0m
+> #example.lua [disabled]
+> #example.lua [disabled]
+> 10LvlChest.lua [reloaded]
+> DailyQuests.lua [reloaded]
+> FridayChest.lua [reloaded]
+> GlobalBuffs.lua [reloaded]
+> MarketLevers.lua [reloaded]
+> add Speed.lua [reloaded]
+> add bpSlots.lua [reloaded]
+> addBounce.lua [reloaded]
+> autoTools.lua [reloaded]
+> bossLevers.lua [reloaded]
+> craftSpells.lua [reloaded]
+> experienceBag.lua [reloaded]
+> fragTimeRemover.lua [reloaded]
+> levelItemBag.lua [reloaded]
+> openTeleport.lua [reloaded]
+> protecLossItems.lua [reloaded]
+> randomChair.lua [reloaded]
+> randomTeleport.lua [reloaded]
+> randomregeneq.lua [reloaded]
+> statsPointItems.lua [reloaded]
+> surprisegreenbox.lua [reloaded]
+> teleporTo.lua [reloaded]
+> transformItem.lua [reloaded]
+> unlockSpells.lua [reloaded]
+> warriorcoinsbag.lua [reloaded]
+> addExtraHealth.lua [reloaded]
+> addExtraRegeneration.lua [reloaded]
+> addon doll.lua [reloaded]
+> banana.lua [reloaded]
+> blessTemple.lua [reloaded]
+> gods fruit.lua [reloaded]
+> gods fruit2.lua [reloaded]
+> itemstats.lua [reloaded]
+> itemsystem.lua [reloaded]
+> itemthathealsonstandon.lua [reloaded]
+> mount doll.lua [reloaded]
+> stamina.lua [reloaded]
+> walkspeedrune.lua [reloaded]
+> walkspeedrune2.lua [reloaded]
+> afflicted_outfit.lua [reloaded]
+> belongings_of_a_deceased.lua [reloaded]
+> belongings_of_a_deceased_ravager.lua [reloaded]
+> belongings_of_a_deceased_shargon.lua [reloaded]
+> blessing_charms.lua [reloaded]
+> blue_surprise_bag.lua [reloaded]
+> carpets.lua [reloaded]
+> christmas_bundle.lua [reloaded]
+> clay_lump.lua [reloaded]
+> costume_bag.lua [reloaded]
+> crate_usable.lua [reloaded]
+> cup_of_molten_gold.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 6566 in range from id: 24331, to id: 20624
+> dolls.lua [reloaded]
+> doors.lua [reloaded]
+> explosive_present.lua [reloaded]
+> ferumbras_amulet.lua [reloaded]
+> ferumbras_mana_keg.lua [reloaded]
+> ferumbras_staff.lua [reloaded]
+> flower_pot.lua [reloaded]
+> glooth_bag.lua [reloaded]
+> gnomish_supply_package.lua [reloaded]
+> gnomish_voucher_types.lua [reloaded]
+> goldfish_bowl.lua [reloaded]
+> gooey_mass.lua [reloaded]
+> hive_gate.lua [reloaded]
+> ice_flower.lua [reloaded]
+> insectoid_cell.lua [reloaded]
+> juicy_root.lua [reloaded]
+> lottery_ticket.lua [reloaded]
+> melting_horn.lua [reloaded]
+[Warning - Actions::registerLuaEvent] There is no id / aid / uid set for this event
+> muck_remover.lua [reloaded]
+> music_box.lua [reloaded]
+> mysterious_remains.lua [reloaded]
+> nail_case.lua [reloaded]
+> painted_gourd_rattle.lua [reloaded]
+> peppermoon_bells.lua [reloaded]
+> premium_scroll.lua [reloaded]
+> premium_scroll14days.lua [reloaded]
+> premium_scroll30days.lua [reloaded]
+> premium_scroll3days.lua [reloaded]
+> premium_scroll7days.lua [reloaded]
+> premium_scrollday.lua [reloaded]
+> red_surprise_bag.lua [reloaded]
+> roasted_meat.lua [reloaded]
+> scroll_of_ascension.lua [reloaded]
+> shaggy_ogre_bag.lua [reloaded]
+> spellbook.lua [reloaded]
+> spellwand.lua [reloaded]
+> spider_egg.lua [reloaded]
+> sugar_oat.lua [reloaded]
+> surprise_cube.lua [reloaded]
+> surprise_nest.lua [reloaded]
+> suspicious_surprise_bag.lua [reloaded]
+> sweetheart_ring.lua [reloaded]
+> taming.lua [reloaded]
+> tinder_box.lua [reloaded]
+> transforms.lua [reloaded]
+> usable_mount_items.lua [reloaded]
+> voodoo_doll.lua [reloaded]
+> windows.lua [reloaded]
+> sarahupgrade.lua [reloaded]
+> dustRemover.lua [reloaded]
+> miningSystem.lua [reloaded]
+> removeItem-onClick.lua [reloaded]
+> runesSystem.lua [reloaded]
+> check_bless.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> firebug.lua [reloaded]
+> gold_converter.lua [reloaded]
+> juice_squeezer.lua [reloaded]
+> rust_remover.lua [reloaded]
+> saw.lua [reloaded]
+> skinning.lua [reloaded]
+> bossroom1.lua [reloaded]
+> bossroomgoblins1.lua [reloaded]
+> bossroomgoblins2.lua [reloaded]
+> lineroll1.lua [reloaded]
+> lineroll2.lua [reloaded]
+> lineroll3.lua [reloaded]
+> lineroll4.lua [reloaded]
+> lineroll5.lua [reloaded]
+> lineroll6.lua [reloaded]
+> lineroll7.lua [reloaded]
+> lineroll8.lua [reloaded]
+> lineroll9.lua [reloaded]
+> Bublet.lua [reloaded]
+> DPSCounter.lua [reloaded]
+> Dark Torturer Deluxe.lua [reloaded]
+> Demon Deluxe.lua [reloaded]
+> Destroyer Deluxe.lua [reloaded]
+> OracleModal.lua [reloaded]
+> mapText.lua [reloaded]
+> sendTitles.lua [reloaded]
+> deathChannel.lua [reloaded]
+> dropItems.lua [reloaded]
+> fire devil deluxe.lua [reloaded]
+> gs_wyda_death.lua [reloaded]
+> northern_pike_death.lua [reloaded]
+> onLoginMapMark.lua [reloaded]
+> scarab_death.lua [reloaded]
+> softboots quest dragon lord.lua [reloaded]
+> arenaDeath.lua [reloaded]
+> outfitBonusSystem.lua [reloaded]
+> summonFollow.lua [reloaded]
+> taskSystem.lua [reloaded]
+> wild_horse_death.lua [reloaded]
+> add cap.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 18422 in range from id: 18422, to id: 18422
+> add premium.lua [reloaded]
+> bosses.lua [reloaded]
+> cursed chest.lua [reloaded]
+> dodge.lua [reloaded]
+> expGems.lua [reloaded]
+> phoenix event.lua [reloaded]
+> rings.lua [reloaded]
+> summblast3.lua [reloaded]
+> summblast4.lua [reloaded]
+> teleport-removeItem.lua [reloaded]
+> teleporter.lua [reloaded]
+> time remover.lua [reloaded]
+> default_onDropLoot.lua [reloaded]
+> default_onLook.lua [reloaded]
+> default_onLookInBattleList.lua [reloaded]
+> default_onMoveItem.lua [reloaded]
+> default_onReportBug.lua [reloaded]
+> default_onReportRuleViolation.lua [reloaded]
+> firestorm.lua [reloaded]
+> snakeevent.lua [reloaded]
+> FixSpells.lua [reloaded]
+> HealArea.lua [reloaded]
+> Lottery.lua [reloaded]
+> OnlinePlayers.lua [reloaded]
+> TimeEffect.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> antiRollback.lua [reloaded]
+> duplicateStorages.lua [reloaded]
+> trapSystem.lua [reloaded]
+> jail system.lua [reloaded]
+> Base.lua [reloaded]
+> BensMarket.lua [reloaded]
+> Sofa.lua [reloaded]
+> StorageVerifier.lua [reloaded]
+> Trainers.lua [reloaded]
+> Tutorial.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> dailyroompremiummashine.lua [reloaded]
+> dragon lord deluxe softquestentrance.lua [reloaded]
+> fridayquest.lua [reloaded]
+> huntteleportsexlusive.lua [reloaded]
+> huntteleportsexlusive2.lua [reloaded]
+> onEquipStorage.lua [reloaded]
+> passagetofirstdesert.lua [reloaded]
+> poison tile.lua [reloaded]
+> questroompremiummashine1.lua [reloaded]
+> questroompremiummashine2.lua [reloaded]
+> questroompremiummashine3.lua [reloaded]
+> rookgaard-finish.lua [reloaded]
+> scarab tile.lua [reloaded]
+> seeds.lua [reloaded]
+> basinTransformSystem.lua [reloaded]
+> staminaTile.lua [reloaded]
+> templepremiummashine.lua [reloaded]
+> yellow_pillow.lua [reloaded]
+> sacrafice.lua [reloaded]
+> ferumbrasdoll.lua [reloaded]
+> herobossdoll.lua [reloaded]
+> PoxStrike.lua [reloaded]
+> bounce Summoner1.lua [reloaded]
+> exura hyper vita.lua [reloaded]
+> exura super vita.lua [reloaded]
+> intense_summon_healing.lua [reloaded]
+> burtaskazkokas.lua [reloaded]
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/spells/plantMasRes.lua
+/home/ots/data/scripts/spells/plantMasRes.lua:73: attempt to call global 'vocation' (a nil value)
+stack traceback:
+	[C]: in function 'vocation'
+	/home/ots/data/scripts/spells/plantMasRes.lua:73: in main chunk
+	[C]: in function 'reload'
+	data/talkactions/scripts/reload.lua:87: in function <data/talkactions/scripts/reload.lua:65>
+> plantMasRes.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> don mr.lua [reloaded]
+> don uh.lua [reloaded]
+> frostrune.lua [reloaded]
+> healthrunewarriorcoin1.lua [reloaded]
+> healthrunewarriorcoin2.lua [reloaded]
+> healthrunewarriorcoin3.lua [reloaded]
+> manarunewarriorcoin1.lua [reloaded]
+> manarunewarriorcoin2.lua [reloaded]
+> manarunewarriorcoin3.lua [reloaded]
+> quest mana.lua [reloaded]
+> quest uh.lua [reloaded]
+> spiritrunewarriorcoin1.lua [reloaded]
+> spiritrunewarriorcoin2.lua [reloaded]
+> spiritrunewarriorcoin3.lua [reloaded]
+> sudden death rune.lua [reloaded]
+[Warning - Spells::registerInstantLuaEvent] Duplicate registered instant spell with words: exori test
+> exori test.lua [reloaded]
+> utamo knight strong.lua [reloaded]
+> utamo knight.lua [reloaded]
+> utamo mage strong.lua [reloaded]
+> utamo mega strong.lua [reloaded]
+> utamo sorc strong.lua [reloaded]
+> utamo sorc super strong.lua [reloaded]
+> utamo strong.lua [reloaded]
+> utamo super strong.lua [reloaded]
+> utevo remove.lua [reloaded]
+> MonstersIncreaseDamage.lua [reloaded]
+> RarityOnLoot.lua [reloaded]
+> Unique Positions System.lua [reloaded]
+> addStatPointsChest.lua [reloaded]
+> addons.lua [reloaded]
+> anti mc.lua [reloaded]
+> antiPvpLoot.lua [reloaded]
+> autoloot.lua [reloaded]
+> afkProtection.lua [reloaded]
+> explosion.lua [reloaded]
+> fishing.lua [reloaded]
+> onlineTime.lua [reloaded]
+> taskSystem.lua [reloaded]
+> trainweapons.lua [reloaded]
+> trappedEnergy.lua [reloaded]
+> bosses.lua [reloaded]
+> bossesStatsPoint.lua [reloaded]
+> bossspellswarningTEST.lua [reloaded]
+> deleteGroundItem.lua [reloaded]
+> eternal flame.lua [reloaded]
+> extraHealing.lua [reloaded]
+> extraHealth.lua [reloaded]
+> extraHealthRegenerate.lua [reloaded]
+> extraMana.lua [reloaded]
+> extraManaRegenerate.lua [reloaded]
+> itemShaders.lua [reloaded]
+> mounts.lua [reloaded]
+> protectionAllBase.lua [reloaded]
+> quest system.lua [reloaded]
+> rookgard.lua [reloaded]
+> boostedCreatureSystem.lua [reloaded]
+> add stats points.lua [reloaded]
+> point_stat_system.lua [reloaded]
+> summonsDamage.lua [reloaded]
+> ModalShopMinorCrystallineTokens.lua [reloaded]
+> addAura.lua [reloaded]
+> addMount.lua [reloaded]
+> addOutfit.lua [reloaded]
+> addShader.lua [reloaded]
+> addWing.lua [reloaded]
+> animatedText.lua [reloaded]
+> attribute.lua [reloaded]
+> disableEffects.lua [reloaded]
+> gift.lua [reloaded]
+> goToTestServer.lua [reloaded]
+> position.lua [reloaded]
+> quitDungeons.lua [reloaded]
+> rank.lua [reloaded]
+> repairSoft.lua [reloaded]
+> sayOpen.lua [reloaded]
+> storagesManage.lua [reloaded]
+> stuck.lua [reloaded]
+> talkactions.lua [reloaded]
+> toLearn.lua [reloaded]
+> diamond_arrow.lua [reloaded]
+> explosion.lua [reloaded]
+> ricochet.lua [reloaded]
+[1;36mDakosek Reloaded scripts[0m
+1
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/jail system.lua:callback
+/home/ots/data/scripts/jail system.lua:111: attempt to concatenate local 'duration' (a nil value)
+stack traceback:
+	[C]: in function '__concat'
+	/home/ots/data/scripts/jail system.lua:111: in function 'addPlayer'
+	/home/ots/data/scripts/jail system.lua:314: in function </home/ots/data/scripts/jail system.lua:250>
+Dakosek [1;31mhas logged out.[0m
+Dakosek [1;32mhas logged in.[0m
+1
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/jail system.lua:callback
+/home/ots/data/scripts/jail system.lua:111: attempt to concatenate local 'duration' (a nil value)
+stack traceback:
+	[C]: in function '__concat'
+	/home/ots/data/scripts/jail system.lua:111: in function 'addPlayer'
+	/home/ots/data/scripts/jail system.lua:314: in function </home/ots/data/scripts/jail system.lua:250>
+> #example.lua [disabled]
+> #example.lua [disabled]
+> 10LvlChest.lua [reloaded]
+> DailyQuests.lua [reloaded]
+> FridayChest.lua [reloaded]
+> GlobalBuffs.lua [reloaded]
+> MarketLevers.lua [reloaded]
+> add Speed.lua [reloaded]
+> add bpSlots.lua [reloaded]
+> addBounce.lua [reloaded]
+> autoTools.lua [reloaded]
+> bossLevers.lua [reloaded]
+> craftSpells.lua [reloaded]
+> experienceBag.lua [reloaded]
+> fragTimeRemover.lua [reloaded]
+> levelItemBag.lua [reloaded]
+> openTeleport.lua [reloaded]
+> protecLossItems.lua [reloaded]
+> randomChair.lua [reloaded]
+> randomTeleport.lua [reloaded]
+> randomregeneq.lua [reloaded]
+> statsPointItems.lua [reloaded]
+> surprisegreenbox.lua [reloaded]
+> teleporTo.lua [reloaded]
+> transformItem.lua [reloaded]
+> unlockSpells.lua [reloaded]
+> warriorcoinsbag.lua [reloaded]
+> addExtraHealth.lua [reloaded]
+> addExtraRegeneration.lua [reloaded]
+> addon doll.lua [reloaded]
+> banana.lua [reloaded]
+> blessTemple.lua [reloaded]
+> gods fruit.lua [reloaded]
+> gods fruit2.lua [reloaded]
+> itemstats.lua [reloaded]
+> itemsystem.lua [reloaded]
+> itemthathealsonstandon.lua [reloaded]
+> mount doll.lua [reloaded]
+> stamina.lua [reloaded]
+> walkspeedrune.lua [reloaded]
+> walkspeedrune2.lua [reloaded]
+> afflicted_outfit.lua [reloaded]
+> belongings_of_a_deceased.lua [reloaded]
+> belongings_of_a_deceased_ravager.lua [reloaded]
+> belongings_of_a_deceased_shargon.lua [reloaded]
+> blessing_charms.lua [reloaded]
+> blue_surprise_bag.lua [reloaded]
+> carpets.lua [reloaded]
+> christmas_bundle.lua [reloaded]
+> clay_lump.lua [reloaded]
+> costume_bag.lua [reloaded]
+> crate_usable.lua [reloaded]
+> cup_of_molten_gold.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 6566 in range from id: 24331, to id: 20624
+> dolls.lua [reloaded]
+> doors.lua [reloaded]
+> explosive_present.lua [reloaded]
+> ferumbras_amulet.lua [reloaded]
+> ferumbras_mana_keg.lua [reloaded]
+> ferumbras_staff.lua [reloaded]
+> flower_pot.lua [reloaded]
+> glooth_bag.lua [reloaded]
+> gnomish_supply_package.lua [reloaded]
+> gnomish_voucher_types.lua [reloaded]
+> goldfish_bowl.lua [reloaded]
+> gooey_mass.lua [reloaded]
+> hive_gate.lua [reloaded]
+> ice_flower.lua [reloaded]
+> insectoid_cell.lua [reloaded]
+> juicy_root.lua [reloaded]
+> lottery_ticket.lua [reloaded]
+> melting_horn.lua [reloaded]
+[Warning - Actions::registerLuaEvent] There is no id / aid / uid set for this event
+> muck_remover.lua [reloaded]
+> music_box.lua [reloaded]
+> mysterious_remains.lua [reloaded]
+> nail_case.lua [reloaded]
+> painted_gourd_rattle.lua [reloaded]
+> peppermoon_bells.lua [reloaded]
+> premium_scroll.lua [reloaded]
+> premium_scroll14days.lua [reloaded]
+> premium_scroll30days.lua [reloaded]
+> premium_scroll3days.lua [reloaded]
+> premium_scroll7days.lua [reloaded]
+> premium_scrollday.lua [reloaded]
+> red_surprise_bag.lua [reloaded]
+> roasted_meat.lua [reloaded]
+> scroll_of_ascension.lua [reloaded]
+> shaggy_ogre_bag.lua [reloaded]
+> spellbook.lua [reloaded]
+> spellwand.lua [reloaded]
+> spider_egg.lua [reloaded]
+> sugar_oat.lua [reloaded]
+> surprise_cube.lua [reloaded]
+> surprise_nest.lua [reloaded]
+> suspicious_surprise_bag.lua [reloaded]
+> sweetheart_ring.lua [reloaded]
+> taming.lua [reloaded]
+> tinder_box.lua [reloaded]
+> transforms.lua [reloaded]
+> usable_mount_items.lua [reloaded]
+> voodoo_doll.lua [reloaded]
+> windows.lua [reloaded]
+> sarahupgrade.lua [reloaded]
+> dustRemover.lua [reloaded]
+> miningSystem.lua [reloaded]
+> removeItem-onClick.lua [reloaded]
+> runesSystem.lua [reloaded]
+> check_bless.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> firebug.lua [reloaded]
+> gold_converter.lua [reloaded]
+> juice_squeezer.lua [reloaded]
+> rust_remover.lua [reloaded]
+> saw.lua [reloaded]
+> skinning.lua [reloaded]
+> bossroom1.lua [reloaded]
+> bossroomgoblins1.lua [reloaded]
+> bossroomgoblins2.lua [reloaded]
+> lineroll1.lua [reloaded]
+> lineroll2.lua [reloaded]
+> lineroll3.lua [reloaded]
+> lineroll4.lua [reloaded]
+> lineroll5.lua [reloaded]
+> lineroll6.lua [reloaded]
+> lineroll7.lua [reloaded]
+> lineroll8.lua [reloaded]
+> lineroll9.lua [reloaded]
+> Bublet.lua [reloaded]
+> DPSCounter.lua [reloaded]
+> Dark Torturer Deluxe.lua [reloaded]
+> Demon Deluxe.lua [reloaded]
+> Destroyer Deluxe.lua [reloaded]
+> OracleModal.lua [reloaded]
+> mapText.lua [reloaded]
+> sendTitles.lua [reloaded]
+> deathChannel.lua [reloaded]
+> dropItems.lua [reloaded]
+> fire devil deluxe.lua [reloaded]
+> gs_wyda_death.lua [reloaded]
+> northern_pike_death.lua [reloaded]
+> onLoginMapMark.lua [reloaded]
+> scarab_death.lua [reloaded]
+> softboots quest dragon lord.lua [reloaded]
+> arenaDeath.lua [reloaded]
+> outfitBonusSystem.lua [reloaded]
+> summonFollow.lua [reloaded]
+> taskSystem.lua [reloaded]
+> wild_horse_death.lua [reloaded]
+> add cap.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 18422 in range from id: 18422, to id: 18422
+> add premium.lua [reloaded]
+> bosses.lua [reloaded]
+> cursed chest.lua [reloaded]
+> dodge.lua [reloaded]
+> expGems.lua [reloaded]
+> phoenix event.lua [reloaded]
+> rings.lua [reloaded]
+> summblast3.lua [reloaded]
+> summblast4.lua [reloaded]
+> teleport-removeItem.lua [reloaded]
+> teleporter.lua [reloaded]
+> time remover.lua [reloaded]
+> default_onDropLoot.lua [reloaded]
+> default_onLook.lua [reloaded]
+> default_onLookInBattleList.lua [reloaded]
+> default_onMoveItem.lua [reloaded]
+> default_onReportBug.lua [reloaded]
+> default_onReportRuleViolation.lua [reloaded]
+> firestorm.lua [reloaded]
+> snakeevent.lua [reloaded]
+> FixSpells.lua [reloaded]
+> HealArea.lua [reloaded]
+> Lottery.lua [reloaded]
+> OnlinePlayers.lua [reloaded]
+> TimeEffect.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> antiRollback.lua [reloaded]
+> duplicateStorages.lua [reloaded]
+> trapSystem.lua [reloaded]
+> jail system.lua [reloaded]
+> Base.lua [reloaded]
+> BensMarket.lua [reloaded]
+> Sofa.lua [reloaded]
+> StorageVerifier.lua [reloaded]
+> Trainers.lua [reloaded]
+> Tutorial.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> dailyroompremiummashine.lua [reloaded]
+> dragon lord deluxe softquestentrance.lua [reloaded]
+> fridayquest.lua [reloaded]
+> huntteleportsexlusive.lua [reloaded]
+> huntteleportsexlusive2.lua [reloaded]
+> onEquipStorage.lua [reloaded]
+> passagetofirstdesert.lua [reloaded]
+> poison tile.lua [reloaded]
+> questroompremiummashine1.lua [reloaded]
+> questroompremiummashine2.lua [reloaded]
+> questroompremiummashine3.lua [reloaded]
+> rookgaard-finish.lua [reloaded]
+> scarab tile.lua [reloaded]
+> seeds.lua [reloaded]
+> basinTransformSystem.lua [reloaded]
+> staminaTile.lua [reloaded]
+> templepremiummashine.lua [reloaded]
+> yellow_pillow.lua [reloaded]
+> sacrafice.lua [reloaded]
+> ferumbrasdoll.lua [reloaded]
+> herobossdoll.lua [reloaded]
+> PoxStrike.lua [reloaded]
+> bounce Summoner1.lua [reloaded]
+> exura hyper vita.lua [reloaded]
+> exura super vita.lua [reloaded]
+> intense_summon_healing.lua [reloaded]
+> burtaskazkokas.lua [reloaded]
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/spells/plantMasRes.lua
+/home/ots/data/scripts/spells/plantMasRes.lua:73: attempt to call global 'vocation' (a nil value)
+stack traceback:
+	[C]: in function 'vocation'
+	/home/ots/data/scripts/spells/plantMasRes.lua:73: in main chunk
+	[C]: in function 'reload'
+	data/talkactions/scripts/reload.lua:87: in function <data/talkactions/scripts/reload.lua:65>
+> plantMasRes.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> don mr.lua [reloaded]
+> don uh.lua [reloaded]
+> frostrune.lua [reloaded]
+> healthrunewarriorcoin1.lua [reloaded]
+> healthrunewarriorcoin2.lua [reloaded]
+> healthrunewarriorcoin3.lua [reloaded]
+> manarunewarriorcoin1.lua [reloaded]
+> manarunewarriorcoin2.lua [reloaded]
+> manarunewarriorcoin3.lua [reloaded]
+> quest mana.lua [reloaded]
+> quest uh.lua [reloaded]
+> spiritrunewarriorcoin1.lua [reloaded]
+> spiritrunewarriorcoin2.lua [reloaded]
+> spiritrunewarriorcoin3.lua [reloaded]
+> sudden death rune.lua [reloaded]
+[Warning - Spells::registerInstantLuaEvent] Duplicate registered instant spell with words: exori test
+> exori test.lua [reloaded]
+> utamo knight strong.lua [reloaded]
+> utamo knight.lua [reloaded]
+> utamo mage strong.lua [reloaded]
+> utamo mega strong.lua [reloaded]
+> utamo sorc strong.lua [reloaded]
+> utamo sorc super strong.lua [reloaded]
+> utamo strong.lua [reloaded]
+> utamo super strong.lua [reloaded]
+> utevo remove.lua [reloaded]
+> MonstersIncreaseDamage.lua [reloaded]
+> RarityOnLoot.lua [reloaded]
+> Unique Positions System.lua [reloaded]
+> addStatPointsChest.lua [reloaded]
+> addons.lua [reloaded]
+> anti mc.lua [reloaded]
+> antiPvpLoot.lua [reloaded]
+> autoloot.lua [reloaded]
+> afkProtection.lua [reloaded]
+> explosion.lua [reloaded]
+> fishing.lua [reloaded]
+> onlineTime.lua [reloaded]
+> taskSystem.lua [reloaded]
+> trainweapons.lua [reloaded]
+> trappedEnergy.lua [reloaded]
+> bosses.lua [reloaded]
+> bossesStatsPoint.lua [reloaded]
+> bossspellswarningTEST.lua [reloaded]
+> deleteGroundItem.lua [reloaded]
+> eternal flame.lua [reloaded]
+> extraHealing.lua [reloaded]
+> extraHealth.lua [reloaded]
+> extraHealthRegenerate.lua [reloaded]
+> extraMana.lua [reloaded]
+> extraManaRegenerate.lua [reloaded]
+> itemShaders.lua [reloaded]
+> mounts.lua [reloaded]
+> protectionAllBase.lua [reloaded]
+> quest system.lua [reloaded]
+> rookgard.lua [reloaded]
+> boostedCreatureSystem.lua [reloaded]
+> add stats points.lua [reloaded]
+> point_stat_system.lua [reloaded]
+> summonsDamage.lua [reloaded]
+> ModalShopMinorCrystallineTokens.lua [reloaded]
+> addAura.lua [reloaded]
+> addMount.lua [reloaded]
+> addOutfit.lua [reloaded]
+> addShader.lua [reloaded]
+> addWing.lua [reloaded]
+> animatedText.lua [reloaded]
+> attribute.lua [reloaded]
+> disableEffects.lua [reloaded]
+> gift.lua [reloaded]
+> goToTestServer.lua [reloaded]
+> position.lua [reloaded]
+> quitDungeons.lua [reloaded]
+> rank.lua [reloaded]
+> repairSoft.lua [reloaded]
+> sayOpen.lua [reloaded]
+> storagesManage.lua [reloaded]
+> stuck.lua [reloaded]
+> talkactions.lua [reloaded]
+> toLearn.lua [reloaded]
+> diamond_arrow.lua [reloaded]
+> explosion.lua [reloaded]
+> ricochet.lua [reloaded]
+[1;36mDakosek Reloaded scripts[0m
+Dakosek [1;31mhas logged out.[0m
+Dakosek [1;32mhas logged in.[0m
+1
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/jail system.lua:callback
+/home/ots/data/scripts/jail system.lua:111: attempt to concatenate local 'duration' (a nil value)
+stack traceback:
+	[C]: in function '__concat'
+	/home/ots/data/scripts/jail system.lua:111: in function 'addPlayer'
+	/home/ots/data/scripts/jail system.lua:314: in function </home/ots/data/scripts/jail system.lua:250>
+> #example.lua [disabled]
+> #example.lua [disabled]
+> 10LvlChest.lua [reloaded]
+> DailyQuests.lua [reloaded]
+> FridayChest.lua [reloaded]
+> GlobalBuffs.lua [reloaded]
+> MarketLevers.lua [reloaded]
+> add Speed.lua [reloaded]
+> add bpSlots.lua [reloaded]
+> addBounce.lua [reloaded]
+> autoTools.lua [reloaded]
+> bossLevers.lua [reloaded]
+> craftSpells.lua [reloaded]
+> experienceBag.lua [reloaded]
+> fragTimeRemover.lua [reloaded]
+> levelItemBag.lua [reloaded]
+> openTeleport.lua [reloaded]
+> protecLossItems.lua [reloaded]
+> randomChair.lua [reloaded]
+> randomTeleport.lua [reloaded]
+> randomregeneq.lua [reloaded]
+> statsPointItems.lua [reloaded]
+> surprisegreenbox.lua [reloaded]
+> teleporTo.lua [reloaded]
+> transformItem.lua [reloaded]
+> unlockSpells.lua [reloaded]
+> warriorcoinsbag.lua [reloaded]
+> addExtraHealth.lua [reloaded]
+> addExtraRegeneration.lua [reloaded]
+> addon doll.lua [reloaded]
+> banana.lua [reloaded]
+> blessTemple.lua [reloaded]
+> gods fruit.lua [reloaded]
+> gods fruit2.lua [reloaded]
+> itemstats.lua [reloaded]
+> itemsystem.lua [reloaded]
+> itemthathealsonstandon.lua [reloaded]
+> mount doll.lua [reloaded]
+> stamina.lua [reloaded]
+> walkspeedrune.lua [reloaded]
+> walkspeedrune2.lua [reloaded]
+> afflicted_outfit.lua [reloaded]
+> belongings_of_a_deceased.lua [reloaded]
+> belongings_of_a_deceased_ravager.lua [reloaded]
+> belongings_of_a_deceased_shargon.lua [reloaded]
+> blessing_charms.lua [reloaded]
+> blue_surprise_bag.lua [reloaded]
+> carpets.lua [reloaded]
+> christmas_bundle.lua [reloaded]
+> clay_lump.lua [reloaded]
+> costume_bag.lua [reloaded]
+> crate_usable.lua [reloaded]
+> cup_of_molten_gold.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 6566 in range from id: 24331, to id: 20624
+> dolls.lua [reloaded]
+> doors.lua [reloaded]
+> explosive_present.lua [reloaded]
+> ferumbras_amulet.lua [reloaded]
+> ferumbras_mana_keg.lua [reloaded]
+> ferumbras_staff.lua [reloaded]
+> flower_pot.lua [reloaded]
+> glooth_bag.lua [reloaded]
+> gnomish_supply_package.lua [reloaded]
+> gnomish_voucher_types.lua [reloaded]
+> goldfish_bowl.lua [reloaded]
+> gooey_mass.lua [reloaded]
+> hive_gate.lua [reloaded]
+> ice_flower.lua [reloaded]
+> insectoid_cell.lua [reloaded]
+> juicy_root.lua [reloaded]
+> lottery_ticket.lua [reloaded]
+> melting_horn.lua [reloaded]
+[Warning - Actions::registerLuaEvent] There is no id / aid / uid set for this event
+> muck_remover.lua [reloaded]
+> music_box.lua [reloaded]
+> mysterious_remains.lua [reloaded]
+> nail_case.lua [reloaded]
+> painted_gourd_rattle.lua [reloaded]
+> peppermoon_bells.lua [reloaded]
+> premium_scroll.lua [reloaded]
+> premium_scroll14days.lua [reloaded]
+> premium_scroll30days.lua [reloaded]
+> premium_scroll3days.lua [reloaded]
+> premium_scroll7days.lua [reloaded]
+> premium_scrollday.lua [reloaded]
+> red_surprise_bag.lua [reloaded]
+> roasted_meat.lua [reloaded]
+> scroll_of_ascension.lua [reloaded]
+> shaggy_ogre_bag.lua [reloaded]
+> spellbook.lua [reloaded]
+> spellwand.lua [reloaded]
+> spider_egg.lua [reloaded]
+> sugar_oat.lua [reloaded]
+> surprise_cube.lua [reloaded]
+> surprise_nest.lua [reloaded]
+> suspicious_surprise_bag.lua [reloaded]
+> sweetheart_ring.lua [reloaded]
+> taming.lua [reloaded]
+> tinder_box.lua [reloaded]
+> transforms.lua [reloaded]
+> usable_mount_items.lua [reloaded]
+> voodoo_doll.lua [reloaded]
+> windows.lua [reloaded]
+> sarahupgrade.lua [reloaded]
+> dustRemover.lua [reloaded]
+> miningSystem.lua [reloaded]
+> removeItem-onClick.lua [reloaded]
+> runesSystem.lua [reloaded]
+> check_bless.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> firebug.lua [reloaded]
+> gold_converter.lua [reloaded]
+> juice_squeezer.lua [reloaded]
+> rust_remover.lua [reloaded]
+> saw.lua [reloaded]
+> skinning.lua [reloaded]
+> bossroom1.lua [reloaded]
+> bossroomgoblins1.lua [reloaded]
+> bossroomgoblins2.lua [reloaded]
+> lineroll1.lua [reloaded]
+> lineroll2.lua [reloaded]
+> lineroll3.lua [reloaded]
+> lineroll4.lua [reloaded]
+> lineroll5.lua [reloaded]
+> lineroll6.lua [reloaded]
+> lineroll7.lua [reloaded]
+> lineroll8.lua [reloaded]
+> lineroll9.lua [reloaded]
+> Bublet.lua [reloaded]
+> DPSCounter.lua [reloaded]
+> Dark Torturer Deluxe.lua [reloaded]
+> Demon Deluxe.lua [reloaded]
+> Destroyer Deluxe.lua [reloaded]
+> OracleModal.lua [reloaded]
+> mapText.lua [reloaded]
+> sendTitles.lua [reloaded]
+> deathChannel.lua [reloaded]
+> dropItems.lua [reloaded]
+> fire devil deluxe.lua [reloaded]
+> gs_wyda_death.lua [reloaded]
+> northern_pike_death.lua [reloaded]
+> onLoginMapMark.lua [reloaded]
+> scarab_death.lua [reloaded]
+> softboots quest dragon lord.lua [reloaded]
+> arenaDeath.lua [reloaded]
+> outfitBonusSystem.lua [reloaded]
+> summonFollow.lua [reloaded]
+> taskSystem.lua [reloaded]
+> wild_horse_death.lua [reloaded]
+> add cap.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 18422 in range from id: 18422, to id: 18422
+> add premium.lua [reloaded]
+> bosses.lua [reloaded]
+> cursed chest.lua [reloaded]
+> dodge.lua [reloaded]
+> expGems.lua [reloaded]
+> phoenix event.lua [reloaded]
+> rings.lua [reloaded]
+> summblast3.lua [reloaded]
+> summblast4.lua [reloaded]
+> teleport-removeItem.lua [reloaded]
+> teleporter.lua [reloaded]
+> time remover.lua [reloaded]
+> default_onDropLoot.lua [reloaded]
+> default_onLook.lua [reloaded]
+> default_onLookInBattleList.lua [reloaded]
+> default_onMoveItem.lua [reloaded]
+> default_onReportBug.lua [reloaded]
+> default_onReportRuleViolation.lua [reloaded]
+> firestorm.lua [reloaded]
+> snakeevent.lua [reloaded]
+> FixSpells.lua [reloaded]
+> HealArea.lua [reloaded]
+> Lottery.lua [reloaded]
+> OnlinePlayers.lua [reloaded]
+> TimeEffect.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> antiRollback.lua [reloaded]
+> duplicateStorages.lua [reloaded]
+> trapSystem.lua [reloaded]
+> jail system.lua [reloaded]
+> Base.lua [reloaded]
+> BensMarket.lua [reloaded]
+> Sofa.lua [reloaded]
+> StorageVerifier.lua [reloaded]
+> Trainers.lua [reloaded]
+> Tutorial.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> dailyroompremiummashine.lua [reloaded]
+> dragon lord deluxe softquestentrance.lua [reloaded]
+> fridayquest.lua [reloaded]
+> huntteleportsexlusive.lua [reloaded]
+> huntteleportsexlusive2.lua [reloaded]
+> onEquipStorage.lua [reloaded]
+> passagetofirstdesert.lua [reloaded]
+> poison tile.lua [reloaded]
+> questroompremiummashine1.lua [reloaded]
+> questroompremiummashine2.lua [reloaded]
+> questroompremiummashine3.lua [reloaded]
+> rookgaard-finish.lua [reloaded]
+> scarab tile.lua [reloaded]
+> seeds.lua [reloaded]
+> basinTransformSystem.lua [reloaded]
+> staminaTile.lua [reloaded]
+> templepremiummashine.lua [reloaded]
+> yellow_pillow.lua [reloaded]
+> sacrafice.lua [reloaded]
+> ferumbrasdoll.lua [reloaded]
+> herobossdoll.lua [reloaded]
+> PoxStrike.lua [reloaded]
+> bounce Summoner1.lua [reloaded]
+> exura hyper vita.lua [reloaded]
+> exura super vita.lua [reloaded]
+> intense_summon_healing.lua [reloaded]
+> burtaskazkokas.lua [reloaded]
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/spells/plantMasRes.lua
+/home/ots/data/scripts/spells/plantMasRes.lua:73: attempt to call global 'vocation' (a nil value)
+stack traceback:
+	[C]: in function 'vocation'
+	/home/ots/data/scripts/spells/plantMasRes.lua:73: in main chunk
+	[C]: in function 'reload'
+	data/talkactions/scripts/reload.lua:87: in function <data/talkactions/scripts/reload.lua:65>
+> plantMasRes.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> don mr.lua [reloaded]
+> don uh.lua [reloaded]
+> frostrune.lua [reloaded]
+> healthrunewarriorcoin1.lua [reloaded]
+> healthrunewarriorcoin2.lua [reloaded]
+> healthrunewarriorcoin3.lua [reloaded]
+> manarunewarriorcoin1.lua [reloaded]
+> manarunewarriorcoin2.lua [reloaded]
+> manarunewarriorcoin3.lua [reloaded]
+> quest mana.lua [reloaded]
+> quest uh.lua [reloaded]
+> spiritrunewarriorcoin1.lua [reloaded]
+> spiritrunewarriorcoin2.lua [reloaded]
+> spiritrunewarriorcoin3.lua [reloaded]
+> sudden death rune.lua [reloaded]
+[Warning - Spells::registerInstantLuaEvent] Duplicate registered instant spell with words: exori test
+> exori test.lua [reloaded]
+> utamo knight strong.lua [reloaded]
+> utamo knight.lua [reloaded]
+> utamo mage strong.lua [reloaded]
+> utamo mega strong.lua [reloaded]
+> utamo sorc strong.lua [reloaded]
+> utamo sorc super strong.lua [reloaded]
+> utamo strong.lua [reloaded]
+> utamo super strong.lua [reloaded]
+> utevo remove.lua [reloaded]
+> MonstersIncreaseDamage.lua [reloaded]
+> RarityOnLoot.lua [reloaded]
+> Unique Positions System.lua [reloaded]
+> addStatPointsChest.lua [reloaded]
+> addons.lua [reloaded]
+> anti mc.lua [reloaded]
+> antiPvpLoot.lua [reloaded]
+> autoloot.lua [reloaded]
+> afkProtection.lua [reloaded]
+> explosion.lua [reloaded]
+> fishing.lua [reloaded]
+> onlineTime.lua [reloaded]
+> taskSystem.lua [reloaded]
+> trainweapons.lua [reloaded]
+> trappedEnergy.lua [reloaded]
+> bosses.lua [reloaded]
+> bossesStatsPoint.lua [reloaded]
+> bossspellswarningTEST.lua [reloaded]
+> deleteGroundItem.lua [reloaded]
+> eternal flame.lua [reloaded]
+> extraHealing.lua [reloaded]
+> extraHealth.lua [reloaded]
+> extraHealthRegenerate.lua [reloaded]
+> extraMana.lua [reloaded]
+> extraManaRegenerate.lua [reloaded]
+> itemShaders.lua [reloaded]
+> mounts.lua [reloaded]
+> protectionAllBase.lua [reloaded]
+> quest system.lua [reloaded]
+> rookgard.lua [reloaded]
+> boostedCreatureSystem.lua [reloaded]
+> add stats points.lua [reloaded]
+> point_stat_system.lua [reloaded]
+> summonsDamage.lua [reloaded]
+> ModalShopMinorCrystallineTokens.lua [reloaded]
+> addAura.lua [reloaded]
+> addMount.lua [reloaded]
+> addOutfit.lua [reloaded]
+> addShader.lua [reloaded]
+> addWing.lua [reloaded]
+> animatedText.lua [reloaded]
+> attribute.lua [reloaded]
+> disableEffects.lua [reloaded]
+> gift.lua [reloaded]
+> goToTestServer.lua [reloaded]
+> position.lua [reloaded]
+> quitDungeons.lua [reloaded]
+> rank.lua [reloaded]
+> repairSoft.lua [reloaded]
+> sayOpen.lua [reloaded]
+> storagesManage.lua [reloaded]
+> stuck.lua [reloaded]
+> talkactions.lua [reloaded]
+> toLearn.lua [reloaded]
+> diamond_arrow.lua [reloaded]
+> explosion.lua [reloaded]
+> ricochet.lua [reloaded]
+[1;36mDakosek Reloaded scripts[0m
+1
+Method: normal
+Duration Type: 5
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/jail system.lua:callback
+/home/ots/data/scripts/jail system.lua:313: attempt to concatenate local 'duration' (a nil value)
+stack traceback:
+	[C]: in function '__concat'
+	/home/ots/data/scripts/jail system.lua:313: in function </home/ots/data/scripts/jail system.lua:250>
+1
+Method: normal
+Duration Type: minute
+Duration: 5
+> #example.lua [disabled]
+> #example.lua [disabled]
+> 10LvlChest.lua [reloaded]
+> DailyQuests.lua [reloaded]
+> FridayChest.lua [reloaded]
+> GlobalBuffs.lua [reloaded]
+> MarketLevers.lua [reloaded]
+> add Speed.lua [reloaded]
+> add bpSlots.lua [reloaded]
+> addBounce.lua [reloaded]
+> autoTools.lua [reloaded]
+> bossLevers.lua [reloaded]
+> craftSpells.lua [reloaded]
+> experienceBag.lua [reloaded]
+> fragTimeRemover.lua [reloaded]
+> levelItemBag.lua [reloaded]
+> openTeleport.lua [reloaded]
+> protecLossItems.lua [reloaded]
+> randomChair.lua [reloaded]
+> randomTeleport.lua [reloaded]
+> randomregeneq.lua [reloaded]
+> statsPointItems.lua [reloaded]
+> surprisegreenbox.lua [reloaded]
+> teleporTo.lua [reloaded]
+> transformItem.lua [reloaded]
+> unlockSpells.lua [reloaded]
+> warriorcoinsbag.lua [reloaded]
+> addExtraHealth.lua [reloaded]
+> addExtraRegeneration.lua [reloaded]
+> addon doll.lua [reloaded]
+> banana.lua [reloaded]
+> blessTemple.lua [reloaded]
+> gods fruit.lua [reloaded]
+> gods fruit2.lua [reloaded]
+> itemstats.lua [reloaded]
+> itemsystem.lua [reloaded]
+> itemthathealsonstandon.lua [reloaded]
+> mount doll.lua [reloaded]
+> stamina.lua [reloaded]
+> walkspeedrune.lua [reloaded]
+> walkspeedrune2.lua [reloaded]
+> afflicted_outfit.lua [reloaded]
+> belongings_of_a_deceased.lua [reloaded]
+> belongings_of_a_deceased_ravager.lua [reloaded]
+> belongings_of_a_deceased_shargon.lua [reloaded]
+> blessing_charms.lua [reloaded]
+> blue_surprise_bag.lua [reloaded]
+> carpets.lua [reloaded]
+> christmas_bundle.lua [reloaded]
+> clay_lump.lua [reloaded]
+> costume_bag.lua [reloaded]
+> crate_usable.lua [reloaded]
+> cup_of_molten_gold.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 6566 in range from id: 24331, to id: 20624
+> dolls.lua [reloaded]
+> doors.lua [reloaded]
+> explosive_present.lua [reloaded]
+> ferumbras_amulet.lua [reloaded]
+> ferumbras_mana_keg.lua [reloaded]
+> ferumbras_staff.lua [reloaded]
+> flower_pot.lua [reloaded]
+> glooth_bag.lua [reloaded]
+> gnomish_supply_package.lua [reloaded]
+> gnomish_voucher_types.lua [reloaded]
+> goldfish_bowl.lua [reloaded]
+> gooey_mass.lua [reloaded]
+> hive_gate.lua [reloaded]
+> ice_flower.lua [reloaded]
+> insectoid_cell.lua [reloaded]
+> juicy_root.lua [reloaded]
+> lottery_ticket.lua [reloaded]
+> melting_horn.lua [reloaded]
+[Warning - Actions::registerLuaEvent] There is no id / aid / uid set for this event
+> muck_remover.lua [reloaded]
+> music_box.lua [reloaded]
+> mysterious_remains.lua [reloaded]
+> nail_case.lua [reloaded]
+> painted_gourd_rattle.lua [reloaded]
+> peppermoon_bells.lua [reloaded]
+> premium_scroll.lua [reloaded]
+> premium_scroll14days.lua [reloaded]
+> premium_scroll30days.lua [reloaded]
+> premium_scroll3days.lua [reloaded]
+> premium_scroll7days.lua [reloaded]
+> premium_scrollday.lua [reloaded]
+> red_surprise_bag.lua [reloaded]
+> roasted_meat.lua [reloaded]
+> scroll_of_ascension.lua [reloaded]
+> shaggy_ogre_bag.lua [reloaded]
+> spellbook.lua [reloaded]
+> spellwand.lua [reloaded]
+> spider_egg.lua [reloaded]
+> sugar_oat.lua [reloaded]
+> surprise_cube.lua [reloaded]
+> surprise_nest.lua [reloaded]
+> suspicious_surprise_bag.lua [reloaded]
+> sweetheart_ring.lua [reloaded]
+> taming.lua [reloaded]
+> tinder_box.lua [reloaded]
+> transforms.lua [reloaded]
+> usable_mount_items.lua [reloaded]
+> voodoo_doll.lua [reloaded]
+> windows.lua [reloaded]
+> sarahupgrade.lua [reloaded]
+> dustRemover.lua [reloaded]
+> miningSystem.lua [reloaded]
+> removeItem-onClick.lua [reloaded]
+> runesSystem.lua [reloaded]
+> check_bless.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> firebug.lua [reloaded]
+> gold_converter.lua [reloaded]
+> juice_squeezer.lua [reloaded]
+> rust_remover.lua [reloaded]
+> saw.lua [reloaded]
+> skinning.lua [reloaded]
+> bossroom1.lua [reloaded]
+> bossroomgoblins1.lua [reloaded]
+> bossroomgoblins2.lua [reloaded]
+> lineroll1.lua [reloaded]
+> lineroll2.lua [reloaded]
+> lineroll3.lua [reloaded]
+> lineroll4.lua [reloaded]
+> lineroll5.lua [reloaded]
+> lineroll6.lua [reloaded]
+> lineroll7.lua [reloaded]
+> lineroll8.lua [reloaded]
+> lineroll9.lua [reloaded]
+> Bublet.lua [reloaded]
+> DPSCounter.lua [reloaded]
+> Dark Torturer Deluxe.lua [reloaded]
+> Demon Deluxe.lua [reloaded]
+> Destroyer Deluxe.lua [reloaded]
+> OracleModal.lua [reloaded]
+> mapText.lua [reloaded]
+> sendTitles.lua [reloaded]
+> deathChannel.lua [reloaded]
+> dropItems.lua [reloaded]
+> fire devil deluxe.lua [reloaded]
+> gs_wyda_death.lua [reloaded]
+> northern_pike_death.lua [reloaded]
+> onLoginMapMark.lua [reloaded]
+> scarab_death.lua [reloaded]
+> softboots quest dragon lord.lua [reloaded]
+> arenaDeath.lua [reloaded]
+> outfitBonusSystem.lua [reloaded]
+> summonFollow.lua [reloaded]
+> taskSystem.lua [reloaded]
+> wild_horse_death.lua [reloaded]
+> add cap.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 18422 in range from id: 18422, to id: 18422
+> add premium.lua [reloaded]
+> bosses.lua [reloaded]
+> cursed chest.lua [reloaded]
+> dodge.lua [reloaded]
+> expGems.lua [reloaded]
+> phoenix event.lua [reloaded]
+> rings.lua [reloaded]
+> summblast3.lua [reloaded]
+> summblast4.lua [reloaded]
+> teleport-removeItem.lua [reloaded]
+> teleporter.lua [reloaded]
+> time remover.lua [reloaded]
+> default_onDropLoot.lua [reloaded]
+> default_onLook.lua [reloaded]
+> default_onLookInBattleList.lua [reloaded]
+> default_onMoveItem.lua [reloaded]
+> default_onReportBug.lua [reloaded]
+> default_onReportRuleViolation.lua [reloaded]
+> firestorm.lua [reloaded]
+> snakeevent.lua [reloaded]
+> FixSpells.lua [reloaded]
+> HealArea.lua [reloaded]
+> Lottery.lua [reloaded]
+> OnlinePlayers.lua [reloaded]
+> TimeEffect.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> antiRollback.lua [reloaded]
+> duplicateStorages.lua [reloaded]
+> trapSystem.lua [reloaded]
+> jail system.lua [reloaded]
+> Base.lua [reloaded]
+> BensMarket.lua [reloaded]
+> Sofa.lua [reloaded]
+> StorageVerifier.lua [reloaded]
+> Trainers.lua [reloaded]
+> Tutorial.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> dailyroompremiummashine.lua [reloaded]
+> dragon lord deluxe softquestentrance.lua [reloaded]
+> fridayquest.lua [reloaded]
+> huntteleportsexlusive.lua [reloaded]
+> huntteleportsexlusive2.lua [reloaded]
+> onEquipStorage.lua [reloaded]
+> passagetofirstdesert.lua [reloaded]
+> poison tile.lua [reloaded]
+> questroompremiummashine1.lua [reloaded]
+> questroompremiummashine2.lua [reloaded]
+> questroompremiummashine3.lua [reloaded]
+> rookgaard-finish.lua [reloaded]
+> scarab tile.lua [reloaded]
+> seeds.lua [reloaded]
+> basinTransformSystem.lua [reloaded]
+> staminaTile.lua [reloaded]
+> templepremiummashine.lua [reloaded]
+> yellow_pillow.lua [reloaded]
+> sacrafice.lua [reloaded]
+> ferumbrasdoll.lua [reloaded]
+> herobossdoll.lua [reloaded]
+> PoxStrike.lua [reloaded]
+> bounce Summoner1.lua [reloaded]
+> exura hyper vita.lua [reloaded]
+> exura super vita.lua [reloaded]
+> intense_summon_healing.lua [reloaded]
+> burtaskazkokas.lua [reloaded]
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/spells/plantMasRes.lua
+/home/ots/data/scripts/spells/plantMasRes.lua:73: attempt to call global 'vocation' (a nil value)
+stack traceback:
+	[C]: in function 'vocation'
+	/home/ots/data/scripts/spells/plantMasRes.lua:73: in main chunk
+	[C]: in function 'reload'
+	data/talkactions/scripts/reload.lua:87: in function <data/talkactions/scripts/reload.lua:65>
+> plantMasRes.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> don mr.lua [reloaded]
+> don uh.lua [reloaded]
+> frostrune.lua [reloaded]
+> healthrunewarriorcoin1.lua [reloaded]
+> healthrunewarriorcoin2.lua [reloaded]
+> healthrunewarriorcoin3.lua [reloaded]
+> manarunewarriorcoin1.lua [reloaded]
+> manarunewarriorcoin2.lua [reloaded]
+> manarunewarriorcoin3.lua [reloaded]
+> quest mana.lua [reloaded]
+> quest uh.lua [reloaded]
+> spiritrunewarriorcoin1.lua [reloaded]
+> spiritrunewarriorcoin2.lua [reloaded]
+> spiritrunewarriorcoin3.lua [reloaded]
+> sudden death rune.lua [reloaded]
+[Warning - Spells::registerInstantLuaEvent] Duplicate registered instant spell with words: exori test
+> exori test.lua [reloaded]
+> utamo knight strong.lua [reloaded]
+> utamo knight.lua [reloaded]
+> utamo mage strong.lua [reloaded]
+> utamo mega strong.lua [reloaded]
+> utamo sorc strong.lua [reloaded]
+> utamo sorc super strong.lua [reloaded]
+> utamo strong.lua [reloaded]
+> utamo super strong.lua [reloaded]
+> utevo remove.lua [reloaded]
+> MonstersIncreaseDamage.lua [reloaded]
+> RarityOnLoot.lua [reloaded]
+> Unique Positions System.lua [reloaded]
+> addStatPointsChest.lua [reloaded]
+> addons.lua [reloaded]
+> anti mc.lua [reloaded]
+> antiPvpLoot.lua [reloaded]
+> autoloot.lua [reloaded]
+> afkProtection.lua [reloaded]
+> explosion.lua [reloaded]
+> fishing.lua [reloaded]
+> onlineTime.lua [reloaded]
+> taskSystem.lua [reloaded]
+> trainweapons.lua [reloaded]
+> trappedEnergy.lua [reloaded]
+> bosses.lua [reloaded]
+> bossesStatsPoint.lua [reloaded]
+> bossspellswarningTEST.lua [reloaded]
+> deleteGroundItem.lua [reloaded]
+> eternal flame.lua [reloaded]
+> extraHealing.lua [reloaded]
+> extraHealth.lua [reloaded]
+> extraHealthRegenerate.lua [reloaded]
+> extraMana.lua [reloaded]
+> extraManaRegenerate.lua [reloaded]
+> itemShaders.lua [reloaded]
+> mounts.lua [reloaded]
+> protectionAllBase.lua [reloaded]
+> quest system.lua [reloaded]
+> rookgard.lua [reloaded]
+> boostedCreatureSystem.lua [reloaded]
+> add stats points.lua [reloaded]
+> point_stat_system.lua [reloaded]
+> summonsDamage.lua [reloaded]
+> ModalShopMinorCrystallineTokens.lua [reloaded]
+> addAura.lua [reloaded]
+> addMount.lua [reloaded]
+> addOutfit.lua [reloaded]
+> addShader.lua [reloaded]
+> addWing.lua [reloaded]
+> animatedText.lua [reloaded]
+> attribute.lua [reloaded]
+> disableEffects.lua [reloaded]
+> gift.lua [reloaded]
+> goToTestServer.lua [reloaded]
+> position.lua [reloaded]
+> quitDungeons.lua [reloaded]
+> rank.lua [reloaded]
+> repairSoft.lua [reloaded]
+> sayOpen.lua [reloaded]
+> storagesManage.lua [reloaded]
+> stuck.lua [reloaded]
+> talkactions.lua [reloaded]
+> toLearn.lua [reloaded]
+> diamond_arrow.lua [reloaded]
+> explosion.lua [reloaded]
+> ricochet.lua [reloaded]
+[1;36mDakosek Reloaded scripts[0m
+> Broadcasted message: "There is a strange smell coming from the air, beware Evotronus citizens!".
+> Broadcasted message: "Simpsons are falling from the Giant Ancient Trees, carefull they seem to appear all around in Evotronus city!".
+> Broadcasted message: "They are still dropping all around, help the city survive from those tricky sticky stinky creatures!".
+> #example.lua [disabled]
+> #example.lua [disabled]
+> 10LvlChest.lua [reloaded]
+> DailyQuests.lua [reloaded]
+> FridayChest.lua [reloaded]
+> GlobalBuffs.lua [reloaded]
+> MarketLevers.lua [reloaded]
+> add Speed.lua [reloaded]
+> add bpSlots.lua [reloaded]
+> addBounce.lua [reloaded]
+> autoTools.lua [reloaded]
+> bossLevers.lua [reloaded]
+> craftSpells.lua [reloaded]
+> experienceBag.lua [reloaded]
+> fragTimeRemover.lua [reloaded]
+> levelItemBag.lua [reloaded]
+> openTeleport.lua [reloaded]
+> protecLossItems.lua [reloaded]
+> randomChair.lua [reloaded]
+> randomTeleport.lua [reloaded]
+> randomregeneq.lua [reloaded]
+> statsPointItems.lua [reloaded]
+> surprisegreenbox.lua [reloaded]
+> teleporTo.lua [reloaded]
+> transformItem.lua [reloaded]
+> unlockSpells.lua [reloaded]
+> warriorcoinsbag.lua [reloaded]
+> addExtraHealth.lua [reloaded]
+> addExtraRegeneration.lua [reloaded]
+> addon doll.lua [reloaded]
+> banana.lua [reloaded]
+> blessTemple.lua [reloaded]
+> gods fruit.lua [reloaded]
+> gods fruit2.lua [reloaded]
+> itemstats.lua [reloaded]
+> itemsystem.lua [reloaded]
+> itemthathealsonstandon.lua [reloaded]
+> mount doll.lua [reloaded]
+> stamina.lua [reloaded]
+> walkspeedrune.lua [reloaded]
+> walkspeedrune2.lua [reloaded]
+> afflicted_outfit.lua [reloaded]
+> belongings_of_a_deceased.lua [reloaded]
+> belongings_of_a_deceased_ravager.lua [reloaded]
+> belongings_of_a_deceased_shargon.lua [reloaded]
+> blessing_charms.lua [reloaded]
+> blue_surprise_bag.lua [reloaded]
+> carpets.lua [reloaded]
+> christmas_bundle.lua [reloaded]
+> clay_lump.lua [reloaded]
+> costume_bag.lua [reloaded]
+> crate_usable.lua [reloaded]
+> cup_of_molten_gold.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 6566 in range from id: 24331, to id: 20624
+> dolls.lua [reloaded]
+> doors.lua [reloaded]
+> explosive_present.lua [reloaded]
+> ferumbras_amulet.lua [reloaded]
+> ferumbras_mana_keg.lua [reloaded]
+> ferumbras_staff.lua [reloaded]
+> flower_pot.lua [reloaded]
+> glooth_bag.lua [reloaded]
+> gnomish_supply_package.lua [reloaded]
+> gnomish_voucher_types.lua [reloaded]
+> goldfish_bowl.lua [reloaded]
+> gooey_mass.lua [reloaded]
+> hive_gate.lua [reloaded]
+> ice_flower.lua [reloaded]
+> insectoid_cell.lua [reloaded]
+> juicy_root.lua [reloaded]
+> lottery_ticket.lua [reloaded]
+> melting_horn.lua [reloaded]
+[Warning - Actions::registerLuaEvent] There is no id / aid / uid set for this event
+> muck_remover.lua [reloaded]
+> music_box.lua [reloaded]
+> mysterious_remains.lua [reloaded]
+> nail_case.lua [reloaded]
+> painted_gourd_rattle.lua [reloaded]
+> peppermoon_bells.lua [reloaded]
+> premium_scroll.lua [reloaded]
+> premium_scroll14days.lua [reloaded]
+> premium_scroll30days.lua [reloaded]
+> premium_scroll3days.lua [reloaded]
+> premium_scroll7days.lua [reloaded]
+> premium_scrollday.lua [reloaded]
+> red_surprise_bag.lua [reloaded]
+> roasted_meat.lua [reloaded]
+> scroll_of_ascension.lua [reloaded]
+> shaggy_ogre_bag.lua [reloaded]
+> spellbook.lua [reloaded]
+> spellwand.lua [reloaded]
+> spider_egg.lua [reloaded]
+> sugar_oat.lua [reloaded]
+> surprise_cube.lua [reloaded]
+> surprise_nest.lua [reloaded]
+> suspicious_surprise_bag.lua [reloaded]
+> sweetheart_ring.lua [reloaded]
+> taming.lua [reloaded]
+> tinder_box.lua [reloaded]
+> transforms.lua [reloaded]
+> usable_mount_items.lua [reloaded]
+> voodoo_doll.lua [reloaded]
+> windows.lua [reloaded]
+> sarahupgrade.lua [reloaded]
+> dustRemover.lua [reloaded]
+> miningSystem.lua [reloaded]
+> removeItem-onClick.lua [reloaded]
+> runesSystem.lua [reloaded]
+> check_bless.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> firebug.lua [reloaded]
+> gold_converter.lua [reloaded]
+> juice_squeezer.lua [reloaded]
+> rust_remover.lua [reloaded]
+> saw.lua [reloaded]
+> skinning.lua [reloaded]
+> bossroom1.lua [reloaded]
+> bossroomgoblins1.lua [reloaded]
+> bossroomgoblins2.lua [reloaded]
+> lineroll1.lua [reloaded]
+> lineroll2.lua [reloaded]
+> lineroll3.lua [reloaded]
+> lineroll4.lua [reloaded]
+> lineroll5.lua [reloaded]
+> lineroll6.lua [reloaded]
+> lineroll7.lua [reloaded]
+> lineroll8.lua [reloaded]
+> lineroll9.lua [reloaded]
+> Bublet.lua [reloaded]
+> DPSCounter.lua [reloaded]
+> Dark Torturer Deluxe.lua [reloaded]
+> Demon Deluxe.lua [reloaded]
+> Destroyer Deluxe.lua [reloaded]
+> OracleModal.lua [reloaded]
+> mapText.lua [reloaded]
+> sendTitles.lua [reloaded]
+> deathChannel.lua [reloaded]
+> dropItems.lua [reloaded]
+> fire devil deluxe.lua [reloaded]
+> gs_wyda_death.lua [reloaded]
+> northern_pike_death.lua [reloaded]
+> onLoginMapMark.lua [reloaded]
+> scarab_death.lua [reloaded]
+> softboots quest dragon lord.lua [reloaded]
+> arenaDeath.lua [reloaded]
+> outfitBonusSystem.lua [reloaded]
+> summonFollow.lua [reloaded]
+> taskSystem.lua [reloaded]
+> wild_horse_death.lua [reloaded]
+> add cap.lua [reloaded]
+[Warning - Actions::registerLuaEvent] Duplicate registered item with id: 18422 in range from id: 18422, to id: 18422
+> add premium.lua [reloaded]
+> bosses.lua [reloaded]
+> cursed chest.lua [reloaded]
+> dodge.lua [reloaded]
+> expGems.lua [reloaded]
+> phoenix event.lua [reloaded]
+> rings.lua [reloaded]
+> summblast3.lua [reloaded]
+> summblast4.lua [reloaded]
+> teleport-removeItem.lua [reloaded]
+> teleporter.lua [reloaded]
+> time remover.lua [reloaded]
+> default_onDropLoot.lua [reloaded]
+> default_onLook.lua [reloaded]
+> default_onLookInBattleList.lua [reloaded]
+> default_onMoveItem.lua [reloaded]
+> default_onReportBug.lua [reloaded]
+> default_onReportRuleViolation.lua [reloaded]
+> firestorm.lua [reloaded]
+> snakeevent.lua [reloaded]
+> FixSpells.lua [reloaded]
+> HealArea.lua [reloaded]
+> Lottery.lua [reloaded]
+> OnlinePlayers.lua [reloaded]
+> TimeEffect.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> antiRollback.lua [reloaded]
+> duplicateStorages.lua [reloaded]
+> trapSystem.lua [reloaded]
+> jail system.lua [reloaded]
+> Base.lua [reloaded]
+> BensMarket.lua [reloaded]
+> Sofa.lua [reloaded]
+> StorageVerifier.lua [reloaded]
+> Trainers.lua [reloaded]
+> Tutorial.lua [reloaded]
+> claw_of_the_noxious_spawn.lua [reloaded]
+> dailyroompremiummashine.lua [reloaded]
+> dragon lord deluxe softquestentrance.lua [reloaded]
+> fridayquest.lua [reloaded]
+> huntteleportsexlusive.lua [reloaded]
+> huntteleportsexlusive2.lua [reloaded]
+> onEquipStorage.lua [reloaded]
+> passagetofirstdesert.lua [reloaded]
+> poison tile.lua [reloaded]
+> questroompremiummashine1.lua [reloaded]
+> questroompremiummashine2.lua [reloaded]
+> questroompremiummashine3.lua [reloaded]
+> rookgaard-finish.lua [reloaded]
+> scarab tile.lua [reloaded]
+> seeds.lua [reloaded]
+> basinTransformSystem.lua [reloaded]
+> staminaTile.lua [reloaded]
+> templepremiummashine.lua [reloaded]
+> yellow_pillow.lua [reloaded]
+> sacrafice.lua [reloaded]
+> ferumbrasdoll.lua [reloaded]
+> herobossdoll.lua [reloaded]
+> PoxStrike.lua [reloaded]
+> bounce Summoner1.lua [reloaded]
+> exura hyper vita.lua [reloaded]
+> exura super vita.lua [reloaded]
+> intense_summon_healing.lua [reloaded]
+> burtaskazkokas.lua [reloaded]
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/spells/plantMasRes.lua
+/home/ots/data/scripts/spells/plantMasRes.lua:73: attempt to call global 'vocation' (a nil value)
+stack traceback:
+	[C]: in function 'vocation'
+	/home/ots/data/scripts/spells/plantMasRes.lua:73: in main chunk
+	[C]: in function 'reload'
+	data/talkactions/scripts/reload.lua:87: in function <data/talkactions/scripts/reload.lua:65>
+> plantMasRes.lua [error]
+^ /home/ots/data/scripts/globalevents/TimeEffect.lua:11: unexpected symbol near '}'
+> don mr.lua [reloaded]
+> don uh.lua [reloaded]
+> frostrune.lua [reloaded]
+> healthrunewarriorcoin1.lua [reloaded]
+> healthrunewarriorcoin2.lua [reloaded]
+> healthrunewarriorcoin3.lua [reloaded]
+> manarunewarriorcoin1.lua [reloaded]
+> manarunewarriorcoin2.lua [reloaded]
+> manarunewarriorcoin3.lua [reloaded]
+> quest mana.lua [reloaded]
+> quest uh.lua [reloaded]
+> spiritrunewarriorcoin1.lua [reloaded]
+> spiritrunewarriorcoin2.lua [reloaded]
+> spiritrunewarriorcoin3.lua [reloaded]
+> sudden death rune.lua [reloaded]
+[Warning - Spells::registerInstantLuaEvent] Duplicate registered instant spell with words: exori test
+> exori test.lua [reloaded]
+> utamo knight strong.lua [reloaded]
+> utamo knight.lua [reloaded]
+> utamo mage strong.lua [reloaded]
+> utamo mega strong.lua [reloaded]
+> utamo sorc strong.lua [reloaded]
+> utamo sorc super strong.lua [reloaded]
+> utamo strong.lua [reloaded]
+> utamo super strong.lua [reloaded]
+> utevo remove.lua [reloaded]
+> MonstersIncreaseDamage.lua [reloaded]
+> RarityOnLoot.lua [reloaded]
+> Unique Positions System.lua [reloaded]
+> addStatPointsChest.lua [reloaded]
+> addons.lua [reloaded]
+> anti mc.lua [reloaded]
+> antiPvpLoot.lua [reloaded]
+> autoloot.lua [reloaded]
+> afkProtection.lua [reloaded]
+> explosion.lua [reloaded]
+> fishing.lua [reloaded]
+> onlineTime.lua [reloaded]
+> taskSystem.lua [reloaded]
+> trainweapons.lua [reloaded]
+> trappedEnergy.lua [reloaded]
+> bosses.lua [reloaded]
+> bossesStatsPoint.lua [reloaded]
+> bossspellswarningTEST.lua [reloaded]
+> deleteGroundItem.lua [reloaded]
+> eternal flame.lua [reloaded]
+> extraHealing.lua [reloaded]
+> extraHealth.lua [reloaded]
+> extraHealthRegenerate.lua [reloaded]
+> extraMana.lua [reloaded]
+> extraManaRegenerate.lua [reloaded]
+> itemShaders.lua [reloaded]
+> mounts.lua [reloaded]
+> protectionAllBase.lua [reloaded]
+> quest system.lua [reloaded]
+> rookgard.lua [reloaded]
+> boostedCreatureSystem.lua [reloaded]
+> add stats points.lua [reloaded]
+> point_stat_system.lua [reloaded]
+> summonsDamage.lua [reloaded]
+> ModalShopMinorCrystallineTokens.lua [reloaded]
+> addAura.lua [reloaded]
+> addMount.lua [reloaded]
+> addOutfit.lua [reloaded]
+> addShader.lua [reloaded]
+> addWing.lua [reloaded]
+> animatedText.lua [reloaded]
+> attribute.lua [reloaded]
+> disableEffects.lua [reloaded]
+> gift.lua [reloaded]
+> goToTestServer.lua [reloaded]
+> position.lua [reloaded]
+> quitDungeons.lua [reloaded]
+> rank.lua [reloaded]
+> repairSoft.lua [reloaded]
+> sayOpen.lua [reloaded]
+> storagesManage.lua [reloaded]
+> stuck.lua [reloaded]
+> talkactions.lua [reloaded]
+> toLearn.lua [reloaded]
+> diamond_arrow.lua [reloaded]
+> explosion.lua [reloaded]
+> ricochet.lua [reloaded]
+[1;36mDakosek Reloaded scripts[0m
+Dakson [1;31mhas logged out.[0m
+Dakson [1;32mhas logged in.[0m
+> Broadcasted message: "There is a strange smell coming from the air, beware Evotronus citizens!".
+> Broadcasted message: "Bublets are falling from the Giant Ancient Trees, carefull they seem to appear all around in Evotronus city!".
+> Broadcasted message: "They are still dropping all around, young brave souls, help the city survive from those litle tricky creatures!".
+> Broadcasted message: "Attention, adventurers! Brace yourselves for Draken Spellweaver Ultima's awakening, far south east from Evotronus city in the Mountains of Drakens. Prepare yourself!".
+> Broadcasted message: "The Mountains of Drakens, far south east from Evotronus city, shiver with magic. Draken Spellweaver Ultima stirs, promising astounding rewards. Rally friends for the mystical battle and legendary loot!".
+> Broadcasted message: "Mystical danger nears! Draken Spellweaver Ultima prepares its magic far south east from Evotronus city, within the Mountains of Drakens. Gather strength for the trial and claim wondrous loot!".
+> Broadcasted message: "Last call to action! Draken Spellweaver Ultima emerges in the Mountains of Drakens, you can also use command /bosses to find the boss. Face the arcane trial, seize amazing loot, and etch your name in legend!!".
+[Error - AreaSpawnEvent::executeEvent] Can't create monster Draken Spellweaver Ultima
+
+Lua Script Error: [Scripts Interface] 
+/home/ots/data/scripts/jail system.lua:callback
+/home/ots/data/scripts/jail system.lua:111: attempt to concatenate local 'duration' (a nil value)
+stack traceback:
+	[C]: in function '__concat'
+	/home/ots/data/scripts/jail system.lua:111: in function 'addPlayer'
+	/home/ots/data/scripts/jail system.lua:317: in function </home/ots/data/scripts/jail system.lua:250>
+Invoker Supreme choosed vocation: Summoner
+[1;31m>>>> Long file @data/creaturescripts/scripts/extendedopcode.lua executed in 3425.659 ms[0m
+Dako [1;31mhas logged out.[0m
+Dakson [1;31mhas logged out.[0m
+Dakson [1;32mhas logged in.[0m
+> Broadcasted message: "Evotronus is saving game in 5 minutes.".
+> Broadcasted message: "Evotronus is saving game in 3 minutes.".
+Dakson [1;31mhas logged out.[0m
+Dakosek [1;31mhas logged out.[0m
+SIGHUP received, reloading config files...
+
+Lua Script Error: [Test Interface] 
+data/actions/scripts/other/itemdoesntattackmonsters.lua
+data/actions/scripts/other/itemdoesntattackmonsters.lua:4: attempt to index global 'Storage' (a nil value)
+stack traceback:
+	[C]: in function '__index'
+	data/actions/scripts/other/itemdoesntattackmonsters.lua:4: in main chunk
+[Warning - Event::checkScript] Can not load script: scripts/other/itemdoesntattackmonsters.lua
+cannot open data/movements/scripts/ownertp.lua: No such file or directory
+Reloaded actions.
+Reloaded config.
+Reloaded creature scripts.
+[Warning - Event::checkScript] Can not load script: scripts/ownertp.lua
+cannot open data/movements/scripts/ownertp.lua: No such file or directory
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+Reloaded movements.
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (necromantic robe)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (compound eye)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (crawler head plating)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling breaktime snack)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling ridge)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling scales)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling warts)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deeptags)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (eye of a deepling)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (key to the Drowned Library)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spellsinger's seal)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spidris mandible)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spitter nose)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (swarmer antenna)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid wing)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (necromantic robe)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (compound eye)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (crawler head plating)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling breaktime snack)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling ridge)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling scales)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling warts)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deeptags)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (eye of a deepling)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (key to the Drowned Library)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spellsinger's seal)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spidris mandible)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spitter nose)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (swarmer antenna)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid wing)
+Reloaded npcs.
+Reloaded raids.
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Bone Capsule.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Clomp.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42295". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42296". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42297". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42298". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "pure energy". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/energy_overlord.xml
+[Warning - Monsters::loadMonster] Unknown loot item "fish remains". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/frazzlemaw.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral masterblade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Ghost Wolf.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Gloom Wolf.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "26004". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/1090/Hellflayer.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "silver goblet". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/lost_soul.xml
+[Warning - Monsters::loadMonster] Unknown loot item "demonbone". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/morgaroth.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42287". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42286". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42285". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42284". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46114". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46115". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46116". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46117". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown race type physical. data/monster/training light.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46033". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46034". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46035". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46036". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Vexclaw.xml
+Reloaded monsters.
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+Reloaded spells.
+Reloaded talk actions.
+[Warning - Items::parseItemNode] Unknown key value: ticks
+[Warning - Items::parseItemNode] Unknown key value: count
+[Warning - Items::parseItemNode] Unknown key value: damage
+[Warning - Items::parseItemNode] Unknown key value: ticks
+[Warning - Items::parseItemNode] Unknown key value: count
+[Warning - Items::parseItemNode] Unknown key value: damage
+[Warning - Items::parseItemNode] Unknown key value: ticks
+[Warning - Items::parseItemNode] Unknown key value: count
+[Warning - Items::parseItemNode] Unknown key value: damage
+[Warning - Items::parseItemNode] Duplicate item with id: 13946
+[Warning - Items::parseItemNode] Duplicate item with id: 21699
+[Warning - Items::parseItemNode] Duplicate item with id: 21252
+[Warning - Event::checkScript] Can not load script: scripts/ownertp.lua
+cannot open data/movements/scripts/ownertp.lua: No such file or directory
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+Reloaded items.
+Reloaded weapons.
+Reloaded quests.
+Reloaded mounts.
+Reloaded auras.
+Reloaded wings.
+Reloaded globalevents.
+Reloaded events.
+Reloaded chatchannels.
+>> Using LuaJIT 2.1.0-beta3
+Reloaded global.lua.
+SIGHUP received, reloading config files...
+
+Lua Script Error: [Test Interface] 
+data/actions/scripts/other/itemdoesntattackmonsters.lua
+data/actions/scripts/other/itemdoesntattackmonsters.lua:4: attempt to index global 'Storage' (a nil value)
+stack traceback:
+	[C]: in function '__index'
+	data/actions/scripts/other/itemdoesntattackmonsters.lua:4: in main chunk
+[Warning - Event::checkScript] Can not load script: scripts/other/itemdoesntattackmonsters.lua
+cannot open data/movements/scripts/ownertp.lua: No such file or directory
+Reloaded actions.
+Reloaded config.
+Reloaded creature scripts.
+[Warning - Event::checkScript] Can not load script: scripts/ownertp.lua
+cannot open data/movements/scripts/ownertp.lua: No such file or directory
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+Reloaded movements.
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (necromantic robe)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (compound eye)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (crawler head plating)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling breaktime snack)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling ridge)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling scales)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling warts)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deeptags)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (eye of a deepling)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (key to the Drowned Library)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spellsinger's seal)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spidris mandible)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spitter nose)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (swarmer antenna)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid wing)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (necromantic robe)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (compound eye)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (crawler head plating)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling breaktime snack)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling ridge)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling scales)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deepling warts)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (deeptags)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (eye of a deepling)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (key to the Drowned Library)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spellsinger's seal)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spidris mandible)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (spitter nose)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (swarmer antenna)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid claw)
+[Warning : Vegrico] NpcSystem: Sell price higher than buy price: (waspoid wing)
+Reloaded npcs.
+Reloaded raids.
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Bone Capsule.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Clomp.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42295". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42296". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42297". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42298". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "pure energy". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/energy_overlord.xml
+[Warning - Monsters::loadMonster] Unknown loot item "fish remains". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/frazzlemaw.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral masterblade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Ghost Wolf.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Gloom Wolf.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "26004". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/1090/Hellflayer.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "silver goblet". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/lost_soul.xml
+[Warning - Monsters::loadMonster] Unknown loot item "demonbone". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/morgaroth.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42287". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42286". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42285". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42284". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46114". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46115". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46116". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46117". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown race type physical. data/monster/training light.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46033". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46034". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46035". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46036". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Vexclaw.xml
+Reloaded monsters.
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+Reloaded spells.
+Reloaded talk actions.
+[Warning - Items::parseItemNode] Unknown key value: ticks
+[Warning - Items::parseItemNode] Unknown key value: count
+[Warning - Items::parseItemNode] Unknown key value: damage
+[Warning - Items::parseItemNode] Unknown key value: ticks
+[Warning - Items::parseItemNode] Unknown key value: count
+[Warning - Items::parseItemNode] Unknown key value: damage
+[Warning - Items::parseItemNode] Unknown key value: ticks
+[Warning - Items::parseItemNode] Unknown key value: count
+[Warning - Items::parseItemNode] Unknown key value: damage
+[Warning - Items::parseItemNode] Duplicate item with id: 13946
+[Warning - Items::parseItemNode] Duplicate item with id: 21699
+[Warning - Items::parseItemNode] Duplicate item with id: 21252
+[Warning - Event::checkScript] Can not load script: scripts/ownertp.lua
+cannot open data/movements/scripts/ownertp.lua: No such file or directory
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 21705
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22406
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22409
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22412
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22415
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22418
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+[Warning - MoveEvents::addEvent] Duplicate move event found: 22421
+Reloaded items.
+Reloaded weapons.
+Reloaded quests.
+Reloaded mounts.
+Reloaded auras.
+Reloaded wings.
+Reloaded globalevents.
+Reloaded events.
+Reloaded chatchannels.
+>> Using LuaJIT 2.1.0-beta3
+Reloaded global.lua.
+> Broadcasted message: "Evotronus is saving game in one minute.".
+Cassidy choosed vocation: Assassin
+Saving server...
+> Saved house items in: 0.027 s
+> Broadcasted message: "Server save has been completed.".
+Mysteric [1;32mhas logged in.[0m
+Cassidy [1;31mhas logged out.[0m
+Mysteric [1;31mhas logged out.[0m
+Claire [1;32mhas logged in.[0m
+Mysteric [1;32mhas logged in.[0m
+7 players online.
+Mysteric [1;31mhas logged out.[0m
+Mysteric [1;32mhas logged in.[0m
+Mysteric [1;31mhas logged out.[0m
+Mysteric [1;32mhas logged in.[0m
+Mysteric [1;31mhas logged out.[0m
+Mysteric [1;32mhas logged in.[0m
+Voldemort [1;31mhas logged out.[0m
+Voldemort [1;32mhas logged in.[0m
+Claire [1;31mhas logged out.[0m
+Cassidy [1;32mhas logged in.[0m
+Cassidy [1;31mhas logged out.[0m
+Claire [1;32mhas logged in.[0m
+Hellion [1;31mhas logged out.[0m
+Hellion [1;32mhas logged in.[0m
+> Broadcasted message: "There is a strange smell coming from the air, beware Evotronus citizens!".
+> Broadcasted message: "Bublets are falling from the Giant Ancient Trees, carefull they seem to appear all around in Evotronus city!".
+> Broadcasted message: "They are still dropping all around, young brave souls, help the city survive from those litle tricky creatures!".
+> Broadcasted message: "There is a strange smell coming from the air, beware Evotronus citizens!".
+> Broadcasted message: "Grynch Clan Goblins are appearing to surprise Evotronus city!".
+> Broadcasted message: "Evotronus City, clean up Grynch Clan Goblin are running around with worthy loot!!!".
+Invoker Supreme [1;31mhas logged out.[0m
+Invoker Supreme [1;32mhas logged in.[0m
+> Broadcasted message: "Evotronus is saving game in 5 minutes.".
+> Broadcasted message: "Evotronus is saving game in 3 minutes.".
+> Broadcasted message: "Evotronus is saving game in one minute.".
+Saving server...
+> Saved house items in: 0.023 s
+> Broadcasted message: "Server save has been completed.".
+7 players online.
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Bone Capsule.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Clomp.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42295". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42296". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42297". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42298". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "pure energy". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/energy_overlord.xml
+[Warning - Monsters::loadMonster] Unknown loot item "fish remains". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/frazzlemaw.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral masterblade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Ghost Wolf.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Gloom Wolf.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "26004". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/1090/Hellflayer.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "silver goblet". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/lost_soul.xml
+[Warning - Monsters::loadMonster] Unknown loot item "demonbone". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/morgaroth.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42287". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42286". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42285". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42284". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46114". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46115". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46116". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46117". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown race type physical. data/monster/training light.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46033". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46034". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46035". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46036". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Vexclaw.xml
+Hellion [1;31mhas logged out.[0m
+Claire choosed vocation: Venomic
+> Broadcasted message: "Evotronus is saving game in 5 minutes.".
+> Broadcasted message: "Evotronus is saving game in 3 minutes.".
+> Broadcasted message: "Evotronus is saving game in one minute.".
+Saving server...
+> Saved house items in: 0.027 s
+> Broadcasted message: "Server save has been completed.".
+6 players online.
+Invoker Supreme [1;31mhas logged out.[0m
+Invoker Supreme [1;32mhas logged in.[0m
+Invoker Supreme [1;31mhas logged out.[0m
+Invoker Supreme [1;32mhas logged in.[0m
+> Broadcasted message: "Evotronus is saving game in 5 minutes.".
+> Broadcasted message: "Evotronus is saving game in 3 minutes.".
+> Broadcasted message: "Evotronus is saving game in one minute.".
+Saving server...
+> Saved house items in: 0.027 s
+> Broadcasted message: "Server save has been completed.".
+6 players online.
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Bone Capsule.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Clomp.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42295". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42296". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42297". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42298". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "pure energy". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/energy_overlord.xml
+[Warning - Monsters::loadMonster] Unknown loot item "fish remains". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/frazzlemaw.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral masterblade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Ghost Wolf.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Gloom Wolf.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "26004". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/1090/Hellflayer.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "silver goblet". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/lost_soul.xml
+[Warning - Monsters::loadMonster] Unknown loot item "demonbone". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/morgaroth.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42287". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42286". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42285". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42284". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46114". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46115". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46116". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46117". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown race type physical. data/monster/training light.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46033". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46034". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46035". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46036". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Vexclaw.xml
+Voldemort [1;31mhas logged out.[0m
+Voldemort [1;32mhas logged in.[0m
+> Broadcasted message: "Evotronus is saving game in 5 minutes.".
+Mysteric [1;31mhas logged out.[0m
+Mysteric [1;32mhas logged in.[0m
+> Broadcasted message: "Evotronus is saving game in 3 minutes.".
+> Broadcasted message: "Evotronus is saving game in one minute.".
+Saving server...
+> Saved house items in: 0.024 s
+> Broadcasted message: "Server save has been completed.".
+6 players online.
+Claire [1;31mhas logged out.[0m
+Claire [1;32mhas logged in.[0m
+> Broadcasted message: "Evotronus is saving game in 5 minutes.".
+> Broadcasted message: "Evotronus is saving game in 3 minutes.".
+> Broadcasted message: "Evotronus is saving game in one minute.".
+Saving server...
+> Saved house items in: 0.026 s
+> Broadcasted message: "Server save has been completed.".
+6 players online.
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Bone Capsule.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Clomp.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42295". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42296". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42297". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42298". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "pure energy". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/energy_overlord.xml
+[Warning - Monsters::loadMonster] Unknown loot item "fish remains". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/frazzlemaw.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral masterblade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Ghost Wolf.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Gloom Wolf.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "26004". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/1090/Hellflayer.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "silver goblet". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/lost_soul.xml
+[Warning - Monsters::loadMonster] Unknown loot item "demonbone". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/morgaroth.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42287". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42286". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42285". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42284". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46114". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46115". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46116". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46117". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown race type physical. data/monster/training light.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46033". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46034". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46035". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46036". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Vexclaw.xml
+Mysteric choosed vocation: Paladin
+> Broadcasted message: "Evotronus is saving game in 5 minutes.".
+> Broadcasted message: "Evotronus is saving game in 3 minutes.".
+> Broadcasted message: "Evotronus is saving game in one minute.".
+Saving server...
+> Saved house items in: 0.027 s
+> Broadcasted message: "Server save has been completed.".
+6 players online.
+> Broadcasted message: "There is a strange smell coming from the air, beware Evotronus citizens!".
+> Broadcasted message: "Simpsons are falling from the Giant Ancient Trees, carefull they seem to appear all around in Evotronus city!".
+> Broadcasted message: "They are still dropping all around, help the city survive from those tricky sticky stinky creatures!".
+Joy Boy [1;32mhas logged in.[0m
+> Broadcasted message: "Evotronus is saving game in 5 minutes.".
+> Broadcasted message: "Evotronus is saving game in 3 minutes.".
+> Broadcasted message: "Evotronus is saving game in one minute.".
+Saving server...
+> Saved house items in: 0.027 s
+> Broadcasted message: "Server save has been completed.".
+Joy Boy [1;31mhas logged out.[0m
+6 players online.
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Spells::registerEvent] Duplicate registered instant spell with words: 
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Bone Capsule.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Clomp.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42295". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42296". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42297". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42298". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/durianus.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "pure energy". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/energy_overlord.xml
+[Warning - Monsters::loadMonster] Unknown loot item "fish remains". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/frazzlemaw.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral blade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral masterblade". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master slayer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master axe". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master chopper". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master mace". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master hammer". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master bow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master crossbow". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "crude umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] Unknown loot item "umbral master spellbook". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/gaz'haragoth.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Ghost Wolf.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Gloom Wolf.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "26004". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/1090/Hellflayer.xml
+[Warning - Monsters::loadMonster] Non-unique loot item "silver goblet". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/lost_soul.xml
+[Warning - Monsters::loadMonster] Unknown loot item "demonbone". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/monsters/morgaroth.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42287". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42286". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42285". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "42284". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Nighthaven Kraken.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46114". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46115". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46116". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46117". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Professor Maxxen.xml
+[Warning - Monsters::loadMonster] Unknown race type physical. data/monster/training light.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46033". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46034". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46035". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] Unknown loot item id "46036". 
+[Warning - Monsters::loadMonster] Cant load loot. data/monster/eqbossrooms/Ursabeast.xml
+[Warning - Monsters::loadMonster] manaCost missing or zero on monster with summonable and/or convinceable flags: data/monster/1090/Vexclaw.xml
+Claire [1;31mhas logged out.[0m
+Mysteric [1;31mhas logged out.[0m
+Voldemort [1;31mhas logged out.[0m
+Invoker Supreme [1;31mhas logged out.[0m
+Bolek [1;31mhas logged out.[0m
+Saving server...
+> Saved house items in: 0.031 s
+> CLEAN: Removed 198 items from 119 tiles in 0.009 seconds.
+Vanagas [1;31mhas logged out.[0m
+Error while saving player: Vanagas
+SIGTERM received, shutting game server down...
+Saving server...
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Server shutdown in progress
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query
+[Error - mysql_real_query] Query: UPDATE `houses` SET `owner` = 0, `paid` = 1698925248, `warnings` = 0, `name` = 'River port 1', `town_id` = 1, `rent` = 1100, `size` = 64, `beds` = 1 WHERE `id` = 92
+Message: Lost connection to MySQL server during query

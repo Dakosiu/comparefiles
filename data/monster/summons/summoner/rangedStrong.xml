@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Ranged" nameDescription="a ranged" race="blood" experience="4000" speed="230">
+	<health now="100" max="100" />
+	<look type="994" head="0" body="52" legs="128" feet="95" addons="1" corpse="20527" />
+	<targetchange interval="4000" chance="10" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="4" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+		<flag canwalkonenergy="1" />
+		<flag canwalkonfire="1" />
+		<flag canwalkonpoison="1" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-20" max="-45" />
+		<attack name="energy" interval="2000" chance="100" range="7" min="-30" max="-80">
+			<attribute key="shootEffect" value="energy" />
+		</attack>
+		<attack name="energy" interval="3000" chance="100" radius="3" target="1" min="-30" max="-50">
+		    <attribute key="shootEffect" value="energyball" />
+			<attribute key="areaEffect" value="purpleenergy"/>
+		</attack>
+	</attacks>
+	<defenses armor="9" defense="9" />
+	<elements>
+		<element firePercent="1" />
+		<element holyPercent="1" />
+		<element icePercent="-1" />
+		<element deathPercent="-1" />
+	</elements>
+</monster>

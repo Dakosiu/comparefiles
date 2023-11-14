@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Demodras" nameDescription="Demodras" race="blood" experience="7000" speed="230">
+	<health now="45000" max="45000" />
+	<look type="204" corpse="5984" />
+	<targetchange interval="5000" chance="8" />
+	<level min="0" max="3" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="3500" />
+		<flag boss="1" />
+		<flag bosslevel="53"/>
+		<flag description="This boss located Very Far South from Evotronus city, it respawns every 1 hour"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-211" max="-435" />
+		<attack name="fire" interval="1000" chance="40" range="7" radius="4" target="1" min="-350" max="-400">
+			<attribute key="shootEffect" value="fire" />
+			<attribute key="areaEffect" value="firearea" />
+		</attack>
+		<attack name="firefield" interval="1000" chance="10" range="7" radius="6" target="1">
+			<attribute key="shootEffect" value="fire" />
+		</attack>
+		<attack name="fire" interval="1000" chance="20" length="8" spread="3" min="-300" max="-550">
+			<attribute key="areaEffect" value="firearea" />
+		</attack>
+	</attacks>
+	<defenses armor="45" defense="45">
+		<defense name="healing" interval="2000" chance="100" min="200" max="1600">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	</defenses>
+	<immunities>
+		<immunity fire="1" />
+		<immunity earth="1" />
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<summons maxSummons="5">
+		<summon name="Dragon Lord" interval="1000" chance="25" />
+	</summons>
+	<voices interval="5000" chance="25">
+		<voice sentence="I WILL SET THE WORLD ON FIRE!" yell="1" />
+		<voice sentence="I WILL PROTECT MY BROOD!" yell="1" />
+	</voices>
+	<loot>
+		<item id="5919" chance="1000" /><!-- dragon claw -->
+		<item name="platinum coin" countmax="99" chance="99000" />
+		<item name="dragon ham" countmax="10" chance="75000" />
+		<item name="green mushroom" countmax="7" chance="25666" />
+		<item name="crystal coin" countmax="7" chance="19000" />
+		<item name="red dragon leather" chance="15000" />
+		<item name="small sapphire" chance="12222" />
+		<item name="energy ring" chance="10000" />
+		<item name="great mana potion" chance="8800" />
+		<item name="great health potion" chance="8800" />
+		<item name="golden mug" chance="6100" />
+		<item id="26180" countmax="7" chance="46670"/><!-- small energy ball -->
+		<item id="40554" countmax="5" chance="33333" /><!-- warrior coin -->
+		<item id="35969" countmax="1" chance="200" /><!-- dark cube  -->
+		<item name="dragon scale mail" chance="5000" />
+		<item name="fire sword" chance="30000" />
+		<item name="royal helmet" chance="10000" />
+		<item name="life crystal" chance="1000" />
+	</loot>
+</monster>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Ranged" nameDescription="a ranged" race="blood" experience="550" speed="200" manacost="0">
+	<health now="200" max="200"/>
+	<look type="1795" corpse="5527"/>
+	<targetchange interval="2000" chance="15"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="4"/>
+		<flag runonhealth="0"/>
+		<flag canwalkonenergy="1" />
+		<flag canwalkonfire="1" />
+		<flag canwalkonpoison="1" />
+	</flags>
+	<attacks>
+		<attack name="legendaryrangedcurse" interval="2000" range="5" chance="100" />
+		<attack name="fire" interval="1000" chance="10" range="7" min="-100" max="-400">
+			<attribute key="shootEffect" value="fire" />
+		</attack>
+		<attack name="firecondition" interval="1000" chance="100" range="2" min="-100" max="-250">
+			<attribute key="shootEffect" value="fire"/>
+			<attribute key="areaEffect" value="yellowspark"/>
+		</attack>
+		<attack name="physical" interval="1000" chance="10" radius="6" target="1" min="-100" max="-250">
+			<attribute key="areaEffect" value="explosion"/>
+		</attack>
+		<attack name="fire" interval="1000" chance="10" radius="5" target="1" min="-100" max="-250">
+			<attribute key="areaEffect" value="yellowspark"/>
+		</attack>
+		<attack name="fire" interval="1000" chance="10" range="60" radius="7" target="1" min="-100" max="-250">
+			<attribute key="shootEffect" value="missile75"/>
+			<attribute key="areaEffect" value="firearea"/>
+		</attack>
+		<attack name="fire" interval="1000" chance="10" length="8" spread="0" min="-100" max="-250">
+			<attribute key="areaEffect" value="explosion"/>
+		</attack>
+		<attack name="fire" interval="1000" chance="10" length="8" spread="3" min="-100" max="-250">
+			<attribute key="areaEffect" value="firearea"/>
+		</attack>
+	</attacks>
+	<defenses armor="15" defense="15" />
+	<immunities>
+		<immunity physical="0"/>
+		<immunity paralyze="1"/>
+		<immunity outfit="1"/>
+		<immunity drunk="1"/>
+		<immunity invisible="1"/>
+	</immunities>
+</monster>

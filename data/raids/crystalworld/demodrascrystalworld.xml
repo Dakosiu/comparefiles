@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raid>
+	<!-- Message broadcast -->
+	<!-- Broadcast types: warning, event, default, description, smallstatus, blueconsole, redconsole -->
+	<announce delay="1000" type="warning" message="Prepare your gear and sharpen your skills, Draganir pack is coming to Crystal World!" />
+	<announce delay="250000" type="warning" message="Warriors of Evotronus, unite! Draganir pack approaches Crystal World, and our realm needs heroes to stand against those Fire Creatures. Will you answer the call?" />
+
+
+	<areaspawn delay="250000" fromx="244" fromy="516" fromz="7" tox="517" toy="895" toz="7">
+		<monster name="Draganir" minamount="6" maxamount="12" /><!-- Random amount in specified range -->
+	</areaspawn>
+
+</raid>

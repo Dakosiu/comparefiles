@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Ancient Women" script="task12.lua" walkinterval="500" floorchange="0">
+	<health now="100" max="100" />
+	<look type="949" head="21" body="18" legs="3" feet="89" shader="Red Strong Wave" addons="3" />
+</npc>

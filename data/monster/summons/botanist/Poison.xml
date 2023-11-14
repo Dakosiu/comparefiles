@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Poison" nameDescription="a poison" race="undead" experience="580" speed="0" manacost="0">
+	<health now="515" max="515" />
+	<look typeex="36607" />
+	<targetchange interval="4000" chance="10" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="0" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="Venom Pox" interval="100" chance="100" range="8" radius="8" target="1" min="-100" max="-1000">
+			<attribute key="shootEffect" value="burstarrow"/>
+			<attribute key="areaEffect" value="firearea"/>
+		</attack>
+	</attacks>
+	<defenses armor="10" defense="10"/>
+	<elements>
+		<element physicalPercent="-5"/>
+		<element deathPercent="-5"/>
+	</elements>
+	<loot>
+		<item id="2148" countmax="20" chance="40000"/><!-- gold coin -->
+		<item id="2229" countmax="2" chance="80000"/><!-- skull -->
+		<item id="2379" chance="80000"/><!-- dagger -->
+		<item id="12400" chance="5000"/><!-- Protective Charm -->
+		<item id="2691" chance="30333"/><!-- brown bread -->
+		<item id="2385" chance="23000"/><!-- sabre -->
+		<item id="12399" chance="10000"/><!-- Girlish Hair Decoration -->
+		<item id="2050" chance="1005"/><!-- torch -->
+		<item id="2125" chance="287"/><!-- crystal necklace -->
+		<item id="2147" chance="161"/><!-- small ruby -->
+	</loot>
+</monster>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Haunter" nameDescription="Haunter" race="blood" experience="6000" speed="270">
+	<health now="18500" max="18500" />
+	<look type="320" corpse="9915" />
+	<targetchange interval="2000" chance="9" />
+	<level min="0" max="3" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+		<flag boss="1" />
+		<flag bosslevel="38"/>
+		<flag description="This boss located far south east from Evotronus city, it respawns every 1 hour"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-150" max="-350" />
+		<attack name="energy" interval="1000" chance="36" radius="3" target="0" min="-111" max="-530">
+			<attribute key="areaEffect" value="energy" />
+		</attack>
+		<attack name="poisoncondition" interval="2000" chance="16" range="7" target="1" start="13">
+			<attribute key="shootEffect" value="poison" />
+			<attribute key="areaEffect" value="poison" />
+		</attack>
+	</attacks>
+	<defenses armor="25" defense="20">
+		<defense name="healing" interval="500" chance="22" min="100" max="1505">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+		<defense name="speed" interval="2000" chance="16" speedchange="360" duration="80000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element deathPercent="10" />
+	</elements>
+	<immunities>
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="2000" chance="9">
+		<voice sentence="Surrender and I'll end it quick!" />
+	</voices>
+	<loot>
+		<item id="2124" chance="1030" /><!-- crystal ring -->
+		<item name="gold coin" countmax="100" chance="50000" />
+		<item name="platinum coin" countmax="21" chance="50000" />
+		<item name="warrior coin" countmax="4" chance="21111" /> <!-- warrior coin -->
+		<item id="35969" countmax="1" chance="40" /> <!-- dark cube -->
+		<item name="platinum amulet" chance="1210" />
+		<item name="boots of haste" chance="1210" />
+		<item name="protection amulet" chance="847" />
+		<item name="shadow herb" chance="4761" />
+		<item name="haunted blade" chance="3180" />
+		<item name="chaos mace" chance="1210" />
+		<item name="strong mana potion" countmax="23" chance="1612" />
+		<item name="spirit cloak" chance="1520" />
+		<item name="crystal of balance" chance="1270" />
+	</loot>
+</monster>

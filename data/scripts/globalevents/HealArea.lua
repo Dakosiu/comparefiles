@@ -1,0 +1,33 @@
+--local HealingTile = GlobalEvent("HealingTile")
+--local Cooldown = 5 * 1000 --in seconds
+--local Percentage = 25
+
+--local Tiles = {
+  -- [1] = { x = 846, y = 870, z = 5, Effect = 100, Text = "", color = 192 },
+  -- [2] = { x = 846, y = 871, z = 5, Effect = 100, Text = "", color = 255 },
+--   [3] = { x = 847, y = 871, z = 5, Effect = 100, Text = "", color = 130 },
+--   [4] = { x = 848, y = 871, z = 5, Effect = 100, Text = "", color = 192 },
+--   [5] = { x = 848, y = 870, z = 5, Effect = 100, Text = "", color = 255 },
+--}
+
+--function HealingTile.onThink(interval, lastExecution)
+ --  local players = Game.getPlayers()
+ --  if #players == 0 then -- 0 players online, no need to execute the script
+ --     return true
+ --  end
+ --  local player
+  -- for i = 1, #players do
+  --    player = players[i]
+  --    for i in pairs(Tiles) do
+  --       Position(Tiles[i].x, Tiles[i].y, Tiles[i].z):sendMagicEffect(404)
+  --       if player:getPosition() == Position(Tiles[i].x, Tiles[i].y, Tiles[i].z) then
+ --           player:addHealth(player:getMaxHealth() * (Percentage/100))
+            --player:addMana(player:getMaxMana() * (Percentage/100))
+ --        end
+ --     end
+ --  end
+ --  return true
+--end
+
+--HealingTile:interval(Cooldown)
+--HealingTile:register()

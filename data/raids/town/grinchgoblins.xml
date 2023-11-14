@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raid>
+	<!-- Message broadcast -->
+	<!-- Broadcast types: warning, event, default, description, smallstatus, blueconsole, redconsole -->
+	<announce delay="1000" type="warning" message="There is a strange smell coming from the air, beware Evotronus citizens!" />
+	<announce delay="5000" type="warning" message="Grynch Clan Goblins are appearing to surprise Evotronus city!" />
+	<announce delay="25000" type="warning" message="Evotronus City, clean up Grynch Clan Goblin are running around with worthy loot!!!" />
+
+
+	<areaspawn delay="6000" fromx="803" fromy="862" fromz="5" tox="862" toy="928" toz="5">
+		<monster name="Grynch Clan Goblin" minamount="21" maxamount="33" /><!-- Random amount in specified range -->
+	</areaspawn>
+
+</raid>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Vinc" script="Vincent stars.lua" walkinterval="2000">
+	<health now="100" max="100" />
+	<look type="1205" head="0" body="0" legs="114" feet="94" addons="0" />
+<voices>
+<voice text="Bows, crossbows and ammunition for sale." interval2="1000" margin="1" yell="yes" />
+</voices>
+<parameters>
+		<parameter key="message_greet" value="Welcome, |PLAYERNAME|! I trade with distance assassin weapons. If you are interested, just ask me for a trade." />
+		<parameter key="message_farewell" value="See you later!" />
+		<parameter key="module_shop" value="1" />
+		<parameter key="shop_buyable" value="	
+	spear ,2389,120;
+	hunting spear,3965,200;
+	royal spear,7378,320;
+	enchanted spear,7367,450;
+	glooth spear,23529,570;
+	throwing knife,2410,680;
+	throwing star,2399,800;
+	viper star,7366,920;
+	assassin star,7368,1100;
+	royal star,28415,1320;
+	throwing star of Sula,25526,1550;" />
+		<parameter key="shop_sellable" value="
+	throwing star of Sula,25526,1020;
+	royal star,28415,820;
+	assassin star,7368,680;
+	viper star,7366,520;
+	throwing star,2399,420;
+	throwing knife,2410,380;
+	glooth spear,23529,270;
+	enchanted spear,7367,180;
+	royal spear,7378,120;
+	hunting spear,3965,50;
+	spear,2389,30" />
+	</parameters>
+</npc>

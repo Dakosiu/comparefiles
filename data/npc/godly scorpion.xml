@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Godly Scorpion" script="goldy scorpion.lua" walkinterval="1300">
+	<health now="100" max="100" />
+	<look type="1407" head="77" body="68" legs="115" feet="39" addons="3" />
+<voices>
+<voice text="Weaponary for Berserkers for sale." interval2="1000" margin="1" yell="yes" />
+</voices>
+<parameters>
+		<parameter key="message_greet" value="Welcome, |PLAYERNAME|! I trade with berserker godly weapons. If you are interested, just ask me for a trade." />
+		<parameter key="message_farewell" value="See you later!" />
+		<parameter key="module_shop" value="1" />
+		<parameter key="shop_buyable" value="
+	gigantus axe,41450,20000000;
+	icikus axe,41435,50000000;
+	gloricus axe,41445,100000000;
+	undead axe,41448,200000000;
+	bloody axe,41447,400000000;
+	fallen angel axe,41469,800000000;
+	iceverius brutal axe,41464,1000000000;
+	skeleton axe,41438,2000000000;" />
+		<parameter key="shop_sellable" value="
+	gigantus axe,41450,2000;
+	icikus axe,41435,5000;
+	gloricus axe,41445,10000;
+	undead axe,41448,20000;
+	bloody axe,41447,40000;
+	fallen angel axe,41469,80000;
+	iceverius brutal axe,41464,100000;
+	skeleton axe,41438,200000" />
+	</parameters>
+</npc>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Vincent" script="Vincent.lua" walkinterval="2000">
+	<health now="100" max="100" />
+	<look type="683" head="123" body="124" legs="11" feet="20" addons="3" />
+<voices>
+<voice text="crossbows and ammunition for sale." interval2="1000" margin="1" yell="yes" />
+</voices>
+<parameters>
+		<parameter key="message_greet" value="Welcome, |PLAYERNAME|! I trade with distance paladin weapons and ammunition. If you are interested, just ask me for a trade." />
+		<parameter key="message_farewell" value="See you later!" />
+		<parameter key="module_shop" value="1" />
+		<parameter key="shop_buyable" value="
+	crossbow,2455,50000;
+	modified crossbow,8849,500000;
+	chain bolter,8850,1000000;
+	Arbalest,5803,2000000;
+	Ironworker,8853,4000000;
+	Rift Crossbow,25523,6000000;
+	Ornate Crossbow,15644,12000000;
+	Devileye,8852,25000000;
+	Crystal Crossbow,18453,32000000;
+	bolt,2543,10;
+	piercing bolt,7363,20;
+	power bolt,2547,30;
+	infernal bolt,6529,40;
+	Drill bolt,18436,80;
+	Prismatic bolt,18435,160;
+	Vortex bolt,15649,320;
+	Pandorus bolt,28414,640;" />
+		<parameter key="shop_sellable" value="
+	piercing bolt,7363,3;
+	power bolt,2547,5;
+	crossbow,2455,12000" />
+	</parameters>
+</npc>

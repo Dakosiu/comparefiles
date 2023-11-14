@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wings>
+   <wing id="3" clientid="1834" name="Dark Wing" speed="20" />
+   <wing id="4" clientid="1835" name="Dark Wing" speed="20" />
+   <wing id="5" clientid="1836" name="Dark Wing" speed="20" />
+   <wing id="6" clientid="1837" name="Dark Wing" speed="20" />
+   <wing id="7" clientid="1838" name="Dark Wing" speed="20" />
+   <wing id="8" clientid="1839" name="Dark Wing" speed="20" />
+   <wing id="9" clientid="1840" name="Dark Wing" speed="20" />
+   <wing id="10" clientid="1841" name="Dark Wing" speed="20" />
+   <wing id="11" clientid="1842" name="Dark Wing" speed="20" />
+   <wing id="12" clientid="1843" name="Dark Wing" speed="20" />
+   <wing id="13" clientid="1844" name="Dark Wing" speed="20" />
+   <wing id="14" clientid="1845" name="Dark Wing" speed="20" />
+   <wing id="15" clientid="1846" name="Dark Wing" speed="20" />
+   <wing id="16" clientid="1847" name="Dark Wing" speed="20" />
+   <wing id="17" clientid="1848" name="Dark Wing" speed="20" />
+   <wing id="18" clientid="1849" name="Dark Wing" speed="20" />
+   <wing id="19" clientid="1850" name="Dark Wing" speed="20" />
+   <wing id="20" clientid="1851" name="Dark Wing" speed="20" />
+   <wing id="21" clientid="1852" name="Dark Wing" speed="20" />
+   <wing id="22" clientid="1853" name="Dark Wing" speed="20" />
+   <wing id="23" clientid="1854" name="Dark Wing" speed="20" />
+   <wing id="24" clientid="1855" name="Dark Wing" speed="20" />
+   <wing id="25" clientid="1856" name="Dark Wing" speed="20" />
+   <wing id="26" clientid="1857" name="Dark Wing" speed="20" />
+   <wing id="27" clientid="1830" name="Dark Wing" speed="20" />
+   <wing id="28" clientid="1964" name="Cool Wing" speed="20" />
+   <wing id="29" clientid="1968" name="Cool Wing" speed="20" />
+   <wing id="30" clientid="1973" name="Cool Wing" speed="20" />
+   <wing id="31" clientid="1976" name="Cool Wing" speed="20" />
+   <wing id="32" clientid="1978" name="Cool Wing" speed="20" />
+   <wing id="33" clientid="1980" name="Cool Wing" speed="20" />
+   <wing id="34" clientid="1975" name="Cool Wing" speed="20" />
+   <wing id="35" clientid="1982" name="Cool Wing" speed="20" />
+</wings>

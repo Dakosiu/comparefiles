@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raid>
+	<!-- Message broadcast -->
+	<!-- Broadcast types: warning, event, default, description, smallstatus, blueconsole, redconsole -->
+	<announce delay="1000" type="warning" message="There is a strange smell coming from the air, beware Evotronus citizens!" />
+	<announce delay="5000" type="warning" message="Simpsons are falling from the Giant Ancient Trees, carefull they seem to appear all around in Evotronus city!" />
+	<announce delay="25000" type="warning" message="They are still dropping all around, help the city survive from those tricky sticky stinky creatures!" />
+
+
+	<areaspawn delay="25500" fromx="803" fromy="862" fromz="5" tox="862" toy="928" toz="5">
+		<monster name="Simpson" minamount="14" maxamount="28" /><!-- Random amount in specified range -->
+	</areaspawn>
+
+</raid>

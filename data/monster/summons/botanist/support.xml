@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Support" nameDescription="a support" race="undead" experience="580" speed="0" manacost="0">
+	<health now="515" max="515" />
+	<look typeex="31578" />
+	<targetchange interval="4000" chance="10" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="0" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<defenses armor="150" defense="150">
+		<defense name="Summon Healing" interval="1000" chance="100">
+			<attribute key="areaEffect" value="greenspark" />
+		</defense>
+	</defenses>
+</monster>

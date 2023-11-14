@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<auras>
+    <aura id="1" clientid="1831" name="Protection Aura" premium="no" />
+	<aura id="2" clientid="1829" name="Reflection Aura" premium="no" />
+    <aura id="3" clientid="1833" name="Bloody Aura" premium="no" /> <!-- Not working very well yet-->
+	<aura id="4" clientid="1858" name="Mystic Energy Aura" premium="no" />
+	<aura id="5" clientid="1859" name="Warrior Aura" premium="no" />
+	<aura id="6" clientid="1860" name="Giant energy Aura" premium="no" />
+	<aura id="7" clientid="1861" name="Red Bubble Aura" premium="no" />
+	<aura id="8" clientid="1862" name="Blue Bubble Aura" premium="no" />
+	<aura id="9" clientid="1863" name="Super Aura" premium="no" />
+	<aura id="10" clientid="1864" name="Magical Elements Aura" premium="no" />
+	<aura id="11" clientid="1865" name="Blue Flame Aura" premium="no" />
+	<aura id="12" clientid="1866" name="Red Flame Aura" premium="no" />
+	<aura id="13" clientid="1983" name="Angel Aura" premium="no" />
+	<aura id="14" clientid="1981" name="Blessed Aura" premium="no" />
+	<aura id="15" clientid="1991" name="Red Crystals Aura" premium="no" />
+	<aura id="16" clientid="1984" name="Reflection Aura" premium="no" />
+	<aura id="17" clientid="1986" name="Magical Candles aura" premium="no" />
+	<aura id="18" clientid="1987" name="Root Chakra aura" premium="no" />
+	<aura id="19" clientid="1988" name="Water Bubbles aura" premium="no" />
+	<aura id="20" clientid="1989" name="Green Crystals Aura" premium="no" />
+	<aura id="21" clientid="1990" name="Zeus Energy Aura" premium="no" />
+</auras>

@@ -1,0 +1,27 @@
+local condition = Condition(CONDITION_ATTRIBUTES)
+condition:setParameter(CONDITION_PARAM_STAT_MAXHITPOINTSPERCENT, 140)
+condition:setParameter(CONDITION_PARAM_TICKS, 2 * 60 * 1000)
+condition:setParameter(CONDITION_PARAM_SUBID, 4)
+condition:setParameter(CONDITION_PARAM_BUFF, true)
+
+local spell = Spell("instant")
+function spell.onCastSpell(creature, variant)
+    creature:addCondition(condition)
+    creature:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
+    return true
+end
+
+spell:name("Strong Life Increasment")
+spell:words("Empowered Vitality Infusion")
+spell:group("support")
+spell:vocation("Pramanus Tank")
+spell:id(24)
+spell:cooldown(2 * 1000)
+spell:groupCooldown(2 * 500)
+spell:level(310)
+spell:manaPercent(85)
+spell:isAggressive(false)
+spell:isSelfTarget(true)
+spell:isPremium(false)
+spell:needLearn(false)
+spell:register()

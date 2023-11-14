@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raid>
+	<!-- Message broadcast -->
+	<!-- Broadcast types: warning, event, default, description, smallstatus, blueconsole, redconsole -->
+	<announce delay="1000" type="warning" message="Attention all adventurers! Prepare for battle as Souleater Ultima presence looms. Will you conquer the darkness and claim victory?!" />
+	<announce delay="5000" type="warning" message="Souleater Ultima stirs, its malevolent power growing stronger. Rally your allies and face the ultimate challenge now!" />
+	<announce delay="10000" type="warning" message="The malevolent Souleater Ultima grows restless, its power intensifying. Assemble your forces, for the ultimate battle to save our First Desert!" />
+	<announce delay="15000" type="warning" message="Behold, the hour has arrived! Souleater Ultima has materialized in The First Desert, challenging the bravest. Engage, claim glory, and etch your saga into eternity!" />
+
+
+	<areaspawn delay="15000" fromx="1148" fromy="1118" fromz="7" tox="1162" toy="1138" toz="7">
+		<monster name="Souleater Ultima" minamount="1" maxamount="1" /><!-- Random amount in specified range -->
+	</areaspawn>
+
+</raid>

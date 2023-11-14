@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Elysandria Sacra" script="sacrafice.lua" walkinterval="6000" floorchange="0">
+	<health now="100" max="100" />
+	<look type="664" head="41" body="45" legs="56" feet="71" shader="Bluerish Shrine" addons="3"  />
+</npc>
