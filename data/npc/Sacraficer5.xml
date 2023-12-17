@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<npc name="Galadrielle Sacra" script="sacrafice.lua" walkinterval="4000" floorchange="0">
-	<health now="100" max="100" />
-	<look type="929" head="77" body="44" legs="33" feet="55" shader="White Wave" addons="3"  />
-</npc>

@@ -1,8 +1,0 @@
-set $_exitcode = 999
-run
-set $ec = $_exitcode
-if $ec > 0
-   thread apply all bt full  
-   call g_game.saveGameState()
-end
-quit $ec

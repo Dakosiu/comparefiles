@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-
-<npc name="Npc Mission Third" script="data/npc/scripts/mission3.lua" walkinterval="1" floorchange="0" access="5" level="1" maglevel="1">
-<health now="100" max="100"/>
-<look type="146" head="87" body="79" legs="111" feet="76" addons="3"/>
-<parameters>
-<parameter key="message_greet" value="Hello |PLAYERNAME|. You can started {quest}?" />
-</parameters>
-</npc> 

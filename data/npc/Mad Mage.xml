@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<npc name="Mad Mage" script="Madmage.lua" walkinterval="2000" floorchange="0">
-	<health now="100" max="100"/>
-	<look type="141" head="160" body="50" legs="98" feet="151" addons="3"/>
-	<parameters>
-		<parameter key="message_greet" value="Hello |PLAYERNAME|, I can offer you a {summon scroll} if you've got required items."/>
-	</parameters>
-</npc>

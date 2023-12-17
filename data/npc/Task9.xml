@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<npc name="Valandor Firestorm" script="task9.lua" walkinterval="4000" floorchange="0">
-	<health now="100" max="100" />
-	<look type="634" head="0" body="94" legs="79" feet="94" addons="3" />
-</npc>

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<npc name="Blooresia Sacra" script="sacrafice.lua" walkinterval="11000" floorchange="0">
-	<health now="100" max="100" />
-	<look type="279" head="114" body="114" legs="94" feet="94" addons="2"  />
-</npc>
