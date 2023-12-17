@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Greison Spider" nameDescription="a greison spider" race="venom" experience="21000" speed="330">
-	<health now="12000" max="12000" />
+<monster name="Greison Spider" nameDescription="a greison spider" race="venom" experience="35000" speed="35">
+	<health now="18000" max="18000" />
 	<look type="1487" corpse="39737" />
 	<targetchange interval="4000" chance="10" />
-	<level min="100" max="151" />
+	<level min="150" max="200" />
 	<flags>
 		<flag summonable="0" />
 		<flag attackable="1" />
@@ -19,11 +19,11 @@
 		<flag canwalkonfire="0" />
 	</flags>
 	<attacks>
-		<attack name="melee" interval="2000" min="-100" max="-350" poison="150" />
+		<attack name="melee" interval="2000" min="-100" max="-300" poison="150" />
 		<attack name="earth" interval="2000" chance="20" range="7" min="-100" max="-200">
 			<attribute key="shootEffect" value="poison" />
 		</attack>
-		<attack name="poisoncondition" interval="2000" chance="15" target="0" radius="5" range="5" min="-300" max="-400">
+		<attack name="poisoncondition" interval="2000" chance="15" target="0" radius="5" range="5" min="-200" max="-300">
 			<attribute key="areaEffect" value="greenspark" />
 		</attack>
 		<attack name="earth" interval="2000" chance="20" radius="3" target="0" min="-120" max="-170">

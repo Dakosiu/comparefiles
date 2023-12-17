@@ -33,19 +33,25 @@ ec.onLook = function(self, thing, position, distance, description, exp)
 			description = description .. "\n" .. "-------------- "
 		end
 		
-		local toRemove = thing:getCustomAttribute(itemUpgradeSystem.markedToRemove)
-		if toRemove then
-		   description = description .. "\n" .. "To Remove: " .. toRemove 
+		-- local toRemove = thing:getCustomAttribute(itemUpgradeSystem.markedToRemove)
+		-- if toRemove then
+		   -- description = description .. "\n" .. "To Remove: " .. toRemove 
+		-- end
+		
+		local itemUpgradeDescription = ITEM_UPGRADE_SYSTEM:getDescription(thing)
+		if itemUpgradeDescription then
+		    description = description .. "\n" .. itemUpgradeDescription
 		end
 
 	end
+	
 
-	if thing:isItem() then
-		local stats = thing:displayStats()
-		if stats ~= "" then
-			description = description .. "\n" .. stats
-		end
-	end
+	-- if thing:isItem() then
+		-- local stats = thing:displayStats()
+		-- if stats ~= "" then
+			-- description = description .. "\n" .. stats
+		-- end
+	-- end
 
 	if self:getAccountType() >= ACCOUNT_TYPE_GOD then 
 		if thing:isItem() then
@@ -91,7 +97,8 @@ ec.onLook = function(self, thing, position, distance, description, exp)
 	end
 	if thing:isCreature() then
 		if thing:isPlayer() then
-			local attackSpeed = thing:getVocation():getAttackSpeed() - thing:getStorageValue(BonusAttackSpeed)
+			--local attackSpeed = thing:getVocation():getAttackSpeed() - thing:getStorageValue(BonusAttackSpeed)
+			local attackSpeed = thing:getAttackSpeed()
 			if attackSpeed > 0 then
 				description = description .. "\n" .. "Attack Speed: " .. attackSpeed .. "ms"
 			end
@@ -101,14 +108,15 @@ ec.onLook = function(self, thing, position, distance, description, exp)
 				description = description .. "\n" .. "Protection Loss: " .. protectionLoss .. "%"
 			end
 			
-			local trappedEnergy = thing:getStorageValue(StatSystem.config.storages.trappedEnergyPoints)
+			local trappedEnergy = ABILITY_SYSTEM:getTrappedEnergy(thing)
 			if trappedEnergy > 0 then
 				description = description .. "\n" .. "Trapped Energy: " .. trappedEnergy .. "%"
 			end
-			local extraHealing = thing:getTotalExtraHealing()
-			if extraHealing > 0 then
-				description = description .. "\n" .. "Healing Boost: " .. extraHealing .. "%"
-			end
+			
+			-- local extraHealing = thing:getTotalExtraHealing()
+			-- if extraHealing > 0 then
+				-- description = description .. "\n" .. "Healing Boost: " .. extraHealing .. "%"
+			-- end
 
 			local extraHealth = thing:onLookBonusHealth()
 			if extraHealth > 0 then
@@ -139,43 +147,80 @@ ec.onLook = function(self, thing, position, distance, description, exp)
 				description = string.format("%s \n Speed Bonus: %d", description, speed) .. "."
 			end
 
-			local rate = _G.rate + thing:statsExpBonus() * 100
-			if rate then
-				if rate >= 1 then
-					description = string.format("%s \nExp Boost: %d", description, rate) .. "%"
-				end
-			end
+			-- local rate = _G.rate + thing:statsExpBonus() * 100
+			-- if rate then
+				-- if rate >= 1 then
+					-- description = string.format("%s \nExp Boost: %d", description, rate) .. "%"
+				-- end
+			-- end
 
 			local cap = thing:getStorageValue(31214124) * 25
 			if cap >= 1 then
 				description = string.format("%s \n Cap Bonus: %d", description, cap) .. "."
 			end
-
-			local toAddHere = 0
-			if thing:getItemsBonusDamage() then
-				toAddHere = thing:getItemsBonusDamage()
-			end
-
-			local attackDamage = math.max(0, thing:getStorageValue(StatSystem.config.storages.attackPoints)) + toAddHere
-			if attackDamage > 0 then
-				description = description .. "\n" .. "Bonus Damage: " .. attackDamage .. "%"
-			end
-
-			local reflection = thing:getTotalReflect()
-			if reflection > 0 then
-				description = description .. "\n" .. "Reflect: " .. reflection .. "%"
-			end
-
-			local dodge = thing:getTotalDodge()
+			
+			local dodge = ABILITY_SYSTEM:getDodge(thing)
 			if dodge > 0 then
-				description = description .. "\n" .. "Dodge: " .. dodge .. "%"
+			    description = description .. "\n" .. "Dodge: " .. dodge .. "%"
 			end
 
-			local protection = thing:getAllProtection()
-			if protection > 0 then
-				--description = string.format("%s,\nProtection: %d", description, protection) .. "%"
-				description = description .. "\n" .. "Protection All: " .. protection .. "%"
+			local reflect = ABILITY_SYSTEM:getReflect(thing)
+			if dodge > 0 then
+			    description = description .. "\n" .. "Reflect: " .. reflect .. "%"
 			end
+			
+			local protectionall = ABILITY_SYSTEM:getProtectionAll(thing)
+			if protectionall > 0 then
+			    description = description .. "\n" .. "Protection All: " .. protectionall .. "%"
+			end
+			
+			local damage = ABILITY_SYSTEM:getBonusDamage(thing)
+			if damage > 0 then
+			   description = description .. "\n" .. "Bonus Damage: " .. damage .. "%" 
+			end
+						
+			local summondamage = ABILITY_SYSTEM:getSummonDamage(thing)
+			if summondamage > 0 then
+			    description = description .. "\n" .. "Summon Damage: " .. summondamage .. "%"
+			end
+			
+			local experience = ABILITY_SYSTEM:getExperience(thing)
+			if experience > 0 then
+			    description = description .. "\n" .. "Experience: " .. experience .. "%"
+			end
+			
+			local spellcooldown = ABILITY_SYSTEM:getSpellCooldown(thing)
+			if spellcooldown > 0 then
+			   description = description .. "\n" .. "Spell Cooldown: " .. spellcooldown .. "%"
+			end
+			
+
+			
+			-- local toAddHere = 0
+			-- if thing:getItemsBonusDamage() then
+				-- toAddHere = thing:getItemsBonusDamage()
+			-- end
+
+			-- local attackDamage = math.max(0, thing:getStorageValue(StatSystem.config.storages.attackPoints)) + toAddHere
+			-- if attackDamage > 0 then
+				-- description = description .. "\n" .. "Bonus Damage: " .. attackDamage .. "%"
+			-- end
+
+			-- local reflection = thing:getTotalReflect()
+			-- if reflection > 0 then
+				-- description = description .. "\n" .. "Reflect: " .. reflection .. "%"
+			-- end
+
+			-- local dodge = thing:getTotalDodge()
+			-- if dodge > 0 then
+				-- description = description .. "\n" .. "Dodge: " .. dodge .. "%"
+			-- end
+
+			-- local protection = thing:getAllProtection()
+			-- if protection > 0 then
+				-- --description = string.format("%s,\nProtection: %d", description, protection) .. "%"
+				-- description = description .. "\n" .. "Protection All: " .. protection .. "%"
+			-- end
 
 			local healthRegen = thing:getExtraHealthRegeneration()
 			local manaRegen = thing:getExtraManaRegeneration()

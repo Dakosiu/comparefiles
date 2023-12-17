@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <monster name="Garry Grimshade" nameDescription="Garry Grimshade" race="blood" experience="140000" speed="20">
 	<health now="80000" max="80000" />
@@ -52,58 +51,3 @@
 		<item name="steel boots" chance="1500" />
 	</loot>
 </monster>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<monster name="Garry Grimshade" nameDescription="Garry Grimshade" race="blood" experience="140000" speed="20">
-	<health now="80000" max="80000" />
-	<look type="1717" corpse="40259" />
-	<targetchange interval="4000" chance="15" />
-	<level min="200" max="250" />
-	<flags>
-		<flag summonable="0" />
-		<flag attackable="1" />
-		<flag hostile="1" />
-		<flag illusionable="0" />
-		<flag pushable="0" />
-		<flag canpushitems="1" />
-		<flag canpushcreatures="1" />
-		<flag staticattack="90" />
-	</flags>
-	<attacks>
-		<attack name="melee" interval="1000" min="-200" max="-350" />
-		<attack name="death" interval="2000" chance="30" range="7" radius="3" target="1" min="-300" max="-500">
-			<attribute key="areaEffect" value="rednote" />
-		</attack>
-	</attacks>
-	<defenses armor="250" defense="250" />
-	<elements>
-		<element earthPercent="15" />
-		<element holyPercent="15" />
-		<element deathPercent="15" />
-		<element icePercent="15" />
-		<element firePercent="15" />
-	</elements>
-	<immunities>
-		<immunity invisible="1" />
-	</immunities>
-	<voices interval="5000" chance="10">
-		<voice sentence="Come closer!" />
-	</voices>
-	<loot>
-		<item name="piggy bank" chance="150" />
-		<item name="platinum coin" countmax="80" chance="20000" />
-		<item name="crystal coin" countmax="5" chance="2500" />
-		<item name="sabre" chance="10000" />
-		<item name="dark armor" chance="1650" />
-		<item name="dark shield" chance="1000" />
-		<item name="pirate boots" chance="220" />
-		<item name="rum flask" chance="130" />
-		<item name="pirate backpack" chance="930" />
-		<item name="pirate hat" chance="1150" />
-		<item name="ultimate health potion" countmax="3" chance="5000" />
-		<item name="crown armor" chance="2000" />
-		<item name="crown legs" chance="2000" />
-		<item name="steel boots" chance="1500" />
-	</loot>
-</monster>
->>>>>>> 193e1d9f287ffb71d1704a673e900f89ce82457a

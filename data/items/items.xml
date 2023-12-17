@@ -4530,6 +4530,7 @@
 		<attribute key="skillClub" value="7" />
 		<attribute key="skillShield" value="5" />
 		<attribute key="maxhitpoints" value="3300" />
+		<attribute key="description" value="Wearing this shield increases your health by 3300 health." />
 		<attribute key="showattributes" value="1" />
 		<attribute key="weaponType" value="shield" />
 	</item>
@@ -4542,6 +4543,7 @@
 		<attribute key="skillClub" value="14" />
 		<attribute key="skillShield" value="10" />
 		<attribute key="maxhitpoints" value="6600" />
+		<attribute key="description" value="Wearing this shield increases your health by 6600 health." />
 		<attribute key="weaponType" value="shield" />
 	</item>
 	<item id="40648" name="Eternal Templar Champion Shield">
@@ -4553,6 +4555,7 @@
 		<attribute key="skillClub" value="28" />
 		<attribute key="skillShield" value="20" />
 		<attribute key="maxhitpoints" value="13200" />
+		<attribute key="description" value="Wearing this shield increases your health by 13200 health." />
 		<attribute key="weaponType" value="shield" />
 	</item>
 	<item id="2521" article="a" name="dark shield">
@@ -27467,10 +27470,41 @@
 		<attribute key="corpseType" value="blood" />
 		<attribute key="fluidSource" value="blood" />
 	</item>
-	<item id="39737" name="dead greison spider">
-		<attribute key="containerSize" value="25" />
+	<item id="40097" article="a" name="dead greison spider">
 		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="39737" article="a" name="dead greison spider">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40282" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40095" name="dead greison spider">
+		<attribute key="containerSize" value="25" />
+		<attribute key="decayTo" value="39737" />
 		<attribute key="duration" value="30" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40163" article="a" name="dead elder demon">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40162" article="a" name="dead elder demon">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40163" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40161" name="dead elder demon">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40162" />
+		<attribute key="duration" value="20" />
 		<attribute key="corpseType" value="blood" />
 		<attribute key="fluidSource" value="blood" />
 	</item>
@@ -27565,6 +27599,272 @@
 	<item id="39929" name="dead muficus tuff">
 		<attribute key="containerSize" value="35" />
 		<attribute key="decayTo" value="39930" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40464" article="a" name="dead trohynox">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40464" article="a" name="dead trohynox">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40464" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40464" name="dead trohynox">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40464" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40469" article="a" name="dead pysonox">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40468" article="a" name="dead pysonox">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40464" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40467" name="dead pysonox">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40464" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40255" article="a" name="dead Dreadaxe Grimshade">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40254" article="a" name="dead Dreadaxe Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40255" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40253" name="dead Dreadaxe Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40254" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40258" article="a" name="dead Captain Grimshade">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40257" article="a" name="dead Captain Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40258" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40256" name="dead Captain Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40257" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40261" article="a" name="dead Garry Grimshade">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40260" article="a" name="dead Garry Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40261" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40259" name="dead Garry Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40260" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40264" article="a" name="dead Piotr Grimshade">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40263" article="a" name="dead Piotr Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40264" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40262" name="dead Piotr Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40263" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40267" article="a" name="dead Sirioga Grimshade">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40266" article="a" name="dead Sirioga Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40267" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40265" name="dead Sirioga Grimshade">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40266" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40402" article="a" name="dead Underground Demon">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40416" article="a" name="dead Underground Demon">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40402" />
+		<attribute key="duration" value="90" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40400" name="dead Underground Demon">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40416" />
+		<attribute key="duration" value="50" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40470" article="a" name="dead Golden Dragon">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40472" article="a" name="dead Golden Dragon">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40470" />
+		<attribute key="duration" value="30" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="39892" name="dead Golden Dragon">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40472" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40463" article="a" name="dead White Dragon">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40462" article="a" name="dead White Dragon">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40463" />
+		<attribute key="duration" value="30" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40461" name="dead White Dragon">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40462" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40423" article="a" name="dead Jah Djinn">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40422" article="a" name="dead Jah Djinn">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40423" />
+		<attribute key="duration" value="30" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40421" name="dead Jah Djinn">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40422" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40429" article="a" name="dead Jah">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40428" article="a" name="dead Jah">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40429" />
+		<attribute key="duration" value="30" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40427" name="dead Jah">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40428" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40426" article="a" name="dead Nube Djinn">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40425" article="a" name="dead Nube Djinn">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40426" />
+		<attribute key="duration" value="30" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40424" name="dead Nube Djinn">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40425" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40432" article="a" name="dead Nube">
+		<attribute key="decayTo" value="0" />
+		<attribute key="duration" value="20" />
+		<attribute key="corpseType" value="blood" />
+	</item>
+	<item id="40451" article="a" name="dead Nube">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40432" />
+		<attribute key="duration" value="30" />
+		<attribute key="corpseType" value="blood" />
+		<attribute key="fluidSource" value="blood" />
+	</item>
+	<item id="40430" name="dead Nube">
+		<attribute key="containerSize" value="35" />
+		<attribute key="decayTo" value="40451" />
 		<attribute key="duration" value="20" />
 		<attribute key="corpseType" value="blood" />
 		<attribute key="fluidSource" value="blood" />
@@ -38184,11 +38484,11 @@
 	<item id="26131" article="a" name="enchanted tiara of power">
 		<attribute key="weight" value="1150" />
 		<attribute key="slotType" value="head" />
-		<attribute key="speed" value="30" />
-		<attribute key="armor" value="30" />
-		<attribute key="healthGain" value="100" />
+		<attribute key="speed" value="50" />
+		<attribute key="armor" value="20" />
+		<attribute key="healthGain" value="110" />
 		<attribute key="healthTicks" value="1000" />
-		<attribute key="manaGain" value="100" />
+		<attribute key="manaGain" value="110" />
 		<attribute key="manaTicks" value="1000" />
 		<attribute key="absorbPercentAll" value="10" />
 		<attribute key="showattributes" value="1" />
@@ -38196,8 +38496,8 @@
 	<item id="26132" name="enchanted void boots">
 		<attribute key="weight" value="1500" />
 		<attribute key="slotType" value="feet" />
-		<attribute key="speed" value="90" />
-		<attribute key="armor" value="30" />
+		<attribute key="speed" value="110" />
+		<attribute key="armor" value="20" />
 		<attribute key="healthGain" value="150" />
 		<attribute key="healthTicks" value="1000" />
 		<attribute key="manaGain" value="150" />
@@ -39423,7 +39723,6 @@
 		<attribute key="maxhitpoints" value="22000" />
 		<attribute key="showattributes" value="1" />
 	</item>
-<<<<<<< HEAD
 	<item id="46225" article="the" name="ring of knights">
 		<attribute key="description" value="Knights Family line ring. Also on wearing gives 8k health" />
 		<attribute key="weight" value="7250" />
@@ -39511,8 +39810,6 @@
 		<attribute key="criticalhitamount" value="6" />
 		<attribute key="showattributes" value="1" />
 	</item>
-=======
->>>>>>> parent of 47e4ede (Update)
 	<item id="41654" article="a" name="Divine Covenant Signet">
 		<attribute key="description" value="This ring was made by the best of Tartarians. Also on wearing gives 11k hp/mp" />
 		<attribute key="weight" value="10000" />
@@ -39527,7 +39824,6 @@
 		<attribute key="maxmanapoints" value="11000" />
 		<attribute key="showattributes" value="1" />
 	</item>
-<<<<<<< HEAD
 	<item id="42049" article="the" name="ring of paladins">
 		<attribute key="description" value="Ring of family line Paladins. Also on wearing gives 4k hp/mp" />
 		<attribute key="weight" value="3900" />
@@ -39547,8 +39843,6 @@
 		<attribute key="manaleechchance" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
-=======
->>>>>>> parent of 47e4ede (Update)
 	<item id="41655" article="a" name="Tartarian Arcane Enigma Ring">
 		<attribute key="description" value="This ring was made by the best of Tartarians. Also wearing gives 22k maana" />
 		<attribute key="weight" value="10000" />
@@ -39562,7 +39856,6 @@
 		<attribute key="magiclevelpoints" value="4" />
 		<attribute key="showattributes" value="1" />
 	</item>
-<<<<<<< HEAD
 	<item id="42047" article="the" name="ring of magicians">
 		<attribute key="description" value="Magicians family line Ring. Also wearing gives 11k mana" />
 		<attribute key="weight" value="10000" />
@@ -39579,8 +39872,6 @@
 		<attribute key="manaleechchance" value="2" />
 		<attribute key="showattributes" value="1" />
 	</item>
-=======
->>>>>>> parent of 47e4ede (Update)
 	<item id="34248" article="a" name="Siren's Serenade Ring">
 		<attribute key="description" value="Mermaid's melody enthralls. Foes pause in rapture, enchanted by its song. Vulnerable, they succumb to the bearer's spellbound mastery. This ring gives extra 9k hp/mp on wearing the ring." />
 		<attribute key="weight" value="19800" />
@@ -39735,8 +40026,48 @@
 		<attribute key="weight" value="1660" />
 	</item>
 	<item id="43728" article="a" name="draganir trophy">
-	    <attribute key="description" value="Using this trophy you will spawn Draganirs in Crystal World! Remember Crystal World can enter only 120 levels!." />
+	    <attribute key="description" value="Using this trophy you will spawn Draganir in Crystal World! Remember in Crystal World can enter only 55 levels!." />
 		<attribute key="weight" value="1000" />
+	</item>
+	<item id="44277" article="a" name="draganir pearl">
+	    <attribute key="description" value="Using this draganir pearl you will gain 1k hp or mana by choice, can be used only once per character." />
+		<attribute key="weight" value="2500" />
+	</item>
+	<item id="44278" article="a" name="drahhu pearl">
+	    <attribute key="description" value="Using this drahhu pearl you will gain 1k hp or mana by choice, can be used only once per character." />
+		<attribute key="weight" value="2500" />
+	</item>
+	<item id="41869" article="a" name="mino lore journal">
+	    <attribute key="description" value="Using this mino lore journal you will gain 2k hp or mana by choice, can be used only once per character." />
+		<attribute key="weight" value="11900" />
+	</item>
+	<item id="40994" article="a" name="skullhasher charm">
+	    <attribute key="description" value="Using this skullhasher charm you will gain 1.2k hp or mana by choice, can be used only once per character." />
+		<attribute key="weight" value="3700" />
+	</item>
+	<item id="40993" article="a" name="skullhasher trinket">
+	    <attribute key="description" value="Using this skullhasher trinket you will gain 1.2k hp or mana by choice, can be used only once per character." />
+		<attribute key="weight" value="3700" />
+	</item>
+	<item id="41767" article="a" name="Durianus Elixir of Valor">
+	    <attribute key="description" value="Using this Durianus Elixir of Valor you will gain 2k hp or mana by choice, can be used only once per character." />
+		<attribute key="weight" value="5500" />
+	</item>
+	<item id="41768" article="a" name="Durianus Honor Tonic">
+	    <attribute key="description" value="Using this Durianus Honor Tonic you will gain 2k hp or mana by choice, can be used only once per character." />
+		<attribute key="weight" value="5500" />
+	</item>
+	<item id="41865" article="a" name="Nighthaven Nectar">
+	    <attribute key="description" value="Using this Nighthaven Nectar you will gain 1k hp or 5k mana by choice, can be used only once per character." />
+		<attribute key="weight" value="3999" />
+	</item>
+	<item id="45536" article="a" name="Professor Maxxen Dead Heart">
+	    <attribute key="description" value="Using this Professor Maxxen Dead Heart you will gain 3k hp or mana by choice, can be used only once per character." />
+		<attribute key="weight" value="8350" />
+	</item>
+	<item id="41881" article="a" name="Professor Maxxen Claw">
+	    <attribute key="description" value="Using this Professor Maxxen Claw you will gain 2k hp or mana by choice, can be used only once per character." />
+		<attribute key="weight" value="14280" />
 	</item>
 	<item id="46226" article="a" name="drahhu helmet">
 		<attribute key="description" value="Drahhu manifestation into helmet." />
@@ -39926,7 +40257,6 @@
 		<attribute key="maxmanapoints" value="5000" />
 		<attribute key="weight" value="1680" />
 	</item>
-<<<<<<< HEAD
 	<item id="46033" article="a" name="Professor Maxxen helmet">
 		<attribute key="description" value="A cutting-edge equipment piece designed by the ingenious Professor Maxxen, infusing its wearer with the revolutionary power of advanced technology. Gives 15k Mana/health." />
 		<attribute key="slotType" value="head" />
@@ -40035,8 +40365,6 @@
 		<attribute key="criticalhitamount" value="3" />
 		<attribute key="weight" value="1720" />
 	</item>
-=======
->>>>>>> parent of 47e4ede (Update)
 	<item id="36765" article="a" name="Desire Bag">
 		<attribute key="description" value="There might be something valuable in it." />
 		<attribute key="weight" value="10" />

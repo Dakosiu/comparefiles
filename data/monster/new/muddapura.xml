@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Muddapura" nameDescription="the muddapura" race="blood" experience="17290" speed="330">
-	<health now="7200" max="7200" />
+<monster name="Muddapura" nameDescription="the muddapura" race="blood" experience="50000" speed="30">
+	<health now="35000" max="35000" />
 	<look type="1551" corpse="40458" />
 	<targetchange interval="4000" chance="10" />
 	<level min="122" max="166" />
@@ -21,7 +21,7 @@
 	</flags>
 	<attacks>
 		<attack name="melee" interval="2000" min="-150" max="-300" />
-		<attack name="manadrain" interval="2000" chance="15" length="4" spread="3" min="-296" max="-500">
+		<attack name="manadrain" interval="2000" chance="5" length="4" spread="3" min="-20" max="-50">
 			<attribute key="areaEffect" value="smallplants" />
 		</attack>
 		<attack name="physical" interval="2000" chance="10" length="6" spread="0" target="0" min="-300" max="-500">
@@ -41,7 +41,7 @@
 	<defenses armor="65" defense="65" />
 	<elements>
 		<element energyPercent="-5" />
-		<element earthPercent="25" />
+		<element earthPercent="15" />
 		<element firePercent="10" />
 		<element deathPercent="5" />
 		<element physicalPercent="1" />

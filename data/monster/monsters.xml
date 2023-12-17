@@ -14,6 +14,14 @@
 	<monster name="Greison Spider" file="new/greison spider.xml" />
 	<monster name="Euryale" file="new/Euryale.xml" />
 	<monster name="Stheno" file="new/Stheno.xml" />
+	<monster name="Muficus Puff" file="new/Muficus Puff.xml" />
+	<monster name="Muficus Ruff" file="new/Muficus Ruff.xml" />
+	<monster name="Muficus Tuff" file="new/Muficus Tuff.xml" />
+	<monster name="Sirioga Grimshade" file="new/Sirioga Grimshade.xml" />
+	<monster name="Piotr Grimshade" file="new/Piotr Grimshade.xml" />
+	<monster name="Garry Grimshade" file="new/Garry Grimshade.xml" />
+	<monster name="Captain Grimshade" file="new/Captain Grimshade.xml" />
+	<monster name="Dreadaxe Grimshade" file="new/Dreadaxe Grimshade.xml" />
 	
     <!-- eqSOLObossrooms -->
 	
@@ -259,7 +267,6 @@
 	<monster name="Destroyer Deluxe" file="monsters/destroyer deluxe.xml" />
 	<monster name="Dharalion" file="monsters/dharalion.xml" />
 	<monster name="Diabolic Imp" file="monsters/diabolic_imp.xml" />
-	<monster name="Diamond Servant" file="monsters/diamond_servant.xml" />
 	<monster name="Diblis the Fair" file="monsters/diblis_the_fair.xml" />
 	<monster name="Dipthrah" file="monsters/dipthrah.xml" />
 	<monster name="Dire Penguin" file="monsters/dire_penguin.xml" />
@@ -389,7 +396,6 @@
 	<monster name="Goblin Leader" file="monsters/goblin_leader.xml" />
 	<monster name="Goblin Scavenger" file="monsters/goblin_scavenger.xml" />
 	<monster name="Goblin" file="monsters/goblin.xml" />
-	<monster name="Golden Servant" file="monsters/golden_servant.xml" />
 	<monster name="Golgordan" file="monsters/golgordan.xml" />
 	<monster name="Gozzler" file="monsters/gozzler.xml" />
 	<monster name="Grand Mother Foulscale" file="monsters/grand_mother_foulscale.xml" />
@@ -449,7 +455,11 @@
 	<monster name="Insect Swarm" file="monsters/insect_swarm.xml" />
 	<monster name="Insectoid Scout" file="monsters/insectoid_scout.xml" />
 	<monster name="Insectoid Worker" file="monsters/insectoid_worker.xml" />
+	
 	<monster name="Iron Servant" file="monsters/iron_servant.xml" />
+	<monster name="Golden Servant" file="monsters/golden_servant.xml" />
+	<monster name="Diamond Servant" file="monsters/diamond_servant.xml" />
+	
 	<monster name="Ironblight" file="monsters/ironblight.xml" />
 	<monster name="Island Troll" file="monsters/island_troll.xml" />
 	<monster name="Jagged Earth Elemental" file="monsters/jagged_earth_elemental.xml" />

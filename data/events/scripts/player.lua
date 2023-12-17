@@ -45,6 +45,7 @@ end
 local blockedIds = { 41759, 41675, 41671, 41672, 30165, 18388, 41667, 41761, 41762 }
 function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, toCylinder)
 
+
     if isInArray(blockedIds, item:getId()) then
 	   return RETURNVALUE_NOTPOSSIBLE
     end
@@ -74,21 +75,7 @@ function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, 
 	if item:getActionId() <= 54500 and item:getActionId() >= 54430 then
 	   return RETURNVALUE_NOTPOSSIBLE
 	end
-	
-	--useless loop
-	-- for i = 54430, 54500 do
-		-- if item:getActionId() == i then
-			-- return RETURNVALUE_NOTPOSSIBLE
-		-- end
-	-- end
-
-	-- for i = 11500, 11610 do
-		-- if item:getActionId() == i then
-			-- return RETURNVALUE_NOTPOSSIBLE
-		-- end
-	-- end
-	
-
+		
 	if item:getId() == 1746 and item:getActionId() > 0 then
 		return RETURNVALUE_NOTPOSSIBLE
 	end
@@ -160,6 +147,13 @@ function Player:onItemMoved(item, count, fromPosition, toPosition, fromCylinder,
 			self:sendCancelMessage("You cannot equip a shield as a berserker.")
 			return false
 		end
+	end
+	
+	if ITEM_UPGRADE_SYSTEM:isEquiped(toPosition) then
+	   ITEM_UPGRADE_SYSTEM:updateBonuses(self, item)
+	end
+	if ITEM_UPGRADE_SYSTEM:isEquiped(fromPosition) then
+	   ITEM_UPGRADE_SYSTEM:updateBonuses(self, item, true)
 	end
 
 	if item:getId() == 1746 and item:getActionId() > 0 then
@@ -343,6 +337,14 @@ function Player:onGainExperience(source, exp, rawExp)
 	end
 	--end
 
+
+    local ability = ABILITY_SYSTEM:getExperience(self)
+	if ability > 0 then
+	   ability = ability / 100
+	   exp = exp + (exp * ability)
+	end
+	
+	
 	if getGlobalStorageValue(17589) > os.time() then
 		exp = exp * (1 + getGlobalStorageValue(17585) / 100)
 	end

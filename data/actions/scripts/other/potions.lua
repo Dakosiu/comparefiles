@@ -143,18 +143,27 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 		return true
 	else
 		if potion.health then
-			doTargetCombat(player, target, COMBAT_HEALING, potion.health[1], potion.health[2])
+		    local minValue = potion.health[1]
+			local maxValue = potion.health[2]
+			local bonus = ABILITY_SYSTEM:getHealing(player)
+		    if bonus > 0 then
+		        bonus = bonus / 100
+				minValue = minValue + (minValue * bonus)
+				maxValue = maxValue + (maxValue * bonus)
+		    end
+			doTargetCombat(player, target, COMBAT_HEALING, minValue, maxValue)
 		end
-
-		if player:getExtraHealing() then
-			extraheal = player:getExtraHealing() / 100
-			if potion.mana and player:getExtraHealing() >= 1 then
-				doTargetCombat(player, target, COMBAT_MANADRAIN, potion.mana[1] * extraheal, potion.mana[2] * extraheal)
-			end
-		end
-
+        
 		if potion.mana then
-			doTargetCombat(player, target, COMBAT_MANADRAIN, potion.mana[1], potion.mana[2])
+		    local minValue = potion.mana[1]
+			local maxValue = potion.mana[2]
+			local bonus = ABILITY_SYSTEM:getHealing(player)
+		    if bonus > 0 then
+		        bonus = bonus / 100
+				minValue = minValue + (minValue * bonus)
+				maxValue = maxValue + (maxValue * bonus)
+		    end
+			doTargetCombat(player, target, COMBAT_MANADRAIN, minValue, maxValue)
 		end
 
 		if potion.antidote then

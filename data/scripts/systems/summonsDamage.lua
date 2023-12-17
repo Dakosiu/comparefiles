@@ -20,17 +20,13 @@ function extraDamage.onHealthChange(creature, attacker, primaryDamage,
         local hasMaster = attacker:getMaster()
         if hasMaster then
             if hasMaster:isPlayer() then
-                local summon = attacker
-				local attackPoints = 1
-				if hasMaster:isPlayer() then
-                   attackPoints = math.max(0, hasMaster:getStorageValue(StatSystem.config.storages.attackPoints))
-				end
-				
-                if attackPoints < 0 then
-                    attackPoints = 1
-                end
+                local summon = attacker			
                 local increase = (hasMaster:getLevel() * 10) + (hasMaster:getMagicLevel() * hasMaster:getMagicLevel())
-                --increase = increase + increase * (attackPoints / 100)
+				local ability = ABILITY_SYSTEM:getSummonDamage(hasMaster)
+				if ability > 0 then
+				   ability = ability / 100
+				   increase = increase + (increase * ability)
+				end
                 local damage = increase
                 if summon:getName() == "Melee" then
                     local value = damage*0.5

@@ -17,9 +17,11 @@ function reSpawn.onDeath(creature, corpse, killer, mostDamageKiller, lastHitUnju
    if killer:isPlayer() or killer:getMaster() then
       local chance
       if killer:isPlayer() then
-         chance = killer:getStorageValue(StatSystem.config.storages.trappedEnergyPoints)
+	     chance = ABILITY_SYSTEM:getTrappedEnergy(killer)
+         --chance = killer:getStorageValue(StatSystem.config.storages.trappedEnergyPoints)
       elseif killer:getMaster() then
-         chance = killer:getMaster():getStorageValue(StatSystem.config.storages.trappedEnergyPoints)
+         --chance = killer:getMaster():getStorageValue(StatSystem.config.storages.trappedEnergyPoints)
+		 chance = ABILITY_SYSTEM:getTrappedEnergy(killer:getMaster())
       end
       local random = math.random(1, 100)
       local monsterName = creature:getName()

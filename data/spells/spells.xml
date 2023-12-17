@@ -235,6 +235,10 @@
 		<vocation name="Knight" />
 		<vocation name="Elite Knight" />
 	</instant>
+	<instant group="attack" spellid="177" name="Knights Slash" words="exori slash" lvl="450" mana="3500" premium="0" selftarget="1" cooldown="2000" groupcooldown="1000" needlearn="0" script="custom/knight slash.lua">
+		<vocation name="Knight" />
+		<vocation name="Elite Knight" />
+	</instant>
 	<!-- Custom Spells berserker -->
 	<instant group="attack" spellid="177" name="Berserker begginer fly" words="exori berserc flur" lvl="80" mana="550" premium="0" selftarget="1" cooldown="2000" groupcooldown="1000" needlearn="0" script="custom/berserker begginer fly.lua">
 		<vocation name="Berserker" />

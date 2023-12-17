@@ -1218,6 +1218,64 @@
 	<movevent event="Equip" itemid="41070" level="25" slot="backpack" function="onEquipItem" />  <!-- gemsbringer falcon backpack -->
 	<movevent event="DeEquip" itemid="41070" slot="backpack" function="onDeEquipItem" /> 
 
+
+    <!-- Boss Rings -->
+	
+	<movevent event="Equip" itemid="42062" level="110" slot="ring" function="onEquipItem" />  <!-- mighty mino ring -->
+	<movevent event="DeEquip" itemid="42062" slot="ring" function="onDeEquipItem" /> 
+	
+	<movevent event="Equip" itemid="42058" level="220" slot="ring" function="onEquipItem" />  <!-- durianus ring -->
+	<movevent event="DeEquip" itemid="42058" slot="ring" function="onDeEquipItem" /> 
+	
+	<movevent event="Equip" itemid="42055" level="330" slot="ring" function="onEquipItem" />  <!-- durianus ring -->
+	<movevent event="DeEquip" itemid="42055" slot="ring" function="onDeEquipItem" /> 
+	
+	<movevent event="Equip" itemid="42057" level="220" slot="ring" function="onEquipItem" />  <!-- Nighthaven Kraken ring -->
+	<movevent event="DeEquip" itemid="42057" slot="ring" function="onDeEquipItem" /> 
+	
+	<movevent event="Equip" itemid="44415" level="330" slot="ring" function="onEquipItem" />  <!-- Professor Maxxen ring -->
+	<movevent event="DeEquip" itemid="44415" slot="ring" function="onDeEquipItem" /> 
+
+
+	<!-- Donation rings -->
+
+<movevent event="Equip" itemid="46225" level="50" slot="ring" function="onEquipItem">
+		<vocation name="Knight" />
+		<vocation name="Elite Knight" showInDescription="0" />
+		<vocation name="Tank" />
+		<vocation name="Pramanus Tank" showInDescription="0" />
+		<vocation name="Berserker" />
+		<vocation name="Warlord Berserker" showInDescription="0" />
+	</movevent>
+	<movevent event="DeEquip" itemid="46225" slot="ring" function="onDeEquipItem" />
+	
+	<movevent event="Equip" itemid="42049" level="50" slot="ring" function="onEquipItem">
+		<vocation name="Paladin" />
+		<vocation name="Royal Paladin" showInDescription="0" />
+		<vocation name="Archer" />
+		<vocation name="Grand Archer" showInDescription="0" />
+		<vocation name="Assassin" />
+		<vocation name="Tronic Assassin" showInDescription="0" />
+	</movevent>
+	<movevent event="DeEquip" itemid="42049" slot="ring" function="onDeEquipItem" />
+	
+	
+	<movevent event="Equip" itemid="42047" level="50" slot="ring" function="onEquipItem">
+		<vocation name="Sorcerer" />
+		<vocation name="Master Sorcerer" showInDescription="0" />
+		<vocation name="Mage" />
+		<vocation name="Ultra Mage" showInDescription="0" />
+		<vocation name="Summoner" />
+		<vocation name="Barbaric Summoner" showInDescription="0" />
+		<vocation name="Druid" />
+		<vocation name="Elder Druid" showInDescription="0" />
+		<vocation name="Venomic" />
+		<vocation name="Vomic Venomic" showInDescription="0" />
+		<vocation name="Botanist" />
+		<vocation name="Light Botanist" showInDescription="0" />
+	</movevent>
+	<movevent event="DeEquip" itemid="42047" slot="ring" function="onDeEquipItem" />
+
 	<!-- Rings tartarian dude -->
 	
 	<movevent event="Equip" itemid="41653" level="285" slot="ring" function="onEquipItem">

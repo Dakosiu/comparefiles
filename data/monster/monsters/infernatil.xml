@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Infernatil" nameDescription="Infernatil" race="fire" experience="17000" speed="605">
-	<health now="5000" max="5000" />
-	<look type="12" head="3" body="4" legs="132" feet="132" corpse="2916" />
+<monster name="Infernatil" nameDescription="Infernatil" race="fire" experience="18000" speed="60">
+	<health now="10000" max="10000" />
+	<look type="1313" corpse="6068" />
 	<targetchange interval="2000" chance="15" />
-	<level min="77" max="111" />
+	<level min="100" max="140" />
 	<flags>
 		<flag summonable="0" />
 		<flag attackable="1" />
@@ -17,7 +17,7 @@
 		<flag runonhealth="0" />
 	</flags>
 	<attacks>
-		<attack name="melee" interval="2000" min="-220" max="-460" />
+		<attack name="melee" interval="2000" min="-220" max="-400" />
 		<attack name="firecondition" interval="1000" chance="10" range="2" min="-100" max="-200">
 			<attribute key="shootEffect" value="fire" />
 			<attribute key="areaEffect" value="yellowspark" />
@@ -54,8 +54,6 @@
 		</defense>
 	</defenses>
 	<immunities>
-		<immunity energy="1" />
-		<immunity fire="1" />
 		<immunity lifedrain="1" />
 		<immunity paralyze="1" />
 		<immunity outfit="1" />
@@ -85,8 +83,6 @@
 		<item name="small diamond" countmax="5" chance="9500" />
 		<item name="small sapphire" countmax="10" chance="13500" />
 		<item name="platinum coin" countmax="100" chance="99900" />
-		<item name="gold coin" countmax="100" chance="88800" />
-		<item name="gold coin" countmax="100" chance="77700" />
 		<item name="gold coin" countmax="100" chance="66600" />
 		<item name="small emerald" countmax="10" chance="15500" />
 		<item name="small amethyst" countmax="20" chance="13500" />
@@ -102,26 +98,18 @@
 		<item name="life crystal" chance="1000" />
 		<item name="mind stone" chance="4000" />
 		<item name="gold ring" chance="8000" />
-		<item name="snakebite rod" chance="3500" />
-		<item name="necrotic rod" chance="3500" />
-		<item name="moonlight rod" chance="3500" />
-		<item name="wand of decay" chance="2500" />
 		<item id="2192" chance="2500" /><!-- crystal ball -->
 		<item name="boots of haste" chance="4000" />
 		<item name="stone skin amulet" chance="4000" />
 		<item name="protection amulet" chance="4500" />
 		<item name="ring of healing" chance="13000" />
-		<item id="2231" chance="9000" /><!-- big bone -->
-		<item name="two handed sword" chance="20000" />
-		<item name="double axe" chance="20000" />
-		<item name="giant sword" chance="12500" />
-		<item name="fire axe" chance="17000" />
-		<item name="dragon hammer" chance="4500" />
+		<item name="giant sword" chance="8500" />
+		<item name="fire axe" chance="10000" />
 		<item name="skull staff" chance="5000" />
 		<item name="devil helmet" chance="11000" />
-		<item name="golden legs" chance="5000" />
-		<item name="magic plate armor" chance="3000" />
-		<item name="mastermind shield" chance="7500" />
-		<item name="demon shield" chance="15500" />
+		<item name="golden legs" chance="3000" />
+		<item name="magic plate armor" chance="2000" />
+		<item name="mastermind shield" chance="3000" />
+		<item name="demon shield" chance="8500" />
 	</loot>
 </monster>
