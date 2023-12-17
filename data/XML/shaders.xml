@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shaders>
+    <shader id="1" name="Rainbow" premium="no" />
+    <shader id="2" name="Glitch" premium="no" />
+    <shader id="3" name="Blue Galaxy" premium="no" />
+    <shader id="4" name="Galaxy" premium="no" />
+    <shader id="5" name="Brazil" premium="no" />
+    <shader id="6" name="Lithuania" premium="no" />
+    <shader id="7" name="Gold" premium="no" />
+    <shader id="8" name="Pulse" premium="no" />
+    <shader id="9" name="Soft" premium="no" />
+    <shader id="10" name="Stars" premium="no" />
+    <shader id="11" name="Sunset" premium="no" />
+    <shader id="12" name="Sweden" premium="no" />
+    <shader id="13" name="Outline" premium="no" />
+    <shader id="14" name="Night" premium="no" />
+    <shader id="15" name="Shiny Golden Outline" premium="no" />
+    <shader id="16" name="Black Outline" premium="no" />
+	<shader id="17" name="Bluerish Shrine" premium="no" />
+	<shader id="18" name="Redish Shrine" premium="no" />
+	<shader id="19" name="Greenish Shrine" premium="no" />
+	<shader id="20" name="Ywllowish Shrine" premium="no" />
+	<shader id="21" name="Transparent Shrine" premium="no" />
+	<shader id="22" name="Green Outline" premium="no" />
+	<shader id="23" name="Dark Red Outline" premium="no" />
+	<shader id="24" name="Rainbow Outline" premium="no" />
+	<shader id="25" name="Red Outline" premium="no" />
+	<shader id="26" name="Blue Wave" premium="no" />
+	<shader id="27" name="Green Wave" premium="no" />
+	<shader id="28" name="Orange Wave" premium="no" />
+	<shader id="29" name="White Wave" premium="no" />
+	<shader id="30" name="Blue Strong Wave" premium="no" />
+	<shader id="31" name="Red Strong Wave" premium="no" />
+	<shader id="32" name="Super White Wave" premium="no" />
+	<shader id="33" name="Super Green Wave" premium="no" />
+	<shader id="34" name="Super Yellow Wave" premium="no" />
+	<shader id="35" name="Electrical Super Charge" premium="no" />
+	<shader id="36" name="Etherical Charge" premium="no" />
+	<shader id="37" name="Red Etherical Charge" premium="no" />
+	<shader id="38" name="Golden Etherical Charge" premium="no" />
+	<shader id="39" name="White Etherical Charge" premium="no" />
+	<shader id="40" name="Orange Etherical Charge" premium="no" />
+	<shader id="41" name="Dotty Uplift" premium="no" />
+	<shader id="42" name="Green Dotty Uplift" premium="no" />
+	<shader id="43" name="Blue Dotty Uplift" premium="no" />
+	<shader id="44" name="Strong Cyan Angelic" premium="no" />
+	<shader id="45" name="Strong White Angelic" premium="no" />
+	<shader id="46" name="Strong Golden Angelic" premium="no" />
+	<shader id="47" name="Strong Yellow Angelic" premium="no" />
+	<shader id="48" name="Strong Red Angelic" premium="no" />
+	<shader id="49" name="Blue Angelic" premium="no" />
+	<shader id="50" name="Purple Angelic" premium="no" />
+	<shader id="51" name="Red Angelic" premium="no" />
+	<shader id="52" name="Strong Blue Angelic" premium="no" />
+	<shader id="53" name="Golden Angelic" premium="no" />
+	<shader id="54" name="Strong Green Angelic" premium="no" />
+	<shader id="55" name="White Angelic" premium="no" />
+	<shader id="56" name="Dark Cyan Outline" premium="no" />
+	<shader id="57" name="Test41" premium="no" />
+	<shader id="58" name="Test42" premium="no" />
+	<shader id="59" name="Test43" premium="no" />
+	<shader id="60" name="Test44" premium="no" />
+	<shader id="61" name="Test45" premium="no" />
+	<shader id="62" name="Test46" premium="no" />
+	<shader id="63" name="Test47" premium="no" />
+	<shader id="64" name="Test48" premium="no" />
+	<shader id="65" name="Test49" premium="no" />
+	<shader id="66" name="Test50" premium="no" />
+	<shader id="67" name="Test51" premium="no" />
+	<shader id="68" name="Test52" premium="no" />
+	
+	<shader id="69" name="Test53" premium="no" />
+	<shader id="70" name="Test54" premium="no" />
+	<shader id="71" name="Test55" premium="no" />
+	<shader id="72" name="Test56" premium="no" />
+	<shader id="73" name="Test57" premium="no" />
+	<shader id="74" name="Test58" premium="no" />
+	<shader id="75" name="Test59" premium="no" />
+	<shader id="76" name="Test60" premium="no" />
+	<shader id="77" name="Test61" premium="no" />
+	<shader id="78" name="Test62" premium="no" />
+	<shader id="79" name="Test63" premium="no" />
+	<shader id="80" name="Test64" premium="no" />
+	<shader id="81" name="Test65" premium="no" />
+	<shader id="82" name="Test66" premium="no" />
+	<shader id="83" name="Test67" premium="no" />
+	<shader id="84" name="Test68" premium="no" />
+	<shader id="85" name="Test69" premium="no" />
+	<shader id="86" name="Test70" premium="no" />
+	<shader id="87" name="Test71" premium="no" />
+	<shader id="88" name="Test72" premium="no" />
+	<shader id="89" name="Test73" premium="no" />
+	<shader id="90" name="Test74" premium="no" />
+	<shader id="91" name="Test75" premium="no" />
+	<shader id="92" name="Test76" premium="no" />
+	<shader id="93" name="Test77" premium="no" />
+	<shader id="94" name="Test78" premium="no" />
+	<shader id="95" name="Test79" premium="no" />
+	<shader id="96" name="Test80" premium="no" />
+	<shader id="97" name="Test81" premium="no" />
+	<shader id="98" name="Test82" premium="no" />
+	<shader id="99" name="Test83" premium="no" />
+	<shader id="100" name="Test84" premium="no" />
+	<shader id="101" name="Test85" premium="no" />
+	<shader id="102" name="Test86" premium="no" />
+	<shader id="103" name="Test87" premium="no" />
+	<shader id="104" name="Test88" premium="no" />
+	<shader id="105" name="Test89" premium="no" />
+	<shader id="106" name="Test90" premium="no" />
+	<shader id="107" name="Test91" premium="no" />
+	<shader id="108" name="Test92" premium="no" />
+</shaders>

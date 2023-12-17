@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Mighty Cyclop" nameDescription="a mighty cyclop" race="blood" experience="77000" speed="210" manacost="695">
+	<health now="68800" max="68800" />
+	<look type="277" corpse="7740" />
+	<targetchange interval="2500" chance="40" />
+	<level min="0" max="3" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="1" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag runonhealth="0" />
+		<flag canwalkonenergy="0" />
+		<flag canwalkonfire="0" />
+		<flag canwalkonpoison="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-270" max="-710" />
+		<attack name="physical" interval="2000" chance="10" range="7" min="-300" max="-700">
+			<attribute key="shootEffect" value="whirlwindclub" />
+		</attack>
+		<attack name="drunk" interval="1000" chance="40" duration="4000">
+			<attribute key="shootEffect" value="whirlwindclub" />
+			<attribute key="areaEffect" value="stun" />
+		</attack>
+	</attacks>
+	<defenses armor="38" defense="38" />
+	<elements>
+		<element energyPercent="10" />
+		<element firePercent="10" />
+		<element holyPercent="10" />
+		<element earthPercent="10" />
+		<element deathPercent="10" />
+	</elements>
+	<voices interval="8000" chance="50">
+		<voice sentence="Love yourself." />
+		<voice sentence="Cherish you." />
+		<voice sentence="Radiate self-love." />
+		<voice sentence="Be your joy." />
+		<voice sentence="Celebrate uniqueness." />
+		<voice sentence="Embrace kindness." />
+		<voice sentence="Nourish inner strength." />
+		<voice sentence="Cultivate happiness within." />
+		<voice sentence="Find your peace." />
+		<voice sentence="Thrive in self-worth." />
+		<voice sentence="Embrace love daily." />
+		<voice sentence="Kindness matters most." />
+		<voice sentence="Your heart matters." />
+		<voice sentence="Radiate positivity." />
+		<voice sentence="Joy within you." />
+		<voice sentence="Strength within love." />
+		<voice sentence="Be your happiness." />
+		<voice sentence="Celebrate each day." />
+		<voice sentence="Embrace your strength." />
+		<voice sentence="Live with purpose." />
+		<voice sentence="Cherish every moment." />
+		<voice sentence="Love deeply always." />
+	</voices>
+	<loot>
+		<item name="crystal coin" countmax="44" chance="82920" />
+		<item name="club ring" chance="90" />
+		<item id="40969" chance="50" /><!-- cyclop doll -->
+		<item name="knight axe" chance="3800" />
+		<item name="heavy machete" chance="2000" />
+		<item name="crusader helmet" chance="2000" />
+		<item name="demon shield" chance="2000" />
+		<item name="tower shield" chance="6190" />
+		<item name="meat" chance="49950" />
+		<item id="7398" chance="140" /><!-- cyclops trophy -->
+		<item id="40554" countmax="10" chance="63333" /><!-- warrior coin -->
+		<item id="26180" countmax="5" chance="46670"/><!-- small energy ball -->
+		<item id="35969" countmax="1" chance="100" /> <!-- dark cube -->		
+		<item name="spiked squelcher" chance="15000" />
+		<item name="ultimate health potion" countmax="26" chance="39000" />
+		<item name="cyclops toe" chance="70280" />
+	</loot>
+</monster>

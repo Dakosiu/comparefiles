@@ -1,0 +1,28 @@
+local condition = Condition(CONDITION_ATTRIBUTES)
+condition:setParameter(CONDITION_PARAM_STAT_MAXHITPOINTSPERCENT, 525)
+condition:setParameter(CONDITION_PARAM_STAT_MAXMANAPOINTSPERCENT, 607)
+condition:setParameter(CONDITION_PARAM_TICKS, 10 * 60 * 1000)
+condition:setParameter(CONDITION_PARAM_SUBID, 4)
+condition:setParameter(CONDITION_PARAM_BUFF, true)
+
+local spell = Spell("instant")
+function spell.onCastSpell(creature, variant)
+    creature:addCondition(condition)
+    creature:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
+    return true
+end
+
+spell:name("Life and Mana IncreaseV3")
+spell:words("utamo mega strong")
+spell:group("support")
+spell:vocation("Royal Paladin")
+spell:id(24)
+spell:cooldown(1 * 500)
+spell:groupCooldown(1 * 500)
+spell:level(250000)
+spell:manaPercent(15)
+spell:isAggressive(false)
+spell:isSelfTarget(true)
+spell:isPremium(false)
+spell:needLearn(false)
+spell:register()

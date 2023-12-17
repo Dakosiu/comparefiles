@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raid>
+	<!-- Message broadcast -->
+	<!-- Broadcast types: warning, event, default, description, smallstatus, blueconsole, redconsole -->
+	<announce delay="1000" type="warning" message="Attention, adventurers! Brace yourselves for Draken Spellweaver Ultima's awakening, far south east from Evotronus city in the Mountains of Drakens. Prepare yourself!" />
+	<announce delay="5000" type="warning" message="The Mountains of Drakens, far south east from Evotronus city, shiver with magic. Draken Spellweaver Ultima stirs, promising astounding rewards. Rally friends for the mystical battle and legendary loot!" />
+	<announce delay="10000" type="warning" message="Mystical danger nears! Draken Spellweaver Ultima prepares its magic far south east from Evotronus city, within the Mountains of Drakens. Gather strength for the trial and claim wondrous loot!" />
+	<announce delay="15000" type="warning" message="Last call to action! Draken Spellweaver Ultima emerges in the Mountains of Drakens, you can also use command /bosses to find the boss. Face the arcane trial, seize amazing loot, and etch your name in legend!!" />
+
+
+	<areaspawn delay="15000" fromx="1275" fromy="956" fromz="2" tox="1276" toy="957" toz="2">
+		<monster name="Draken Spellweaver Ultima" minamount="1" maxamount="1" /><!-- Random amount in specified range -->
+	</areaspawn>
+
+</raid>

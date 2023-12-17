@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Ancient Men" script="Task System.lua" walkinterval="1000" floorchange="0">
+	<health now="100" max="100" />
+	<look type="948" head="21" body="18" legs="3" feet="89" shader="Transparent Shrine" addons="3" />
+</npc>

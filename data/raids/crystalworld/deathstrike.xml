@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raid>
+	<!-- Message broadcast -->
+	<!-- Broadcast types: warning, event, default, description, smallstatus, blueconsole, redconsole -->
+	<announce delay="1000" type="warning" message="Prepare your weapons and gather your allies! Deathstrike is coming to Crystal World" />
+	<announce delay="11000" type="warning" message="Attention all adventurers! Deathstrike's arrival is near in Crystal World!" />
+	<announce delay="22000" type="warning" message="Get ready, Evotronus heroes! Deathstrike is on the horizon in Crystal World. Stand by for the raid!" />
+	<announce delay="33000" type="warning" message="Deathstrike looms in Crystal World! Rally with your comrades for an epic fight!" />
+
+
+	<areaspawn delay="34000" fromx="452" fromy="485" fromz="7" tox="451" toy="486" toz="7">
+		<monster name="Deathstrike" minamount="1" maxamount="1" /><!-- Random amount in specified range -->
+	</areaspawn>
+
+</raid>

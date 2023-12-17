@@ -1,0 +1,143 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Captain Grimshade" nameDescription="Captain Grimshade" race="blood" experience="1000000" speed="30">
+	<health now="1000000" max="1000000" />
+	<look type="1716" corpse="40256" />
+	<targetchange interval="4000" chance="25" />
+	<level min="300" max="320" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag staticattack="90" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-400" max="-600" />
+		<attack name="death" interval="2000" chance="20" radius="5" target="0" min="-200" max="-400">
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>
+		<attack name="energy" interval="2000" chance="20" radius="4" target="0" min="-200" max="-400">
+			<attribute key="areaEffect" value="energyarea"/>
+		</attack>
+		<attack name="drunk" interval="3000" chance="10" radius="5" target="0" duration="10000">
+			<attribute key="areaEffect" value="purplenote"/>
+		</attack>
+		<attack name="lifedrain" interval="2000" chance="20" range="3" radius="4" target="1" min="-100" max="-300">
+			<attribute key="shootEffect" value="poison" />
+		</attack>
+	</attacks>
+	<defenses armor="250" defense="250" />
+	<defense name="healing" interval="2000" chance="25" min="30000" max="50000">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	<elements>
+		<element earthPercent="30" />
+		<element holyPercent="30" />
+		<element deathPercent="30" />
+		<element icePercent="30" />
+		<element firePercent="30" />
+		<element physicalPercent="30"/>
+		<element energyPercent="30" />
+	</elements>
+	<immunities>
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Challenger!" />
+		<voice sentence="I'll snap your limbs." />
+	</voices>
+	<loot>
+		<item name="crystal coin" countmax="35" chance="20000" />
+		<item id="41529" countmax="4" chance="20000" />    <!-- amber coin -->
+		<item id="40554" countmax="20" chance="20000" />   <!-- warrior coin -->
+		<item name="ultimate health potion" countmax="10" chance="10000" />
+		<item name="ultimate mana potion" countmax="10" chance="10000" />
+		<item name="steel boots" chance="20000" />
+		<item id="2393" chance="10000"/>					<!-- giant sword -->
+		<item id="7402" chance="10000"/>					<!-- dragon slayer -->
+		<item id="5741" chance="21000"/>				<!-- skull helmet -->
+		<item id="9971" chance="19000"/>				<!-- gold ingot -->
+		<item id="5669" chance="12500"/>				<!-- mysterious voodoo skull -->
+		<item id="5892" chance="8285"/>				    <!-- huge chunk of crude iron -->
+		<item id="2475" chance="15000"/>				<!-- warrior helmet -->
+		<item id="27604" countmax="2" chance="5000"/>				<!-- teleportation drink -->
+		<item id="30523" countmax="3" chance="6000"/>				<!-- common upgrade orb -->
+		<item id="8302" countmax="3" chance="6000"/>				<!-- uncommon slot gem -->
+	</loot>
+</monster>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Captain Grimshade" nameDescription="Captain Grimshade" race="blood" experience="1000000" speed="30">
+	<health now="1000000" max="1000000" />
+	<look type="1716" corpse="40256" />
+	<targetchange interval="4000" chance="25" />
+	<level min="300" max="320" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag staticattack="90" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-400" max="-600" />
+		<attack name="death" interval="2000" chance="20" radius="5" target="0" min="-200" max="-400">
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>
+		<attack name="energy" interval="2000" chance="20" radius="4" target="0" min="-200" max="-400">
+			<attribute key="areaEffect" value="energyarea"/>
+		</attack>
+		<attack name="drunk" interval="3000" chance="10" radius="5" target="0" duration="10000">
+			<attribute key="areaEffect" value="purplenote"/>
+		</attack>
+		<attack name="lifedrain" interval="2000" chance="20" range="3" radius="4" target="1" min="-100" max="-300">
+			<attribute key="shootEffect" value="poison" />
+		</attack>
+	</attacks>
+	<defenses armor="250" defense="250" />
+	<defense name="healing" interval="2000" chance="25" min="30000" max="50000">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	<elements>
+		<element earthPercent="30" />
+		<element holyPercent="30" />
+		<element deathPercent="30" />
+		<element icePercent="30" />
+		<element firePercent="30" />
+		<element physicalPercent="30"/>
+		<element energyPercent="30" />
+	</elements>
+	<immunities>
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Challenger!" />
+		<voice sentence="I'll snap your limbs." />
+	</voices>
+	<loot>
+		<item name="crystal coin" countmax="35" chance="20000" />
+		<item id="41529" countmax="4" chance="20000" />    <!-- amber coin -->
+		<item id="40554" countmax="20" chance="20000" />   <!-- warrior coin -->
+		<item name="ultimate health potion" countmax="10" chance="10000" />
+		<item name="ultimate mana potion" countmax="10" chance="10000" />
+		<item name="steel boots" chance="20000" />
+		<item id="2393" chance="10000"/>					<!-- giant sword -->
+		<item id="7402" chance="10000"/>					<!-- dragon slayer -->
+		<item id="5741" chance="21000"/>				<!-- skull helmet -->
+		<item id="9971" chance="19000"/>				<!-- gold ingot -->
+		<item id="5669" chance="12500"/>				<!-- mysterious voodoo skull -->
+		<item id="5892" chance="8285"/>				    <!-- huge chunk of crude iron -->
+		<item id="2475" chance="15000"/>				<!-- warrior helmet -->
+		<item id="27604" countmax="2" chance="5000"/>				<!-- teleportation drink -->
+		<item id="30523" countmax="3" chance="6000"/>				<!-- common upgrade orb -->
+		<item id="8302" countmax="3" chance="6000"/>				<!-- uncommon slot gem -->
+	</loot>
+</monster>
+>>>>>>> 193e1d9f287ffb71d1704a673e900f89ce82457a

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Taranus" script="taranus.lua" walkinterval="1000">
+	<health now="100" max="100" />
+	<look type="1331" head="89" body="79" legs="87" feet="79" addons="3" />
+<voices>
+<voice text="Weaponary for Knights and Tanks for sale." interval2="1000" margin="1" yell="yes" />
+</voices>
+<parameters>
+		<parameter key="message_greet" value="Welcome, |PLAYERNAME|! I trade with tank and knight weaponary items. If you are interested, just ask me for a trade." />
+		<parameter key="message_farewell" value="See you later!" />
+		<parameter key="module_shop" value="1" />
+		<parameter key="shop_buyable" value="
+	mythril axe,7455,20000000;
+	ornamented axe,7411,50000000;
+	execowtioner axe,23547,100000000;
+	royal axe,7434,200000000;
+	taranus axe,41437,400000000;
+	crystalline axe,18451,800000000;
+	stonecutter axe,2431,1000000000;
+	crystalcutter axe,41455,2000000000;
+	arcane staff,2453,20000000;
+	jade hammer,7422,50000000;
+	deepling squelcher,15647,100000000;
+	hammer of wrath,2444,200000000;
+	taranus mace,41409,400000000;
+	mycological mace,18452,800000000;
+	the stomper,8929,1000000000;
+	obsidian truncheon,8928,2000000000;
+	shiny blade,18465,20000000;
+	reapers axe,7420,50000000;
+	pharaoh sword,2446,100000000;
+	the justice seeker,7390,200000000;
+	taranus sword,41395,400000000;
+	okolnir sword,34270,800000000;
+	the calamity,8932,1000000000;
+	emerald sword,8930,2000000000;" />
+		<parameter key="shop_sellable" value="
+	mythril axe,7455,2000;
+	ornamented axe,7411,5000;
+	execowtioner axe,23547,10000;
+	royal axe,7434,20000;
+	taranus axe,41437,40000;
+	crystalline axe,18451,80000;
+	stonecutter axe,2431,100000;
+	crystalcutter axe,41455,200000;
+	arcane staff,2453,2000;
+	jade hammer,7422,5000;
+	deepling squelcher,15647,10000;
+	hammer of wrath,2444,20000;
+	taranus mace,41409,40000;
+	mycological mace,18452,80000;
+	the stomper,8929,100000;
+	obsidian truncheon,8928,200000;
+	shiny blade,18465,2000;
+	reapers axe,7420,5000;
+	pharaoh sword,2446,10000;
+	the justice seeker,7390,20000;
+	taranus sword,41395,40000;
+	okolnir sword,34270,80000;
+	the calamity,8932,100000;
+	emerald sword,8930,200000" />
+	</parameters>
+</npc>

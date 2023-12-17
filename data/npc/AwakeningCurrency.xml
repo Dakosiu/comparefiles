@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Tartaria Survival" script="awakeningCurrency.lua" walkinterval="500" floorchange="0">
+	<health now="100" max="100" />
+	<look type="1922" head="115" body="114" legs="82" feet="78" addons="3" shader="Galaxy" aura="1991" />
+</npc>

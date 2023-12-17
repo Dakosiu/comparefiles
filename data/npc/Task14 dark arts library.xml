@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Albert The Ritualist" script="Task System.lua" walkinterval="3000" floorchange="0">
+	<health now="100" max="100" />
+	<look type="2173" head="20" body="29" legs="117" feet="85" addons="3" />
+</npc>

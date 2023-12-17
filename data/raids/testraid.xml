@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raid>
+	<!-- Message broadcast -->
+	<!-- Broadcast types: warning, event, default, description, smallstatus, blueconsole, redconsole -->
+	<announce delay="1000" type="warning" message="Rats are attacking neart Trekolt Temple!" />
+	<announce delay="3000" type="warning" message="Rats attack continues!" />
+
+	<!-- Area spawns - you can specify raid area or use range value -->
+	<areaspawn delay="2000" radius="10" centerx="823" centery="873" centerz="5">
+		<monster name="Rat" amount="3" /><!-- Specified amount -->
+	</areaspawn>
+
+	<!-- Single spawns -->
+	<singlespawn delay="15000" name="Cave Rat" x="824" y="875" z="5" />
+</raid>

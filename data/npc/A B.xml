@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="A Second Walker" script="AB.lua" walkinterval="1" floorchange="15">
+	<health now="100" max="1000" />
+	<look type="128" head="60" body="22" legs="24" feet="32" addons="3" />
+	<parameters>
+		<parameters key="message_greet" value="|PLAYERNAME|, You are the famous guy that killed the MONSTERBOSSNAME, isnt you ? can you help me doing some missions ? You can also {report} if you already done your mission." />
+	</parameters>
+</npc>

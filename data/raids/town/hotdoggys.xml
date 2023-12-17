@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raid>
+	<!-- Message broadcast -->
+	<!-- Broadcast types: warning, event, default, description, smallstatus, blueconsole, redconsole -->
+	<announce delay="1000" type="warning" message="There is a strange smell coming from the air, beware Evotronus citizens!" />
+	<announce delay="15000" type="warning" message="Sausage Boys incoming! Get ready for a hot and spicy showdown!" />
+	<announce delay="35000" type="warning" message="The Army of Sausage Boys has arrived, prepare for a meaty mayhem!" />
+
+
+	<areaspawn delay="35500" fromx="803" fromy="862" fromz="5" tox="862" toy="928" toz="5">
+		<monster name="Sausage Boy" minamount="140" maxamount="280" /><!-- Random amount in specified range -->
+	</areaspawn>
+
+</raid>

@@ -1,0 +1,387 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+ local colors = {
+     blue = "#3333ff",
+     lightBlue = "#1fb1f9",
+     black = "#333333",
+     red = "#ff3333",
+     darkred = "#990000",
+     white = "#ffffff",
+     orange = "#ffaa00",
+     purple = "#ff00af",
+     darkpurple = "#f1009a",
+     green = "#00ffaa",
+     darkgreen = "#00ff00",
+     yellow = "#FFFF50",
+     blackT = '#0a0a0a99',
+ }
+ local response = {
+     config = {
+         [1] = {
+             Position = { 847, 876, 5 },
+             Text = "Welcome to Evotronus",
+             Color = colors.green
+         },
+         [2] = { Position = { 975, 891, 6 }, Text = "Stamina Trainers", Color = colors.white },
+         [3] = { Position = { 852, 876, 5 }, Text = "Blessings", Color = colors.orange },
+         [4] = { Position = { 852, 877, 5 }, Text = "Aol Amulet", Color = "#ff00ff" },
+         [5] = { Position = { 807, 871, 5 }, Text = "Friday Chest", Color = "#ff1010" },
+         [6] = {
+             Position = { 72, 1874, 10 },
+             Text = "Upgrading Things And Extra!",
+             Color = "#ffff00"
+         },
+          ! Tutorial
+         [7] = { Position = { 2931, 214, 7 }, Text = "Supplies/Potions", Color = "#ffaa00" },
+         [8] = { Position = { 2925, 212, 7 }, Text = "1 Chest", Color = "#ffffff" },
+         [9] = { Position = { 2931, 212, 7 }, Text = "2 Chest", Color = "#ffffff" },
+         [10] = { Position = { 2925, 210, 7 }, Text = "3 Chest", Color = "#ffffff" },
+         [11] = { Position = { 2932, 210, 7 }, Text = "4 Chest", Color = "#ffffff" },
+         [12] = { Position = { 2925, 208, 7 }, Text = "5 Chest", Color = "#ffffff" },
+         [13] = { Position = { 2931, 208, 7 }, Text = "6 Chest", Color = "#ffffff" },
+         [14] = { Position = { 2925, 206, 7 }, Text = "7 Chest", Color = "#ffffff" },
+         [15] = { Position = { 2932, 206, 7 }, Text = "8 Chest", Color = "#ffffff" },
+         [16] = { Position = { 2925, 204, 7 }, Text = "9 Chest", Color = "#ffffff" },
+         [17] = { Position = { 2931, 204, 7 }, Text = "10 Chest", Color = "#ffffff" },
+         [18] = { Position = { 2925, 202, 7 }, Text = "11 Chest", Color = "#ffffff" },
+         [19] = { Position = { 2931, 202, 7 }, Text = "12 Chest", Color = "#ffffff" },
+         [20] = { Position = { 2925, 200, 7 }, Text = "13 Chest", Color = "#ffffff" },
+         [21] = { Position = { 2931, 200, 7 }, Text = "14 Chest", Color = "#ffffff" },
+         [22] = { Position = { 2925, 196, 7 }, Text = "15 Chest", Color = "#ffffff" },
+         [23] = { Position = { 2931, 196, 7 }, Text = "16 Chest", Color = "#ffffff" },
+         [24] = {
+             Position = { 2928, 214, 7 },
+             Text = "Every Chest Here Give You\nAn Important Items For Your Start.",
+             Color = colors.green
+         },
+         [25] = {
+             Position = { 847, 870, 4 },
+             Text = "Bosses Chest",
+             Color = "#ff9900"
+         },
+         [26] = {
+             Position = { 2925, 192, 7 },
+             Text = "Exit",
+             Color = "#aacc00"
+         },
+         [27] = {
+             Position = { 2931, 192, 7 },
+             Text = "Exit",
+             Color = "#aacc00"
+         },
+         [28] = {
+             Position = { 937, 1053, 7 },
+             Text = "Pick",
+             Color = "#660000"
+         },
+         [29] = {
+             Position = { 958, 1050, 8 },
+             Text = "Exit",
+             Color = "#660000"
+         },
+         [30] = {
+             Position = { 62, 2154, 9 },
+             Text = "Exit",
+             Color = "#aacc00"
+         },
+         [31] = {
+             Position = { 66, 2154, 9 },
+             Text = "Exit",
+             Color = "#aacc00"
+         },
+         [32] = {
+             Position = { 69, 2149, 9 },
+             Text = "Remember in Exploreable area is over 350 quests, for addon dolls, stat points, items, money, warrior coins and much more....",
+             Color = "#ffffff"
+         },
+         [33] = {
+             Position = { 2890, 212, 8 },
+             Text = "Use Command !points to use your stat points in the way you want, keep in mind that at start you need boost your health for better survival rate",
+             Color = "#ffffff"
+         },
+         [34] = {
+             Position = { 2934, 212, 8 },
+             Text = "Recomendation to use first 30 stat points into health!",
+             Color = "#aacc00"
+         },
+     }
+ }
+ local jsonResponse = json.encode(response)
+
+ local sendMapText = CreatureEvent("sendMapText")
+ function sendMapText.onExtendedOpcode(player, opcode, buffer)
+     print('data/scripts/creaturescripts/clientData/mapText.lua')
+     if opcode == 22 then
+         player:sendExtendedOpcode(22, jsonResponse)
+     end
+     return true
+ end
+
+ sendMapText:register()
+
+ local sendMapTextOnLogin = CreatureEvent("sendMapText_onLogin")
+
+ function sendMapTextOnLogin.onLogin(player)
+     player:registerEvent("sendMapText")
+     return true
+ end
+
+ sendMapTextOnLogin:register(-1)
+=======
+ local colors = {
+     blue = "#3333ff",
+     lightBlue = "#1fb1f9",
+     black = "#333333",
+     red = "#ff3333",
+     darkred = "#990000",
+     white = "#ffffff",
+     orange = "#ffaa00",
+     purple = "#ff00af",
+     darkpurple = "#f1009a",
+     green = "#00ffaa",
+     darkgreen = "#00ff00",
+     yellow = "#FFFF50",
+     blackT = '#0a0a0a99',
+ }
+ local response = {
+     config = {
+         [1] = {
+             Position = { 847, 876, 5 },
+             Text = "Welcome to Evotronus",
+             Color = colors.green
+         },
+         [2] = { Position = { 975, 891, 6 }, Text = "Stamina Trainers", Color = colors.white },
+         [3] = { Position = { 852, 876, 5 }, Text = "Blessings", Color = colors.orange },
+         [4] = { Position = { 852, 877, 5 }, Text = "Aol Amulet", Color = "#ff00ff" },
+         [5] = { Position = { 807, 871, 5 }, Text = "Friday Chest", Color = "#ff1010" },
+         [6] = {
+             Position = { 72, 1874, 10 },
+             Text = "Upgrading Things And Extra!",
+             Color = "#ffff00"
+         },
+          ! Tutorial
+         [7] = { Position = { 2931, 214, 7 }, Text = "Supplies/Potions", Color = "#ffaa00" },
+         [8] = { Position = { 2925, 212, 7 }, Text = "1 Chest", Color = "#ffffff" },
+         [9] = { Position = { 2931, 212, 7 }, Text = "2 Chest", Color = "#ffffff" },
+         [10] = { Position = { 2925, 210, 7 }, Text = "3 Chest", Color = "#ffffff" },
+         [11] = { Position = { 2932, 210, 7 }, Text = "4 Chest", Color = "#ffffff" },
+         [12] = { Position = { 2925, 208, 7 }, Text = "5 Chest", Color = "#ffffff" },
+         [13] = { Position = { 2931, 208, 7 }, Text = "6 Chest", Color = "#ffffff" },
+         [14] = { Position = { 2925, 206, 7 }, Text = "7 Chest", Color = "#ffffff" },
+         [15] = { Position = { 2932, 206, 7 }, Text = "8 Chest", Color = "#ffffff" },
+         [16] = { Position = { 2925, 204, 7 }, Text = "9 Chest", Color = "#ffffff" },
+         [17] = { Position = { 2931, 204, 7 }, Text = "10 Chest", Color = "#ffffff" },
+         [18] = { Position = { 2925, 202, 7 }, Text = "11 Chest", Color = "#ffffff" },
+         [19] = { Position = { 2931, 202, 7 }, Text = "12 Chest", Color = "#ffffff" },
+         [20] = { Position = { 2925, 200, 7 }, Text = "13 Chest", Color = "#ffffff" },
+         [21] = { Position = { 2931, 200, 7 }, Text = "14 Chest", Color = "#ffffff" },
+         [22] = { Position = { 2925, 196, 7 }, Text = "15 Chest", Color = "#ffffff" },
+         [23] = { Position = { 2931, 196, 7 }, Text = "16 Chest", Color = "#ffffff" },
+         [24] = {
+             Position = { 2928, 214, 7 },
+             Text = "Every Chest Here Give You\nAn Important Items For Your Start.",
+             Color = colors.green
+         },
+         [25] = {
+             Position = { 847, 870, 4 },
+             Text = "Bosses Chest",
+             Color = "#ff9900"
+         },
+         [26] = {
+             Position = { 2925, 192, 7 },
+             Text = "Exit",
+             Color = "#aacc00"
+         },
+         [27] = {
+             Position = { 2931, 192, 7 },
+             Text = "Exit",
+             Color = "#aacc00"
+         },
+         [28] = {
+             Position = { 937, 1053, 7 },
+             Text = "Pick",
+             Color = "#660000"
+         },
+         [29] = {
+             Position = { 958, 1050, 8 },
+             Text = "Exit",
+             Color = "#660000"
+         },
+         [30] = {
+             Position = { 62, 2154, 9 },
+             Text = "Exit",
+             Color = "#aacc00"
+         },
+         [31] = {
+             Position = { 66, 2154, 9 },
+             Text = "Exit",
+             Color = "#aacc00"
+         },
+         [32] = {
+             Position = { 69, 2149, 9 },
+             Text = "Remember in Exploreable area is over 350 quests, for addon dolls, stat points, items, money, warrior coins and much more....",
+             Color = "#ffffff"
+         },
+         [33] = {
+             Position = { 2890, 212, 8 },
+             Text = "Use Command !points to use your stat points in the way you want, keep in mind that at start you need boost your health for better survival rate",
+             Color = "#ffffff"
+         },
+         [34] = {
+             Position = { 2934, 212, 8 },
+             Text = "Recomendation to use first 30 stat points into health!",
+             Color = "#aacc00"
+         },
+     }
+ }
+ local jsonResponse = json.encode(response)
+
+ local sendMapText = CreatureEvent("sendMapText")
+ function sendMapText.onExtendedOpcode(player, opcode, buffer)
+     print('data/scripts/creaturescripts/clientData/mapText.lua')
+     if opcode == 22 then
+         player:sendExtendedOpcode(22, jsonResponse)
+     end
+     return true
+ end
+
+ sendMapText:register()
+
+ local sendMapTextOnLogin = CreatureEvent("sendMapText_onLogin")
+
+ function sendMapTextOnLogin.onLogin(player)
+     player:registerEvent("sendMapText")
+     return true
+ end
+
+ sendMapTextOnLogin:register(-1)
+>>>>>>> 193e1d9f287ffb71d1704a673e900f89ce82457a
+=======
+-- local colors = {
+    -- blue = "#3333ff",
+    -- lightBlue = "#1fb1f9",
+    -- black = "#333333",
+    -- red = "#ff3333",
+    -- darkred = "#990000",
+    -- white = "#ffffff",
+    -- orange = "#ffaa00",
+    -- purple = "#ff00af",
+    -- darkpurple = "#f1009a",
+    -- green = "#00ffaa",
+    -- darkgreen = "#00ff00",
+    -- yellow = "#FFFF50",
+    -- blackT = '#0a0a0a99',
+-- }
+-- local response = {
+    -- config = {
+        -- [1] = {
+            -- Position = { 847, 876, 5 },
+            -- Text = "Welcome to Evotronus",
+            -- Color = colors.green
+        -- },
+        -- [2] = { Position = { 975, 891, 6 }, Text = "Stamina Trainers", Color = colors.white },
+        -- [3] = { Position = { 852, 876, 5 }, Text = "Blessings", Color = colors.orange },
+        -- [4] = { Position = { 852, 877, 5 }, Text = "Aol Amulet", Color = "#ff00ff" },
+        -- [5] = { Position = { 807, 871, 5 }, Text = "Friday Chest", Color = "#ff1010" },
+        -- [6] = {
+            -- Position = { 72, 1874, 10 },
+            -- Text = "Upgrading Things And Extra!",
+            -- Color = "#ffff00"
+        -- },
+        -- -- ! Tutorial
+        -- [7] = { Position = { 2931, 214, 7 }, Text = "Supplies/Potions", Color = "#ffaa00" },
+        -- [8] = { Position = { 2925, 212, 7 }, Text = "1 Chest", Color = "#ffffff" },
+        -- [9] = { Position = { 2931, 212, 7 }, Text = "2 Chest", Color = "#ffffff" },
+        -- [10] = { Position = { 2925, 210, 7 }, Text = "3 Chest", Color = "#ffffff" },
+        -- [11] = { Position = { 2932, 210, 7 }, Text = "4 Chest", Color = "#ffffff" },
+        -- [12] = { Position = { 2925, 208, 7 }, Text = "5 Chest", Color = "#ffffff" },
+        -- [13] = { Position = { 2931, 208, 7 }, Text = "6 Chest", Color = "#ffffff" },
+        -- [14] = { Position = { 2925, 206, 7 }, Text = "7 Chest", Color = "#ffffff" },
+        -- [15] = { Position = { 2932, 206, 7 }, Text = "8 Chest", Color = "#ffffff" },
+        -- [16] = { Position = { 2925, 204, 7 }, Text = "9 Chest", Color = "#ffffff" },
+        -- [17] = { Position = { 2931, 204, 7 }, Text = "10 Chest", Color = "#ffffff" },
+        -- [18] = { Position = { 2925, 202, 7 }, Text = "11 Chest", Color = "#ffffff" },
+        -- [19] = { Position = { 2931, 202, 7 }, Text = "12 Chest", Color = "#ffffff" },
+        -- [20] = { Position = { 2925, 200, 7 }, Text = "13 Chest", Color = "#ffffff" },
+        -- [21] = { Position = { 2931, 200, 7 }, Text = "14 Chest", Color = "#ffffff" },
+        -- [22] = { Position = { 2925, 196, 7 }, Text = "15 Chest", Color = "#ffffff" },
+        -- [23] = { Position = { 2931, 196, 7 }, Text = "16 Chest", Color = "#ffffff" },
+        -- [24] = {
+            -- Position = { 2928, 214, 7 },
+            -- Text = "Every Chest Here Give You\nAn Important Items For Your Start.",
+            -- Color = colors.green
+        -- },
+        -- [25] = {
+            -- Position = { 847, 870, 4 },
+            -- Text = "Bosses Chest",
+            -- Color = "#ff9900"
+        -- },
+        -- [26] = {
+            -- Position = { 2925, 192, 7 },
+            -- Text = "Exit",
+            -- Color = "#aacc00"
+        -- },
+        -- [27] = {
+            -- Position = { 2931, 192, 7 },
+            -- Text = "Exit",
+            -- Color = "#aacc00"
+        -- },
+        -- [28] = {
+            -- Position = { 937, 1053, 7 },
+            -- Text = "Pick",
+            -- Color = "#660000"
+        -- },
+        -- [29] = {
+            -- Position = { 958, 1050, 8 },
+            -- Text = "Exit",
+            -- Color = "#660000"
+        -- },
+        -- [30] = {
+            -- Position = { 62, 2154, 9 },
+            -- Text = "Exit",
+            -- Color = "#aacc00"
+        -- },
+        -- [31] = {
+            -- Position = { 66, 2154, 9 },
+            -- Text = "Exit",
+            -- Color = "#aacc00"
+        -- },
+        -- [32] = {
+            -- Position = { 69, 2149, 9 },
+            -- Text = "Remember in Exploreable area is over 350 quests, for addon dolls, stat points, items, money, warrior coins and much more....",
+            -- Color = "#ffffff"
+        -- },
+        -- [33] = {
+            -- Position = { 2890, 212, 8 },
+            -- Text = "Use Command !points to use your stat points in the way you want, keep in mind that at start you need boost your health for better survival rate",
+            -- Color = "#ffffff"
+        -- },
+        -- [34] = {
+            -- Position = { 2934, 212, 8 },
+            -- Text = "Recomendation to use first 30 stat points into health!",
+            -- Color = "#aacc00"
+        -- },
+    -- }
+-- }
+-- local jsonResponse = json.encode(response)
+
+-- local sendMapText = CreatureEvent("sendMapText")
+-- function sendMapText.onExtendedOpcode(player, opcode, buffer)
+    -- print('data/scripts/creaturescripts/clientData/mapText.lua')
+    -- if opcode == 22 then
+        -- player:sendExtendedOpcode(22, jsonResponse)
+    -- end
+    -- return true
+-- end
+
+-- sendMapText:register()
+
+-- local sendMapTextOnLogin = CreatureEvent("sendMapText_onLogin")
+
+-- function sendMapTextOnLogin.onLogin(player)
+    -- player:registerEvent("sendMapText")
+    -- return true
+-- end
+
+-- sendMapTextOnLogin:register(-1)
+>>>>>>> parent of 47e4ede (Update)

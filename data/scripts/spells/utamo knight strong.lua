@@ -1,0 +1,27 @@
+local condition = Condition(CONDITION_ATTRIBUTES)
+condition:setParameter(CONDITION_PARAM_STAT_MAXHITPOINTSPERCENT, 357)
+condition:setParameter(CONDITION_PARAM_TICKS, 10 * 60 * 1000)
+condition:setParameter(CONDITION_PARAM_SUBID, 4)
+condition:setParameter(CONDITION_PARAM_BUFF, true)
+
+local spell = Spell("instant")
+function spell.onCastSpell(creature, variant)
+    creature:addCondition(condition)
+    creature:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
+    return true
+end
+
+spell:name("Life Increase Knight")
+spell:words("utamo knight strong")
+spell:group("support")
+spell:vocation("Elite Knight")
+spell:id(24)
+spell:cooldown(1 * 500)
+spell:groupCooldown(1 * 500)
+spell:level(90000)
+spell:manaPercent(15)
+spell:isAggressive(false)
+spell:isSelfTarget(true)
+spell:isPremium(false)
+spell:needLearn(false)
+spell:register()

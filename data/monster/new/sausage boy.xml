@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Sausage Boy" nameDescription="a sausage boy" race="blood" experience="111" speed="70" manacost="0">
+	<health now="110" max="110"/>
+	<look type="2159" corpse="35427"/>
+	<targetchange interval="6000" chance="80"/>
+	<level min="1" max="4" />
+	<flags>
+        <flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="0"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="3000" min="-1" max="-5" poison="1"/>
+	</attacks>
+	<defenses armor="25" defense="25"/>
+	<elements>
+	</elements>
+	<immunities>
+	</immunities>
+	<voices interval="1000" chance="15">
+		<voice sentence="Come tasty one!"/>
+		<voice sentence="Tasty Hot Dogs, come and bite me."/>
+		<voice sentence="I Drop event stones!"/>
+		<voice sentence="Tasty tasty doggy!!!"/>
+		<voice sentence="You gotta try me!"/>
+		<voice sentence="So hot in this costume, help me out!"/>
+		<voice sentence="I Hate my job!"/>
+		<voice sentence="Mayo please!"/>
+		<voice sentence="Mustard Please!"/>
+	</voices>
+	<loot>
+		<item id="2148" countmax="1" chance="100000"/>	<!-- gold coin -->
+	</loot>
+</monster>

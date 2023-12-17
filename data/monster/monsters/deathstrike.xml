@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Deathstrike" nameDescription="Deathstrike" race="undead" experience="4000000" speed="470">
+	<health now="2000000" max="2000000" />
+	<look type="500" corpse="18384" />
+	<targetchange interval="5000" chance="8" />
+	<level min="1" max="3" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="50" />
+		<flag runonhealth="10000" />
+		<flag boss="1" />
+		<flag bosslevel="235"/>
+		<flag description="This boss spawns by raid in Crystal World"/>
+		<flag rewardchest="1" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1300" min="-2510" max="-3940" />
+		<attack name="speed" interval="2000" chance="20" range="7" speedchange="-400" duration="2500">
+			<attribute key="shootEffect" value="whirlwindaxe" />
+		</attack>
+		<attack name="fire" interval="2000" chance="50" range="7" min="-2820" max="-3950">
+			<attribute key="areaEffect" value="firearea" />
+		</attack>
+		<attack name="energy" interval="1200" chance="50" range="3" target="1" min="-2350" max="-3800">
+			<attribute key="areaEffect" value="purpleenergy" />
+		</attack>
+	</attacks>
+	<defenses armor="25" defense="35">
+		<defense name="healing" interval="1000" chance="25" min="1000" max="15500">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element physicalPercent="-10" />
+		<element deathPercent="-10" />
+		<element energyPercent="-30" />
+	</elements>
+	<immunities>
+		<immunity outfit="1" />
+		<immunity fire="1" />
+		<immunity earth="1" />
+		<immunity drown="1" />
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Deeestructiooon!" />
+		<voice sentence="Maaahhhrrr!" />
+		<voice sentence="You are nothing!" />
+		<voice sentence="Taaake ... this!" />
+	</voices>
+	<loot>
+		<item name="Deathstrike's snippet" chance="10000" />
+		<item name="crystalline sword" chance="148" />
+		<item name="crystalline axe" chance="143" />
+		<item name="mycological mace" chance="157" />
+		<item name="crystal crossbow" chance="123" />
+		<item name="mycological bow" chance="114" />
+		<item id="26180" countmax="77" chance="46670"/><!-- small energy ball -->
+		<item id="40554" countmax="49" chance="33333" /><!-- warrior coin -->
+		<item id="35969" countmax="2" chance="2000" /><!-- dark cube  -->
+		<item id="21401" countmax="1" chance="2000" /><!-- small dragon tear  -->
+		<item id="2160" countmax="100" chance="50000" /><!-- cc  -->
+		<item id="2160" countmax="100" chance="50000" /><!-- cc  -->
+		<item name="shiny blade" chance="114" />
+	</loot>
+</monster>

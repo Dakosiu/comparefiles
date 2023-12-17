@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="A Walker" script="AA.lua" walkinterval="0" floorchange="15">
+	<health now="100" max="1000" />
+	<look type="128" head="60" body="22" legs="24" feet="32" addons="3" />
+	<parameters>
+		<parameters key="message_greet" value="Hey arent you |PLAYERNAME|, the new adventurer everyone is talking about ? Im looking for someone to {help} me in some missions, maybe you can,  also if you done mission just {report} it to me." />
+	</parameters>
+</npc>

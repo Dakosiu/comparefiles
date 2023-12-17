@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Skullhasher" nameDescription="skullhasher" race="blood" experience="88000" speed="280" manacost="0">
+	<health now="88800" max="88800"/>
+	<look type="1303" corpse="6068"/>
+	<targetchange interval="4000" chance="10"/>
+	<level min="0" max="3" />
+	<flags>
+        <flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="70"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-330" max="-520"/>
+		<attack name="death" interval="2000" chance="60" range="1" min="-350" max="-500">
+			<attribute key="shootEffect" value="death"/>
+			<attribute key="areaEffect" value="smallclouds"/>
+		</attack>
+		<attack name="drunk" interval="2000" chance="10" range="7">
+			<attribute key="shooteffect" value="energy"/>
+			<attribute key="areaeffect" value="teleport"/>
+		</attack>
+		<attack name="lifedrain" interval="2000" chance="30" range="1" min="-200" max="-500">
+			<attribute key="areaeffect" value="redshimmer"/>
+		</attack>
+		<attack name="manadrain" interval="2000" chance="10" range="7" min="-150" max="-250"/>
+	</attacks>
+	<defenses armor="20" defense="20">
+		<defense name="healing" interval="2000" chance="20" min="150" max="1000">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<elements>
+		<element earthPercent="15"/>
+		<element firePercent="15"/>
+		<element energyPercent="15"/>
+		<element deathPercent="15"/>
+	</elements>
+	<immunities>
+		<immunity paralyze="1"/>
+		<immunity invisible="1"/>
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Death ... Taste!"/>
+	</voices>
+	<loot>
+		<item id="2160" countmax="44" chance="40000"/><!-- cc coin -->
+		<item id="2795" countmax="16" chance="20740"/><!-- fire mushroom -->
+		<item id="8473" countmax="55" chance="20000"/><!-- ultimate health potion -->
+		<item id="7590" countmax="55" chance="14285"/><!-- great mana potion -->
+		<item id="1982" chance="1190"/><!-- purple tome -->
+		<item id="2179" chance="1010"/><!-- gold ring -->
+		<item id="2214" chance="4730"/><!-- ring of healing -->
+		<item id="2470" chance="2000"/><!-- golden legs -->
+		<item id="2514" chance="1000"/><!-- mastermind shield -->
+		<item id="2472" chance="500"/><!-- magic plate armor -->
+		<item id="40554" countmax="10" chance="63333" /><!-- warrior coin -->
+		<item id="26180" countmax="5" chance="46670"/><!-- small energy ball -->
+		<item id="35969" countmax="1" chance="100" /> <!-- dark cube -->		
+		<item id="44527" chance="60" /> <!-- Helmet  < boss  -->
+		<item id="44528" chance="60" /> <!-- Armor  < boss  -->
+		<item id="44529" chance="60" /> <!-- Legs  < boss  -->
+		<item id="44530" chance="60" /> <!-- Boots  < boss  -->
+		<item id="26144" chance="60" /> <!-- craft surprise box < boss  -->
+		<item id="36765" chance="60" /> <!-- Desire bag, craft bag < boss  -->
+	</loot>
+</monster>

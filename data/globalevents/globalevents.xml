@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<globalevents>
+	<globalevent type="startup" name="ServerStartup" script="startup.lua" />
+	<globalevent type="record" name="PlayerRecord" script="record.lua" />
+	<globalevent name="shop" interval="1000" script="shop.lua"/>
+	<globalevent name="Server Save" time="09:55:00" script="serversave.lua" />
+	<globalevent name="Save" interval="1800000" script="save.lua" />
+	<globalevent name="Skull Quest" interval="100" script="skull.lua" />
+</globalevents>

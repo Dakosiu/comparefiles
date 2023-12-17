@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Draganir" nameDescription="a draganir" race="blood" experience="66450" speed="240">
+	<health now="50000" max="50000" />
+	<look type="1556" corpse="40473" />
+	<targetchange interval="4000" chance="10" />
+	<level min="0" max="3" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="30" />
+		<flag canwalkonenergy="0" />
+		<flag canwalkonpoison="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-100" max="-300" />
+		<attack name="fire" interval="2000" chance="30" length="5" spread="2" min="-190" max="-325">
+			<attribute key="areaEffect" value="firearea" />
+		</attack>
+		<attack name="fire" interval="2000" chance="35" range="7" radius="4" target="1" min="-255" max="-405">
+			<attribute key="shootEffect" value="fire" />
+			<attribute key="areaEffect" value="firearea" />
+		</attack>
+		<attack name="firefield" interval="2000" chance="10" range="7" radius="3" target="1">
+			<attribute key="shootEffect" value="fire" />
+		</attack>
+	</attacks>
+	<defenses armor="20" defense="20">
+		<defense name="healing" interval="1000" chance="15" min="260" max="480">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element earthPercent="5" />
+		<element icePercent="-10" />
+		<element energyPercent="-10" />
+	</elements>
+	<immunities>
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+		<immunity fire="1" />
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Draganirrrr" />
+		<voice sentence="RRRRRRR" />
+	</voices>
+	<loot>
+		<item name="crystal coin" countmax="15" chance="33750" />
+		<item name="crystal coin" countmax="10" chance="33750" />
+		<item id="40554" countmax="5" chance="63333" /><!-- warrior coin -->
+		<item id="26180" countmax="3" chance="46670"/><!-- small energy ball -->
+		<item id="35969" countmax="1" chance="50" /> <!-- dark cube -->		
+		<item name="dragon ham" countmax="9" chance="80000" />
+		<item name="green mushroom" countmax="3" chance="55560" />
+		<item name="great mana potion" countmax="5" chance="55300" />
+		<item id="43728" chance="50" /> <!-- draganir trophy  -->
+		<item id="46240" chance="50" /> <!-- Helmet red < boss  -->
+		<item id="46241" chance="50" /> <!-- Armor red < boss  -->
+		<item id="46242" chance="50" /> <!-- Legs red < boss  -->
+		<item id="46243" chance="50" /> <!-- Boots red < boss  -->
+		<item id="26144" chance="50" /> <!-- craft surprise box < boss  -->
+		<item id="36765" chance="50" /> <!-- Desire bag, craft bag < boss  -->
+	</loot>
+</monster>

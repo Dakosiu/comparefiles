@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Kirrela" script="default.lua" walkinterval="2000" floorchange="0">
+	<health now="100" max="100" />
+	<look type="514" head="79" body="0" legs="85" feet="91" addons="3" aura="1864" />
+	<parameters>
+		<parameter key="module_shop" value="1" />
+		<parameter key="shop_sellable" value="
+			event stone,35427,10000;
+			event token,18422,1000000;
+			grand event token,18423,100000000;" />
+		<parameter key="shop_buyable" value="
+			event stone,35427,10000;
+			event token,18422,1000000;
+			grand event token,18423,100000000;" />
+	</parameters>
+</npc>

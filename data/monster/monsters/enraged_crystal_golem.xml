@@ -1,0 +1,134 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Enraged Crystal Golem" nameDescription="enraged crystal golem" race="energy" experience="40000" speed="25">
+	<health now="18000" max="18000" />
+	<look type="508" corpse="18466" />
+	<targetchange interval="4000" chance="10" />
+	<level min="120" max="160" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="70" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-200" max="-400" />
+		<attack name="energy strike" interval="2000" chance="40" range="3" min="-100" max="-400">
+		</attack>
+	</attacks>
+	<defenses armor="15" defense="15" />
+	<elements>
+		<element physicalPercent="15" />
+	</elements>
+	<immunities>
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Crrrrk! Chhhhr!" />
+	</voices>
+	<loot>
+		<item name="platinum coin" countmax="70" chance="7000" />
+		<item name="crystal coin" countmax="2" chance="3000" />
+		<item name="gold coin" countmax="100" chance="100000" />
+		<item name="crystal sword" chance="4710" />
+		<item name="glorious axe" chance="360" />
+		<item name="ultimate health potion" countmax="3" chance="7140" />
+		<item name="ultimate mana potion" countmax="3" chance="8270" />
+		<item name="blue crystal splinter" chance="4120" />
+		<item name="cyan crystal fragment" chance="1050" />
+		<item name="crystalline spikes" chance="7980" />
+		<item name="crystalline axe" countmax="5" chance="5008" />
+		<item name="crystalline axe" countmax="5" chance="5008" />
+	</loot>
+</monster>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Enraged Crystal Golem" nameDescription="enraged crystal golem" race="energy" experience="40000" speed="25">
+	<health now="18000" max="18000" />
+	<look type="508" corpse="18466" />
+	<targetchange interval="4000" chance="10" />
+	<level min="120" max="160" />
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Enraged Crystal Golem" nameDescription="enraged crystal golem" race="energy" experience="550" speed="200">
+	<health now="700" max="700" />
+	<look type="508" corpse="18466" />
+	<targetchange interval="4000" chance="10" />
+	<level min="0" max="44" />
+>>>>>>> parent of 47e4ede (Update)
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="70" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+<<<<<<< HEAD
+		<attack name="melee" interval="2000" min="-200" max="-400" />
+		<attack name="energy strike" interval="2000" chance="40" range="3" min="-100" max="-400">
+		</attack>
+=======
+		<attack name="melee" interval="2000" min="0" max="-150" />
+>>>>>>> parent of 47e4ede (Update)
+	</attacks>
+	<defenses armor="15" defense="15" />
+	<elements>
+		<element physicalPercent="15" />
+	</elements>
+	<immunities>
+<<<<<<< HEAD
+=======
+		<immunity fire="1" />
+		<immunity ice="1" />
+>>>>>>> parent of 47e4ede (Update)
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Crrrrk! Chhhhr!" />
+	</voices>
+	<loot>
+<<<<<<< HEAD
+		<item name="platinum coin" countmax="70" chance="7000" />
+		<item name="crystal coin" countmax="2" chance="3000" />
+		<item name="gold coin" countmax="100" chance="100000" />
+		<item name="crystal sword" chance="4710" />
+		<item name="glorious axe" chance="360" />
+		<item name="ultimate health potion" countmax="3" chance="7140" />
+		<item name="ultimate mana potion" countmax="3" chance="8270" />
+=======
+		<item name="gold coin" countmax="100" chance="100000" />
+		<item name="crystal sword" chance="4710" />
+		<item name="glorious axe" chance="360" />
+		<item name="strong health potion" chance="7140" />
+		<item name="strong mana potion" chance="8270" />
+>>>>>>> parent of 47e4ede (Update)
+		<item name="blue crystal splinter" chance="4120" />
+		<item name="cyan crystal fragment" chance="1050" />
+		<item name="crystalline spikes" chance="7980" />
+		<item name="crystalline axe" countmax="5" chance="5008" />
+<<<<<<< HEAD
+		<item name="crystalline axe" countmax="5" chance="5008" />
+	</loot>
+</monster>
+>>>>>>> 193e1d9f287ffb71d1704a673e900f89ce82457a
+=======
+	</loot>
+</monster>
+>>>>>>> parent of 47e4ede (Update)

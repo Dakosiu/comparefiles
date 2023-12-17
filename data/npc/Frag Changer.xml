@@ -1,0 +1,8 @@
+<npc name="Frag Reward Changer" script="data/npc/scripts/frag.lua" floorchange="0" access="5" level="1" maglevel="1">
+	<health now="150" max="150"/>
+	<look type="144" head="67" body="95" legs="77" feet="87" addons="3" corpse="2212"/>
+	<parameters>
+        <parameter key="module_travel" value="1"/>
+	<parameter key="message_greet" value="Hello |PLAYERNAME|. I am one of the who collecting frag rewards, and I can give you a gift for them , just say {offer}!" />
+	</parameters>
+</npc>

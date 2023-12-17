@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Bublet" nameDescription="a bublet" race="venom" experience="1000" speed="1100" manacost="0">
+	<health now="430" max="430"/>
+	<look type="1926" corpse="2160"/>
+	<targetchange interval="6000" chance="80"/>
+	<level min="0" max="11" />
+	<flags>
+        <flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="0"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="420"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="10000" min="-1" max="-2" poison="200"/>
+	</attacks>
+	<defenses armor="0" defense="0"/>
+	<elements>
+	</elements>
+	<immunities>
+	</immunities>
+	<voices interval="1000" chance="15">
+		<voice sentence="Bubli Bubli Buu."/>
+		<voice sentence="Bubli Bubli Daa."/>
+		<voice sentence="Bubli Bubli."/>
+		<voice sentence="Bubli Da."/>
+		<voice sentence="Flury Blury Plur Plur."/>
+		<voice sentence="Poh uh."/>
+		<voice sentence="Poke Poke."/>
+		<voice sentence="Humy Humy ku ku."/>
+		<voice sentence="ku ku."/>
+	</voices>
+	<loot>
+		<item id="2148" countmax="1" chance="100000"/>	<!-- gold coin -->
+	</loot>
+	<script>
+		<event name="bublett" />
+	</script>
+</monster>

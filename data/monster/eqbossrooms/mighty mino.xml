@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Mighty Mino" nameDescription="a mighty mino" race="blood" experience="88000" speed="260" manacost="0">
+	<health now="88800" max="88800"/>
+	<look type="1628" corpse="6068"/>
+	<targetchange interval="4000" chance="10"/>
+	<level min="0" max="3" />
+	<flags>
+        <flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-210" max="-700"/>
+		<attack name="energy beam" interval="2000" chance="30" min="-310" max="-565"/>
+		<attack name="physical" interval="1500" chance="25" radius="3" min="-450" max="-655">
+			<attribute key="areaEffect" value="blackspark"/>
+		</attack>
+	</attacks>
+	<defenses armor="30" defense="30">
+		<defense name="healing" interval="1000" chance="15" min="100" max="1600">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<elements>
+		<element physicalPercent="20"/>
+		<element firePercent="20"/>
+		<element energyPercent="20"/>
+		<element icePercent="20"/>
+		<element earthPercent="20"/>
+		<element deathPercent="20"/>
+	</elements>
+	<immunities>
+		<immunity invisible="1"/>
+		<immunity lifedrain="1" />
+		<immunity paralyze="1" />
+	</immunities>
+	<voices interval="5000" chance="30">
+		<voice sentence="Feel the power of my hands!"/>
+		<voice sentence="DO YOU SMELL ME?!"/>
+	</voices>
+	<loot>
+		<item id="2160" countmax="22" chance="40000"/>	<!-- cc coin -->
+		<item id="2160" countmax="22" chance="40000"/>		<!-- cc coin -->
+		<item id="2147" countmax="22" chance="50000"/>						<!-- small ruby -->
+		<item id="2149" countmax="22" chance="50000"/>						<!-- small emerald -->
+		<item id="2150" countmax="22" chance="50000"/>						<!-- small amethyst -->
+		<item id="9970" countmax="22" chance="50000"/>						<!-- small topaz -->
+		<item id="2207" countmax="22" chance="10100"/>						<!-- sword ring -->
+		<item id="40554" countmax="10" chance="63333" /><!-- warrior coin -->
+		<item id="26180" countmax="5" chance="46670"/><!-- small energy ball -->
+		<item id="35969" countmax="1" chance="100" /> <!-- dark cube -->		
+		<item id="45636" chance="60" /> <!-- Helmet  < boss  -->
+		<item id="45637" chance="60" /> <!-- Armor  < boss  -->
+		<item id="45638" chance="60" /> <!-- Legs  < boss  -->
+		<item id="45639" chance="60" /> <!-- Boots  < boss  -->
+		<item id="26144" chance="60" /> <!-- craft surprise box < boss  -->
+		<item id="36765" chance="60" /> <!-- Desire bag, craft bag < boss  -->
+	</loot>
+</monster>
