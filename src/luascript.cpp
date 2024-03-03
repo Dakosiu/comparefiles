@@ -2049,6 +2049,10 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Game", "getAccountStorageValue", LuaScriptInterface::luaGameGetAccountStorageValue);
 	registerMethod("Game", "setAccountStorageValue", LuaScriptInterface::luaGameSetAccountStorageValue);
 	registerMethod("Game", "saveAccountStorageValues", LuaScriptInterface::luaGameSaveAccountStorageValues);
+	
+	
+	registerMethod("Game", "getServerItemId", LuaScriptInterface::luaGameGetServerItemId);
+	
 
 	// Variant
 	registerClass("Variant", "", LuaScriptInterface::luaVariantCreate);
@@ -2227,6 +2231,8 @@ void LuaScriptInterface::registerFunctions()
 
 	registerMethod("Item", "setStoreItem", LuaScriptInterface::luaItemSetStoreItem);
 	registerMethod("Item", "isStoreItem", LuaScriptInterface::luaItemIsStoreItem);
+	
+	registerMethod("Item", "getWorth", LuaScriptInterface::luaItemGetWorth);
 
 	// Container
 	registerClass("Container", "Item", LuaScriptInterface::luaContainerCreate);
@@ -2508,7 +2514,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Player", "getFightMode", LuaScriptInterface::luaPlayerGetFightMode);
 
 	registerMethod("Player", "getStoreInbox", LuaScriptInterface::luaPlayerGetStoreInbox);
-
+	
 	// Monster
 	registerClass("Monster", "Creature", LuaScriptInterface::luaMonsterCreate);
 	registerMetaMethod("Monster", "__eq", LuaScriptInterface::luaUserdataCompare);
@@ -2680,6 +2686,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("ItemType", "getGroup", LuaScriptInterface::luaItemTypeGetGroup);
 	registerMethod("ItemType", "getId", LuaScriptInterface::luaItemTypeGetId);
 	registerMethod("ItemType", "getClientId", LuaScriptInterface::luaItemTypeGetClientId);
+	
 	registerMethod("ItemType", "getName", LuaScriptInterface::luaItemTypeGetName);
 	registerMethod("ItemType", "getPluralName", LuaScriptInterface::luaItemTypeGetPluralName);
 	registerMethod("ItemType", "getArticle", LuaScriptInterface::luaItemTypeGetArticle);
@@ -6846,6 +6853,18 @@ int LuaScriptInterface::luaItemIsStoreItem(lua_State* L)
 	return 1;
 }
 
+int LuaScriptInterface::luaItemGetWorth(lua_State* L)
+{
+	// item:getWorth()
+	Item* item = getUserdata<Item>(L, 1);
+	if (item) {
+		lua_pushnumber(L, item->getWorth());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
 // Container
 int LuaScriptInterface::luaContainerCreate(lua_State* L)
 {
@@ -9211,7 +9230,8 @@ int LuaScriptInterface::luaPlayerAddItem(lua_State* L)
 	uint16_t itemId;
 	if (isNumber(L, 2)) {
 		itemId = getNumber<uint16_t>(L, 2);
-	} else {
+	}
+	else {
 		itemId = Item::items.getItemIdByName(getString(L, 2));
 		if (itemId == 0) {
 			lua_pushnil(L);
@@ -9228,20 +9248,23 @@ int LuaScriptInterface::luaPlayerAddItem(lua_State* L)
 	int parameters = lua_gettop(L);
 	if (parameters >= 5) {
 		itemCount = std::max<int32_t>(1, count);
-	} else if (it.hasSubType()) {
+	}
+	else if (it.hasSubType()) {
 		if (it.stackable) {
 			itemCount = std::ceil(count / 100.f);
 		}
 
 		subType = count;
-	} else {
+	}
+	else {
 		itemCount = std::max<int32_t>(1, count);
 	}
 
 	bool hasTable = itemCount > 1;
 	if (hasTable) {
 		lua_newtable(L);
-	} else if (itemCount == 0) {
+	}
+	else if (itemCount == 0) {
 		lua_pushnil(L);
 		return 1;
 	}
@@ -9277,7 +9300,8 @@ int LuaScriptInterface::luaPlayerAddItem(lua_State* L)
 			pushUserdata<Item>(L, item);
 			setItemMetatable(L, -1, item);
 			lua_settable(L, -3);
-		} else {
+		}
+		else {
 			pushUserdata<Item>(L, item);
 			setItemMetatable(L, -1, item);
 		}
@@ -11931,6 +11955,19 @@ int LuaScriptInterface::luaItemTypeGetClientId(lua_State* L)
 		lua_pushnumber(L, itemType->clientId);
 	} else {
 		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int LuaScriptInterface::luaGameGetServerItemId(lua_State* L)
+{
+	uint32_t spriteId = getNumber<uint32_t>(L, 1);
+	const ItemType& itemType = Item::items.getItemIdByClientId(spriteId);
+
+	if (itemType.id == 0) {
+		lua_pushnil(L);
+	} else {
+		lua_pushnumber(L, itemType.id);
 	}
 	return 1;
 }

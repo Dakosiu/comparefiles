@@ -585,6 +585,7 @@ class LuaScriptInterface
 		static int luaGameGetAccountStorageValue(lua_State* L);
 		static int luaGameSetAccountStorageValue(lua_State* L);
 		static int luaGameSaveAccountStorageValues(lua_State* L);
+		static int luaGameGetServerItemId(lua_State* L);
 
 		// Variant
 		static int luaVariantCreate(lua_State* L);
@@ -1035,7 +1036,7 @@ class LuaScriptInterface
 		static int luaPlayerGetFightMode(lua_State* L);
 
 		static int luaPlayerGetStoreInbox(lua_State* L);
-
+		
 		// Monster
 		static int luaMonsterCreate(lua_State* L);
 
