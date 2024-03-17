@@ -1175,6 +1175,13 @@ void ItemParse::createAndRegisterScript(ItemType &itemType, pugi::xml_node attri
 				g_logger().warn("Chain disabled for weapon: {}", itemType.name);
 			}
 		}
+		
+		else if (stringKey == "chainmaxtarget" && weapon) {
+			if (auto value = subValueAttribute.as_uint) {
+				weapon->setChainMaxTarget(value);
+				g_logger().trace("Found chain max target value '{}' for weapon: {}", value, itemType.name);
+			}
+		}
 	}
 
 	if (weapon) {

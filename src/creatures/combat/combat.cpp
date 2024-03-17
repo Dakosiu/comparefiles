@@ -971,8 +971,16 @@ void Combat::setupChain(const std::shared_ptr<Weapon> &weapon) {
 		setParam(COMBAT_PARAM_EFFECT, effect);
 		setParam(COMBAT_PARAM_BLOCKARMOR, true);
 	};
+    
+	uint16_t chainMaxTarget = g_configManager().getNumber(COMBAT_CHAIN_TARGETS, __FUNCTION__);
+	
+	uint16_t weaponChainMaxTarget = weapon->getMaxChainTarget();
+	if (weaponChainMaxTarget > 0) {
+		chainMaxTarget = weaponChainMaxTarget;
+	}
 
-	setChainCallback(g_configManager().getNumber(COMBAT_CHAIN_TARGETS, __FUNCTION__), 1, true);
+    setChainCallback(chainMaxTarget, __FUNCTION__), 1, true);
+
 
 	switch (weaponType) {
 		case WEAPON_SWORD:

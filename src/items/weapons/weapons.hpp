@@ -212,6 +212,14 @@ public:
 
 		return m_combat;
 	}
+	
+	const getChainMaxTarget() const {
+		return chainMaxTarget;
+	}
+	
+	void setChainMaxTarget(uint16_t value) {
+		chainMaxTarget = value;
+	}
 
 	std::shared_ptr<Combat> getCombat() {
 		if (!m_combat) {
@@ -253,6 +261,7 @@ private:
 	bool wieldUnproperly = false;
 	bool m_isDisabledChain = false;
 	std::string vocationString = "";
+	uint16_t chainMaxTarget = 0;
 
 	void onUsedWeapon(std::shared_ptr<Player> player, std::shared_ptr<Item> item, std::shared_ptr<Tile> destTile) const;
 
