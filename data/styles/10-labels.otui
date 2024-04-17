@@ -1,0 +1,42 @@
+Label < UILabel
+  font: tahoma-bold-16px
+  color: #c1d4a7
+
+  $disabled:
+    color: #c1d4a788
+
+Header < UILabel
+  font: tahoma-bold-16px
+  color: #f6bc39
+
+  $disabled:
+    color: #f6bc3988
+
+FlatLabel < UILabel
+  font: tahoma-bold-16px
+  color: #6b2e33
+  size: 86 20
+  text-offset: 3 3
+  image-source: /images/ui/panel_flat
+  image-border: 4
+
+  $disabled:
+    color: #6b2e3388
+
+FlatBackground < UILabel
+  font: tahoma-bold-16px
+  color: #6b2e33
+  size: 86 20
+  text-offset: 3 3
+  image-source: /images/newUI/flat_background
+  image-border: 8
+
+  $disabled:
+    color: #6b2e3388
+
+MenuLabel < Label
+  color: #6b2e33
+
+GameLabel < UILabel
+  font: tahoma-bold-16px
+  color: #c1d4a7

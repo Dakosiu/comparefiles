@@ -1,0 +1,71 @@
+ServerWidget < UIWidget
+  size: 225 70
+
+  Button
+    id: server
+    size: 225 50
+    font: tahoma-bold-16px
+    anchors.top: parent.top
+    anchors.left: parent.left
+
+  FlatLabel
+    id: time
+    height: 30
+    color: #171f0a
+    font: tahoma-bold-16px
+    anchors.top: prev.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 10
+    text-align: center
+    font: verdana-italic-10px
+
+StaticMainWindow
+  id: serverWindow
+  size: 900 175
+  margin: 10
+
+  Label
+    id: topBar
+    image-source: /images/newUI/header
+    anchors.bottom: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 480 100
+    text: CHOOSE SURVIVAL MODE
+    color: #6b2e33
+    font: lithos-pro-26px
+    color: #6b2e33
+    margin-bottom: -16
+    text-offset: 0 30
+    text-align: center
+    phantom: true
+
+  Label
+    id: cornerRight
+    image-source: /images/newUI/rightCornerDeco
+    anchors.bottom: parent.top
+    anchors.left: parent.right
+    size: 50 30
+    margin-bottom: 15
+    margin-right: -2
+    phantom: true
+
+  Label
+    id: cornerLeft
+    image-source: /images/newUI/leftCornerDeco
+    anchors.bottom: parent.top
+    anchors.right: parent.left
+    size: 50 30
+    margin-bottom: 15
+    margin-left: -2
+    phantom: true
+
+  Panel
+    id: servers
+    height: 70
+    width: 775
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.horizontalCenter: parent.horizontalCenter
+    layout:
+      type: horizontalBox
+      spacing: 50
