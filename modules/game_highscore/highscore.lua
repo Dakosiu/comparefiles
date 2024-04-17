@@ -2,6 +2,8 @@ highscoreButton = nil
 window = nil
 seasonEndTextList = nil
 seasonEndLabel = nil
+seasonTitleTextList = nil
+seasonTitleLabel = nil
 HIGHSCORE_OPCODE = 151
 local refreshMemoryTime = 60
 
@@ -17,7 +19,8 @@ function init()
 	
 	seasonEndTextList = window:recursiveGetChildById('SeasonSchedulerTextList')
 	seasonEndLabel = seasonEndTextList:recursiveGetChildById('SeasonEndLabel')
-	
+	seasonTitleTextList = window:recursiveGetChildById('TitleTextList')
+	seasonTitleLabel = seasonTitleTextList:recursiveGetChildById('seasonTitleLabel')
 	
 	  connect(g_game, { 
 		onGameEnd = offline 
@@ -65,6 +68,10 @@ function onHighscoreJSONOpcode(protocol, code, json_data_convert)
     local data = json_data['data']
     if not action or not data or not data['opcodeData'] then return false end	
 	
+	
+	
+	
+	
 	local getData
 	if data['opcodeDataFirst'] and data['opcodeDataFirst'] == "true" then
 		if not parsingTables[code] then parsingTables[code] = {} end
@@ -78,6 +85,7 @@ function onHighscoreJSONOpcode(protocol, code, json_data_convert)
 if not getData then return end	
     if action == 'refreshHighscore' then
 	    seasonEndLabel:setText(getData["time_end"])
+		seasonTitleLabel:setText(getData["title"])
 		for i, v in pairs(getData['info']) do
 		    local t = {}
 			--print("Name: " .. v.name)
