@@ -1,0 +1,366 @@
+Box < UIWidget
+  border-width-top: 1
+  border-color-top: black
+  border-width-left: 1
+  border-color-left: black
+  border-width-bottom: 1
+  border-color-bottom: gray
+  border-width-right: 1
+  border-color-right: gray
+  image-smooth: true
+  image-fixed-ratio: false
+
+HistoryEntry < UIWidget
+  anchors.top: parent.top
+  anchors.right: parent.right
+  margin-right: 15
+  margin-top: 28
+  size: 675 15
+  background-color: #484848
+
+  Label
+    id: historyDate
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 3
+
+  Label
+    id: historyBalance
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 200
+
+  Label
+    id: historyDescription
+    anchors.left: parent.left
+    anchors.verticalCenter: parent.verticalCenter
+    margin-left: 310
+
+RowStore < Label
+  size: 75 125
+  text-align: top
+  padding-left: 0
+  padding-right: 0
+  padding-bottom: 8
+
+  FlatBackground
+    id: lblBackground
+    anchors.top: lblName.bottom
+    anchors.bottom: lblPrice.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 5
+    margin-bottom: 5
+
+  MenuLabel
+    id: lblName
+    height: 26
+    anchors.top: parent.top
+    margin-top: 10
+    anchors.left: parent.left
+    anchors.right: parent.right
+    text-align: center
+    phantom: true
+
+  Label
+    id: image
+    size: 64 64
+    anchors.horizontalCenter: lblBackground.horizontalCenter
+    anchors.verticalCenter: lblBackground.verticalCenter
+    padding: 4
+    phantom: true
+
+  UIItem
+    id: item
+    size: 64 64
+    anchors.horizontalCenter: lblBackground.horizontalCenter
+    anchors.verticalCenter: lblBackground.verticalCenter
+    padding: 4
+
+  UICreature
+    id: outfit
+    size: 64 64
+    anchors.horizontalCenter: lblBackground.horizontalCenter
+    anchors.verticalCenter: lblBackground.verticalCenter
+    padding: 4
+    phantom: true
+    animate: true
+
+  MenuLabel
+    id: lblPrice
+    anchors.bottom: buyButton.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    text-align: center
+    height: 26
+    margin-bottom: 10
+    phantom: true
+
+  Button
+    id: buyButton
+    height: 42
+    text: BUY
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    text-align: center
+    margin-left: 25
+    margin-right: 25
+
+MenuCategoryStore < Button
+  height: 30
+  width: 80
+  margin: 3
+  text-align: left
+  text-wrap: true
+  icon-align: left
+  icon-offset: 4 0
+  text-offset: 20 1
+
+  $pressed:
+    text-offset: 21 1
+
+StoreWindow
+  size: 850 525
+  !text: tr('Shop')
+  color: #909090
+  visible: false
+  @onEscape: modules.game_store.onCloseStore()
+
+  Label
+    id: topBar
+    image-source: /images/newUI/header
+    anchors.bottom: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 280 70
+    text: Shop
+    color: #6b2e33
+    font: lithos-pro-26px
+    color: #6b2e33
+    margin-top: -2
+    text-offset: 0 22
+    text-align: center
+    phantom: true
+
+  Label
+    id: cornerRight
+    image-source: /images/newUI/rightCornerDeco
+    anchors.bottom: parent.top
+    anchors.left: parent.right
+    size: 50 30
+    margin-bottom: 15
+    margin-right: -2
+    phantom: true
+
+  Label
+    id: cornerLeft
+    image-source: /images/newUI/leftCornerDeco
+    anchors.bottom: parent.top
+    anchors.right: parent.left
+    size: 50 30
+    margin-bottom: 15
+    margin-left: -2
+    phantom: true
+
+  Button
+    id: close2
+    anchors.right: parent.right
+    anchors.top: parent.top
+    font: lithos-pro-26px
+    margin-top: 20 
+    size: 21 20
+    @onClick: modules.game_store.onCloseStore()
+    image-source: /images/newUI/exit
+    image-clip: 0 0 73 68
+
+    $hover:
+      image-clip: 0 68 73 68
+
+    $pressed:
+      image-clip: 0 68 73 68
+
+  StoreButton
+    id: btnClose
+    size: 45 20
+    visible: false
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    !text: tr('Close')
+    font: cipsoftFont
+    @onClick: modules.game_store.onCloseStore()
+
+  ButtonBox
+    id: btnHistory
+    size: 45 20
+    image-source: /images/ui/button
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    !text: tr('History')
+    font: cipsoftFont
+    visible: false
+    @onClick: |
+      self:setChecked(not self:isChecked())
+      modules.game_store.toggleTransferHistory()
+
+    $checked:
+      color: green
+
+  StoreButton
+    id: btnBuyGift
+    size: 64 20
+    visible: false
+    anchors.bottom: parent.bottom
+    anchors.left: btnHistory.right
+    !text: tr('Gift')
+    margin-left: 15
+    font: cipsoftFont
+    image-color: #75bfff
+
+  StoreButton
+    id: btnBuy
+    size: 64 20
+    visible: false
+    anchors.bottom: parent.bottom
+    anchors.right: btnClose.left
+    !text: tr('Buy')
+    margin-right: 15
+    font: cipsoftFont
+    image-color: #75bfff
+
+  StoreButton
+    id: btnPoints
+    size: 64 20
+    visible: false
+    anchors.bottom: parent.bottom
+    anchors.right: btnBuy.left
+    margin-right: 15
+    image-color: #ed4d4d
+    text-align: center
+    !text: tr('Buy Points')
+    font: cipsoftFont
+    @onClick: modules.game_store.getPointsWebsite()
+
+  StoreButton
+    id: transferPoints
+    anchors.top: btnPoints.top
+    !text: tr('Transfer Points')
+    anchors.left: btnBuyGift.right
+    image-color: #ed4d4d
+    margin-left: 15
+    size: 80 20
+    visible: false
+    font: cipsoftFont
+    @onClick: modules.game_store.transferPoints()
+
+  HorizontalSeparator
+    anchors.bottom: prev.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-bottom: 8
+    visible: false
+
+  UIScrollArea
+    id: listCategory
+    size: 650 40
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    image-source: /images/ui/panel
+    image-border: 3
+    auto-focus: none
+    visible: false
+    margin-bottom: 8
+    padding: 25
+    padding-left: 50
+    padding-right: 50
+    layout:
+      type: horizontalBox
+
+  Header
+    id: alphaLabel
+    text: CHESTS
+    anchors.horizontalCenter: panelItem.horizontalCenter
+    anchors.bottom: panelItem.top
+    margin-bottom: 15
+
+  StoreLightFlatPanel
+    id: panelItem
+    size: 630 380
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    margin-top: 8
+    margin-bottom: 50
+    padding: 2
+
+    UIScrollArea
+      id: listProduct
+      anchors.fill: parent
+      vertical-scrollbar: scrollList
+      image-source: /images/ui/panel
+      image-border: 3
+      layout:
+        type: grid
+        cell-size: 180 280
+        cell-spacing: 20
+        num-columns: 5
+      padding: 20
+      auto-focus: none
+    
+    VerticalScrollBar
+      id: scrollList
+      visible: false
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.right: parent.right
+      step: 14
+      pixels-scroll: true
+
+  MenuLabel
+    id: lblPoints
+    size: 260 20
+    anchors.bottom: panelItem.bottom
+    anchors.right: btnPoints.left
+    anchors.left: transferPoints.right
+    text-align: center
+    margin-right: 15
+    margin-left: 15
+    margin-bottom: 25
+    image-color: #1111118c
+    text: 0
+
+  Panel
+    id: transferHistoryPanel
+    image-source: /images/ui/window
+    image-border: 15
+    padding: 8
+    anchors.fill: parent
+    anchors.bottom: panelItem.bottom
+
+    FlatLabel
+      width: 200
+      anchors.top: parent.top
+      anchors.left: parent.left
+      text-align: center
+      !text: tr('Date')
+      font: cipsoftFont
+
+    FlatLabel
+      width: 110
+      anchors.top: parent.top
+      anchors.left: prev.right
+      text-align: center
+      !text: tr('Balance')
+      font: cipsoftFont
+
+    FlatLabel
+      width: 300
+      anchors.top: parent.top
+      anchors.left: prev.right
+      anchors.right: parent.right
+      text-align: center
+      !text: tr('Description')
+      font: cipsoftFont
+
+    UIWidget
+      id: transferHistory
+      anchors.fill: parent
+      anchors.top: prev.bottom

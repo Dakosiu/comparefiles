@@ -1,0 +1,7 @@
+Module
+  name: game_seasonrewards
+  sandboxed: true
+  autoload: true
+  scripts: [ season_rewards ]
+  @onLoad: init()
+  @onUnload: terminate()

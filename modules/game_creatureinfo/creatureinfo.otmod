@@ -1,0 +1,9 @@
+Module
+  name: game_creatureinfo
+  description: Manage creatures information
+  author: InSaiyan#8460
+  scripts: [ creatureinfo ]
+  autoload: true
+  sandboxed: true
+  @onLoad: init()
+  @onUnload: terminate()
