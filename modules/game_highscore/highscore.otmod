@@ -1,7 +1,0 @@
-Module
-  name: game_highscore
-  sandboxed: true
-  autoload: true
-  scripts: [ highscore ]
-  @onLoad: init()
-  @onUnload: terminate()

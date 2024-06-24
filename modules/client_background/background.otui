@@ -1,9 +1,0 @@
-UIWidget
-  id: background
-  anchors.fill: parent
-  focusable: false
-  image-source: /images/background
-  image-smooth: true
-  image-fixed-ratio: true
-  margin-top: 1
-
