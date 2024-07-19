@@ -1,0 +1,58 @@
+local config = {
+                 cooldown = 1 * 60 * 1000,
+				 regenerate = { value = 40, interval = 3 * 1000 },
+				 upgrade = { everyLevel = 10, value = 1 }
+			   }
+
+local combat = Combat()
+combat:setParameter(COMBAT_PARAM_EFFECT, CONST_ME_MAGIC_GREEN)
+combat:setParameter(COMBAT_PARAM_AGGRESSIVE, false)
+
+
+
+local condition = Condition(CONDITION_REGENERATION, CONDITIONID_DEFAULT)
+condition:setParameter(CONDITION_PARAM_TICKS, config.cooldown)
+--condition:setParameter(CONDITION_PARAM_HEALTHGAIN, config.regenerate.value)
+condition:setParameter(CONDITION_PARAM_HEALTHTICKS, config.regenerate.interval)
+condition:setParameter(CONDITION_PARAM_BUFF_SPELL, true)
+condition:setParameter(CONDITION_PARAM_SUBID, 400)
+--combat:addCondition(condition)
+
+local function getUpgradeValue(player)
+   local t = config.upgrade
+   local level = t.everyLevel
+   local value = t.value
+   local playerLevel = player:getLevel()
+   if playerLevel < level then
+      return 0
+   end
+   return math.max(playerLevel / level) * value
+end
+
+
+
+local spell = Spell("instant")
+
+function spell.onCastSpell(creature, variant)
+	local player = Player(creature)
+	if player then
+	   condition:setParameter(CONDITION_PARAM_HEALTHGAIN, config.regenerate.value + getUpgradeValue(player))
+	end
+	combat:addCondition(condition)
+	return combat:execute(creature, variant)
+end
+
+spell:name("Intense Recovery")
+spell:words("utura gran")
+spell:group("healing")
+spell:vocation("knight;true", "elite knight;true", "paladin;true", "royal paladin;true")
+spell:id(160)
+spell:cooldown(cooldown)
+spell:groupCooldown(1000)
+spell:level(100)
+spell:mana(165)
+spell:isSelfTarget(true)
+spell:isAggressive(false)
+spell:isPremium(true)
+spell:needLearn(false)
+spell:register()

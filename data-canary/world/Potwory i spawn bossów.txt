@@ -1,0 +1,590 @@
+Potwory Bez Respów 
+Amazon, Chicken, Rabbit, Black Sheep, Sheep, Squirrel, Deer, Pig, Wisp, Skunk, Rat, Bat, Snike, Spider, Wolf, Fox, Bug, Badger, Troll, Poison Spider, Wasp, Bear, Cobra, Crab, Lion, Rotworm, Troll Champion, Larva, War Wolf, Boar, Ghost Wolf, Poacher, Hunter, Carrion Worm, Gloom Wolf, Valkyrie, Scarab, Dog, Cat, Cow, Killer Caiman, Nomad, 
+
+
+
+
+
+
+
+
+
+
+1.SKELETON TELEPORT: {x = 990, y = 1248, z = 8}
+
+*Skeleton
+*Skeleton warrior
+#Expo skeleton Boss: Teleskor - {x = 1005, y = 1301, z = 8}
+
+
+
+2.GIANT SPIDER TELEPORT: {x = 1094, y = 1281, z = 8}
+
+*Giant Spider
+*Tarantula
+*Spider
+*poison Spider
+#Expo Gs Boss: The Old Widow - {x = 1043, y = 1297, z = 8}
+
+
+
+3.HREO TELEPORT: {x = 1085, y = 1153, z = 8}
+
+*Hero
+*Vicious Squire
+*Renegade Knight
+*Vile Grandmaster
+*Midnight Warrior
+#Expo hero Boss: Fernfang - {x = 1099, y = 1208, z = 8}
+
+
+
+4.DRAGON TELEPORT: {x = 1206, y = 1146, z = 7}
+
+*Dragon
+*Dragon lord
+*Dragon Hatchling
+*Dragon lord Hatchling
+#Expo Dragon Boss: Demodras - {x = 1212, y = 1204, z = 8}
+
+
+
+5.FOREST FURY TELEPORT:{x = 1147, y = 953, z = 7}
+
+*Forest Fury
+*Elder Forest Fury
+#Exp Forest Fury Boss: The Blightfather -{x = 1113, y = 962, z = 7}
+
+
+
+6.STAMPOR TELEPORT:{x = 1367, y = 1056, z = 8}
+
+$*Stampor Item Do Oswojenia (id:)
+#Exp Stampor Boss: Tromphonyte -{x = 1385, y = 1137, z = 8}
+
+
+
+7.MUMMY TELEPORT:{x = 1347, y = 1042, z = 8}
+
+*Mummy
+*Scarab
+*Crypt Shambler
+*Ghoul
+*Tomb Servant
+*Bonebeast
+#Exp Mummy Boss: Ribstride -{x = 1323, y = 981, z = 8}
+
+
+
+8.NOBLE LION TELEPORT:{x = 1162, y = 985, z = 8}
+
+*Roaring lion
+$*Mount-Noble Lion. Item Do Oswojenia (id:23810)
+#Exp Noble Lion Boss: Zomba -{x = 1153, y = 1020, z = 8}
+
+
+
+9.CORYM TELEPORT:{x = 1258, y = 901, z = 8}
+
+*Corym Charlatan
+*Corym Skirmisher
+*Corym Vanguard
+#Exp Corym Boss: Munster -{x = 1200, y = 914, z = 8}
+
+
+
+10.GRIM REAPER TELEPORT: {x = 1221, y = 804, z = 8}
+
+*Grim Reaper
+$*Mount-Hellgrip. Item Do Oswojenia (id:21452)
+#Exp Grim Reaper Boss: Boogey -{x = 1304, y = 784, z = 8}
+
+
+
+11.FLIMSY LOST SOUL TELEPORT:{x = 964, y = 827, z = 8}
+
+*Flimsy Lost Soul
+*Freakish Lost Soul
+*Mean Lost Soul
+#Exp Flimsy Lost Soul Boss: Irgix The Flimsy -{x = 969, y = 858, z = 8}
+
+
+
+12.YIELOTHAX TELEPORT:{x = 1287, y = 1058, z = 8}
+
+*Yielothax
+#Exp Yielothax Boss: Empowered Glooth Horror -{x = 1311, y = 1035, z = 8}
+
+
+
+13.MEDUSA TELEPORT:{x = 1161, y = 1049, z = 8}
+
+*Medusa
+*Hydra
+*Serpent Spawn
+#Exp Medusa Boss: Gorgo -{x = 1231, y = 1091, z = 8}
+
+
+
+14.LIZARD CHOSEN TELEPORT: {x = 1073, y = 1106, z = 7}
+
+*Lizard chosen
+#Exp Lizard Chosen Boss: The Voice Of Ruin - {x = 1080, y = 1048, z = 7}
+
+
+
+15.CRYSTALCRUSHER TELEPORT:{x = 991, y = 1004, z = 7}
+
+*Crystalcrusher
+*Enraged Crystal Golem
+*Damaged Crystal Golem
+$*Mount- Crystal Wolf. Item Do Oswojenia (id:13536)
+#Exp Crystalcrusher Boss: Hirintror -{x = 1058, y = 1060, z = 7}
+
+
+
+16.VAMPIRE TELEPORT: {x = 1129, y = 824, z = 8}
+
+*Vampire
+*Vampier Bride
+*Nightfiend
+*Vicious Manbat
+1.#Exp Vampire Boss: The Pale Count -{x = 1201, y = 839, z = 8}
+
+
+17.GLOOTH BANDIT TELEPORT:{x = 1134, y = 886, z = 8}
+
+*Glooth Bandit
+*Glooth Brigand
+#Exp Glooth Bandit Boss: Lisa -{x = 1087, y = 877, z = 8}
+
+
+
+18.LEAF GOLEM TELEPORT: {x = 873, y = 1062, z = 9}
+
+*Salamander
+*Emerald Damselfly
+*Insect Swarm
+*Marsh Stalker
+*Leaf Golem
+*Wilting Leaf Golem
+#Exp Leaf Golem Boss: Man in the Cave -{x = 873, y = 1062, z = 9}
+
+
+
+19.RAPPER SPECTRE TELEPORT:{x = 1226, y = 990, z = 8}
+
+*Rapper Spectre
+#Exp Rapper Spectre Boss: Countess Sorrow -{x = 1235, y = 896, z = 10}
+
+
+
+20.DEMON TELEPORT:{x = 1493, y = 1132, z = 8}
+
+*Demon
+*Fire Elemental
+#Exp Demon Boss: Orshabaal -{x = 1438, y = 1106, z = 9}
+
+
+
+
+21.BURSTER SPECTRE TELEPORT:{x = 1294, y = 728, z = 8}
+
+*Burster Spectre
+#Exp Boss: The Count of the Core -{x = 1338, y = 862, z = 8}
+
+
+
+22.DARK TORTURER TELEPORT:{x = 1293, y = 680, z = 8}
+
+*Dark Torturer
+$*Mount- Draptor. Item Do Oswojenia (id:13294)
+#Exp Dark Torturer Boss: Mr. Punish -{x = 1313, y = 636, z = 8}
+
+
+
+23.ARACHNOPHOBICA TELEPORT:
+
+*Arachnophobica
+*Bone Bringer
+$*Mount- Slug. Item Do Oswojenia (id:13508)
+#Exp Arachnophobica Boss: The Plasmother -{x = 1471, y = 790, z = 8}
+
+
+
+24.PUTRID MUMMY: {x = 1535, y = 861, z = 8}
+
+*Putrid Mummy
+*Bride Of Night
+#Exp Putrid Mummy Boss: Mahrdis -{x = 1610, y = 697, z = 8}
+
+
+
+25.CYCLOPS TELEPORT:{x = 1612, y = 770, z = 8}
+
+*Cyclops
+*Cyclops Drone
+*Cyclops Smith
+#Exp Cyclops Boss: The Old Whopper -{x = 1651, y = 806, z = 8}
+
+
+
+26.SEA SERPENT: {x = 1319, y = 982, z = 9}
+
+*Sea Serpent
+*Seacrest Serpent
+*Terrorsleep
+*Young Sea Serpent
+#Exp Sea Serpent Boss: Brokul -{x = 1307, y = 1063, z = 9}
+
+
+
+27.TUNNEL TYRANT TELEPORT: {x = 1320, y = 1231, z = 8}
+
+*Tunnel Tyrant
+#Exp Tunnel Tyrant Boss: Terofar -{x = 1324, y = 1259, z = 8}
+
+
+
+28.GAZER SPECTRE TELEPORT: {x = 1245, y = 1249, z = 8}
+
+*Gazer Spectre
+#Exp Gazer Spectre Boss: Lady Tenebris -{x = 1250, y = 1209, z = 8}
+
+
+
+29.HYDRA TELEPORT: {x = 994, y = 1089, z = 7}
+
+*Hydra
+#Exp Hydra Boss: The Welter - {x = 1041, y = 1045, z = 3}
+
+
+
+30.ORC CULTIST TELEPORT:
+
+*Orc Cultist
+*Orc cult priest
+*Orc Cult Minion
+*Orc Cult Inquisitor
+*Orc Cult Fanatic
+#Exp Orc Cultist Boss: Bibby Bloodbath -
+
+
+
+31.ARMADILE TELEPORT:{x = 1049, y = 1395, z = 10}
+
+*Armadile
+*Stone Devourer
+#Exp Armadile Boss: Maw -{x = 1045, y = 1312, z = 10}
+
+
+
+32.BLACK KNIGHT TELEPORT:980/650/7
+
+*Black Knight
+$*Mount- Gravedigger. Item Do Oswojenia (id:21452)
+#Exp Black Knight Boss: The Enraged Thorn Knight -{x = 997, y = 629, z = 9}
+
+
+
+33.ADEPT OF THE CULT TEPELORT:1103/635/6
+
+*Dark Apprentice
+*Dark Magician
+*Acolyte of the Cult
+*Adept of the Cult
+*Enlightened of the Cult
+#Exp Adept of the Cult Boss: Tzumrah the Dazzler -{x = 1055, y = 678, z = 8}
+
+
+
+34.DESTROYER TELEPORT:1274/716/7
+
+*Destroyer
+*Behemoth
+*Hellspawn
+#Exp Destroyer Teleport Boss: Stonecracker -{x = 1225, y = 685, z = 7}
+
+
+
+35.OGRE BRUTE TELEPORT:1197/632/6
+
+*Ogre Brute
+*Ogre Savage
+*Ogre Shaman
+*Ogre Rowdy
+*Ogre Ruffian
+*Ogre Sage
+*Shaper Matriarch
+#Exp Ogre Brute Boss: Malofur Mangrinder -x1292y582z8
+
+
+
+36.STONEREFINER TELEPORT:1540/548/8
+
+*Stonerefiner
+#Exp Stonerefiner Boss: Kroazur -{x = 1484, y = 506, z = 9}
+
+
+
+37.Medusa TELEPORT:1206/868/7
+
+*Medusa
+*Behemoth
+*Serpent spawn
+
+
+
+
+38.COBRA ASSASSIN TELEPORT:1061/1323/7
+
+*Cobra Assassin
+*Cobra Scout
+*Cobra Vizier
+#Exp Cobra Assassin Boss: Scarlett Etzel -x1072y1338z6
+#Exp Cobra Assassin Boss: Gaffir -x1071y1373z4 
+#Exp Cobra Assassin Boss: Guard Captain Quaid -x1068y1352z3
+#Exp Cobra Assassin Boss: Custodian -x1052y1521z8
+
+
+
+39.CAVE DEVOURER TELEPORT:901/1500/11
+
+*Cave Devourer
+*Arachnophobica
+#Exp Cave Devourer Boss: Abyssador -x814y1500z11
+
+
+
+40.CURSED BOOK TELEPORT:957/1495/11
+
+*Cursed Book
+#Exp Cursed Book Boss: The Last Lore Keeper -x1094y1538z11
+
+
+
+41.DEFILER TELEPORT:625/1504/8
+
+*Defiler
+*Slime
+*Devourer
+#Exp Defiler Boss: The Plasmother -x737y1448z8
+
+
+
+42.BURNING BOOK TELEPORT:1187/1357/9
+
+*Burning Book
+*Rage Squid
+*Floating Savant
+#Exp Burning Book Boss: The Blazing Time Guardian -x1212y1278z8
+
+
+
+43.Guzzlemaw TELEPORT:{x = 1133, y = 1013, z = 7}
+
+*Guzzlemaw
+*frazzlemaw
+#Exp Guzzlemaw Boss :Mawhawk {x = 1079, y = 958, z = 6}
+
+
+
+44.Souleater TELEPORT:{x = 1205, y = 1038, z = 7}
+
+*Souleater
+#Exp Souleater Boss: Mad Mage -{x = 1202, y = 1053, z = 7}
+
+
+
+45.Cliff Strider TELEPORT:{x = 1236, y = 1062, z = 7}
+
+*Cliff Strider
+*Orewalker
+*Ironblight
+{x = 1204, y = 1064, z = 6}
+
+
+
+46.TELEPORT:{x = 1037, y = 990, z = 7}
+
+?
+
+47.Rotten Golem TELEPORT:{x = 920, y = 1050, z = 7}
+
+*Branchy Crawler
+*Rotten Golem
+*Turbulent Elemental
+*Ink Blob
+#Exp Rotten Golem Boss: Srezz Yellow Eyes -{x = 1232, y = 885, z = 2}
+
+
+
+48       TELEPORT:{x = 1077, y = 941, z = 7}
+
+?
+
+49.Pirat Bombardier TELEPORT:{x = 775, y = 866, z = 5}
+
+*pirat Mate
+*Pirat Scoundrel
+*Pirat Bombardier
+*Pirat Cutthroat
+
+50.      TELEPORT:{x = 1201, y = 996, z = 8}
+
+*Nightmare
+*Nightmare Scion
+
+
+51.      TELEPORT:{x = 767, y = 1285, z = 8}
+
+Werehyaena
+Werehyaena Shaman
+
+52.Lost Thrower TELEPORT:{x = 669, y = 1307, z = 8}
+
+Lost Thrower
+Lost Basher
+Lost Berserker
+Lost Husher
+
+
+
+53.    ? TELEPORT:{x = 780, y = 882, z = 8}
+
+
+
+54.Crystal Spider TELEPORT:{x = 499, y = 1309, z = 8}
+
+Crystal Spider
+
+55.Exotic Cave Spider TELEPORT:{x = 781, y = 1219, z = 8}
+
+Exotic Cave Spider
+
+
+56.Shark TELEPORT:{x = 546, y = 887, z = 8}
+
+Shark
+
+
+57.? TELEPORT:{x = 664, y = 965, z = 8}
+
+
+
+58.Two-Headed Turtle TELEPORT:{x = 736, y = 953, z = 8}
+
+Two-Headed Turtle
+
+59.Sphinx TELEPORT:{x = 1138, y = 1459, z = 8}
+
+Sphinix
+Lamsau
+Crypt Warden
+
+
+
+60.hellflayer TELEPORT:{x = 876, y = 1396, z = 8}
+
+HellFlayer
+
+61.Humongous Fungus TELEPORT:{x = 933, y = 1280, z = 9}
+
+Humongous Fungus
+
+
+62.Hellfire Fighter TELEPORT:{x = 1376, y = 1118, z = 9}
+
+Hellfire Fighter
+
+
+63.Icecold Book TELEPORT:{x = 1175, y = 1793, z = 10}
+
+Animated Feather
+Icecold Book
+Squid Warden
+Biting Book
+
+
+64.Fury TELEPORT:{x = 1413, y = 901, z = 8}
+
+Fury
+
+65.infernal demon TELEPORT:{x = 1508, y = 1318, z = 10}
+
+Infernal Demon
+
+
+66.Brachiodemon TELEPORT:{x = 607, y = 1687, z = 10}
+
+Brachiodemon
+
+
+67.Energy book TELEPORT:{x = 843, y = 1776, z = 11}    
+
+Energuardian of Tales
+Knowledge Elemental
+Energetic Book
+
+
+68.Carnivory TELEPORT:{x = 598, y = 1782, z = 10}
+
+Menacing Carnivor
+Spiky Carnivor
+Lumbering Carnivor
+
+
+
+69.Behemoth TELEPORT:{x = 1444, y = 973, z = 9}
+
+Behemoth
+Medusa
+Serpent Spawn
+
+70.Bony Sea Devil TELEPORT:{x = 789, y = 1739, z = 10}
+
+Bony Sea Devil
+
+
+71.Burning Gladiator TELEPORT:{x = 1561, y = 972, z = 9}
+
+Burning Gladiator
+Black Sphinx Acolyte
+Priestess of the Wild Sun
+
+
+
+72.Diremaw TELEPORT:{x = 1770, y = 918, z = 8}
+
+Diremaw
+Deepworm
+
+73.      TELEPORT:{x = 1735, y = 1101, z = 9}
+
+
+
+74.      TELEPORT:{x = 1166, y = 1588, z = 8}
+
+
+
+75.      TELEPORT:{x = 705, y = 1024, z = 8}
+
+
+
+76.      TELEPORT:{x = 781, y = 1219, z = 8}
+
+
+
+77.      TELEPORT:{x = 485, y = 1796, z = 10}
+
+
+
+78.      TELEPORT:{x = 769, y = 1774, z = 10}
+
+
+
+79.      TELEPORT:{x = 675, y = 1685, z = 10}
+
+
+
+80.      TELEPORT:
