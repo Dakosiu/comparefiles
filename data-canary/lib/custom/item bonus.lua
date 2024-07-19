@@ -1,0 +1,74 @@
+-- ITEM_BONUS_SYSTEM = { 
+                      -- WEAPON_BONUS = {
+						               -- [42315] = { 
+									               -- AVAIBLE_BONUSES = { 
+												      -- STAT_LIFELEECHCHANCE, 
+												      -- STAT_MANALEECHCHANCE,
+												      -- STAT_CRITCHANCE, 
+												   -- },
+									               -- [1] = { chance = 100, value = 1 },
+												   -- [2] = { chance = 50, value = 2 },
+												   -- [3] = { chance = 10, value = 3 },
+												   -- [4] = { chance = 3, value = 4 },
+												   -- [5] = { chance = 1, value = 5 },
+												 -- },
+									 -- },
+					  -- EQUIPMENT_BONUS = {
+						               -- [31356] = { 
+									               -- AVAIBLE_BONUSES = { 
+												      -- STAT_FIRE_RESIST,
+													  -- STAT_EARTH_RESIST,
+												      -- STAT_ENERGY_RESIST,
+													  -- STAT_ICE_RESIST,
+		                                              -- STAT_HOLY_RESIST,
+		                                              -- STAT_DEATH_RESIST,
+		                                              -- --STAT_PHYSICAL_RESIST, 
+												   -- },
+									               -- [1] = { chance = 100, value = 1 },
+												   -- [2] = { chance = 50, value = 2 },
+												   -- [3] = { chance = 10, value = 3 },
+												   -- -- [4] = { chance = 10, value = 4 },
+												   -- -- [5] = { chance = 5, value = 5 },
+												 -- },
+										-- [31355] = {
+									               -- AVAIBLE_BONUSES = { 
+												      -- STAT_HP,
+													  -- STAT_MP,
+												   -- },
+												   -- PERCENTAGES = { 
+												                   -- [1] = { chance = 100, value = 1 },
+												                   -- [2] = { chance = 50, value = 2 },
+												                   -- [3] = { chance = 10, value = 3 },
+												                   -- [4] = { chance = 3, value = 4 },
+												                   -- [5] = { chance = 1, value = 5 },
+																 -- },
+													-- NORMAL = { 
+												                   -- [1] = { chance = 100, value = 100 },
+												                   -- [2] = { chance = 50, value = 200 },
+												                   -- [3] = { chance = 10, value = 300 },
+												                   -- [4] = { chance = 3, value = 400 },
+												                   -- [5] = { chance = 1, value = 500 },
+																  -- },
+												 -- },
+										-- [31354] = {
+									               -- AVAIBLE_BONUSES = { 
+												      -- STAT_ALLSKILLS,
+													  -- STAT_MAGICLEVEL,
+												   -- },
+												   -- PERCENTAGES = { 
+												                   -- [1] = { chance = 100, value = 1 },
+												                   -- [2] = { chance = 50, value = 2 },
+												                   -- [3] = { chance = 10, value = 3 },
+												                   -- [4] = { chance = 3, value = 4 },
+												                   -- [5] = { chance = 1, value = 5 },
+																 -- },
+												   -- NORMAL = { 
+												                   -- [1] = { chance = 100, value = 1 },
+												                   -- [2] = { chance = 50, value = 2 },
+												                   -- [3] = { chance = 10, value = 3 },
+												                   -- [4] = { chance = 3, value = 4 },
+												                   -- [5] = { chance = 5, value = 5 },
+																  -- },
+												 -- },
+									 -- },
+				    -- }

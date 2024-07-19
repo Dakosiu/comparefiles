@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channels>
+	<channel id="2" name="Tutor" script="tutor.lua" />
+	<channel id="15" name="World Chat" public="1" script="world_chat.lua" />
+	<channel id="4" name="English Chat" public="1" script="english_chat.lua" />
+	<channel id="5" name="Advertising" public="1" script="advertising.lua" />
+	<channel id="6" name="Advertising-Rookgaard" public="1" script="advertising-rook.lua" />
+	<channel id="7" name="Help" public="1" script="help.lua" />
+	<channel id="8" name="Gamemaster" script="gamemaster.lua" />
+	<channel id="9" name="Dungeon Channel" public ="1" script="dungeon.lua" />
+	<channel id="11" name="Guild Leaders" script="guild_leaders.lua" />
+	<channel id="14" name="Hunger Games" public="1" script="hunger_games.lua" />
+	<channel id="13" name="Boss Event" public = "1" script="boss event.lua" />
+	<channel id="14" name="Monster Tasks" script="monster tasks.lua" />
+	<channel id="15" name="Find Group" public="1" script="find group.lua" />
+	<channel id="16" name="Summon" public="1" script="summon.lua" />
+	<channel id="17" name="Task Channel" public="1" script="task channel.lua" />
+	<channel id="18" name="Guild War" public="1" script="guild war.lua" />
+	<channel id="25" name="Daily Task" script="daily_task.lua" />
+</channels>
