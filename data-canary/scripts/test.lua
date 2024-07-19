@@ -1,5 +1,0 @@
--- local action = TalkAction("!attributes")
--- function action .onSay(player, words, param)	
-	-- KING_NPC_SYSTEM:getActiveAttributes(player)
--- end
--- action :register()
