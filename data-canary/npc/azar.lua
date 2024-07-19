@@ -131,112 +131,112 @@ end
 local function addRewards(cid, player, t, number)
 
 
-   if not t then
-      return nil
-   end
+   -- if not t then
+      -- return nil
+   -- end
    
-		     local items = {}
-			 local experience = 0
-			 local tibiacoins = 0
-			 local tournamentcoins = 0
+		     -- local items = {}
+			 -- local experience = 0
+			 -- local tibiacoins = 0
+			 -- local tournamentcoins = 0
 			 
-			 local points = 0
+			 -- local points = 0
 			 
-			 local str = "You have received: "
+			 -- local str = "You have received: "
 			 
-			 local backpack_obtained = false
-			 local backpack_method = false
+			 -- local backpack_obtained = false
+			 -- local backpack_method = false
 			 
-		     for _, rewardTable in pairs(t["Rewards"]) do
-			    if rewardTable.type == "experience" then
-				   player:addExperience(rewardTable.value, true)
-				   experience = experience + rewardTable.value
-				elseif rewardTable.type == "tournament coin" then
-				   player:setTournamentCoinsBalance(player:getTournamentCoinsBalance() + rewardTable.value)
-				   tournamentcoins = tournamentcoins + rewardTable.value
-				elseif rewardTable.type == "tibia coin" then
-				   player:addTibiaCoins(rewardTable.value)
-				   tibiacoins = tibiacoins + rewardTable.value
-				elseif rewardTable.type == "item" then
-				   local canObtained = false
-				   local chance = rewardTable.chance
+		     -- for _, rewardTable in pairs(t["Rewards"]) do
+			    -- if rewardTable.type == "experience" then
+				   -- player:addExperience(rewardTable.value, true)
+				   -- experience = experience + rewardTable.value
+				-- elseif rewardTable.type == "tournament coin" then
+				   -- player:setTournamentCoinsBalance(player:getTournamentCoinsBalance() + rewardTable.value)
+				   -- tournamentcoins = tournamentcoins + rewardTable.value
+				-- elseif rewardTable.type == "tibia coin" then
+				   -- player:addTibiaCoins(rewardTable.value)
+				   -- tibiacoins = tibiacoins + rewardTable.value
+				-- elseif rewardTable.type == "item" then
+				   -- local canObtained = false
+				   -- local chance = rewardTable.chance
 				   
-				   if chance then
-				      local rnd = math.random(1, 100)
-					  if rnd <= chance then
-					  canObtained = true
-					  end
-				   else
-					  canObtained = true
-				   end
+				   -- if chance then
+				      -- local rnd = math.random(1, 100)
+					  -- if rnd <= chance then
+					  -- canObtained = true
+					  -- end
+				   -- else
+					  -- canObtained = true
+				   -- end
 				   
-				   local id = rewardTable.item_id
-				   local count = rewardTable.count
-				   if canObtained then
-				            player:addItem(id, count)
-				   end
-				   local values = { [id] = { ["Count"] = count } }
-				   if canObtained then
-				      table.insert(items, values)
-				   end
-				end
-			 end
+				   -- local id = rewardTable.item_id
+				   -- local count = rewardTable.count
+				   -- if canObtained then
+				            -- player:addItem(id, count)
+				   -- end
+				   -- local values = { [id] = { ["Count"] = count } }
+				   -- if canObtained then
+				      -- table.insert(items, values)
+				   -- end
+				-- end
+			 -- end
 			 
-			 if experience > 0 then
-			    if #items == 0 and tournamentcoins == 0 and tibiacoins == 0 then
-			       str = str .. "Experience: " .. experience .. "."
-				else
-				   if #items > 0 then
-				      str = str .. "Experience: " .. experience .. ", Items: "
-				   elseif tournamentcoins > 0 then
-				      str = str .. "Experience: " .. experience .. ", Tournament Coins: "
-				   elseif tibiacoins > 0 then
-				      str = str .. "Experience: " .. experience .. ", Tibia Coins: "
-				   end
-				end
-				else
-				if #items > 0 then
-				   str = str .. "Items: "
-				elseif tournamentcoins > 0 then
-				   str = str .. "Tournament Coins: "
-				elseif tibiacoins > 0 then
-				   str = str .. "Tibia Coins: "
-				end
-			 end
+			 -- if experience > 0 then
+			    -- if #items == 0 and tournamentcoins == 0 and tibiacoins == 0 then
+			       -- str = str .. "Experience: " .. experience .. "."
+				-- else
+				   -- if #items > 0 then
+				      -- str = str .. "Experience: " .. experience .. ", Items: "
+				   -- elseif tournamentcoins > 0 then
+				      -- str = str .. "Experience: " .. experience .. ", Tournament Coins: "
+				   -- elseif tibiacoins > 0 then
+				      -- str = str .. "Experience: " .. experience .. ", Tibia Coins: "
+				   -- end
+				-- end
+				-- else
+				-- if #items > 0 then
+				   -- str = str .. "Items: "
+				-- elseif tournamentcoins > 0 then
+				   -- str = str .. "Tournament Coins: "
+				-- elseif tibiacoins > 0 then
+				   -- str = str .. "Tibia Coins: "
+				-- end
+			 -- end
 			 
-             local indexReward = 1			 
-			 for _, itemTable in pairs(items) do
+             -- local indexReward = 1			 
+			 -- for _, itemTable in pairs(items) do
 				 
-			     for id, v in pairs(itemTable) do
-				     local count = v["Count"]
-					 if indexReward == #items then
-					    if tournamentcoins == 0 and tibiacoins == 0 then
-						   str = str .. count .. "x " .. getItemName(id) .. "."
-						   else
-						   str = str .. count .. "x " .. getItemName(id) .. ", "
-						end
-						else
-						   str = str .. count .. "x " .. getItemName(id) .. ", "
-				     end
-                     indexReward = indexReward + 1
-				 end
-			 end
+			     -- for id, v in pairs(itemTable) do
+				     -- local count = v["Count"]
+					 -- if indexReward == #items then
+					    -- if tournamentcoins == 0 and tibiacoins == 0 then
+						   -- str = str .. count .. "x " .. getItemName(id) .. "."
+						   -- else
+						   -- str = str .. count .. "x " .. getItemName(id) .. ", "
+						-- end
+						-- else
+						   -- str = str .. count .. "x " .. getItemName(id) .. ", "
+				     -- end
+                     -- indexReward = indexReward + 1
+				 -- end
+			 -- end
 			 
-			 if tournamentcoins > 0 then
-			    if tibiacoins == 0 then
-			       str = str .. "Tournament Coins: " .. tournamentcoins .. "."
-				   else
-				   str = str .. "Tournament Coins: " .. tournamentcoins .. ", "
-				end
-			end
+			 -- if tournamentcoins > 0 then
+			    -- if tibiacoins == 0 then
+			       -- str = str .. "Tournament Coins: " .. tournamentcoins .. "."
+				   -- else
+				   -- str = str .. "Tournament Coins: " .. tournamentcoins .. ", "
+				-- end
+			-- end
 			 
-			 if tibiacoins > 0 then
-			    str = str .. "Tibia Coins: " .. tibiacoins .. "."
-		     end
+			 -- if tibiacoins > 0 then
+			    -- str = str .. "Tibia Coins: " .. tibiacoins .. "."
+		     -- end
 			 
-	npcHandler:say(str, cid, player)
+	-- npcHandler:say(str, cid, player)
 	
-	player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
+	-- player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
 	
 	player:setStorageValue(AZAR_STORAGES.checkTask + number, 3)
 	azarTask:updateTracker(player, AZAR_STORAGES.checkTask + number, true)
@@ -254,6 +254,23 @@ local function addRewards(cid, player, t, number)
 			 
 end
 
+
+local function getTableByName(name)
+    for i,v in ipairs(AZAR_SHOP.config) do
+	    if not v.name then
+		    local id = v.id
+			if id then
+			    v.name = getItemName(id)
+			end
+		end
+	    if string.find(name:lower(), v.name:lower()) then
+		    return v
+		end
+	end
+	return false
+end
+
+
 -- On creature say callback
 local function creatureSayCallback(npc, player, type, msg)
 
@@ -263,6 +280,63 @@ local function creatureSayCallback(npc, player, type, msg)
 	
 	local playerId = player:getId()
     local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or npc
+	
+	
+	if MsgContains(msg, "exchange") or MsgContains(msg, "rewards") then
+	    local stringRewards = dakosLib:addReward(player, AZAR_SHOP.config, false, true, true, false, true, true, true)
+        local str = {}
+		str[1] = "Avaible Items: " .. stringRewards
+		str[2] = "You have: " .. player:getAzarPoints() .. " {boss tasks points}."
+		npcHandler:say(str, npc, player)
+		npcHandler:setTopic(playerId, 55)
+		return true
+	end
+	
+	if npcHandler:getTopic(playerId) == 55 then
+	    local t = getTableByName(msg)
+		if t then
+	        npcHandler:say("It will cost " .. t.required_points .. " {boss tasks points}." .. " Are you sure? {yes}, {no}", npc, player)
+			AZAR_SHOP.customers[playerId] = t
+			npcHandler:setTopic(playerId, 56)
+			return true
+		end
+		return true
+	end
+    
+	if npcHandler:getTopic(playerId) == 56 then
+		if MsgContains(msg, "no") then
+		    npcHandler:say("Then no..", npc, player)
+		    npcHandler:setTopic(playerId, 0)
+			AZAR_SHOP.customers[playerId] = nil
+			return true
+		end
+		if MsgContains(msg, "yes") then
+		    local t = AZAR_SHOP.customers[playerId]
+			local cost = t.required_points
+			if player:getAzarPoints() < cost then
+                npcHandler:say("Sorry, you dont have enough {boss tasks points}.", npc, player)
+				return true
+			end
+			
+			local rewards = {}
+			table.insert(rewards, t)
+			
+			player:removeAzarPoints(cost)
+			dakosLib:addReward(player, rewards, false, false, true, false, true, false, true)
+			
+			
+			npcHandler:say("Here you are.", npc, player)
+			player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
+			AZAR_SHOP.customers[playerId] = nil
+			npcHandler:setTopic(playerId, 0)
+			return true
+		end	
+	    return true
+	end
+	
+	
+	
+	
 	local count = player:getStorageValue(AZAR_STORAGES.countTask)
 	
 	if count == nil or count == -1 then
@@ -280,6 +354,10 @@ local function creatureSayCallback(npc, player, type, msg)
 				local t = AZAR_TASKS[selectedTask]
 				
 				if checkTask == 2 then
+				   local rewardTable = t["Rewards"]
+				   local rewardString = dakosLib:addReward(player, rewardTable, false, true, false, false, false, true, true)
+				   npcHandler:say(rewardString, npc, player)
+				   dakosLib:addReward(player, rewardTable, false, false, true, false, false, false, true)
 		           addRewards(npc, player, t, selectedTask)
 				   npcHandler:setTopic(playerId, 7)
 				   return false
@@ -483,7 +561,11 @@ local function creatureSayCallback(npc, player, type, msg)
 		   npcHandler:setTopic(playerId, 1)
 		   return false
 	    end
-		
+		 local rewardTable = index["Rewards"]
+		 local rewardString = dakosLib:addReward(player, rewardTable, false, true, false, false, false, true, true)
+		 npcHandler:say(rewardString, npc, player)
+		 dakosLib:addReward(player, rewardTable, false, false, true, false, false, false, true)
+				   
 		addRewards(npc, player, index, taskNumber)
 		npcHandler:setTopic(playerId, 1)
 	end
@@ -508,7 +590,7 @@ npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 -- Walkaway message
 --npcHandler:setMessage(MESSAGE_WALKAWAY, "You not have education?")
 
-npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! i have some {tasks} for you, dont forget to {report} after!")
+npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! i have some {tasks} for you, dont forget to {report} after!, I {exchange} task boss points for wonderful {rewards}")
 
 npcHandler:addModule(FocusModule:new())
 

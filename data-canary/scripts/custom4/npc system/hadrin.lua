@@ -22,7 +22,7 @@ HADRIN_MISSIONS.config = {
 																			 },																			 
                                                                      },
 											         reward = {
-													            { type = "item", name = "boots of haste", count = 1 },
+													            { type = "mount", name = "Ursagrodon", id = 38 },
 															  }
                                                    },												   
                                            }

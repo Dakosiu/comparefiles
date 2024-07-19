@@ -135,7 +135,6 @@ local function creatureSayCallback(npc, player, type, msg)
 		end
 	elseif npcHandler:getTopic(playerId) == 1 then
 		if MsgContains(msg, 'yes') then
-			player:setStorageValue(800002, 0)
 			npcHandler:say("Ok, then let's start by you telling me a number between {1} and {10}. Remember it will cost you 100 cc.", npc, player)
 			npcHandler:setTopic(playerId, 2)
 		else
@@ -152,15 +151,21 @@ local function creatureSayCallback(npc, player, type, msg)
 			if value < 1 or value > 10 then
 				npcHandler:say("Come on, you have to say a number between {1} and {10}.", npc, player)
 			else
-				if not player:removeMoney(1) then
+				if not player:removeMoney(1000000) then
 					npcHandler:say("Don't waste my time, you don't have the money.", npc, player)
 					npcHandler:setTopic(playerId, 0)
 				else
 					local randomNumber = math.random(1, 10)
 					if randomNumber == value then
 						npcHandler:say("No way! You won this time.", npc, player)
+						player:addWitchBuff()
+						player:addWitchProgress()
 						local actualStorage = player:getStorageValue(800002)
-						local data = diceConfig[actualStorage+1]
+						if actualStorage < 1 then
+						    actualStorage = 1
+						end
+						print("Current Mission: " .. actualStorage)
+						local data = diceConfig[actualStorage]
 						if data.maxHealth then
 						    local str = { "You get " .. data.maxHealth .. " hp extra forever, consider it a witch's gift.", getString(player) }
 							npcHandler:say(str, npc, player)
@@ -179,8 +184,7 @@ local function creatureSayCallback(npc, player, type, msg)
 						   -- npcHandler:say("If you win " .. 10 - value .. " times more, i will allow you to use my kettle.", npc, player)
 						-- end
 						   
-						player:addWitchBuff()
-						player:addWitchProgress()
+
 						if actualStorage == 9 then
 							npcHandler:setTopic(playerId, 0)
 						end

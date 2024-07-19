@@ -63,13 +63,18 @@ function wolfhunterTask:getKills(player)
 	return player:getStorageValue(storage)
 end
 
-function wolfhunterTask:getKillTask()
+function wolfhunterTask:getKillTask(highlight)
         
     local str = ""
     
     local name = WOLFHUNTER_TASKS[1]["Required Monster"].name
 	local count = WOLFHUNTER_TASKS[1]["Required Monster"].count
 	
+	local str2 = "{" .. name .. "}"
+	
+	if highlight then
+	    name = str2
+	end
 	str = str .. count .. " " .. name
 	
 	return str

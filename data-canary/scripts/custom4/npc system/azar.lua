@@ -9,7 +9,8 @@ _maxTasksForPlayer = 1,
 		kills = 1, 
 		["Rewards"] = { 
 		                { type = "experience", value = 20000 },
-						{ type = "item", item_id = 2268, count = 1 },
+						{ type = "item", id = 2268, count = 1 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [2] = { name = "The Old Widow",
@@ -19,7 +20,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
  [3] = { name = "Fernfang",
@@ -29,7 +31,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [4] = { name = "Demodras",
@@ -39,7 +42,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [5] = { name = "Tromphonyte",
@@ -49,7 +53,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [6] = { name = "Ribstride",
@@ -59,7 +64,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [7] = { name = "Zomba",
@@ -69,7 +75,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [8] = { name = "Munster",
@@ -79,7 +86,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [9] = { name = "Boogey",
@@ -89,7 +97,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [10] = { name = "Irgix The Flimsy",
@@ -99,7 +108,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [11] = { name = "The Baron from Below",
@@ -109,7 +119,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [12] = { name = "The Baron from Below",
@@ -119,7 +130,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [13] = { name = "The Voice Of Ruin",
@@ -129,7 +141,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [14] = { name = "The Baron from Below",
@@ -139,7 +152,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [15] = { name = "Hirintror",
@@ -149,7 +163,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [16] = { name = "Sir Valorcrest",
@@ -159,7 +174,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [17] = { name = "The Pale Count",
@@ -169,7 +185,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [18] = { name = "Lisa",
@@ -179,7 +196,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [19] = { name = "Man in the Cave",
@@ -189,7 +207,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [20] = { name = "Countess Sorrow",
@@ -199,7 +218,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [21] = { name = "Orshabaal",
@@ -209,7 +229,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [22] = { name = "The Count of the Core",
@@ -219,7 +240,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [23] = { name = "Mr. Punish",
@@ -229,7 +251,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [24] = { name = "Mahrdis",
@@ -239,7 +262,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [25] = { name = "Mr. Punish",
@@ -249,7 +273,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [26] = { name = "The Old Whopper",
@@ -259,7 +284,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [27] = { name = "Brokul",
@@ -269,7 +295,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [28] = { name = "Terofar",
@@ -279,7 +306,8 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 [29] = { name = "Lady Tenebris",
@@ -289,13 +317,16 @@ _maxTasksForPlayer = 1,
 		kills = 3, 
 		["Rewards"] = { 
 		                { type = "experience", value = 40000 },
-						{ type = "item", item_id = 2789, count = 50 },
+						{ type = "item", id = 2789, count = 50 },
+						{ type = "azar_points", value = 10 }
 					  }
 	   },
 
 }
 
 
+
+-- ALTER TABLE  `players` ADD  `azar_points` INT NOT NULL DEFAULT  '0'
 
 
 AZAR_STORAGES = 
@@ -308,6 +339,41 @@ bossTask = 48770,
 dificult = 49770,
 index = 50770,
 }
+
+if not AZAR_SHOP then
+    AZAR_SHOP = {}
+	AZAR_SHOP.customers = {}
+end
+AZAR_SHOP.config  = {
+                        [1] = { type = "outfit scroll", name = "Summoner", addon = 1, required_points = 100 },
+			            [2] = { type = "mount scroll", name = "Scorpion King", required_points = 100 },
+						[3] = { type = "item", id = 3079, count = 1, required_points = 200 },
+			        }
+			   
+
+
+-- function AZAR_SHOP:getShopItems()
+    -- local str = ""
+    -- for i, v in ipairs(self.config) do
+	    -- if i > 1 then
+		    -- str = str .. ", "
+		-- end
+		-- if
+	    -- str = str .. "{"
+		-- str = str .. v.type .. "(" .. name .. ")"
+		-- -- if v.type == "outfit scroll" then
+		    -- -- local str2 = ""
+		    -- -- if v.addon and v.addon == 1 then
+	            -- -- str2 = "first"
+			-- -- elseif v.addon and v.addon == 2 then
+			    -- -- str2 = "second"
+			-- -- elseif v.addon and v.addon == 3
+			    -- -- str2 = "full"
+			-- -- end
+			
+			-- -- str = str .. 
+	
+
 
 azarTask = { }
 azarTask.__newindex = azarTask

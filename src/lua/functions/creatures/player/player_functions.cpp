@@ -1612,6 +1612,43 @@ int PlayerFunctions::luaPlayerGetMaxSoul(lua_State* L) {
 	return 1;
 }
 
+int PlayerFunctions::luaPlayerGetAzarPoints(lua_State* L) {
+	// player:getMaxSoul()
+	Player* player = getUserdata<Player>(L, 1);
+	if (player) {
+		lua_pushnumber(L, player->getAzarPoints());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int PlayerFunctions::luaPlayerAddAzarPoints(lua_State* L) {
+	// player:addSoul(soulChange)
+	uint32_t value = getNumber<uint32_t>(L, 2);
+	Player* player = getUserdata<Player>(L, 1);
+	if (player) {
+		player->addAzarPoints(value);
+		pushBoolean(L, true);
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int PlayerFunctions::luaPlayerRemoveAzarPoints(lua_State* L) {
+	// player:addSoul(soulChange)
+	uint32_t value = getNumber<uint32_t>(L, 2);
+	Player* player = getUserdata<Player>(L, 1);
+	if (player) {
+		player->removeAzarPoints(value);
+		pushBoolean(L, true);
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
 int PlayerFunctions::luaPlayerGetBankBalance(lua_State* L) {
 	// player:getBankBalance()
 	Player* player = getUserdata<Player>(L, 1);

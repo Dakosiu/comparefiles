@@ -17,6 +17,12 @@ function spell.onCastSpell(creature, variant)
 		creature:getPosition():sendMagicEffect(CONST_ME_POFF)
 		return false
 	end
+	
+	if monsterType:getOutfit().lookType == 78 then
+	   creature:sendCancelMessage("You are not allowed to transform into this creature.")
+	   creature:getPosition():sendMagicEffect(CONST_ME_POFF)
+	   return false
+	end
 
 	condition:setOutfit(monsterType:getOutfit())
 	creature:addCondition(condition)

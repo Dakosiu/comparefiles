@@ -313,7 +313,7 @@ function ITEM_BONUS_SYSTEM:getSingleValue(player, target, attribute)
 			    end
 			end
 		end
-	end	
+	end
 	return value
 end
 
@@ -341,6 +341,7 @@ function ITEM_BONUS_SYSTEM:updateSkills(player, item, removeBonus)
 		   if removeBonus then
 		      value = 0
 		   end
+		   
 	       condition:setParameter(conditionParam, value)
 	       condition:setParameter(CONDITION_PARAM_SUBID, subid)
 	       condition:setTicks(-1)
@@ -368,7 +369,7 @@ function ITEM_BONUS_SYSTEM:updateAllSkills(player)
 					    end
                     elseif i == slot then
  						if itemValue and itemValue > 0 then
-                           ITEM_BONUS_SYSTEM:updateSkills(player, item, true)
+                           ITEM_BONUS_SYSTEM:updateSkills(player, item)
                         end                           
 					end
 			     end
@@ -436,7 +437,7 @@ function ITEM_BONUS_SYSTEM:updateAllSpecialSkills(player)
 					    end
                     elseif i == slot then
  						if itemValue and itemValue > 0 then
-                           ITEM_BONUS_SYSTEM:updateSpecialSkills(player, item, true)
+                           ITEM_BONUS_SYSTEM:updateSpecialSkills(player, item)
                         end                           
 					end
 			     end
@@ -551,7 +552,7 @@ function ITEM_BONUS_SYSTEM:updateAllStats(player)
 					    end
                     elseif i == slot then
  						if itemValue and itemValue > 0 then
-                           ITEM_BONUS_SYSTEM:updateStats(player, item, true)
+                           ITEM_BONUS_SYSTEM:updateStats(player, item)
                         end                           
 					end
 			     end
@@ -771,6 +772,7 @@ end
 local creatureevent = CreatureEvent("ITEM_BONUS_SYSTEM_onLogin")
 function creatureevent.onLogin(player)
    player:registerEvent("ITEM_BONUS_SYSTEM_onDeath")
+   
    addEvent(function(player_id)
 		      local player = Player(player_id)
 			  if not player then

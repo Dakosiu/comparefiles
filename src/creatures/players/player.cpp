@@ -2695,6 +2695,18 @@ BlockType_t Player::blockHit(Creature* attacker, CombatType_t combatType, int32_
 			}
 
 		}
+		
+		
+		uint32_t buff = this->getDefenseByCombat(combatType);
+		if (buff > 0) {
+			std::cout << "Buff : " << buff << std::endl;
+			double value = (double)buff / 100;
+			std::cout << "Damage Before : " << damage << std::endl;
+			damage = damage - (damage * buff);
+			std::cout << "Damage After: " << damage << std::endl;
+		}
+		
+		
 
 		if (damage <= 0) {
 			damage = 0;

@@ -79,7 +79,7 @@ function raid:start(index)
    addEvent(function()
    for i, v in pairs(CITIES_TO_RAID) do
        raid:prepareTables(i)
-       raid:stop(i, number, false, false)
+       raid:stop(i, number, false, false, true)
        if isInArray(t.avaibleCities, i) or isInArray(t.avaibleCities, "all") then
 	      table.insert(cities, i)
           local x = 0
@@ -87,7 +87,6 @@ function raid:start(index)
 	      local z = 0
 	      local count = 0
 	      local pos = nil
-	      local attempts = 0
 		  
 		  if t.monsters.boss and v.positionBoss then
 		    local bossTable = v.positionBoss[math.random(1, #v.positionBoss)]
@@ -106,33 +105,91 @@ function raid:start(index)
 			 
 		  end
 		  
-		  for z = 1, t.monsters.monsterCount do
-             x = math.random(v.position.from_x, v.position.to_x)
-             y = math.random(v.position.from_y, v.position.to_y)
-		     z = v.position.z
-		     pos = Position(x, y, z)
-			 
-			local foundTile = Tile(pos)
-			if foundTile ~= nil and foundTile:getGround() ~= nil and not foundTile:hasProperty(TILESTATE_NONE) and
-            not foundTile:hasProperty(TILESTATE_PROTECTIONZONE) and (foundTile:getCreatureCount() == 0) then
-			 
-			 
-			 
-			 local randMonster = math.random(1, #t.monsters.monsterList)
-             local monster = Game.createMonster(t.monsters.monsterList[randMonster], pos, false, false)
-			
-			 if monster then
-			 monster:registerEvent("Raid_monsterDeath")
-			 monster:setTown(RAID_STORAGE_MONSTERS_TOWN, i)
-			 table.insert(v.monsters["Monsters"], monster:getId())
+		  
+		  local monstersCount = t.monsters.monsterCount
+		  local monstersSpawned = 0
+		  local maxAttempts = 5000
+		  local attempts = 0
+		  
+		  if not raid.badPositions then
+		     raid.badPositions = {}
+		  end
+		  
+		  if not raid.takenPositions then
+		    raid.takenPositions = {}
+	      end
+		  
+		  local posChangeAttempts = 0
+		  
+		  	 if not raid.badPositions[i] then
+				raid.badPositions[i] = {}
 			 end
 			 
-			 if not monster and attempts < 100 then
-			   z = z - 1
-			   attempts = attempts + 1
-			 end			    
-             end
-		  end
+			 if not raid.takenPositions[i] then
+				raid.takenPositions[i] = {}
+			 end
+					
+		  while monstersSpawned < monstersCount and attempts < maxAttempts do
+		    x = math.random(v.position.from_x, v.position.to_x)
+			y = math.random(v.position.from_y, v.position.to_y)
+			z = v.position.z
+		    pos = Position(x, y, z)
+			
+			while isInArray(raid.badPositions[i], pos) or isInArray(raid.takenPositions[i], pos) and posChangeAttempts < 500 do
+		        x = math.random(v.position.from_x, v.position.to_x)
+			    y = math.random(v.position.from_y, v.position.to_y)
+			    z = v.position.z
+			    pos = Position(x, y, z)
+				posChangeAttempts = posChangeAttempts + 1
+			end
+				
+			local foundTile = Tile(pos)
+			if foundTile and foundTile:getGround() and not foundTile:hasProperty(TILESTATE_NONE) then
+			    --print("Tu przechodzi?")
+			    local randMonster = math.random(1, #t.monsters.monsterList)
+				local monster = Game.createMonster(t.monsters.monsterList[randMonster], pos, false, false)
+				if monster then
+				    print("Attempt: " .. attempts)
+					print("Zrespiono: " .. monster:getName())
+				    monster:registerEvent("Raid_monsterDeath")
+					monster:setTown(RAID_STORAGE_MONSTERS_TOWN, i)
+			        table.insert(v.monsters["Monsters"], monster:getId())
+					monstersSpawned = monstersSpawned + 1
+					table.insert(raid.takenPositions[i], monster:getPosition())
+				else
+
+					table.insert(raid.badPositions[i], pos)
+				end
+		    end
+			attempts = attempts + 1
+		 end
+		  -- for z = 1, t.monsters.monsterCount do
+             -- x = math.random(v.position.from_x, v.position.to_x)
+             -- y = math.random(v.position.from_y, v.position.to_y)
+		     -- z = v.position.z
+		     -- pos = Position(x, y, z)
+			 
+			-- local foundTile = Tile(pos)
+			-- if foundTile ~= nil and foundTile:getGround() ~= nil and not foundTile:hasProperty(TILESTATE_NONE) and
+            -- not foundTile:hasProperty(TILESTATE_PROTECTIONZONE) and (foundTile:getCreatureCount() == 0) then
+			 
+			 
+			 
+			 -- local randMonster = math.random(1, #t.monsters.monsterList)
+             -- local monster = Game.createMonster(t.monsters.monsterList[randMonster], pos, false, false)
+			
+			 -- if monster then
+			 -- monster:registerEvent("Raid_monsterDeath")
+			 -- monster:setTown(RAID_STORAGE_MONSTERS_TOWN, i)
+			 -- table.insert(v.monsters["Monsters"], monster:getId())
+			 -- end
+			 
+			 -- if not monster and attempts < 100 then
+			   -- z = z - 1
+			   -- attempts = attempts + 1
+			 -- end			    
+             -- end
+		  -- end
 
         for a = 1, #v.positionLanterns do
 		      x = v.positionLanterns[a].x
@@ -242,7 +299,7 @@ function raid:monsters(name)
     return v
 end
 
-function raid:stop(name, index, killed, notification)
+function raid:stop(name, index, killed, notification, clearAll)
         
 		
 		local _sendMessage = false
@@ -251,7 +308,6 @@ function raid:stop(name, index, killed, notification)
 		
 		if not killed then
 			    for i, bosses in pairs(v.monsters["Boss"]) do
-				
 			        local boss = Monster(bosses)
 				          if boss then
 				             boss:remove()
@@ -263,7 +319,7 @@ function raid:stop(name, index, killed, notification)
 				end
 				
 				for z, monsters in pairs(v.monsters["Monsters"]) do				
-				local monster = Monster(c)
+				local monster = Monster(monsters)
 				      if monster then
 				         monster:remove()
 						 
@@ -274,6 +330,32 @@ function raid:stop(name, index, killed, notification)
 			    end
 			
 		end
+		
+		-- if clearAll then
+		    -- for i, v in pairs(CITIES_TO_RAID) do
+			    -- for _, bosses in pairs(v.monsters["Boss"]) do
+			        -- local boss = Monster(bosses)
+				          -- if boss then
+				             -- boss:remove()
+							
+							 -- if notification then
+				             -- _sendMessage = true
+					         -- end
+			             -- end
+				-- end
+				
+				-- for z, monsters in pairs(v.monsters["Monsters"]) do				
+				-- local monster = Monster(z)
+				      -- if monster then
+				         -- monster:remove()
+						 
+				         -- if notification then
+				            -- _sendMessage = true
+					     -- end
+				     -- end
+			    -- end 
+            -- end
+        -- end			
 		
 		for a = 1, #v.positionLanterns do
 		      x = v.positionLanterns[a].x

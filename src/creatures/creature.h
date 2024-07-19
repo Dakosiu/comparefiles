@@ -216,6 +216,10 @@ class Creature : virtual public Thing
 		void setAbsorbPercent(CombatType_t combat, int32_t value) {
 			absorbPercent[combatTypeToIndex(combat)] += value;
 		}
+		
+		
+    uint32_t getBuffByCombat(CombatType_t combat);
+	uint32_t getDefenseByCombat(CombatType_t combat);
 
 /*     uint16_t getManaShield() const {
       return manaShield;

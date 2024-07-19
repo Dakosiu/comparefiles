@@ -61,7 +61,7 @@ function AILLIKA_MISSIONS:prepare()
 						startValue = 1,
 						endValue = 3,
                         states = {
-						          [1] = "I have to find a plant that aillika asked me.",
+						          [1] = "I have to find a Sling Herb that aillika asked me.",
 								  [2] = "Ask Aillika for reward",
 						          [3] = "I have completed this mission.",
                                  },

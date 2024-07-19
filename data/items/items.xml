@@ -6501,6 +6501,8 @@
 		<attribute key="weight" value="2600"/>
 	</item>
 	<item id="3363" name="dragon scale legs">
+		<attribute key="showAttributes" value="1"/>
+        <attribute key="absorbpercentall" value="3"/>	
 		<attribute key="armor" value="10"/>
 		<attribute key="weight" value="4800"/>
 	</item>
@@ -19860,6 +19862,8 @@
 	<item id="10326" article="a" name="dragon backpack">
 		<attribute key="containersize" value="20"/>
 		<attribute key="weight" value="1700"/>
+		<attribute key="absorbpercentfire" value="3"/>
+		<attribute key="showAttributes" value="1"/>
 		<attribute key="imbuementslot" value="1">
 			<attribute key="increase capacity" value="3"/>
 		</attribute>
@@ -26008,10 +26012,14 @@
 		<attribute key="weight" value="80"/>
 	</item>
 	<item fromid="16258" toid="16261" name="RESERVED SPRITE"/>
-	<item fromid="16262" toid="16263" article="a" name="dragon eye">
+	
+	<item id="16263" article="a" name="dragon eye">
+	    <attribute key="absorbpercentfire" value="10"/>
+		<attribute key="showAttributes" value="1"/>
 		<attribute key="description" value="It belonged to the first dragon to roam the world and was adorned with Tibia-Market's purest gold"/>
 		<attribute key="weight" value="2800"/>
 	</item>
+	
 	<item id="16264" article="a" name="prismatic ring">
 		<attribute key="showduration" value="1"/>
 		<attribute key="showAttributes" value="1"/>
@@ -36461,6 +36469,15 @@
 		<attribute key="weight" value="650"/>
 	</item>
 	<item id="24967" article="a" name="dragon crown">
+	    <attribute key="absorbpercentfire" value="13"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="showduration" value="1"/>
+		<attribute key="duration" value="200"/>
+		<attribute key="decayTo" value="42384"/>
+		<attribute key="weight" value="650"/>
+	</item>
+	<item id="42384" article="a" name="expired dragon crown">
+	    <attribute key="description" value="This amulet lost his power."/>
 		<attribute key="weight" value="650"/>
 	</item>
 	<item id="24968" article="a" name="golden talon">

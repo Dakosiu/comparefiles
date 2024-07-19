@@ -2,25 +2,33 @@
   "name": "canary",
   "version-string": "1.0.0",
   "dependencies": [
-    "boost-asio",
-    "boost-lockfree",
-    "boost-variant",
-    "boost-filesystem",
-    "boost-iostreams",
-    "boost-system",
+    "abseil",
+    "argon2",
+    "asio",
+    "bext-di",
+    "bext-ut",
+    "curl",
+    "eventpp",
+    "luajit",
+    "magic-enum",
+    "mio",
+    "parallel-hashmap",
+    "protobuf",
     "pugixml",
     "spdlog",
-    "curl",
-    "jsoncpp",
-    "protobuf",
-    "parallel-hashmap",
-    "magic-enum",
+    "zlib",
+	"jsoncpp",
+    "bshoshany-thread-pool",
     {
-      "name": "luajit",
-      "platform": "!arm"
+      "name": "opentelemetry-cpp",
+      "default-features": true,
+      "features": ["otlp-http", "prometheus"]
     },
-    { "name": "libmariadb",
-      "features": [ "mariadbclient" ]
+    {
+      "name": "libmariadb",
+      "features": [
+        "mariadbclient"
+      ]
     },
     {
       "name": "gmp",
@@ -30,5 +38,10 @@
       "name": "mpir",
       "platform": "windows"
     }
-  ]
+  ],
+  "overrides": [
+        { "name": "protobuf", "version": "3.21.12" },
+		{ "name": "fmt", "version": "9.1.0" }
+  ],
+  "builtin-baseline": "095ee06e7f60dceef7d713e3f8b1c2eb10d650d7"
 }

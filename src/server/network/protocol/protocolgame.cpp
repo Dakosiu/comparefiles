@@ -3336,7 +3336,13 @@ void ProtocolGame::sendCyclopediaCharacterCombatStats()
 			}
 		}
 	}
-
+    
+	absorbs[0] += player->getDefenseByCombat(COMBAT_PHYSICALDAMAGE);
+	absorbs[1] += player->getDefenseByCombat(COMBAT_ENERGYDAMAGE);
+	absorbs[2] += player->getDefenseByCombat(COMBAT_EARTHDAMAGE);
+	absorbs[3] += player->getDefenseByCombat(COMBAT_FIREDAMAGE);
+	absorbs[9] += player->getDefenseByCombat(COMBAT_ICEDAMAGE);
+	absorbs[11] += player->getDefenseByCombat(COMBAT_DEATHDAMAGE);
 	static const Cipbia_Elementals_t cipbiaCombats[] = {CIPBIA_ELEMENTAL_PHYSICAL, CIPBIA_ELEMENTAL_ENERGY, CIPBIA_ELEMENTAL_EARTH, CIPBIA_ELEMENTAL_FIRE, CIPBIA_ELEMENTAL_UNDEFINED,
 														CIPBIA_ELEMENTAL_LIFEDRAIN, CIPBIA_ELEMENTAL_UNDEFINED, CIPBIA_ELEMENTAL_HEALING, CIPBIA_ELEMENTAL_DROWN, CIPBIA_ELEMENTAL_ICE, CIPBIA_ELEMENTAL_HOLY, CIPBIA_ELEMENTAL_DEATH};
 	for (size_t i = 0; i < COMBAT_COUNT; ++i)

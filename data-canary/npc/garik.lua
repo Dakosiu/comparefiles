@@ -147,7 +147,8 @@ local function creatureSayCallback(npc, player, type, msg)
 	end
 	
 	local questStatus = player:getStorageValue(ShredderRequiredStorage[1])
-	
+	print("Quest Status: " .. questStatus)
+	print("Potrzebne Storage: " .. ShredderRequiredStorage[1])
 	-- keyword: forge
 	if MsgContains(msg, "forge") then
 		if questStatus == -1 then

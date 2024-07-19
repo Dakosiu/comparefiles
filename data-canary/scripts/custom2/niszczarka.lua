@@ -40,7 +40,7 @@ local function getCategoryName(categoryId)
 end
 
 ------ CONFIG
-local ShredderRequiredStorage = {80014, 1}
+--local ShredderRequiredStorage = {80014, 1}
 local SHREDDER_CATEGORY_STORAGE = 80015
 local SHREDDER_CHOICE_STORAGE = 80016
 

@@ -118,8 +118,26 @@ local function creatureSayCallback(npc, player, type, msg)
 	   npcHandler:say("You can do 3 types of world tasks {easy}, {medium} and {hard}.", npc, player)
     end
 
-	if MsgContains(msg, "easy") then 
+	if MsgContains(msg, "report") then 
+	   if player:getStorageValue(larvikTask.isDoingTask + HARD_TASK_NUMBER) == 2 then
+	      npcHandler:say("You have already finished all {world missions} for today, come back tommorow.", npc, player)
+		  return false
+	   end
+	   npcHandler:say("Which type of task do you wish to {report}?, {easy}, {medium} and {hard}.", npc, player)
+	   npcHandler:setTopic(playerId, 10)
+    end
 	
+	if MsgContains(msg, "easy") then 
+	   
+	   if npcHandler:getTopic(playerId) == 10 then
+	        if player:getStorageValue(larvikTask.isDoingTask + EASY_TASK_NUMBER) < 1 then
+			    npcHandler:say("You dont have this task.", npc, player)
+			    --npcHandler:setTopic(playerId, 0)
+				return true
+			end
+	   end
+	   
+	   
        if player:getStorageValue(larvikTask.isDoingTask + EASY_TASK_NUMBER) == 1 then
 	      local taskNumber = player:getStorageValue(larvikTask.selectedTask + EASY_TASK_NUMBER)
 	      local t = LARVIK_TASKS["Easy"][taskNumber]["Required Items"]
@@ -137,7 +155,11 @@ local function creatureSayCallback(npc, player, type, msg)
 		  end
 		  
 		  if #missingItems > 0 then
-	         npcHandler:say("You are aleady doing {easy} task, you have to collect still: " .. larvikTask:getMissingItemList(missingItems) .. ".", npc, player)
+		     local str = "You are aleady doing {easy} task, you have to collect still: " .. larvikTask:getMissingItemList(missingItems) .. "."
+			 -- if npcHandler:getTopic(playerId) == 10 then
+			    -- str = "you have to collect still: " .. larvikTask:getMissingItemList(missingItems) .. "."
+			 -- end
+	         npcHandler:say(str, npc, player)
 		     return false
 		  end
 		  
@@ -169,7 +191,16 @@ local function creatureSayCallback(npc, player, type, msg)
 	   
 	end
 	
-	if MsgContains(msg, "medium") then 
+	if MsgContains(msg, "medium") then
+
+	   if npcHandler:getTopic(playerId) == 10 then
+	        if player:getStorageValue(larvikTask.isDoingTask + MEDIUM_TASK_NUMBER) < 1 then
+			    npcHandler:say("You dont have this task.", npc, player)
+			    --npcHandler:setTopic(playerId, 0)
+				return true
+			end
+	   end
+	   
 	   if player:getStorageValue(larvikTask.isDoingTask + EASY_TASK_NUMBER) ~= 2 then
 	      npcHandler:say("You have to finish {easy} task first.", npc, player)
 		  return false
@@ -224,11 +255,21 @@ local function creatureSayCallback(npc, player, type, msg)
 	end
 	
 	if MsgContains(msg, "hard") then 
+
+	   if npcHandler:getTopic(playerId) == 10 then
+	        if player:getStorageValue(larvikTask.isDoingTask + HARD_TASK_NUMBER) < 1 then
+			    npcHandler:say("You dont have this task.", npc, player)
+			    --npcHandler:setTopic(playerId, 0)
+				return true
+			end
+	   end
 	   
 	   if player:getStorageValue(larvikTask.isDoingTask + MEDIUM_TASK_NUMBER) ~= 2 then
 	      npcHandler:say("You have to finish {medium} task first.", npc, player)
 		  return false
 	   end
+	   
+	   
 	   
        if player:getStorageValue(larvikTask.isDoingTask + HARD_TASK_NUMBER) == 1 then
 	      local taskNumber = player:getStorageValue(larvikTask.selectedTask + HARD_TASK_NUMBER)
@@ -292,7 +333,7 @@ npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 -- Walkaway message
 --npcHandler:setMessage(MESSAGE_WALKAWAY, "You not have education?")
 
-npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! i have some {mission} for you. these missions are {world missions} that give bonuses to every player on the server ! you can get more info about {world missions} by typing {world missions}")
+npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! i have some {mission} for you. dont forget to {report} after finnish... these missions are {world missions} that give bonuses to every player on the server ! you can get more info about {world missions} by typing {world missions}")
 
 npcHandler:addModule(FocusModule:new())
 

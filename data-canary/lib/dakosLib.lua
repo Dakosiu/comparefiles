@@ -56,6 +56,37 @@ MISSION_FINISHED = 3
 	    
 
 
+function dakosLib:canUse(player, item)
+    
+    local container = player:getSlotItem(CONST_SLOT_BACKPACK)
+	
+    local containers = {}
+	
+	local items = {}
+	if container and container:isContainer() then
+        table.insert(containers, container)
+    end
+    while #containers > 0 do
+		for i = (containers[1]:getSize() - 1), 0, -1 do
+			local it = containers[1]:getItem(i)
+			if it.uid == item.uid then
+			   return true
+			end
+			if it:isContainer() then
+                table.insert(containers, it)
+			else
+			    table.insert(items, it.uid)
+            end
+        end
+        table.remove(containers, 1)
+    end
+	
+	if not isInArray(items, item.uid) then
+	   return false
+	end
+	
+    return true
+end
 
 function dakosLib:getInterval(t)
 	local method = t.type
@@ -457,11 +488,19 @@ function dakosLib:addReward(player, t, customString, returnStringOnly, skipText,
 	local outfitScrolls = {}
 	local _outfitScrollsDisplayed = false
 	
+	local mountScrolls = {}
+	local _mountScrollsDisplayed = false
+	
 	local abilityScrolls = {}
 	local _abilityScrollsDisplayed = false
 	
 	local displayThings = 0
 	
+	local mounts = {}
+	local _mountsDisplayed = false
+	
+	local azar_points = 0
+	local _azarPointsDisplayed = false
 	local str = ""
 	if not skipPrefix then
 	   str = "You have received: "
@@ -494,6 +533,25 @@ function dakosLib:addReward(player, t, customString, returnStringOnly, skipText,
 			     _itemsDisplayed = true
 		      end
 		   end
+		elseif v.type == "mount" then
+           local name = v.name
+           local id = v.id
+		   local chance = v.chance
+		   if not chance or skipChance then
+		      chance = 100
+		   end
+		   if chance < 1 then
+		      chance = chance * 100
+		   end
+		   local values = { ["name"] = name, ["id"] = id }
+		   local rand = math.random(0, 100)
+		   if rand <= chance then
+		      table.insert(mounts, values)
+		      if not _mountsDisplayed then
+		         displayThings = displayThings + 1
+			     _mountsDisplayed = true
+		      end
+		   end		   
 		elseif v.type == "outfit scroll" then
            local name = v.name
            local addon = v.addon
@@ -533,7 +591,25 @@ function dakosLib:addReward(player, t, customString, returnStringOnly, skipText,
 		         displayThings = displayThings + 1
 			     _abilityScrollsDisplayed = true
 		      end
-		   end		   
+		   end		
+		elseif v.type == "mount scroll" then
+           local name = v.name
+		   local chance = v.chance
+		   if not chance or skipChance then
+		      chance = 100
+		   end
+		   if chance < 1 then
+		      chance = chance * 100
+		   end
+		   local values = { ["name"] = name }
+		   local rand = math.random(0, 100)
+		   if rand <= chance then
+		      table.insert(mountScrolls, values)
+		      if not _mountScrollsDisplayed then
+		         displayThings = displayThings + 1
+			     _mountScrollsDisplayed = true
+		      end
+		   end			   
 		elseif v.type == "level" then
 		   local value = v.value
 		   levels = levels + value
@@ -617,7 +693,14 @@ function dakosLib:addReward(player, t, customString, returnStringOnly, skipText,
 		   if not _dtpDisplayed then
 		      displayThings = displayThings + 1
 			  _dtpDisplayed = true
-		   end		   
+		   end	
+		elseif v.type == "task_boss_points" or v.type == "azar_points" then
+		   local value = v.value
+		   azar_points = azar_points + value
+		   if not _azarPointsDisplayed then
+		      displayThings = displayThings + 1
+			  _azarPointsDisplayed = true
+		   end			   
 		elseif v.type == "money" then
 		   local value = v.value
 		   money = money + value
@@ -720,11 +803,15 @@ function dakosLib:addReward(player, t, customString, returnStringOnly, skipText,
 	      local addon = scroll.addon
 		  if not returnStringOnly then
 		     if not customContainer then
-			    ADDON_SCROLL_SYSTEM:generateScroll(name, player, addon)
-		        --player:addItem(id, count)
+				local item = ADDON_SCROLL_SYSTEM:generateScroll(name, nil, addon)
+				if item then
+				    player:addItemEx(item)
+				end
 		     else
-			    ADDON_SCROLL_SYSTEM:generateScroll(name, customContainer, addon)
-			    --customContainer:addItem(id, count)
+			    local item = ADDON_SCROLL_SYSTEM:generateScroll(name, nil, addon)
+				if item then
+				    customContainer:addItemEx(item)
+				end
 			 end
 		  end
 		if not string.find(str, name) then
@@ -796,6 +883,74 @@ function dakosLib:addReward(player, t, customString, returnStringOnly, skipText,
       end
 	end
 	
+	if #mountScrolls > 0 then
+	  --local backpack = player:addItem(1998)
+	  for index, scroll in pairs(mountScrolls) do
+	      local name = scroll.name
+		  if not returnStringOnly then
+		     if not customContainer then
+			    local item = MOUNT_SCROLL_SYSTEM:generateScroll(name, player)
+				if item then
+				    player:addItemEx(item)
+				end
+		        --player:addItem(id, count)
+		     else
+			    local item = MOUNT_SCROLL_SYSTEM:generateScroll(name, customContainer)
+				if item then
+				    customContainer:addItemEx(item)
+				end
+			    --customContainer:addItem(id, count)
+			 end
+		  end
+		  name = name:lower()
+		  if highLight then
+		     str = str .. "{" 
+		  end
+		  str = str .. "mount scroll" .. "(" .. name .. ")"
+		  if highLight then
+			 str = str .. "}" 
+		  end		  
+		  if #mountScrolls ~= index then
+		     str = str .. ", "
+	      end
+	   end
+	   displayThings = displayThings - 1
+	  if displayThings == 0 then
+	     str = str .. "."
+	  else
+	     str = str .. ", "
+      end
+	end
+	
+	if #mounts > 0 then
+	  --local backpack = player:addItem(1998)
+	  for index, mount in pairs(mounts) do
+	      local name = mount.name
+		  local id = mount.id
+		  if not returnStringOnly then
+		     if not customContainer then
+			    player:addMount(id)
+			 end
+		  end
+		  name = name:lower()
+		  if highLight then
+		     str = str .. "{" 
+		  end
+		  str = str .. name .. " mount"
+		  if highLight then
+			 str = str .. "}" 
+		  end		  
+		  if #mounts ~= index then
+		     str = str .. ", "
+	      end
+	   end
+	   displayThings = displayThings - 1
+	  if displayThings == 0 then
+	     str = str .. "."
+	  else
+	     str = str .. ", "
+      end
+	end
 	
 	if #keys > 0 then
 	  --local backpack = player:addItem(1998)
@@ -990,7 +1145,15 @@ function dakosLib:addReward(player, t, customString, returnStringOnly, skipText,
 	   if not returnStringOnly then
 	      player:addExperience(experience)
 	   end
-	   str = str .. experience .. " experience"
+	   str = str .. experience 
+	   str = str .. " "
+	    if highLight then 
+		     str = str .. "{"
+		end
+		str = str .. "experience"
+	    if highLight then 
+		     str = str .. "}"
+		end		
 	   displayThings = displayThings - 1
 	   if displayThings == 0 then
 	      str = str .. "."
@@ -1044,6 +1207,34 @@ function dakosLib:addReward(player, t, customString, returnStringOnly, skipText,
 	   if daily_task_points > 1 then
 	      str = str .. "'s"
 	   end
+	   displayThings = displayThings - 1
+	   if displayThings == 0 then
+	      str = str .. "."
+	   elseif displayThings == 1 then
+	      str = str .. " and "
+	   elseif displayThings > 1 then
+	      str = str .. ", "
+	   end
+	end	
+	
+	if azar_points > 0 then
+	      if not returnStringOnly then
+		     --db.executeQuery("UPDATE `accounts` set `premium_points` = `premium_points` - " .. premium_points .. " WHERE `id` = " .. player:getAccountId())
+			 --local value = player:getDailyTaskPoints()
+			 player:addAzarPoints(azar_points)
+		  end
+	      str = str .. azar_points
+          str = str .. " "		  
+		   if highLight then 
+		     str = str .. "{"
+		   end
+		   str = str .. "task boss point"
+	       if azar_points > 1 then
+	       str = str .. "'s"
+	       end
+		   if highLight then 
+		     str = str .. "}"
+		   end
 	   displayThings = displayThings - 1
 	   if displayThings == 0 then
 	      str = str .. "."
@@ -1463,10 +1654,14 @@ function dakosLib:getMissingThings(player, t, highlight)
 		   
 		elseif v.type == "money" then
 		   local value = v.value
-		   money = money + value
-		   if not _moneyDisplayed then
-		      displayThings = displayThings + 1
-			  _moneyDisplayed = true
+		   local playerValue = player:getMoney()
+		   if playerValue < value then
+		        value = value - playerValue
+		        money = money + value
+		        if not _moneyDisplayed then
+		            displayThings = displayThings + 1
+			        _moneyDisplayed = true
+				end
 		   end
 		elseif v.type == "experience_bonus" or v.type == "experience bonus" then
 		   local value = v.value

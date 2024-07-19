@@ -1730,6 +1730,70 @@ uint32_t Creature::getManaShield() const
 	return manaShield;
 }
 
+/* 			COMBAT_PHYSICALDAMAGE = 1 << 0,
+	COMBAT_ENERGYDAMAGE = 1 << 1,
+	COMBAT_EARTHDAMAGE = 1 << 2,
+	COMBAT_FIREDAMAGE = 1 << 3,
+	COMBAT_UNDEFINEDDAMAGE = 1 << 4,
+	COMBAT_LIFEDRAIN = 1 << 5,
+	COMBAT_MANADRAIN = 1 << 6,
+	COMBAT_HEALING = 1 << 7,
+	COMBAT_DROWNDAMAGE = 1 << 8,
+	COMBAT_ICEDAMAGE = 1 << 9,
+	COMBAT_HOLYDAMAGE = 1 << 10,
+	COMBAT_DEATHDAMAGE = 1 << 11, */
+	
+	
+uint32_t Creature::getBuffByCombat(CombatType_t combat)
+{
+	switch (combat) {
+		case COMBAT_PHYSICALDAMAGE: {
+			return getBuff(BUFF_PHYSICAL_DAMAGE);
+		}
+		case COMBAT_ENERGYDAMAGE: {
+			return getBuff(BUFF_ENERGY_DAMAGE);
+		}
+		case COMBAT_EARTHDAMAGE: {
+			return getBuff(BUFF_EARTH_DAMAGE);
+		}		
+		case COMBAT_FIREDAMAGE: {
+			return getBuff(BUFF_FIRE_DAMAGE);
+		}		
+		case COMBAT_ICEDAMAGE: {
+			return getBuff(BUFF_ICE_DAMAGE);
+		}	
+		case COMBAT_DEATHDAMAGE: {
+			return getBuff(BUFF_DEATH_DAMAGE);
+		}	
+    }
+    return 0;	
+}
+
+uint32_t Creature::getDefenseByCombat(CombatType_t combat)
+{
+	switch (combat) {
+		case COMBAT_PHYSICALDAMAGE: {
+			return getBuff(BUFF_PHYSICAL_DEFENSE);
+		}
+		case COMBAT_ENERGYDAMAGE: {
+			return getBuff(BUFF_ENERGY_DEFENSE);
+		}
+		case COMBAT_EARTHDAMAGE: {
+			return getBuff(BUFF_EARTH_DEFENSE);
+		}		
+		case COMBAT_FIREDAMAGE: {
+			return getBuff(BUFF_FIRE_DEFENSE);
+		}		
+		case COMBAT_ICEDAMAGE: {
+			return getBuff(BUFF_ICE_DEFENSE);
+		}	
+		case COMBAT_DEATHDAMAGE: {
+			return getBuff(BUFF_DEATH_DEFENSE);
+		}	
+    }
+    return 0;	
+}
+
 void Creature::setManaShield(uint32_t value)
 {
 	if (g_configManager().getBoolean(LEGACY_MANASHIELD)) {

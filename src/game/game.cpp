@@ -5952,6 +5952,20 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			damage.primary.value *= target->getBuff(BUFF_DAMAGERECEIVED) / 100.;
 			damage.secondary.value *= target->getBuff(BUFF_DAMAGERECEIVED) / 100.;
 		}
+		
+		if (attacker) {
+		    uint32_t buffDamage = attacker->getBuffByCombat(damage.primary.type);
+		//std::cout << "Attacker Name: " << attacker->getName() << std::endl;
+		    if (buffDamage > 0) {
+			double value = (double)buffDamage / 100;
+/* 			std::cout << "Value: " << value << std::endl;
+			std::cout << "Target: " << attacker->getName() << "Buff: " << buffDamage << "%" << std::endl;
+			std::cout << "Damage Before: " << damage.primary.value << std::endl; */
+			damage.primary.value = damage.primary.value + (damage.primary.value * value);
+/* 			std::cout << "Damage After: " << damage.primary.value << std::endl; */
+		   }
+		}
+		
 		if (damage.origin != ORIGIN_NONE && damage.primary.type == COMBAT_PHYSICALDAMAGE || damage.primary.type == COMBAT_FIREDAMAGE || damage.primary.type == COMBAT_EARTHDAMAGE || damage.primary.type == COMBAT_ICEDAMAGE || damage.primary.type == COMBAT_ENERGYDAMAGE || damage.primary.type == COMBAT_HOLYDAMAGE || damage.primary.type == COMBAT_DEATHDAMAGE)
 			damage.primary.value *= (1 - (target->getDamageMitigation() / 10000.));
 		int32_t healthChange = damage.primary.value + damage.secondary.value;

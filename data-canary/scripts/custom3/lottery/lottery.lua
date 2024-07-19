@@ -1,12 +1,10 @@
 LOTTERY_SYSTEM_CONFIG = {
                           minLevel = 100,
-                          ["Scheduler"] = { type = "minutes", interval = 6 },						  
+                          ["Scheduler"] = { type = "hours", interval = 2 },						  
                           ["Avaible Rewards"] = {
-						                          { type = "item", itemid = "3032", count = 1, chance = 0.10 },
-						                          { type = "item", itemid = "3043", count = 1, chance = 0.15 },
-												  { type = "item", itemid = "3035", count = 1, chance = 0.05 },
-												  { type = "item", itemid = "3029", count = 1, chance = 0.50 },
-												  { type = "item", itemid = "5957", count = 1, chance = 0.50 },
+						                          { type = "item", itemid = "3043", count = 25, chance = 0.45 },
+												  { type = "item", itemid = "32771", count = 25, chance = 0.45 },
+												  { type = "item", itemid = "5957", count = 1, chance = 0.02 },
 										        }
 				        }
 

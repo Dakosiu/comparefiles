@@ -111,7 +111,7 @@ local function creatureSayCallback(npc, player, type, msg)
        rewardTable = ALLADYN_TASKS[2]["Reward"]    
 	end
 	  	
-	if MsgContains(msg, "mission") or MsgContains(msg, "help") then
+	if MsgContains(msg, "mission") or MsgContains(msg, "help") or MsgContains(msg, "report") then
 	
 	   if alladynTask:getQuestLogMission(player, 2) == 2 then
 	      npcHandler:setTopic(playerId, 0)
@@ -248,7 +248,7 @@ npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 -- Walkaway message
 --npcHandler:setMessage(MESSAGE_WALKAWAY, "You not have education?")
 
-npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! how did you found me, anyway if you {help} me to DESTROY green djins i can {reward} you...")
+npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! how did you found me, anyway if you {help} me to DESTROY green djins i can {reward} you... dont forget to {report} your mission.")
 
 npcHandler:addModule(FocusModule:new())
 

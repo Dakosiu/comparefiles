@@ -3303,6 +3303,24 @@ local items = {
 		level = 300
 	},
 	{
+		-- spell wand
+		itemid = 651,
+		type = "equip",
+		slot = "hand",
+		level = 250,
+		-- vocation = {
+			-- {"Sorcerer", true},
+			-- {"Master Sorcerer"}
+		-- }
+	},
+	{
+		-- spell wand
+		itemid = 641,
+		type = "deequip",
+		slot = "hand",
+		level = 250
+	},	
+	{
 		-- falcon rod
 		itemid = 28716,
 		type = "equip",
@@ -12181,6 +12199,20 @@ local items = {
 		slot = "necklace",
 		level = 60
 	},
+	
+	{
+		-- dragon crown
+		itemid = 24967,
+		type = "equip",
+		slot = "necklace",
+	},
+	{
+		-- dragon crow
+		itemid = 24967,
+		type = "deequip",
+		slot = "necklace",
+	},
+	
 	{
 		-- terra boots
 		itemid = 813,
@@ -15204,7 +15236,18 @@ local items = {
 		slot = "ammo",
 	},
 	
-	
+	{
+		-- dragon eye
+		itemid = 16263,
+		type = "equip",
+		slot = "ammo",
+	},
+	{
+		-- dragon eye
+		itemid = 16263,
+		type = "deequip",
+		slot = "ammo",
+	},
 	
 	
 	{
@@ -16443,6 +16486,20 @@ local items = {
 		itemid = 3363,
 		type = "deequip",
 		slot = "legs"
+	},
+	
+
+	{
+		-- dragon backpack
+		itemid = 10326,
+		type = "equip",
+		slot = "legs"
+	},
+	{
+		-- dragon backpack
+		itemid = 10326,
+		type = "deequip",
+		slot = "backpack"
 	},
 	
 	

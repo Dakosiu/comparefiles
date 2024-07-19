@@ -16,22 +16,35 @@ function Player.addWitchBuff(player)
 end
 
 function Player.addWitchProgress(self)
-	local key = 52423
-	local value = self:getWitchProgress()
+	local key = 800002
+	local value = self:getStorageValue(800002)
 	if value >= 10 then
 	   return
+	end
+	if value < 0 then
+	    value = 0
 	end
 	return self:setStorageValue(key, value + 1)
 end
 
 function Player.getWitchProgress(self)
-    local key = 52423
+    local key = 800002
 	local value = self:getStorageValue(key)
 	if value < 0 then
 	   value = 0
 	end
 	return value
 end
+
+function Player.getWitchIndex(self)
+    local value = self:getWitchProgress()
+	print("Value:" .. value)
+	if value > 0 then
+	    return value
+	end
+	return 0
+end
+
 
 function Player.canUseKettle(self)
 	if self:getWitchProgress() >= 10 then

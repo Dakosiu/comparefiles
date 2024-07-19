@@ -1,8 +1,5 @@
--- local bless = TalkAction("!testo")
-
--- function bless.onSay(player, words, param)
-	-- player:say("Check store boost")
-	-- player:setGrindingXpBoost(10)
+-- local action = TalkAction("!attributes")
+-- function action .onSay(player, words, param)	
+	-- KING_NPC_SYSTEM:getActiveAttributes(player)
 -- end
-
--- bless:register()
+-- action :register()

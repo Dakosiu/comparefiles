@@ -45,7 +45,7 @@ GameStore.Categories = {
 	
 	{
 		--Premium Time
-		icons = { "Category_ZakarianItems.png" },
+		icons = { "Category_PremiumTime.png" },
 		name = "Zakarian Items",
 		subclasses = {"Equipment", "Jewelry", "Weapons", "Others" },
 		rookgaard = true,
@@ -54,7 +54,7 @@ GameStore.Categories = {
 	},
 	
 	{
-		icons = { "Category_ZakarianItems.png" },
+		icons = { "Category_Blessings.png" },
 		name = "Equipment",
 		parent = "Zakarian Items",
 		rookgaard = true,
@@ -129,7 +129,7 @@ GameStore.Categories = {
 	},
 	
 	{
-		icons = { "Category_Jewelry.png" },
+		icons = { "Category_Blessings.png" },
 		name = "Jewelry",
 		parent = "Zakarian Items",
 		rookgaard = true,
@@ -164,7 +164,7 @@ GameStore.Categories = {
 	},
 	
 	{
-		icons = { "Category_Weapons.png" },
+		icons = { "Category_Blessings.png" },
 		name = "Weapons",
 		parent = "Zakarian Items",
 		rookgaard = true,
@@ -217,7 +217,7 @@ GameStore.Categories = {
 	},
 	
 		{
-		icons = { "Category_Others.png" },
+		icons = { "Category_Blessings.png" },
 		name = "Others",
 		parent = "Zakarian Items",
 		rookgaard = true,
@@ -303,7 +303,7 @@ GameStore.Categories = {
 			-- },	
 			
 	{
-		icons = { "Category_Equipment.png" },
+		icons = { "Category_Blessings.png" },
 		name = "Paladin",
 		parent = "Novice Items",
 		rookgaard = true,
@@ -339,7 +339,7 @@ GameStore.Categories = {
 	},
 	
 	{
-		icons = { "Category_Equipment.png" },
+		icons = { "Category_Blessings.png" },
 		name = "Mage",
 		parent = "Novice Items",
 		rookgaard = true,
@@ -376,7 +376,7 @@ GameStore.Categories = {
 	
 	{
 		--Premium Time
-		icons = { "Category_Gem.png" },
+		icons = { "Category_PremiumTime.png" },
 		name = "Upgrade Gems",
 		subclasses = {"Shards", "Crystals" },
 		rookgaard = true,
@@ -385,7 +385,7 @@ GameStore.Categories = {
 	},
 	
 	{
-		icons = { "Category_Shards.png" },
+		icons = { "Category_Blessings.png" },
 		name = "Shards",
 		parent = "Upgrade Gems",
 		rookgaard = true,
@@ -467,7 +467,7 @@ GameStore.Categories = {
 	},
 	
 	{
-		icons = { "Category_Crystal.png" },
+		icons = { "Category_Blessings.png" },
 		name = "Crystals",
 		parent = "Upgrade Gems",
 		rookgaard = true,
@@ -483,7 +483,7 @@ GameStore.Categories = {
 				type = GameStore.OfferTypes.OFFER_TYPE_STACKABLE,
 			},
 			{
-				icons = { "Category_Crystals.png" },
+				icons = { "Magic_Gold_Converter.png" },
 				name = "Weapon Crystal",
 				price = 15,
 				itemtype = 29287,
@@ -532,7 +532,7 @@ GameStore.Categories = {
 	
 	{
 		--Premium Time
-		icons = { "Category_Others.png" },
+		icons = { "Category_PremiumTime.png" },
 		name = "Others",
 		rookgaard = true,
 		state = GameStore.States.STATE_NONE,

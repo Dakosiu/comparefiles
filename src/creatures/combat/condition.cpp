@@ -773,16 +773,6 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 	stats[STAT_CAPACITY] = std::max<int32_t>(0, value);
 	return true;
   }
-
-  case CONDITION_PARAM_BUFF_DAMAGEDEALT: {
-    buffsPercent[BUFF_DAMAGEDEALT] = std::max<int32_t>(0, value);
-    return true;
-  }
-
-  case CONDITION_PARAM_BUFF_DAMAGERECEIVED: {
-    buffsPercent[BUFF_DAMAGERECEIVED] = std::max<int32_t>(0, value);
-    return true;
-  }
   
   case CONDITION_PARAM_SKILL_LIFE_LEECH_CUSTOM: {
 	if (value > 0) {
@@ -809,11 +799,83 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 	return true;
   }
 
-case CONDITION_PARAM_STAT_EXTRAHEALING: {
+  case CONDITION_PARAM_STAT_EXTRAHEALING: {
 	stats[STAT_EXTRAHEALING] = std::max<int32_t>(0, value);
 	return true;
   }
   
+  
+  case CONDITION_PARAM_BUFF_DAMAGEDEALT: {
+    buffsPercent[BUFF_DAMAGEDEALT] = std::max<int32_t>(0, value);
+    return true;
+  }
+
+  case CONDITION_PARAM_BUFF_DAMAGERECEIVED: {
+    buffsPercent[BUFF_DAMAGERECEIVED] = std::max<int32_t>(0, value);
+    return true;
+  }
+  
+  
+  case CONDITION_PARAM_BUFF_PHYSICAL_DAMAGE: {
+    buffs[BUFF_PHYSICAL_DAMAGE] = value;
+    return true;
+  }
+
+  case CONDITION_PARAM_BUFF_ENERGY_DAMAGE: {
+    buffs[BUFF_ENERGY_DAMAGE] = value;
+    return true;
+  } 
+  
+  case CONDITION_PARAM_BUFF_EARTH_DAMAGE: {
+    buffs[BUFF_ENERGY_DAMAGE] = value;
+    return true;
+  } 
+  
+  case CONDITION_PARAM_BUFF_FIRE_DAMAGE: {
+    buffs[BUFF_FIRE_DAMAGE] = value;
+    return true;
+  } 
+  
+  case CONDITION_PARAM_BUFF_ICE_DAMAGE: {
+    buffs[BUFF_ICE_DAMAGE] = value;
+    return true;
+  } 
+  
+  case CONDITION_PARAM_BUFF_DEATH_DAMAGE: {
+    buffs[BUFF_DEATH_DAMAGE] = value;
+    return true;
+  } 
+  
+    case CONDITION_PARAM_BUFF_PHYSICAL_DEFENSE: {
+    buffs[BUFF_PHYSICAL_DEFENSE] = value;
+    return true;
+  }
+
+  case CONDITION_PARAM_BUFF_ENERGY_DEFENSE: {
+    buffs[BUFF_ENERGY_DEFENSE] = value;
+    return true;
+  } 
+  
+  case CONDITION_PARAM_BUFF_EARTH_DEFENSE: {
+    buffs[BUFF_EARTH_DEFENSE] = value;
+    return true;
+  } 
+  
+  case CONDITION_PARAM_BUFF_FIRE_DEFENSE: {
+    buffs[BUFF_FIRE_DEFENSE] = value;
+    return true;
+  } 
+  
+  case CONDITION_PARAM_BUFF_ICE_DEFENSE: {
+    buffs[BUFF_ICE_DEFENSE] = value;
+    return true;
+  } 
+  
+  case CONDITION_PARAM_BUFF_DEATH_DEFENSE: {
+    buffs[BUFF_DEATH_DEFENSE] = value;
+    return true;
+  } 
+    
   default:
     return ret;
   }

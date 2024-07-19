@@ -568,6 +568,19 @@ class Player final : public Creature, public Cylinder
 		uint8_t getSoul() const {
 			return soul;
 		}
+		
+		uint32_t getAzarPoints() const {
+			return azarPoints;
+        }
+		
+		void addAzarPoints(uint32_t value) {
+			azarPoints += value;
+		}
+		
+		void removeAzarPoints(uint32_t value) {
+			azarPoints -= value;
+		}
+		
 		bool isAccessPlayer() const {
 			return group->access;
 		}
@@ -2533,6 +2546,7 @@ class Player final : public Creature, public Cylinder
 
 		uint8_t soul = 0;
 		uint8_t levelPercent = 0;
+		uint32_t azarPoints = 0;
 		double_t magLevelPercent = 0;
 		double_t experienceBonus = 0;
 

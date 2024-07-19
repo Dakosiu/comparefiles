@@ -63,6 +63,12 @@ MonsterStorage = {
 	},
 }
 
+-- ShredderRequiredStorage = { 
+    -- [1] = 345111
+-- }
+
+ShredderRequiredStorage = {8014, 1}
+
 -- Values extraction function
 local function extractValues(tab, ret)
 	if type(tab) == "number" then

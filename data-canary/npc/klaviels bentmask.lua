@@ -91,6 +91,53 @@ local function creatureSayCallback(npc, player, type, msg)
 	local playerId = player:getId()
     local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or npc
 	
+	local accessTable = JEWEL_BOX_EVENT.access
+	local name = accessTable["Name"]
+	if MsgContains(msg, "access") or MsgContains(msg, name:lower()) then
+	    
+		if JEWEL_BOX_EVENT:hasAccess(player) then
+		    npcHandler:say("Sorry, you have already this {access}", npc, player)
+			return true
+		end
+		
+		local requiredTable = accessTable["Required"]
+		local requiredString = dakosLib:getRequiredThings(player, requiredTable, true)
+	    npcHandler:say("I can give you access to " .. "{" .. name:lower() .. "}" .. " for " .. requiredString .. " Do you agree? " .. "{yes}, {no}" .. ".", npc, player)
+		if not Klaviels.customersAccess then
+		    Klaviels.customersAccess = {}
+		end
+		Klaviels.customersAccess[playerId] = accessTable
+		npcHandler:setTopic(playerId, 668)
+		return true
+	end
+	
+	if npcHandler:getTopic(playerId) == 668 then
+	    if MsgContains(msg, "no") then
+		    npcHandler:setTopic(playerId, 0)
+			npcHandler:say("Then no..", npc, player)
+			Klaviels.customersAccess[playerId] = nil
+			return true
+		end	
+		if MsgContains(msg, "yes") then
+	    	local playerTable = Klaviels.customersAccess[playerId]
+			local requiredTable = playerTable["Required"]
+			local missingString = dakosLib:getMissingThings(player, requiredTable, true)
+			if missingString then
+			    npcHandler:say("Sorry, You still need: " .. missingString, npc, player)
+				return true
+			end
+			dakosLib:removeThings(player, requiredTable)
+			player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
+			JEWEL_BOX_EVENT:addAccess(player)
+			npcHandler:say("Here you are.", npc, player)
+			Klaviels.customersAccess[playerId] = nil
+			npcHandler:setTopic(playerId, 0)
+		    return true
+		end
+		return true
+	end
+	
+	
 	local mainTable = JEWEL_BOX_EVENT.config["NPC"]
 	if MsgContains(msg, "exchange") then
 	   npcHandler:say("You can exchange " .. JEWEL_BOX_EVENT:getAvaibleExchanges(), npc, player)
@@ -175,6 +222,6 @@ local function creatureSayCallback(npc, player, type, msg)
 end
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! here you can {exchange} items")
+npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! here you can {exchange} items from {jewel box event}, {dragon event}, also you can get {access} for " .. "{" .. JEWEL_BOX_EVENT.access["Name"]:lower() .. "}")
 npcHandler:addModule(FocusModule:new())
 npcType:register(npcConfig)

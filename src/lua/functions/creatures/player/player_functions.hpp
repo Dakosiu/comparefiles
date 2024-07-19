@@ -312,6 +312,10 @@ class PlayerFunctions final : LuaScriptInterface {
             registerMethod(L, "Player", "addToWarList", PlayerFunctions::luaPlayerAddToWarList);
 			registerMethod(L, "Player", "updateConcoction", PlayerFunctions::luaPlayerUpdateConcoction);
 			
+			registerMethod(L, "Player", "getAzarPoints", PlayerFunctions::luaPlayerGetAzarPoints);
+			registerMethod(L, "Player", "addAzarPoints", PlayerFunctions::luaPlayerAddAzarPoints);
+			registerMethod(L, "Player", "removeAzarPoints", PlayerFunctions::luaPlayerRemoveAzarPoints);
+			
 			GroupFunctions::init(L);
 			GuildFunctions::init(L);
 			MountFunctions::init(L);
@@ -605,6 +609,9 @@ class PlayerFunctions final : LuaScriptInterface {
 		
 		static int luaPlayerUpdateConcoction(lua_State* L);
 		
+		static int luaPlayerGetAzarPoints(lua_State* L);
+		static int luaPlayerAddAzarPoints(lua_State* L);
+		static int luaPlayerRemoveAzarPoints(lua_State* L);
 		friend class CreatureFunctions;
 };
 

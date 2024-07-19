@@ -53,7 +53,37 @@
 -- end
 
 if not Quests then
-   Quests ={}
+   Quests = {}
+   
+   Quests[1] = {
+				 name = "Garik Request",
+				 startStorageId = ShredderRequiredStorage[1],
+				 startStorageValue = 1,
+				 missions = {
+					[1] = {
+						name = "Bring the ores",
+						storageId = ShredderRequiredStorage[1],
+						missionId = 1,
+						startValue = 0,
+						endValue = 1,
+                        states = {
+						          [0] = "Garik asked me to collect 50 iron ores and 50 soul orbs.",
+						          [1] = "I have completed this mission."
+                                 },
+					},
+					-- [2] = {
+						-- name = "Bring the ores 2",
+						-- storageId = 80014,
+						-- missionId = 80014,
+						-- startValue = 1,
+						-- endValue = 2,
+                        -- states = {
+						          -- [1] = "Garik asked me to collect 50 iron ores and 50 soul orbs.",
+						          -- [2] = "I have completed this mission."
+                                 -- },
+					-- }					
+                }	
+            }				
 end
 
 if not LastQuestlogUpdate then

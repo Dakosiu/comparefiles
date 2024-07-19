@@ -2,22 +2,6 @@ if not JEWEL_BOX_EVENT then
    JEWEL_BOX_EVENT = {}
 end
 
-
-ADDON_SCROLL_SYSTEM = {}
-ADDON_SCROLL_SYSTEM.config = {
-                               [1] = { 
-							           name = "Veteran Paladin",
-									   male = 1204,
-									   female = 1205
-									 }
-						     }
-
-ADDON_SCROLL_SYSTEM.itemid = 10028
-ADDON_SCROLL_SYSTEM.aid = 5007
-ADDON_SCROLL_SYSTEM.customAttribute = {
-                                        index =  "ADDON_SCROLL_INDEX",
-										addons = "ADDON_SCROLL_VALUE"
-									  }
 									  
 ABILITY_SCROLL_SYSTEM = {}
 ABILITY_SCROLL_SYSTEM.config = {
@@ -121,8 +105,35 @@ JEWEL_BOX_EVENT.config = {
 																	 { type = "item", id = 42333, count = 1, chance = 0.05 },
 																	 { type = "item", id = 42332, count = 1, chance = 0.05 },
 																	 { type = "item", id = 42330, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42332, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42325, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42324, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42328, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42327, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42326, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42336, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42338, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42337, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42334, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42335, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42323, count = 1, chance = 0.05 },
+																	 { type = "item", id = 42331, count = 1, chance = 0.05 },
+																	 
 																   }
-												}												
+												},
+						               [11682] = { 
+									        
+									              required = 1,
+												  avaibleRewards = { 
+												                     { type = "item", id = 5919, count = 1, chance = 0.05 },
+																	 { type = "item", id = 24967, count = 1, chance = 0.05 },
+																	 { type = "item", id = 10326, count = 1, chance = 0.05 },
+																	 { type = "item", id = 3363, count = 1, chance = 0.05 },
+																	 { type = "item", id = 16263, count = 1, chance = 0.05 },
+																	 { type = "item", id = 39694, count = 1, chance = 0.05 },
+																   }
+												}													
+												
                                      },
 							["Boss"] = {
 							             ["Name"] = "Cave Rat",
@@ -150,79 +161,59 @@ JEWEL_BOX_EVENT.customAttribute = "GOSHNAR_KEY"
 JEWEL_BOX_EVENT.bossStorageTime = 54112117
 
 
-local talkaction = TalkAction("!jewel")
-function talkaction.onSay(player)
-    
-	local t = JEWEL_BOX_EVENT.config["NPC"][7527].avaibleRewards
-    JEWEL_BOX_EVENT:addRewards(player, t, false, false, true)
-    
-    return false
-end
-talkaction:register()
 
-																				 
-function ADDON_SCROLL_SYSTEM:getIndexByName(name)
-    for i, v in ipairs(self.config) do
-	    if v.name == name or v.name:lower() == name:lower() then
-		   return i
+
+JEWEL_BOX_EVENT.access = {
+                            ["Name"] = "The First Dragon Quest",
+							["Required"] = {
+							                { type = "item", id = 11682, count = 3 }
+										   },
+                            ["Positions"] = { 
+							                  {930, 1120, 7},
+											  {930, 1121, 7}
+											}
+						 }
+						
+JEWEL_BOX_EVENT.access.storage = 786151
+JEWEL_BOX_EVENT.access.ActionID = 1987
+
+
+function JEWEL_BOX_EVENT:setupAccess()
+    for i, v in pairs(self.access["Positions"]) do
+	    local pos = Position(v[1], v[2], v[3])
+		if pos then
+		    local tile = Tile(pos)
+			if tile then
+			    local ground = tile:getGround()
+				ground:setAttribute(ITEM_ATTRIBUTE_ACTIONID, self.access.ActionID)
+	        end
 		end
 	end
+end
+
+function JEWEL_BOX_EVENT:addAccess(player)
+    return player:setStorageValue(self.access.storage, 1)
+end
+
+function JEWEL_BOX_EVENT:hasAccess(player)
+    if player:getStorageValue(self.access.storage) >= 1 then
+	    return true
+    end
 	return false
 end
 
-function ADDON_SCROLL_SYSTEM:generateScroll(name, thing, addons)
-    local item = Game.createItem(self.itemid, 1)
-	if not item then
-	   return false
-	end
-	item:setAttribute(ITEM_ATTRIBUTE_ACTIONID, self.aid)
-	local index = ADDON_SCROLL_SYSTEM:getIndexByName(name) 
-	item:setAttribute(ITEM_ATTRIBUTE_NAME, "Outfit Scroll")
-	
-	
-	local str = ""
-	name = name:lower()
-	if addons == 0 then
-	   str = str .. name .. " outfit."
-	elseif addons == 1 then
-	   str = str .. "first addon for " .. name .. " outfit."
-	elseif addons == 2 then
-	   str = str .. "second addon for " .. name .. " outfit."
-	elseif addons == 3 then
-	   str = str .. "full addon for " .. name .. " outfit."	   
-	end
-	
-	item:setAttribute(ITEM_ATTRIBUTE_DESCRIPTION, str)
-	item:setCustomAttribute(self.customAttribute.index, index)
-	item:setCustomAttribute(self.customAttribute.addons, addons)
-	return item
-end
 
-function ADDON_SCROLL_SYSTEM:getDescription(item)
-    if not item:getId() == self.itemid then
-	   return false
-	end
-	
-	local index = item:getCustomAttribute(self.customAttribute.index) 
-	if not index then
-	   return false
-	end
-	
-	local name = self.config[index].name:lower()
-	local addons = item:getCustomAttribute(self.customAttribute.addons) 
-	local str = "It Contains: " .. "\n"
-	if addons == 0 then
-	   str = str .. name .. " outfit."
-	elseif addons == 1 then
-	   str = str .. "first addon for " .. name .. " outfit."
-	elseif addons == 2 then
-	   str = str .. "second addon for " .. name .. " outfit."
-	elseif addons == 3 then
-	   str = str .. "full addon for " .. name .. " outfit."	   
-	end
-	return str
-end
+-- local talkaction = TalkAction("!jewel")
+-- function talkaction.onSay(player)
+    
+	-- local t = JEWEL_BOX_EVENT.config["NPC"][7527].avaibleRewards
+    -- JEWEL_BOX_EVENT:addRewards(player, t, false, false, true)
+    
+    -- return false
+-- end
+-- talkaction:register()
 
+																				 
 function ABILITY_SCROLL_SYSTEM:getIndexByName(name)
     for i, v in ipairs(self.config) do
 	    if v.name == name or v.name:lower() == name:lower() then
@@ -1355,56 +1346,6 @@ action:register()
 action = Action()
 function action.onUse(player, item, fromPosition, target, toPosition, isHotkey)
     
-	local index = item:getCustomAttribute(ADDON_SCROLL_SYSTEM.customAttribute.index)
-	local t = ADDON_SCROLL_SYSTEM.config[index]
-	local male = t.male
-	local female = t.female
-	local addons = item:getCustomAttribute(ADDON_SCROLL_SYSTEM.customAttribute.addons)
-	local name = t.name
-	
-	if addons == 0 then
-	   if player:hasOutfit(male) or player:hasOutfit(female) then
-	      player:sendCancelMessage("Sorry, You have already this outfit.")
-		  return true
-	   end
-	   
-	elseif addons > 0 then    
-	   if player:hasOutfit(male, addons) or player:hasOutfit(female, addons) then
-	      player:sendCancelMessage("Sorry, You have already this addon for this outfit.")
-		  return true
-	   end
-	end
-    
-	local str = "You have received "
-	if addons == 0 then
-	   str = str .. name .. " outfit."
-	   player:addOutfit(male)
-	   player:addOutfit(female)
-	elseif addons == 1 then
-	   str = str .. name .. " first addon."
-	   player:addOutfitAddon(male, 1)
-	   player:addOutfitAddon(female, 1)
-	elseif addons == 2 then
-	   str = str .. name .. " second addon."
-	   player:addOutfitAddon(male, 2)
-	   player:addOutfitAddon(female, 2)
-	elseif addons == 3 then
- 	   str = str .. name .. " full addon."
-	   player:addOutfitAddon(male, 3)
-	   player:addOutfitAddon(female, 3)      	
-	end
-	
-	
-	player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
-	item:remove()
-    return false
-end
-action:aid(ADDON_SCROLL_SYSTEM.aid)
-action:register()
-
-action = Action()
-function action.onUse(player, item, fromPosition, target, toPosition, isHotkey)
-    
 	local t = JEWEL_BOX_EVENT.config["Boss"]
 	local posTable = t["Positions"]["Entrace"]
 	local x = posTable.x
@@ -1441,8 +1382,30 @@ action:register()
 local globalevent = GlobalEvent("load_JEWEL_BOX_EVENT")
 function globalevent.onStartup()
 	JEWEL_BOX_EVENT:addStatues()
+	JEWEL_BOX_EVENT:setupAccess()
 end
 globalevent:register()
+
+
+local tile = MoveEvent()
+tile:type("stepin")
+function tile.onStepIn(creature, item, position, fromPosition)
+	local player = creature:getPlayer()
+	if not player or player:isInGhostMode() then
+		return true
+	end
+
+	if not JEWEL_BOX_EVENT:hasAccess(player) then
+	    player:teleportTo(fromPosition)
+		player:sendCancelMessage("You are not allowed to go there.")
+		return true
+	end
+	
+	return true
+end
+tile:aid(JEWEL_BOX_EVENT.access.ActionID)
+tile:register()
+
 
 globalevent = GlobalEvent("JEWEL_BOX_EVENT_displayTimer")
 function globalevent.onThink(interval, lastExecution)

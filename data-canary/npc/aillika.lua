@@ -28,9 +28,9 @@ npcConfig.flags = {
 }
 
 npcConfig.voices = {
-	interval = 10000,
-	chance = 50,
-	{ text = "I speak only with banshees.", yell = false }
+	interval = 5000,
+	chance = 100,
+	{ text = "I speak only with banshees, can anyone help me?", yell = false },
 }
 
 
@@ -148,7 +148,7 @@ local function creatureSayCallback(npc, player, type, msg)
 	--local messageTable = missionTable.messages
 
 
-	if MsgContains(msg, "mission") then
+	if MsgContains(msg, "mission") or MsgContains(msg, "help") then
 	
 	    if currentMission == 0 then
 		   npcHandler:say("Sorry!, You have finished all requests from me.", npc, player)
@@ -173,8 +173,9 @@ local function creatureSayCallback(npc, player, type, msg)
 			   npcHandler:setTopic(playerId, 5)
 			elseif missionId == 2 then
 		      local t = missionTable.reward
-		      local rewardString = dakosLib:addReward(player, t, false, true)
-			  dakosLib:addReward(player, t, false, false, true, false)
+			  local rewardString = dakosLib:addReward(player, t, false, true, true, false, true, true, true)
+			  dakosLib:addReward(player, t, false, false, true, false, true, false, true)
+			  --dakosLib:addReward(player, t, false, false, true, false)
 			  local str = {}
 			  table.insert(str, "Ahh, I think i forgot to reward you for your job. This is your reward.")
 			  table.insert(str, rewardString)	  
@@ -211,7 +212,7 @@ local function creatureSayCallback(npc, player, type, msg)
 	       dakosLib:setQuestLogMission(player, key, currentMission, 3)
 		   npcHandler:setTopic(playerId, 0)
 		   dakosLib:removeThings(player, t)
-		   dakosLib:addReward(player, missionTable.reward)
+		   dakosLib:addReward(player, missionTable.reward, false, false, true, false, true, false, true)
 		end	
 	elseif MsgContains(msg, "in need") then
 	    if npcHandler:getTopic(playerId) == 4 then
@@ -239,7 +240,6 @@ local function creatureSayCallback(npc, player, type, msg)
 			   return true
 		   end
 		   dakosLib:removeThings(player, t)
-		   --dakosLib:addReward(player, missionTable.reward)
 		   npcHandler:say("Suddenly, Aillik's delicate body fell to the ground in front of you, breaking him out of his trance. Terrified, he stretched out his hand for the plant", npc, player)
 		   dakosLib:setQuestLogMission(player, key, currentMission, 2)
 		elseif npcHandler:getTopic(playerId) == 8 then
@@ -261,7 +261,7 @@ local function creatureSayCallback(npc, player, type, msg)
 		   end
 		   local t = missionTable.reward
 		   local rewardString = dakosLib:addReward(player, t, false, true)
-		   dakosLib:addReward(player, t, false, false, true, false)
+		   dakosLib:addReward(player, t, false, false, true, false, true, false, true)
 
 		   local str = {}
 		   table.insert(str, "Here's your reward Thank You!, Now I have to see my old friend.")
@@ -274,11 +274,12 @@ local function creatureSayCallback(npc, player, type, msg)
         if currentMission == 2 then
            if missionId == 2 then
 		      local t = missionTable.reward
-		      local rewardString = dakosLib:addReward(player, t, false, true)
-			  dakosLib:addReward(player, t, false, false, true, false)
+		      local rewardString = dakosLib:addReward(player, t, false, true, true, false, true, true, true)
+			  local str2 = "You have received: " .. rewardString
+			  dakosLib:addReward(player, t, false, false, true, false, true, false, true)
 			  local str = {}
 			  table.insert(str, "That's what it was all about. Let me say nothing but start preparing the potion. Goodbye our helper. Come when you regain strength for the trip and you are ready for further tasks. This is your reward.")
-              table.insert(str, rewardString)			  
+              table.insert(str, str2)			  
               npcHandler:say(str, npc, player)
               dakosLib:setQuestLogMission(player, key, currentMission, 3)
            end
@@ -310,7 +311,7 @@ npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 -- Walkaway message
 --npcHandler:setMessage(MESSAGE_WALKAWAY, "You not have education?"
 
---npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! i have some {tasks} for you, dont forget to {report} after!")
+npcHandler:setMessage(MESSAGE_GREET, "Hello, |PLAYERNAME|! I need {help}")
 
 npcHandler:addModule(FocusModule:new())
 

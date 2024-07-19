@@ -959,3 +959,16 @@ int CreatureFunctions::luaCreatureGetZone(lua_State* L) {
 	}
 	return 1;
 }
+
+int CreatureFunctions::luaCreatureGetBuff(lua_State* L) {
+	// creature:getBuff()
+	Creature* creature = getUserdata<Creature>(L, 1);
+	if (creature) {
+		uint32_t buff = getNumber<uint32_t>(L, 2, 0);
+		//std::cout << "Buff: " << buff << std::endl;
+		lua_pushnumber(L, creature->getBuff(buff));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}

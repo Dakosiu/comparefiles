@@ -203,6 +203,7 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
   }
 
   player->soul = result->getNumber<uint16_t>("soul");
+  player->azarPoints = result->getNumber<uint32_t>("azar_points");
   player->capacity = result->getNumber<uint32_t>("cap") * 100;
   for (int i = 1; i <= 8; i++) {
     std::ostringstream ss;
@@ -893,6 +894,7 @@ bool IOLoginData::savePlayer(Player* player)
   query << "`manamax` = " << player->manaMax << ',';
   query << "`manaspent` = " << player->manaSpent << ',';
   query << "`soul` = " << static_cast<uint16_t>(player->soul) << ',';
+  query << "`azar_points` = " << static_cast<uint32_t>(player->azarPoints) << ',';
   query << "`town_id` = " << player->town->getID() << ',';
   //query << "`experience_bonus` = " << player->experienceBonus << ',';
 

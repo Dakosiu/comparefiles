@@ -84,19 +84,36 @@ end
 
 
 
-local config = {
-                  _GoldenAccount = false,
-                  ticketid = 5957,
-                  ["Avaible Rewards"] = {
-						                  { type = "item", itemid = "3366", count = 1, chance = 0.5 },
-						                  { type = "item", itemid = "3288", count = 1, chance = 0.3 },
-										  { type = "item", itemid = "3555", count = 1, chance = 0.1 },
-										  { type = "item", itemid = "3587", count = 5, chance = 0.7 },
-									    } 
-			   }
+-- local config = {
+                  -- _GoldenAccount = false,
+                  -- ticketid = 5957,
+                  -- ["Avaible Rewards"] = {
+						                  -- { type = "item", itemid = "3366", count = 1, chance = 0.5 },
+						                  -- { type = "item", itemid = "3288", count = 1, chance = 0.3 },
+										  -- { type = "item", itemid = "3555", count = 1, chance = 0.1 },
+										  -- { type = "item", itemid = "3587", count = 5, chance = 0.7 },
+									    -- } 
+			   -- }
 			   
 	   			   
 -- On creature say callback
+
+local function getTableByName(name)
+    for i,v in ipairs(KING_NPC_SYSTEM.config["Shop"]) do
+	    if not v.name then
+		    local id = v.id
+			if id then
+			    v.name = getItemName(id)
+			end
+		end
+	    if string.find(name:lower(), v.name:lower()) then
+		    return v
+		end
+	end
+	return false
+end
+
+
 local function creatureSayCallback(npc, player, type, msg)
 	local playerId = player:getId()
 	if not npcHandler:checkInteraction(npc, player) then
@@ -104,45 +121,79 @@ local function creatureSayCallback(npc, player, type, msg)
 	end
 	
 	
-	if config._GoldenAccount then
-       if not player:isGoldenAccount() then
-		  npcHandler:say("Sorry, you dont have a golden account.", npc, player)
-		  return false
-	   end
+	if MsgContains(msg, 'exchange') then
+	    npcHandler:say("You can {exchange} tournament coins to {abilities} and {other stuff}.", npc, player)
+		return true
 	end
 	
-	if MsgContains(msg, 'lottery') or MsgContains(msg, 'ticket') or MsgContains(msg, 'lottery ticket') then
-	    local t = config["Avaible Rewards"]
-	    local list = dakosLib:getRequiredItems(t)
-		npcHandler:say("You can exchange lottery ticket and get one of this special gift: " .. list .. " are you sure? {yes}, {no}", npc, player)
+	if MsgContains(msg, 'abilities') then
+	    local groupString = KING_NPC_SYSTEM:getAvaibleGroups()
+		npcHandler:say("Abilities List: " .. groupString, npc, player)
 		npcHandler:setTopic(playerId, 1)
+		return true
 	end
+	
+	if MsgContains(msg, 'other') then
+	    local shopTable = KING_NPC_SYSTEM.config["Shop"]
+		print(dump(shopTable))
+	    local stringRewards = dakosLib:addReward(player, shopTable, false, true, true, false, true, true, true)
+		print("String Reward: " .. stringRewards)
+		local str = {} 
+		str[1] = "Avaible Things: " .. stringRewards
+		str[2] = "You have " .. player:getTournamentCoinsBalance() .. " {tournament coins}."
+		npcHandler:say(str, npc, player)
+		npcHandler:setTopic(playerId, 2)
+		return true
+	end
+	
 	
 	if npcHandler:getTopic(playerId) == 1 then
-	   if MsgContains(msg, 'yes') then
-	      if player:getItemCount(config.ticketid) < 1 then
-		      npcHandler:say("Sorry, you dont have a {lottery ticket}.", npc, player)
-			  npcHandler:setTopic(playerId, 0)
-			  return false
-		  end
-		  local t = config["Avaible Rewards"]
-	      local rewardTable = dakosLib:getSingleReward(t)
-	      local id = tonumber(rewardTable["itemid"])
-	      local count = tonumber(rewardTable["count"])
-		  player:addItem(id, count)
-		  player:getPosition():sendMagicEffect(CONST_ME_HEARTS)
-		  player:removeItem(config.ticketid, 1)
-		  npcHandler:say("Alright! you have received " .. count .. "x " .. "{" .. getItemName(id) .. "}" .. " as reward.", npc, player) 
-		  npcHandler:setTopic(playerId, 0)
-		  return true
-	   end
-	   if MsgContains(msg, 'no') then
-	      npcHandler:say("then no..", npc, player) 
-		  npcHandler:setTopic(playerId, 0)
-	      return true
-	   end
+	    KING_NPC_SYSTEM:sendWindowByName(player, msg)
+		npcHandler:setTopic(playerId, 0)
+	    return true
 	end
 	
+	if npcHandler:getTopic(playerId) == 2 then
+		local t = getTableByName(msg) 
+		if t then
+	        npcHandler:say("It will cost " .. t.required_coins .. " {tournament coins}." .. " Are you sure? {yes}, {no}", npc, player)
+			KING_NPC_SYSTEM.customers[playerId] = t
+			npcHandler:setTopic(playerId, 3)
+			return true
+		end
+		return true
+	end
+	
+    if npcHandler:getTopic(playerId) == 3 then
+		if MsgContains(msg, "no") then
+		    npcHandler:say("Then no..", npc, player)
+		    npcHandler:setTopic(playerId, 0)
+			KING_NPC_SYSTEM.customers[playerId] = nil
+			return true
+		end
+		if MsgContains(msg, "yes") then
+		    local t = KING_NPC_SYSTEM.customers[playerId]
+			local cost = t.required_coins
+			if player:getTournamentCoinsBalance() < cost then
+                npcHandler:say("Sorry, you dont have enough {tournament coins}.", npc, player)
+				return true
+			end
+			
+			local rewards = {}
+			table.insert(rewards, t)
+			
+			player:setTournamentCoinsBalance(player:getTournamentCoinsBalance() - cost)
+			dakosLib:addReward(player, rewards, false, false, true, false, true, false, true)
+			
+			
+			npcHandler:say("Here you are.", npc, player)
+			player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
+			KING_NPC_SYSTEM.customers[playerId] = nil
+			npcHandler:setTopic(playerId, 0)
+			return true
+		end	
+	    return true
+	end
 	
     return true
 end
@@ -158,8 +209,8 @@ npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 -- Walkaway message
 --npcHandler:setMessage(MESSAGE_WALKAWAY, "You not have education?")
 
-npcHandler:setMessage(MESSAGE_GREET, "Hello |PLAYERNAME|, here you can exchange {lottery ticket} to special gifts.")
-
+--npcHandler:setMessage(MESSAGE_GREET, "Hello |PLAYERNAME|, here you can exchange {lottery ticket} to special gifts.")
+npcHandler:setMessage(MESSAGE_GREET, "Hello |PLAYERNAME| here you can {exchange} tournament coins.")
 npcHandler:addModule(FocusModule:new())
 
 -- Register npc
