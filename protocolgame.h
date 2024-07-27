@@ -20,34 +20,27 @@
 #ifndef FS_PROTOCOLGAME_H_FACA2A2D1A9348B78E8FD7E8003EBB87
 #define FS_PROTOCOLGAME_H_FACA2A2D1A9348B78E8FD7E8003EBB87
 
-#include "protocol.h"
 #include "chat.h"
 #include "creature.h"
 #include "tasks.h"
+#include "protocolgamebase.h"
+#include "protocolspectator.h"
 
-
-class NetworkMessage;
-class Player;
-class Game;
-class House;
-class Container;
-class Tile;
-class Connection;
-class Quest;
-class ProtocolGame;
-typedef std::shared_ptr<ProtocolGame> ProtocolGame_ptr;
+typedef std::unordered_map<Player*, ProtocolGame*> LiveCastsMap;
 
 extern Game g_game;
 
-struct TextMessage
+/* struct TextMessage
 {
 	MessageClasses type;
 	std::string text;
 	TextMessage() = default;
 	TextMessage(MessageClasses type, std::string text) : type(type), text(std::move(text)) {}
-};
+}; */
 
-class ProtocolGame final : public Protocol
+//class ProtocolGame final : public Protocol
+
+class ProtocolGame final : public ProtocolGameBase
 {
 	public:
 		// static protocol information
@@ -59,14 +52,29 @@ class ProtocolGame final : public Protocol
 			return "gameworld protocol";
 		}
 
-		explicit ProtocolGame(Connection_ptr connection) : Protocol(connection) {}
+		explicit ProtocolGame(Connection_ptr connection) : ProtocolGameBase(connection) {}
 
 		void login(const std::string& name, uint32_t accnumber, OperatingSystem_t operatingSystem, bool isFake);
 		void logout(bool displayEffect, bool forced);
 
-		uint16_t getVersion() const {
-			return version;
+		bool canJoinCast(const std::string& password) {
+			return castinfo.enabled && castinfo.password == password;
 		}
+
+		uint32_t getSpectatorsCount() {
+			return castinfo.spectators.size();
+		}
+
+		static ProtocolGame* getLiveCast(Player* player) {
+			const auto& it = liveCasts.find(player);
+			return it != liveCasts.end() ? it->second : nullptr;
+		}
+
+		static LiveCastsMap liveCasts;
+		
+/* 		uint16_t getVersion() const {
+			return version;
+		} */
 
 	private:
 		ProtocolGame_ptr getThis() {
@@ -76,9 +84,29 @@ class ProtocolGame final : public Protocol
 		void disconnectClient(const std::string& message) const;
 		void writeToOutputBuffer(const NetworkMessage& msg);
 
-		void release() final;
+		void release();
+		
+		bool startLiveCasting(const std::string& password);
+		void stopLiveCasting();
+		void pauseLiveCasting(const std::string& reason);
+		bool isLiveCasting() {
+			return castinfo.enabled;
+		}
+		bool kickCastSpectator(std::string name);
+		bool banCastSpectator(std::string name);
+		bool unBanCastSpectator(std::string name);
+		bool muteCastSpectator(std::string name);
+		bool unMuteCastSpectator(std::string name);
 
-		void checkCreatureAsKnown(uint32_t id, bool& known, uint32_t& removedKnown);
+		//void connect(uint32_t playerId, OperatingSystem_t operatingSystem);
+		void writeToSpectatorsOutputBuffer(const NetworkMessage& msg);
+		void onRecvFirstMessage(NetworkMessage& msg) final;
+		//void writeToOutputBuffer(const NetworkMessage& msg, bool broadcast = true) final;
+
+		/* void release() final; */
+		
+
+/* 		void checkCreatureAsKnown(uint32_t id, bool& known, uint32_t& removedKnown);
 
 		bool canSee(int32_t x, int32_t y, int32_t z) const;
 		bool canSee(const Creature*) const;
@@ -86,7 +114,7 @@ class ProtocolGame final : public Protocol
 
 		// we have all the parse methods
 		void parsePacket(NetworkMessage& msg) final;
-		void onRecvFirstMessage(NetworkMessage& msg) final;
+		
 		void onConnect() override;
 
 		//Parse methods
@@ -265,10 +293,14 @@ class ProtocolGame final : public Protocol
 		static void RemoveTileThing(NetworkMessage& msg, const Position& pos, uint32_t stackpos);
 
 		void MoveUpCreature(NetworkMessage& msg, const Creature* creature, const Position& newPos, const Position& oldPos);
-		void MoveDownCreature(NetworkMessage& msg, const Creature* creature, const Position& newPos, const Position& oldPos);
+		void MoveDownCreature(NetworkMessage& msg, const Creature* creature, const Position& newPos, const Position& oldPos); */
 
 		//otclient
 		void parseExtendedOpcode(NetworkMessage& msg);
+		
+	
+		// send functions
+		void sendCastChannel();	
 
 		//OTCv8
 		void sendFeatures();
@@ -285,7 +317,35 @@ class ProtocolGame final : public Protocol
 		void parseAcceptStatistic(NetworkMessage& msg);
 		
 		friend class Player;
+		friend class ProtocolSpectator;
 
+		// casting info
+		struct {
+			uint16_t lastSpectatorNum = 0; // identifying a spectator number
+
+			bool enabled = false;
+			bool paused = false;
+
+			std::vector<ProtocolSpectator_ptr> spectators;
+			std::unordered_map<std::string, uint32_t> muteList;
+			std::unordered_map<std::string, uint32_t> banList;
+
+			std::string password;
+			std::string pauseReason;
+
+			void pause(const std::string& reason) {
+				paused = true;
+				pauseReason = reason;
+			}
+
+			void operator()(std::string newPassword) {
+				if (!newPassword.empty()) {
+					password = newPassword;
+				}
+				paused = false;
+			}
+		} castinfo;
+		
 		// Helpers so we don't need to bind every time
 		template <typename Callable, typename... Args>
 		void addGameTaskWithStats(Callable&& function, const std::string& function_str, const std::string& extra_info, Args&&... args) {
