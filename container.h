@@ -98,7 +98,7 @@ class Container : public Item, public Cylinder
 		ItemDeque::const_reverse_iterator getReversedEnd() const {
 			return itemlist.rend();
 		}
-		
+
 		bool hasParent() const;
 		void addItem(Item* item);
 		Item* getItemByIndex(size_t index) const;

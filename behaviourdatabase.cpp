@@ -32,109 +32,6 @@ extern Game g_game;
 extern Monsters g_monsters;
 extern Spells* g_spells;
 
-void BehaviourDatabase::parseShop()
-{
-	std::set<int32_t> buyItems;
-	std::set<int32_t> sellItems;
-
-	Player player(nullptr);
-	for (NpcBehaviour* behaviour : behaviourEntries) {
-		bool hasBuyMessage = false;
-		bool hasSellMessage = false;
-		int item = 0;
-		int price = 0;
-		int subtype = 0;
-		ShopInfo info;
-		bool skip = false;
-
-		for (auto& condition : behaviour->conditions) {
-			if (condition->type == BEHAVIOUR_TYPE_NOTRADESHOP) {
-				skip = true;
-				break;
-			}
-
-			if (condition->type == BEHAVIOUR_TYPE_MESSAGE_COUNT) {
-				skip = true;
-				break;
-			}
-
-			if (condition->string.find("key") != std::string::npos) {
-				skip = true;
-				break;
-			}
-		}
-
-		if (skip) {
-			continue;
-		}
-
-		for (const NpcBehaviourAction* action : behaviour->actions) {
-			std::string tempMessage;
-			if (action->type == BEHAVIOUR_TYPE_STRING) {
-				if (action->string.find("buy") != std::string::npos) {
-					hasBuyMessage = true;
-				}
-
-				if (action->string.find("sell") != std::string::npos) {
-					hasSellMessage = true;
-				}
-			}
-
-			if (action->type == BEHAVIOUR_TYPE_ITEM) {
-				item = evaluate(action->expression, &player, tempMessage);
-			}
-
-			if (action->type == BEHAVIOUR_TYPE_PRICE) {
-				price = evaluate(action->expression, &player, tempMessage);
-			}
-
-			if (action->type == BEHAVIOUR_TYPE_DATA) {
-				subtype = evaluate(action->expression, &player, tempMessage);
-			}
-
-			if (action->type == BEHAVIOUR_TYPE_CREATECONTAINER)
-				skip = true;
-		}
-
-		if (skip) {
-			continue;
-		}
-
-		info.itemId = item;
-		info.subType = subtype;
-		info.realName = Item::items.getItemType(item).name;
-
-        if (hasBuyMessage && price > 0 && item != 0) {
-            // Check if the item with the same subtype already exists in buyItems
-            bool itemExists = false;
-            for (const auto& existingItem : npc->cipShopList) {
-                if (existingItem.itemId == item && existingItem.subType == subtype && existingItem.buyPrice != 0) {
-                    itemExists = true;
-                    break;
-                }
-            }
-
-            if (itemExists) {
-                continue;
-            }
-
-            info.buyPrice = price;
-            buyItems.insert(item);
-            npc->cipShopList.push_back(info);
-        }
-
-        if (hasSellMessage && price > 0 && item != 0) {
-            if (sellItems.find(item) != sellItems.end()) {
-                continue;
-            }
-
-            info.sellPrice = price;
-            sellItems.insert(item);
-            npc->cipShopList.push_back(info);
-        }
-	}
-}
-
 BehaviourDatabase::BehaviourDatabase(Npc * _npc) : npc(_npc) {
 	topic = 0;
 	data = -1;
@@ -263,10 +160,6 @@ bool BehaviourDatabase::loadConditions(ScriptReader& script, NpcBehaviour* behav
 				searchTerm = true;
 			} else if (identifier == "promoted") {
 				condition->type = BEHAVIOUR_TYPE_PROMOTED;
-				searchTerm = true;
-			} else if (identifier == "notradeshop")
-			{
-				condition->type = BEHAVIOUR_TYPE_NOTRADESHOP;
 				searchTerm = true;
 			}
 		} else if (script.Token == STRING) {
@@ -856,7 +749,6 @@ void BehaviourDatabase::react(BehaviourSituation_t situation, Player* player, co
 
 		if (situation == SITUATION_VANISH) {
 			npc->conversationEndTime = 0;
-			player->closeShopWindow();
 			idle();
 		}
 
@@ -871,7 +763,6 @@ void BehaviourDatabase::react(BehaviourSituation_t situation, Player* player, co
 bool BehaviourDatabase::checkCondition(const NpcBehaviourCondition* condition, Player* player, const std::string& message)
 {
 	switch (condition->type) {
-	case BEHAVIOUR_TYPE_NOTRADESHOP: break;
 	case BEHAVIOUR_TYPE_NOP: break;
 	case BEHAVIOUR_TYPE_MESSAGE_COUNT: {
 		int32_t value = searchDigit(message);

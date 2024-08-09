@@ -54,8 +54,6 @@ class ConfigManager
 			CORPSE_OWNER_ENABLED,
 			ROPE_SPOT_BLOCK,
 			PACKET_COMPRESSION,
-            CAMS_ENABLED,
-			CAMS_RECORD_INPUT_PACKETS,
 			LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};
 
@@ -78,8 +76,7 @@ class ConfigManager
 			MYSQL_SOCK,
 			DEFAULT_PRIORITY,
 			MAP_AUTHOR,
-            CAMS_DIRECTORY,
-			STATUS_IP,
+
 			LAST_STRING_CONFIG /* this must be the last one */
 		};
 
@@ -127,11 +124,6 @@ class ConfigManager
 			NEWBIE_LEVEL_THRESHOLD,
 			MONEY_RATE,
 			CLIENT_VERSION,
-			CAMS_MEMORY_BUFFER_PACKETS_NUMBER,
-			CAMS_CLOSE_CAM_IF_NO_PACKETS_FOR_SECONDS,
-			STATS_DUMP_INTERVAL,
-			STATS_SLOW_LOG_TIME,
-			STATS_VERY_SLOW_LOG_TIME,
 
 			LAST_INTEGER_CONFIG /* this must be the last one */
 		};

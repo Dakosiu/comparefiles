@@ -98,25 +98,23 @@ bool Mailbox::sendItem(Item* item) const
 		return false;
 	}
 
-	if (receiver.empty()) {
+	if (receiver.empty() || townName.empty()) {
 		return false;
 	}
 
-	Town* town = g_game.map.towns.getTown("Carlin");
+	Town* town = g_game.map.towns.getTown(townName);
 	if (!town) {
 		return false;
 	}
 
 	Player* player = g_game.getPlayerByName(receiver);
 	if (player) {
-		//DepotLocker* depotLocker = player->getDepotLocker(town->getID(), true);
-		DepotLocker* depotLocker = player->getDepotLocker(0, true);
+		DepotLocker* depotLocker = player->getDepotLocker(town->getID(), true);
 		if (depotLocker) {
 			if (g_game.internalMoveItem(item->getParent(), depotLocker, INDEX_WHEREEVER,
 				item, item->getItemCount(), nullptr, FLAG_NOLIMIT) == RETURNVALUE_NOERROR) {
 				g_game.transformItem(item, item->getID() + 1);
-				//player->onReceiveMail(town->getID());
-				player->onReceiveMail(0);
+				player->onReceiveMail(town->getID());
 				return true;
 			}
 		}
@@ -127,8 +125,7 @@ bool Mailbox::sendItem(Item* item) const
 			return false;
 		}
 
-		//DepotLocker* depotLocker = tmpPlayer.getDepotLocker(town->getID(), true);
-		DepotLocker* depotLocker = tmpPlayer.getDepotLocker(0, true);
+		DepotLocker* depotLocker = tmpPlayer.getDepotLocker(town->getID(), true);
 		if (depotLocker) {
 			if (g_game.internalMoveItem(item->getParent(), depotLocker, INDEX_WHEREEVER,
 				item, item->getItemCount(), nullptr, FLAG_NOLIMIT) == RETURNVALUE_NOERROR) {

@@ -61,7 +61,6 @@ set(tfs_SRC
 	${CMAKE_CURRENT_LIST_DIR}/shaders.cpp
 	${CMAKE_CURRENT_LIST_DIR}/spawn.cpp
 	${CMAKE_CURRENT_LIST_DIR}/spells.cpp
-	${CMAKE_CURRENT_LIST_DIR}/stats.cpp
 	${CMAKE_CURRENT_LIST_DIR}/script.cpp
 	${CMAKE_CURRENT_LIST_DIR}/talkaction.cpp
 	${CMAKE_CURRENT_LIST_DIR}/tasks.cpp
@@ -77,6 +76,5 @@ set(tfs_SRC
 	${CMAKE_CURRENT_LIST_DIR}/quests.cpp
 	${CMAKE_CURRENT_LIST_DIR}/playertasks.cpp
 	${CMAKE_CURRENT_LIST_DIR}/statistics.cpp
-	${CMAKE_CURRENT_LIST_DIR}/cams.cpp
 	PARENT_SCOPE)
 

@@ -465,7 +465,7 @@ void Creature::onCreatureMove(Creature* creature, const Tile* newTile, const Pos
 				lastStepCost = 2;
 			} else if (Position::getDistanceX(newPos, oldPos) >= 1 && Position::getDistanceY(newPos, oldPos) >= 1) {
 				//diagonal extra cost
-				lastStepCost = 1;
+				lastStepCost = 3;
 			}
 		} else {
 			stopEventWalk();
@@ -724,12 +724,15 @@ bool Creature::dropCorpse(Creature* lastHitCreature, Creature* mostDamageCreatur
 	if (corpse) {
 		g_game.internalAddItem(tile, corpse, INDEX_WHEREEVER, FLAG_NOLIMIT);
 		g_game.startDecay(corpse);
-		dropLoot(corpse->getContainer(), lastHitCreature);
 	}
 
 	//scripting event - onDeath
 	for (CreatureEvent* deathEvent : getCreatureEvents(CREATURE_EVENT_DEATH)) {
 		deathEvent->executeOnDeath(this, corpse, lastHitCreature, mostDamageCreature, lastHitUnjustified, mostDamageUnjustified);
+	}
+
+	if (corpse) {
+		dropLoot(corpse->getContainer(), lastHitCreature);
 	}
 
 	return true;

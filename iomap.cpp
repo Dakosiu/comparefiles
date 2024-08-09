@@ -18,9 +18,10 @@
  */
 
 #include "otpch.h"
+
 #include "iomap.h"
+
 #include "bed.h"
-#include "items.h"
 
 /*
 	OTBM_ROOTV1
@@ -275,20 +276,6 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 								setLastErrorString(ss.str());
 								return false;
 							}
-							
-							//std::cout << "Item Name:" << item->getName() << std::endl;
-/* 							if (item->getID() == 3147) {
-								std::cout << "Item Name2: " << item->getName() << std::endl;
-								delete item;
-								item = Item::CreateItem(6093, 1);
-							} */
-							
-							if (!item) {
-								std::ostringstream ss;
-								ss << "[x:" << x << ", y:" << y << ", z:" << z << "] Failed to create item.";
-								setLastErrorString(ss.str());
-								return false;
-							}	
 
 							if (isHouseTile && item->isMoveable()) {
 								//std::cout << "[Warning - IOMap::loadMap] Moveable item with ID: " << item->getID() << ", in house: " << house->getId() << ", at position [x: " << x << ", y: " << y << ", z: " << z << "]." << std::endl;
@@ -345,34 +332,7 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 						setLastErrorString(ss.str());
 						return false;
 					}
-					
-					
-/* 					uint32_t replaceId = Item::items.getReplaceItemId(item->getID());
-					if (replaceId != item->getID()) {
-						uint32_t count = item->getItemCount();
-						delete item;
-						item = Item::CreateItem(replaceId, count);
-						//std::cout << "Zmieniono Item:" << std::endl;
-						if (!item) {
-						    std::ostringstream ss;
-						    ss << "[x:" << x << ", y:" << y << ", z:" << z << "] Failed to create item.";
-						    setLastErrorString(ss.str());
-						    return false;
-                        }
-                    }	 */					
-/* 					if (item->getID() == 3147) {
-						std::cout << "Item Name2: " << item->getName() << std::endl;
-						delete item;
-						item = Item::CreateItem(6093, 1);
-					} */
-					
-/* 					if (!item) {
-						std::ostringstream ss;
-						ss << "[x:" << x << ", y:" << y << ", z:" << z << "] Failed to create item.";
-						setLastErrorString(ss.str());
-						return false;
-					} */
-					
+
 					if (!item->unserializeItemNode(f, nodeItem, stream)) {
 						std::ostringstream ss;
 						ss << "[x:" << x << ", y:" << y << ", z:" << z << "] Failed to load item " << item->getID() << '.';

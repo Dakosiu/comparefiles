@@ -446,7 +446,7 @@ bool Spell::configureSpell(const pugi::xml_node& node)
 	}
 
 	if ((attr = node.attribute("prem"))) {
-		premium = attr.as_bool();
+		premium = false;
 	}
 
 	if ((attr = node.attribute("enabled"))) {
@@ -466,7 +466,7 @@ bool Spell::configureSpell(const pugi::xml_node& node)
 	}
 
 	if ((attr = node.attribute("needlearn"))) {
-		learnable = attr.as_bool();
+		learnable = false;
 	}
 
 	if ((attr = node.attribute("blocking"))) {
@@ -1560,9 +1560,9 @@ bool ConjureSpell::conjureItem(Creature* creature) const
 	const uint32_t soulCost = getSoulCost();
 
 	if (reagentId != 0) {
-		bool foundReagent = false;		   
-		Item* item = g_game.findItemOfType(player, reagentId, true, -1);			   
-						   
+		bool foundReagent = false;
+
+		Item* item = player->getInventoryItem(CONST_SLOT_LEFT);
 		if (item && item->getID() == reagentId) {
 			foundReagent = true;
 
@@ -1586,7 +1586,7 @@ bool ConjureSpell::conjureItem(Creature* creature) const
 			Spell::postCastSpell(player, conjureCost, soulCost);
 		}
 
-/* 		item = player->getInventoryItem(CONST_SLOT_RIGHT);
+		item = player->getInventoryItem(CONST_SLOT_RIGHT);
 		if (item && item->getID() == reagentId && player->getMana() >= conjureCost) {
 			foundReagent = true;
 
@@ -1608,7 +1608,7 @@ bool ConjureSpell::conjureItem(Creature* creature) const
 			g_game.startDecay(newItem);
 
 			Spell::postCastSpell(player, conjureCost, soulCost);
-		} */
+		}
 
 		if (!foundReagent) {
 			player->sendCancelMessage(RETURNVALUE_YOUNEEDAMAGICITEMTOCASTSPELL);

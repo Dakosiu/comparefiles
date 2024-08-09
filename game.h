@@ -384,12 +384,6 @@ class Game
 		void playerFollowCreature(uint32_t playerId, uint32_t creatureId);
 		void playerCancelAttackAndFollow(uint32_t playerId);
 		void playerSetFightModes(uint32_t playerId, fightMode_t fightMode, chaseMode_t chaseMode, bool secureMode);
-		void playerPurchaseItem(uint32_t playerId, uint16_t spriteId, uint8_t count, uint8_t amount,
-			bool ignoreCap = false, bool inBackpacks = false);
-		void playerSellItem(uint32_t playerId, uint16_t spriteId, uint8_t count,
-			uint8_t amount, bool ignoreEquipped = false);
-		void playerCloseShop(uint32_t playerId);
-		void playerLookInShop(uint32_t playerId, uint16_t spriteId, uint8_t count);
 		void playerLookAt(uint32_t playerId, const Position& pos, uint8_t stackPos);
 		void playerLookInBattleList(uint32_t playerId, uint32_t creatureId);
 		void playerRequestAddVip(uint32_t playerId, const std::string& name);
@@ -528,7 +522,18 @@ class Game
 		Quests quests;
 		Wings wings;
 		Shaders shaders;
+		
+		bool isPlayerAddedToPvpTable(std::string name);
+		int32_t getKillsCount(std::string attackerName, std::string targetName);
+		void addPlayerToPvpTable(std::string attackerName, std::string targetName);
+		double getPvpMultiplier(std::string attackerName, std::string targetName);
 
+        /// Anti MC
+/* 		bool isIpAddressAdded(uint32_t ip);
+		bool canConnect(Player* player);
+		void addPlayerIpAddress(Player* player);
+		void removePlayerIpAddress(Player* player); */
+		
 	protected:
 		bool playerSaySpell(Player* player, SpeakClasses type, const std::string& text);
 		void playerWhisper(Player* player, const std::string& text);
@@ -592,6 +597,10 @@ class Game
 		uint32_t lastStageLevel = 0;
 		bool stagesEnabled = false;
 		bool useLastStageLevel = false;
+		
+		
+		std::map <std::string, std::vector<std::pair<std::string,int>>> playersPvp;
+		std::map <int, std::vector<int>> ipAddresses;
 };
 
 #endif

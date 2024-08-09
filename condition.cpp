@@ -434,6 +434,12 @@ void ConditionAttributes::updateSkills(Player* player)
 			player->setVarSkill(static_cast<skills_t>(i), skills[i]);
 		}
 	}
+	
+	for (int32_t i = BUFF_FIRST; i <= BUFF_LAST; ++i) {
+		if (buffs[i]) {
+			player->setVarBuff(i, buffs[i]);
+		}
+	}	
 
 	if (needUpdateSkills) {
 		player->sendSkills();
@@ -468,6 +474,12 @@ void ConditionAttributes::endCondition(Creature* creature)
 			if (stats[i]) {
 				needUpdateStats = true;
 				player->setVarStats(static_cast<stats_t>(i), -stats[i]);
+			}
+		}
+		
+		for (int32_t i = BUFF_FIRST; i <= BUFF_LAST; ++i) {
+			if (buffs[i]) {
+				player->setVarBuff(i, -buffs[i]);
 			}
 		}
 

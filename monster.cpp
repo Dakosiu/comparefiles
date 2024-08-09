@@ -63,7 +63,6 @@ Monster::Monster(MonsterType* mtype) :
 		}
 	}
 	registerCreatureEvent("ITEM_STATISTIC_SYSTEM_onDeath");
-        registerCreatureEvent("ELITE_MONSTERS_SYSTEM_onDeath");
 }
 
 Monster::~Monster()
@@ -470,18 +469,10 @@ bool Monster::isOpponent(const Creature* creature) const
 			return true;
 		}
 	} else {
-        if ((creature->getPlayer()) || (creature->getMaster() && creature->getMaster()->getPlayer())) {
+		if ((creature->getPlayer()) || (creature->getMaster() && creature->getMaster()->getPlayer())) {
 			return true;
 		}
 	}
-	
-	
-	
-/* 	if ((creature->getPlayer() && !creature->getPlayer()->hasFlag(PlayerFlag_IgnoredByMonsters)) ||
-		   (creature->getMaster() && creature->getMaster()->getPlayer())) {
-			   return true;
-		}
-	} */
 
 	return false;
 }
@@ -704,10 +695,10 @@ BlockType_t Monster::blockHit(Creature* attacker, CombatType_t combatType, int32
 
 bool Monster::isTarget(const Creature* creature) const
 {
-	if (creature->isRemoved() || !creature->isAttackable() ||
+/* 	if (creature->isRemoved() || !creature->isAttackable() ||
 	        creature->getZone() == ZONE_PROTECTION || !canSeeCreature(creature)) {
 		return false;
-	}
+	} */
 
 	if (creature->getPosition().z != getPosition().z) {
 		return false;

@@ -87,9 +87,9 @@ class Monster final : public Creature
 			return mType->nameDescription;
 		}
 		std::string getDescription(int32_t) const final {
-			if (isElite()) {
+/* 			if (isElite()) {
 				return strDescription + '.' + "\n" + "its an elite monster.";
-			}
+			} */
 			return strDescription + '.';
 		}
 

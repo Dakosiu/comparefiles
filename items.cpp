@@ -128,14 +128,6 @@ bool Items::loadItems()
 						items[id].group = ITEM_GROUP_KEY;
 					} else if (identifier == "door") {
 						items[id].type = ITEM_TYPE_DOOR;
-						std::size_t found = items[id].name.find("closed");
-                        if (found!=std::string::npos) {
-						    items[id].blockProjectile = true;
-						}
-						found = items[id].name.find("gate");
-                        if (found!=std::string::npos) {
-						    items[id].blockProjectile = true;
-						}
 					} else if (identifier == "bed") {
 						items[id].type = ITEM_TYPE_BED;
 					} else if (identifier == "rune") {
@@ -481,8 +473,6 @@ bool Items::loadItems()
 						items[id].attack = script.readNumber();
 					} else if (identifier == "defense") {
 						items[id].defense = script.readNumber();
-					} else if (identifier == "refill") {
-						items[id].refill = script.readNumber();
 					} else if (identifier == "range") {
 						items[id].shootRange = static_cast<uint8_t>(script.readNumber());
 					} else if (identifier == "ammotype") {

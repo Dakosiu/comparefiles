@@ -195,30 +195,12 @@ class Creature : virtual public Thing
 		virtual int32_t getStepSpeed() const {
 			return getSpeed();
 		}
-		
-		
 		int32_t getSpeed() const {
 			if (baseSpeed == 0) {
 				return 0;
 			}
-            
-			int32_t value = (2 * (varSpeed + baseSpeed)) + 80;
-			
-			if (const Monster* monster = this->getMonster()) {
-				if (value > maxSpeed) {
-					value = maxSpeed;
-				}
-			}
-			
-			
-			if (const Player* player = this->getPlayer()) {
-				if (value < 150) {
-					value = 150;
-				}
-			}
-			
-			
-			return value;
+
+			return (2 * (varSpeed + baseSpeed)) + 80;
 		}
 		void setSpeed(int32_t varSpeedDelta) {
 			int32_t oldSpeed = getSpeed();
@@ -524,9 +506,7 @@ class Creature : virtual public Thing
 
 		Direction direction = DIRECTION_SOUTH;
 		Skulls_t skull = SKULL_NONE;
-        
-		uint32_t maxSpeed = 400;
-		
+
 		bool localMapCache[mapWalkHeight][mapWalkWidth] = {{ false }};
 		bool isInternalRemoved = false;
 		bool isMapLoaded = false;

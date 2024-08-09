@@ -77,9 +77,7 @@ enum Statistics_t : uint8_t {
 	STATISTIC_DEXTERITY,
 	STATISTIC_DEFENCE,
 	STATISTIC_ENDURANCE,
-	STATISTIC_MAGICDAMAGE,
-	STATISTIC_PHYSICALDAMAGE,
-	STATISTIC_LAST = STATISTIC_PHYSICALDAMAGE
+	STATISTIC_LAST = STATISTIC_ENDURANCE
 };
 
 enum customAttrTypes : uint8_t {
@@ -302,18 +300,6 @@ enum stats_t {
 	STAT_LAST = STAT_MAGICPOINTS
 };
 
-enum SpecialSkills_t {
-	SPECIALSKILL_CRITICALHITCHANCE,
-	SPECIALSKILL_CRITICALHITAMOUNT,
-	SPECIALSKILL_LIFELEECHCHANCE,
-	SPECIALSKILL_LIFELEECHAMOUNT,
-	SPECIALSKILL_MANALEECHCHANCE,
-	SPECIALSKILL_MANALEECHAMOUNT,
-
-	SPECIALSKILL_FIRST = SPECIALSKILL_CRITICALHITCHANCE,
-	SPECIALSKILL_LAST = SPECIALSKILL_MANALEECHAMOUNT
-};
-
 enum buffs_t {
 	BUFF_INCREASEDAMAGE,
 	BUFF_DECREASEDAMAGE,
@@ -499,19 +485,6 @@ struct MarketOffer {
 	uint16_t itemId;
 	std::string playerName;
 };
-
-struct ShopInfo {
-	uint16_t itemId = 0;
-	int32_t subType = 1;
-	uint32_t buyPrice = 0;
-	uint32_t sellPrice = 0;
-	std::string realName = "";
-
-	ShopInfo() = default;
-	ShopInfo(uint16_t itemId, int32_t subType = 0, uint32_t buyPrice = 0, uint32_t sellPrice = 0, std::string realName = "")
-		: itemId(itemId), subType(subType), buyPrice(buyPrice), sellPrice(sellPrice), realName(std::move(realName)) {}
-};
-using ShopInfoList = std::list<ShopInfo>;
 
 struct MarketOfferEx {
 	MarketOfferEx() = default;

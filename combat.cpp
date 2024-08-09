@@ -241,38 +241,27 @@ ReturnValue Combat::canDoCombat(Creature* attacker, Creature* target)
 	if (!attacker) {
 		return g_events->eventCreatureOnTargetCombat(attacker, target);
 	}
-    uint32_t retNumber = 1;
-	if (const Player* targetPlayer = target->getPlayer()) {
-/* 		if (targetPlayer->hasFlag(PlayerFlag_CannotBeAttacked)) {
-					std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
+
+/* 	if (const Player* targetPlayer = target->getPlayer()) {
+		if (targetPlayer->hasFlag(PlayerFlag_CannotBeAttacked)) {
 			return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
-		} */
-		
-/* 		std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1; */
-		
+		}
+
 		if (const Player* attackerPlayer = attacker->getPlayer()) {
-/* 			if (attackerPlayer->hasFlag(PlayerFlag_CannotAttackPlayer)) {
+			if (attackerPlayer->hasFlag(PlayerFlag_CannotAttackPlayer)) {
 				return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
-			} */
+			}
 
 			if (isProtected(attackerPlayer, targetPlayer)) {
-						std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 				return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 			}
 
 			//nopvp-zone
 			const Tile* targetPlayerTile = targetPlayer->getTile();
 			if (targetPlayerTile->hasFlag(TILESTATE_NOPVPZONE)) {
-						std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 				return RETURNVALUE_ACTIONNOTPERMITTEDINANOPVPZONE;
 			}
 			else if (attackerPlayer->getTile()->hasFlag(TILESTATE_NOPVPZONE) && !targetPlayerTile->hasFlag(TILESTATE_NOPVPZONE | TILESTATE_PROTECTIONZONE)) {
-						std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 				return RETURNVALUE_ACTIONNOTPERMITTEDINANOPVPZONE;
 			}
 		}
@@ -280,21 +269,14 @@ ReturnValue Combat::canDoCombat(Creature* attacker, Creature* target)
 		if (attacker->isSummon()) {
 			if (const Player* masterAttackerPlayer = attacker->getMaster()->getPlayer()) {
 				if (masterAttackerPlayer->hasFlag(PlayerFlag_CannotAttackPlayer)) {
-							std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 					return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 				}
 
 				if (targetPlayer->getTile()->hasFlag(TILESTATE_NOPVPZONE)) {
-							std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 					return RETURNVALUE_ACTIONNOTPERMITTEDINANOPVPZONE;
-					
 				}
 
 				if (isProtected(masterAttackerPlayer, targetPlayer)) {
-							std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 					return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 				}
 			}
@@ -303,14 +285,10 @@ ReturnValue Combat::canDoCombat(Creature* attacker, Creature* target)
 	else if (target->getMonster()) {
 		if (const Player* attackerPlayer = attacker->getPlayer()) {
 			if (attackerPlayer->hasFlag(PlayerFlag_CannotAttackMonster)) {
-						std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 				return RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE;
 			}
 
 			if (target->isSummon() && target->getMaster()->getPlayer() && target->getZone() == ZONE_NOPVP) {
-						std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 				return RETURNVALUE_ACTIONNOTPERMITTEDINANOPVPZONE;
 			}
 		}
@@ -320,21 +298,17 @@ ReturnValue Combat::canDoCombat(Creature* attacker, Creature* target)
 		if (attacker->getPlayer() || (attacker->isSummon() && attacker->getMaster()->getPlayer())) {
 			if (target->getPlayer()) {
 				if (!isInPvpZone(attacker, target)) {
-							std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 					return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 				}
 			}
 
 			if (target->isSummon() && target->getMaster()->getPlayer()) {
 				if (!isInPvpZone(attacker, target)) {
-							std::cout << "Tu return " << retNumber << std::endl;
-        retNumber += 1;
 					return RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE;
 				}
 			}
 		}
-	}
+	} */
 	return g_events->eventCreatureOnTargetCombat(attacker, target);
 }
 
@@ -1177,7 +1151,7 @@ bool Combat::rangeAttack(Creature* attacker, Creature* target, fightMode_t fight
 			impact.damage.value = -Combat::computeDamage(attacker, attackStrength, attackVariation);
 			impact.params.blockedByArmor = true;
 			impact.params.blockedByShield = false;
-			circleShapeSpell(attacker, target->getPosition(), 0xFF, 0, 3, &impact, 7);
+			circleShapeSpell(attacker, target->getPosition(), 0xFF, 0, 4, &impact, 7);
 		}
 
 		if (!hit) {
@@ -1240,6 +1214,7 @@ bool Combat::rangeAttack(Creature* attacker, Creature* target, fightMode_t fight
 
 	return true;
 }
+
 
 void Combat::circleShapeSpell(Creature* attacker, const Position& toPos, int32_t range, int32_t animation, int32_t radius, DamageImpact* impact, int32_t effect)
 {

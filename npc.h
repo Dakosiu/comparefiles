@@ -98,10 +98,6 @@ class Npc final : public Creature
 			}
 		}
 
-		void onPlayerTrade(Player* player, int32_t callback, uint16_t itemId, int32_t count,
-			uint8_t amount, bool ignore = false, bool inBackpacks = false);
-		void onPlayerEndTrade(Player* player, int32_t buyCallback, int32_t sellCallback);
-
 		void turnToCreature(Creature* creature);
 		void setCreatureFocus(Creature* creature);
 
@@ -138,10 +134,6 @@ class Npc final : public Creature
 
 		void reset();
 
-		void addShopPlayer(Player* player);
-		void removeShopPlayer(Player* player);
-		void closeAllShopWindows();
-
 		std::set<Player*> spectators;
 
 		std::string name;
@@ -157,9 +149,6 @@ class Npc final : public Creature
 		int64_t conversationStartTime;
 		int64_t conversationEndTime;
 		int64_t staticMovementTime;
-
-		ShopInfoList cipShopList;
-		std::set<Player*> shopPlayerSet;
 
 		bool loaded;
 		bool isIdle;

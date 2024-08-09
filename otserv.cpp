@@ -38,20 +38,16 @@
 #include "databasetasks.h"
 #include "playertasks.h"
 #include "statistics.h"
-#include "cams.h"
-#include "stats.h"
 
 DatabaseTasks g_databaseTasks;
 Dispatcher g_dispatcher;
 Scheduler g_scheduler;
-Stats g_stats;
 
 Game g_game;
 ConfigManager g_config;
 Monsters g_monsters;
 Vocations g_vocations;
 RSA g_RSA;
-Cams g_cams;
 
 std::mutex g_loaderLock;
 std::condition_variable g_loaderSignal;
@@ -91,9 +87,6 @@ int main(int argc, char* argv[])
 
 	g_dispatcher.start();
 	g_scheduler.start();
-#ifdef STATS_ENABLED
-	g_stats.start();
-#endif
 
 	g_dispatcher.addTask(createTask(std::bind(mainLoader, argc, argv, &serviceManager)));
 
@@ -110,9 +103,6 @@ int main(int argc, char* argv[])
 				g_scheduler.stop();
 				g_databaseTasks.stop();
 				g_dispatcher.stop();
-#ifdef STATS_ENABLED
-				g_stats.stop();
-#endif
 			}));
 			ExitThread(0);
 		}, 1);
@@ -123,19 +113,11 @@ int main(int argc, char* argv[])
 		g_scheduler.shutdown();
 		g_databaseTasks.shutdown();
 		g_dispatcher.shutdown();
-#ifdef STATS_ENABLED
-		g_stats.shutdown();
-#endif
-		g_cams.shutdown();
 	}
 
 	g_scheduler.join();
 	g_databaseTasks.join();
 	g_dispatcher.join();
-#ifdef STATS_ENABLED
-	g_stats.join();
-#endif
-	g_cams.join();
 	return 0;
 }
 
@@ -348,7 +330,7 @@ void mainLoader(int, char*[], ServiceManager* services)
 		std::cout << "> Warning: " << STATUS_SERVER_NAME << " has been executed as root user, please consider running it as a normal user." << std::endl;
 	}
 #endif
-    g_cams.start();
+
 	g_game.start(services);
 	g_game.setGameState(GAME_STATE_NORMAL);
 	g_loaderSignal.notify_all();

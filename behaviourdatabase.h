@@ -101,7 +101,6 @@ enum NpcBehaviourType_t
 	BEHAVIOUR_TYPE_SLOTITEM, // get slot item
 	BEHAVIOUR_TYPE_PZFREE, // is player pz not locked
 	BEHAVIOUR_TYPE_CLIENTVERSION, // get client version
-	BEHAVIOUR_TYPE_NOTRADESHOP, // get/set no trade shop
 };
 
 enum NpcBehaviourOperator_t
@@ -258,7 +257,6 @@ class BehaviourDatabase
 		BehaviourDatabase(const BehaviourDatabase&) = delete;
 		BehaviourDatabase& operator=(const BehaviourDatabase&) = delete;
 
-		void parseShop();
 		bool loadDatabase(ScriptReader& script);
 		bool loadBehaviour(ScriptReader& script);
 		bool loadConditions(ScriptReader& script, NpcBehaviour* behaviour);

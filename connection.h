@@ -96,8 +96,6 @@ class Connection : public std::enable_shared_from_this<Connection>
 		void send(const OutputMessage_ptr& msg);
 
 		uint32_t getIP();
-		bool isOtcProxy() const { return isFromOtcProxy; };
-		uint32_t getRealIP() const { return realIP; };
 
 	private:
 		void parseHeader(const boost::system::error_code& error);
@@ -131,10 +129,6 @@ class Connection : public std::enable_shared_from_this<Connection>
 
 		time_t timeConnected;
 		uint32_t packetsSent;
-
-		uint32_t realIP = 0;
-		bool isFromOtcProxy = false;
-		bool receivedFirstHeader = false;
 
 		bool connectionState;
 		bool receivedFirst;

@@ -24,10 +24,7 @@ bool PlayerStatistics::load()
 	REGISTER_ENUM(L, STATISTIC_DEXTERITY);
 	REGISTER_ENUM(L, STATISTIC_DEFENCE);
 	REGISTER_ENUM(L, STATISTIC_ENDURANCE);
-	REGISTER_ENUM(L, STATISTIC_MAGICDAMAGE);
-    REGISTER_ENUM(L, STATISTIC_PHYSICALDAMAGE);
-	
-	
+
 	if (luaL_dofile(L, "data/LUA/statistics.lua")) {
 		std::cout << "[Error - PlayerStatistics] " << lua_tostring(L, -1) << std::endl;
 		lua_close(L);
@@ -93,11 +90,7 @@ bool PlayerStatistics::load()
 			{"distanceSkill", ATTRIBUTE_DISTANCE_SKILL},
 			{"shieldSkill", ATTRIBUTE_SHIELD_SKILL},
 			{"speed", ATTRIBUTE_MOVEMENT_SPEED},
-			{"attackSpeed", ATTRIBUTE_ATTACK_SPEED},
-			{"magicDamage", ATTRIBUTE_MAGIC_DAMAGE},
-			{"criticalDamage", ATTRIBUTE_CRITICAL_DAMAGE},
-			{"criticalChance", ATTRIBUTE_CRITICAL_CHANCE},
-			{"physicalDamage", ATTRIBUTE_PHYSICAL_DAMAGE},
+			{"attackSpeed", ATTRIBUTE_ATTACK_SPEED}
 		};
 
 		Statistics_t id = static_cast<Statistics_t>(lua_tonumber(L, -1));

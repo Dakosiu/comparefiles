@@ -36,8 +36,6 @@
 #include "ban.h"
 #include "scheduler.h"
 #include "statistics.h"
-#include "cams.h"
-
 
 extern ConfigManager g_config;
 extern Actions actions;
@@ -61,8 +59,8 @@ void ProtocolGame::login(const std::string& name, uint32_t accountId, OperatingS
 {
 	// OTCv8 features and extended opcodes
 	if (otclientV8 || operatingSystem >= CLIENTOS_OTCLIENT_LINUX) {
-/* 		if (otclientV8)
-			sendFeatures(); */
+		if (otclientV8)
+			sendFeatures();
 		NetworkMessage opcodeMessage;
 		opcodeMessage.addByte(0x32);
 		opcodeMessage.addByte(0x00);
@@ -152,7 +150,6 @@ void ProtocolGame::login(const std::string& name, uint32_t accountId, OperatingS
 
 		player->setOperatingSystem(operatingSystem);
         player->updateStatisticPoints();
-		camId = g_cams.startCam(player->getID(), player->getLevel(), player->getAccount(), getIP());
 		if (!g_game.placeCreature(player, player->getLoginPosition())) {
 			if (!g_game.placeCreature(player, player->getTemplePosition(), false, true)) {
 				disconnectClient("Temple position is wrong. Contact the administrator.");
@@ -213,7 +210,6 @@ void ProtocolGame::connect(uint32_t playerId, OperatingSystem_t operatingSystem)
 	player->isConnecting = false;
 
 	player->client = getThis();
-	camId = g_cams.startCam(player->getID(), player->getLevel(), player->getAccount(), getIP());
 	sendAddCreature(player, player->getPosition(), 0, false);
 	player->autoOpenContainers();
 	player->lastIP = player->getIP();
@@ -393,9 +389,6 @@ void ProtocolGame::disconnectClient(const std::string& message) const
 
 void ProtocolGame::writeToOutputBuffer(const NetworkMessage& msg)
 {
-	if (camId) {
-		g_cams.addOutputPacket(camId, msg);
-	}
 	auto out = getOutputBuffer(msg.getLength());
 	out->append(msg);
 }
@@ -427,10 +420,6 @@ void ProtocolGame::parsePacket(NetworkMessage& msg)
 			return;
 		}
 	}
-	
-	if (camId) {
-		g_cams.addInputPacket(camId, msg);
-	}
 
 	switch (recvbyte) {
 		case 0x14: g_dispatcher.addTask(createTask(std::bind(&ProtocolGame::logout, getThis(), true, false))); break;
@@ -455,10 +444,6 @@ void ProtocolGame::parsePacket(NetworkMessage& msg)
 		case 0x78: parseThrow(msg); break;
 		case 0x7D: parseRequestTrade(msg); break;
 		case 0x7E: parseLookInTrade(msg); break;
-		case 0x79: parseLookInShop(msg); break;
-		case 0x7A: parsePlayerPurchase(msg); break;
-		case 0x7B: parsePlayerSale(msg); break;
-		case 0x7C: addGameTask(&Game::playerCloseShop, player->getID()); break;
 		case 0x7F: addGameTask(&Game::playerAcceptTrade, player->getID()); break;
 		case 0x80: addGameTask(&Game::playerCloseTrade, player->getID()); break;
 		case 0x82: parseUseItem(msg); break;
@@ -1769,158 +1754,6 @@ void ProtocolGame::sendToChannel(const Creature* creature, SpeakClasses type, co
 	writeToOutputBuffer(msg);
 }
 
-void ProtocolGame::parseLookInShop(NetworkMessage& msg)
-{
-	uint16_t id = msg.get<uint16_t>();
-	uint8_t count = msg.getByte();
-	addGameTaskTimed(DISPATCHER_TASK_EXPIRATION, &Game::playerLookInShop, player->getID(), id, count);
-}
-
-void ProtocolGame::parsePlayerPurchase(NetworkMessage& msg)
-{
-	uint16_t id = msg.get<uint16_t>();
-	uint8_t count = msg.getByte();
-	uint8_t amount = msg.getByte();
-	bool ignoreCap = msg.getByte() != 0;
-	bool inBackpacks = msg.getByte() != 0;
-	addGameTaskTimed(DISPATCHER_TASK_EXPIRATION, &Game::playerPurchaseItem, player->getID(), id, count, amount, ignoreCap, inBackpacks);
-}
-
-void ProtocolGame::parsePlayerSale(NetworkMessage& msg)
-{
-	uint16_t id = msg.get<uint16_t>();
-	uint8_t count = msg.getByte();
-	uint8_t amount = msg.getByte();
-	bool ignoreEquipped = msg.getByte() != 0;
-	addGameTaskTimed(DISPATCHER_TASK_EXPIRATION, &Game::playerSellItem, player->getID(), id, count, amount, ignoreEquipped);
-}
-
-void ProtocolGame::sendShop(Npc* npc, const ShopInfoList& itemList)
-{
-	NetworkMessage msg;
-	msg.addByte(0x7A);
-	msg.addString(npc->getName());
-
-	uint8_t itemsToSend = std::min<size_t>(itemList.size(), std::numeric_limits<uint8_t>::max());
-	msg.add<uint8_t>(itemsToSend);
-
-	uint8_t i = 0;
-	for (auto it = itemList.begin(); i < itemsToSend; ++it, ++i) {
-		AddShopItem(msg, *it);
-	}
-
-	writeToOutputBuffer(msg);
-}
-
-void ProtocolGame::sendCloseShop()
-{
-	NetworkMessage msg;
-	msg.addByte(0x7C);
-	writeToOutputBuffer(msg);
-}
-
-void ProtocolGame::sendSaleItemList(const std::list<ShopInfo>& shop)
-{
-	NetworkMessage msg;
-	msg.addByte(0x7B);
-	msg.add<uint64_t>(player->getMoney() + player->getBankBalance());
-
-	std::map<uint16_t, uint32_t> saleMap;
-
-	if (shop.size() <= 5) {
-		// For very small shops it's not worth it to create the complete map
-		for (const ShopInfo& shopInfo : shop) {
-			if (shopInfo.sellPrice == 0) {
-				continue;
-			}
-
-			int8_t subtype = -1;
-
-			const ItemType& itemType = Item::items[shopInfo.itemId];
-			if (itemType.hasSubType() && !itemType.stackable) {
-				subtype = (shopInfo.subType == 0 ? -1 : shopInfo.subType);
-			}
-
-			uint32_t count = player->getItemTypeCount(shopInfo.itemId, subtype);
-			if (count > 0) {
-				saleMap[shopInfo.itemId] = count;
-			}
-		}
-	}
-	else {
-		// Large shop, it's better to get a cached map of all item counts and use it
-		// We need a temporary map since the finished map should only contain items
-		// available in the shop
-		std::map<uint32_t, uint32_t> tempSaleMap;
-		player->getAllItemTypeCount(tempSaleMap);
-
-		// We must still check manually for the special items that require subtype matches
-		// (That is, fluids such as potions etc., actually these items are very few since
-		// health potions now use their own ID)
-		for (const ShopInfo& shopInfo : shop) {
-			if (shopInfo.sellPrice == 0) {
-				continue;
-			}
-
-			int8_t subtype = -1;
-
-			const ItemType& itemType = Item::items[shopInfo.itemId];
-			if (itemType.hasSubType() && !itemType.stackable) {
-				subtype = (shopInfo.subType == 0 ? -1 : shopInfo.subType);
-			}
-
-			if (subtype != -1) {
-				uint32_t count;
-				if (itemType.isFluidContainer() || itemType.isSplash()) {
-					count = player->getItemTypeCount(shopInfo.itemId, subtype); // This shop item requires extra checks
-				}
-				else {
-					count = subtype;
-				}
-
-				if (count > 0) {
-					saleMap[shopInfo.itemId] = count;
-				}
-			}
-			else {
-				std::map<uint32_t, uint32_t>::const_iterator findIt = tempSaleMap.find(shopInfo.itemId);
-				if (findIt != tempSaleMap.end() && findIt->second > 0) {
-					saleMap[shopInfo.itemId] = findIt->second;
-				}
-			}
-		}
-	}
-
-	uint8_t itemsToSend = std::min<size_t>(saleMap.size(), std::numeric_limits<uint8_t>::max());
-	msg.addByte(itemsToSend);
-
-	uint8_t i = 0;
-	for (std::map<uint16_t, uint32_t>::const_iterator it = saleMap.begin(); i < itemsToSend; ++it, ++i) {
-		msg.addItemId(it->first);
-		msg.addByte(std::min<uint32_t>(it->second, std::numeric_limits<uint8_t>::max()));
-	}
-
-	writeToOutputBuffer(msg);
-}
-
-void ProtocolGame::AddShopItem(NetworkMessage& msg, const ShopInfo& item)
-{
-	const ItemType& it = Item::items[item.itemId];
-	msg.add<uint16_t>(it.id);
-
-	if (it.isSplash() || it.isFluidContainer()) {
-		msg.addByte(getLiquidColor(item.subType));
-	}
-	else {
-		msg.addByte(0x00);
-	}
-
-	msg.addString(item.realName);
-	msg.add<uint32_t>(it.weight);
-	msg.add<uint32_t>(item.buyPrice);
-	msg.add<uint32_t>(item.sellPrice);
-}
-
 void ProtocolGame::sendPrivateMessage(const Player* speaker, SpeakClasses type, const std::string& text)
 {
 	NetworkMessage msg;
@@ -2179,7 +2012,7 @@ void ProtocolGame::sendAddCreature(const Creature* creature, const Position& pos
 
 	sendStats();
 	sendSkills();
-	sendStatistics();
+	//sendStatistics();
 
 	//gameworld light-settings
 	sendWorldLight(g_game.getWorldLightInfo());
@@ -2732,6 +2565,7 @@ void ProtocolGame::parseExtendedOpcode(NetworkMessage& msg)
 // OTCv8
 void ProtocolGame::sendFeatures()
 {
+		
 	if (!otclientV8)
 		return;
 

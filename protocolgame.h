@@ -106,10 +106,6 @@ class ProtocolGame final : public Protocol
 		void parseBugReport(NetworkMessage& msg);
 		void parseDebugAssert(NetworkMessage& msg);
 
-		void parseLookInShop(NetworkMessage& msg);
-		void parsePlayerPurchase(NetworkMessage& msg);
-		void parsePlayerSale(NetworkMessage& msg);
-
 		void parseThrow(NetworkMessage& msg);
 		void parseUseItemEx(NetworkMessage& msg);
 		void parseUseWithCreature(NetworkMessage& msg);
@@ -185,10 +181,6 @@ class ProtocolGame final : public Protocol
 		void sendMarketBrowseOwnHistory(const HistoryMarketOfferList& buyOffers, const HistoryMarketOfferList& sellOffers);
 		void sendQuestLog();
 		void sendQuestLine(const Quest* quest);
-
-		void sendShop(Npc* npc, const ShopInfoList& itemList);
-		void sendCloseShop();
-		void sendSaleItemList(const std::list<ShopInfo>& shop);
 
 		void sendCancelWalk();
 		void sendChangeSpeed(const Creature* creature, uint32_t speed);
@@ -284,8 +276,6 @@ class ProtocolGame final : public Protocol
 		void parseNewPing(NetworkMessage& msg);
 		void sendNewPing(uint32_t pingId);
 
-		void AddShopItem(NetworkMessage& msg, const ShopInfo& item);
-
 		// Tasks
 		void parseTasks(NetworkMessage& msg);
 		void sendTasks();
@@ -298,13 +288,13 @@ class ProtocolGame final : public Protocol
 
 		// Helpers so we don't need to bind every time
 		template <typename Callable, typename... Args>
-		void addGameTaskWithStats(Callable&& function, const std::string& function_str, const std::string& extra_info, Args&&... args) {
-			g_dispatcher.addTask(createTaskWithStats(std::bind(std::forward<Callable>(function), &g_game, std::forward<Args>(args)...), function_str, extra_info));
+		void addGameTask(Callable function, Args&&... args) {
+			g_dispatcher.addTask(createTask(std::bind(function, &g_game, std::forward<Args>(args)...)));
 		}
 
 		template <typename Callable, typename... Args>
-		void addGameTaskTimedWithStats(uint32_t delay, Callable&& function, const std::string& function_str, const std::string& extra_info, Args&&... args) {
-			g_dispatcher.addTask(createTaskWithStats(delay, std::bind(std::forward<Callable>(function), &g_game, std::forward<Args>(args)...), function_str, extra_info));
+		void addGameTaskTimed(uint32_t delay, Callable function, Args&&... args) {
+			g_dispatcher.addTask(createTask(delay, std::bind(function, &g_game, std::forward<Args>(args)...)));
 		}
 
 		std::unordered_set<uint32_t> knownCreatureSet;
@@ -319,7 +309,6 @@ class ProtocolGame final : public Protocol
 		bool debugAssertSent = false;
 		bool acceptPackets = false;
 		uint16_t otclientV8 = 0;
-		uint64_t camId = 0;
 };
 
 #endif
