@@ -26,6 +26,7 @@
 #include <chrono>
 #include <cstdint>
 #include <forward_list>
+#include <fstream>
 #include <functional>
 #include <iomanip>
 #include <iostream>
@@ -40,5 +41,6 @@
 #include <vector>
 
 #include <boost/asio.hpp>
+#include <boost/lockfree/stack.hpp>
 
 #include <pugixml.hpp>

@@ -724,15 +724,12 @@ bool Creature::dropCorpse(Creature* lastHitCreature, Creature* mostDamageCreatur
 	if (corpse) {
 		g_game.internalAddItem(tile, corpse, INDEX_WHEREEVER, FLAG_NOLIMIT);
 		g_game.startDecay(corpse);
+		dropLoot(corpse->getContainer(), lastHitCreature);
 	}
-
+	
 	//scripting event - onDeath
 	for (CreatureEvent* deathEvent : getCreatureEvents(CREATURE_EVENT_DEATH)) {
 		deathEvent->executeOnDeath(this, corpse, lastHitCreature, mostDamageCreature, lastHitUnjustified, mostDamageUnjustified);
-	}
-
-	if (corpse) {
-		dropLoot(corpse->getContainer(), lastHitCreature);
 	}
 
 	return true;

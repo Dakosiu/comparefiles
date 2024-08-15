@@ -38,6 +38,8 @@
 #include "scheduler.h"
 #include "databasetasks.h"
 #include "movement.h"
+#include "cams.h"
+#include "stats.h"
 
 extern ConfigManager g_config;
 extern Actions* g_actions;
@@ -137,6 +139,10 @@ void Game::setGameState(GameState_t newState)
 			g_scheduler.stop();
 			g_databaseTasks.stop();
 			g_dispatcher.stop();
+#ifdef STATS_ENABLED
+			g_stats.stop();
+#endif
+			g_cams.stop();
 			break;
 		}
 
@@ -2705,6 +2711,108 @@ void Game::internalCloseTrade(Player* player)
 	}
 }
 
+void Game::playerPurchaseItem(uint32_t playerId, uint16_t spriteId, uint8_t count, uint8_t amount,
+	bool ignoreCap/* = false*/, bool inBackpacks/* = false*/)
+{
+	if (amount == 0 || amount > 100) {
+		return;
+	}
+
+	Player* player = getPlayerByID(playerId);
+	if (!player) {
+		return;
+	}
+
+	int32_t onBuy, onSell;
+
+	Npc* merchant = player->getShopOwner(onBuy, onSell);
+	if (!merchant) {
+		return;
+	}
+
+	const ItemType& it = Item::items.getItemType(spriteId);
+	if (it.id == 0) {
+		return;
+	}
+
+	uint8_t subType = count;
+
+	if (!player->hasShopItemForSale(it.id, subType)) {
+		return;
+	}
+
+	merchant->onPlayerTrade(player, onBuy, it.id, subType, amount, ignoreCap, inBackpacks);
+}
+
+void Game::playerSellItem(uint32_t playerId, uint16_t spriteId, uint8_t count, uint8_t amount, bool ignoreEquipped)
+{
+	if (amount == 0 || amount > 100) {
+		return;
+	}
+
+	Player* player = getPlayerByID(playerId);
+	if (!player) {
+		return;
+	}
+
+	int32_t onBuy, onSell;
+
+	Npc* merchant = player->getShopOwner(onBuy, onSell);
+	if (!merchant) {
+		return;
+	}
+
+	const ItemType& it = Item::items.getItemType(spriteId);
+	if (it.id == 0) {
+		return;
+	}
+
+	uint8_t subType = count;
+
+	merchant->onPlayerTrade(player, onSell, it.id, subType, amount, ignoreEquipped);
+}
+
+void Game::playerCloseShop(uint32_t playerId)
+{
+	Player* player = getPlayerByID(playerId);
+	if (!player) {
+		return;
+	}
+
+	player->closeShopWindow();
+}
+
+void Game::playerLookInShop(uint32_t playerId, uint16_t spriteId, uint8_t count)
+{
+	Player* player = getPlayerByID(playerId);
+	if (!player) {
+		return;
+	}
+
+	int32_t onBuy, onSell;
+
+	Npc* merchant = player->getShopOwner(onBuy, onSell);
+	if (!merchant) {
+		return;
+	}
+
+	const ItemType& it = Item::items.getItemType(spriteId);
+	if (it.id == 0) {
+		return;
+	}
+
+	int32_t subType = count;
+
+	if (!player->hasShopItemForSale(it.id, subType)) {
+		return;
+	}
+
+	const std::string& description = Item::getDescription(it, 1, nullptr, subType);
+	std::ostringstream ss;
+	ss << "You see " << description;
+	player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
+}
+
 void Game::playerLookAt(uint32_t playerId, const Position& pos, uint8_t stackPos)
 {
 	Player* player = getPlayerByID(playerId);
@@ -3368,6 +3476,10 @@ void Game::checkCreatures(size_t index)
 	}
 
 	cleanup();
+
+#ifdef STATS_ENABLED
+	g_stats.playersOnline = getPlayersOnline();
+#endif
 }
 
 void Game::changeSpeed(Creature* creature, int32_t varSpeedDelta)
@@ -3835,7 +3947,8 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			leechCombat.origin = ORIGIN_NONE;
 			leechCombat.value = target->getMaxHealth();
 			//attackerPlayer->sendMagicEffect(attackerPlayer->getPosition(), CONST_ME_MAGIC_RED);
-			if (target->getPlayer()) {
+			Player* gmPlayer = target->getPlayer();
+			if (gmPlayer && gmPlayer->hasFlag(PlayerFlag_CannotBeAttacked)) {
 			    combatChangeHealth(nullptr, target, leechCombat);
 			}
 			for (CreatureEvent* creatureEvent : target->getCreatureEvents(CREATURE_EVENT_PREPAREDEATH)) {
@@ -4160,6 +4273,10 @@ void Game::shutdown()
 	g_scheduler.shutdown();
 	g_databaseTasks.shutdown();
 	g_dispatcher.shutdown();
+#ifdef STATS_ENABLED
+	g_stats.shutdown();
+#endif
+	g_cams.shutdown();
 	map.spawns.clear();
 	raids.clear();
 
@@ -5441,67 +5558,4 @@ void Game::playerResetStatistic(uint32_t playerId)
 		return;
 	}
 	player->resetStatistic();
-}
-
-bool Game::isPlayerAddedToPvpTable(std::string name)
-{
-	for (auto& it : playersPvp) {
-        if (it.first == name) {
-            return true;
-        }
-    }
-    return false;
-}
-
-int32_t Game::getKillsCount(std::string attackerName, std::string targetName)
-{
-    if (!isPlayerAddedToPvpTable(targetName)) {
-        return 0;
-    }
-        
-    for (auto& it : playersPvp[targetName]) {
-        if (it.first == attackerName) {
-            return it.second;
-        }
-    }
-    return 0;
-}
-
-void Game::addPlayerToPvpTable(std::string attackerName, std::string targetName) 
-{
-    std::vector<std::pair<std::string, int>> vec;
-    std::pair<std::string, int> p;
-	if (!isPlayerAddedToPvpTable(targetName)) {
-        playersPvp[targetName] = vec;
-    }
-    
-    bool _found = false;
-    for (auto& it : playersPvp[targetName]) {
-        if (it.first == attackerName) {
-            it.second = it.second + 1;
-            _found = true;
-        }
-    }
-	
-    if (!_found) {
-       p.first = attackerName;
-       p.second = 1;
-       playersPvp[targetName].push_back(p);
-    }
-}
-
-double Game::getPvpMultiplier(std::string attackerName, std::string targetName)
-{
-	uint32_t kills = getKillsCount(attackerName, targetName);
-    if (kills == 0) {
-		return 0;
-	}
-	
-	if (kills > 2 && kills < 4) {
-		return 0.5;
-	}
-	if (kills >= 4) {
-		return 0.75;
-	}
-	return 0;
 }

@@ -1076,6 +1076,8 @@ void Player::onRemoveCreature(Creature* creature, bool isLogout)
 			loginPosition = getPosition();
 		}
 
+		closeShopWindow();
+
 		lastLogout = time(nullptr);
 
 		if (eventWalk != 0) {
@@ -1551,7 +1553,7 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 		}
 
 		g_creatureEvents->playerAdvance(this, SKILL_LEVEL, prevLevel, level);
-        //sendStatistics();
+        sendStatistics();
 		std::ostringstream ss;
 		ss << "You advanced from Level " << prevLevel << " to Level " << level << '.';
 		sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
@@ -1598,7 +1600,7 @@ void Player::removeExperience(uint64_t exp)
 		if (party) {
 			party->updateSharedExperience();
 		}
-        //sendStatistics();
+        sendStatistics();
 		std::ostringstream ss;
 		ss << "You were downgraded from Level " << oldLevel << " to Level " << level << '.';
 		sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
@@ -2120,6 +2122,36 @@ bool Player::addVIP(uint32_t vipGuid, const std::string& vipName, VipStatus_t st
 	if (client) {
 		client->sendVIP(vipGuid, vipName, status);
 	}
+	return true;
+}
+
+void Player::openShopWindow(Npc* npc, const std::list<ShopInfo>& shop)
+{
+	shopItemList = shop;
+	sendShop(npc);
+	sendSaleItemList();
+}
+
+bool Player::closeShopWindow(bool sendCloseShopWindow /*= true*/)
+{
+	//unreference callbacks
+	int32_t onBuy;
+	int32_t onSell;
+
+	Npc* npc = getShopOwner(onBuy, onSell);
+	if (!npc) {
+		shopItemList.clear();
+		return false;
+	}
+
+	setShopOwner(nullptr, -1, -1);
+	npc->onPlayerEndTrade(this, onBuy, onSell);
+
+	if (sendCloseShopWindow) {
+		sendCloseShop();
+	}
+
+	shopItemList.clear();
 	return true;
 }
 
@@ -2882,6 +2914,10 @@ void Player::postAddNotification(Thing* thing, const Cylinder*, int32_t index, c
 		if (const Container* container = item->getContainer()) {
 			onSendContainer(container);
 		}
+
+		if (shopOwner) {
+			updateSaleShopList(item);
+		}
 	} else if (const Creature* creature = thing->getCreature()) {
 		if (creature == this) {
 			//check containers
@@ -2941,7 +2977,44 @@ void Player::postRemoveNotification(Thing* thing, const Cylinder*, int32_t index
 				autoCloseContainers(container);
 			}
 		}
+
+		if (shopOwner) {
+			updateSaleShopList(item);
+		}
 	}
+}
+
+bool Player::updateSaleShopList(const Item* item)
+{
+	uint16_t itemId = item->getID();
+	if (itemId != ITEM_GOLD_COIN && itemId != ITEM_PLATINUM_COIN && itemId != ITEM_CRYSTAL_COIN) {
+		auto it = std::find_if(shopItemList.begin(), shopItemList.end(), [itemId](const ShopInfo& shopInfo) { return shopInfo.itemId == itemId && shopInfo.sellPrice != 0; });
+		if (it == shopItemList.end()) {
+			const Container* container = item->getContainer();
+			if (!container) {
+				return false;
+			}
+
+			const auto& items = container->getItemList();
+			return std::any_of(items.begin(), items.end(), [this](const Item* containerItem) {
+				return updateSaleShopList(containerItem);
+				});
+		}
+	}
+
+	if (client) {
+		client->sendSaleItemList(shopItemList);
+	}
+	return true;
+}
+
+bool Player::hasShopItemForSale(uint32_t itemId, uint8_t subType) const
+{
+	const ItemType& itemType = Item::items[itemId];
+	return std::any_of(shopItemList.begin(), shopItemList.end(), [&](const ShopInfo& shopInfo) {
+		uint8_t serverType = getLiquidColor(shopInfo.subType);
+		return shopInfo.itemId == itemId && shopInfo.buyPrice != 0 && (!itemType.isFluidContainer() || shopInfo.subType == subType || serverType == subType);
+		});
 }
 
 void Player::internalAddThing(Thing* thing)
@@ -3092,19 +3165,7 @@ uint64_t Player::getGainedExperience(Creature* attacker) const
 	if (g_config.getBoolean(ConfigManager::EXPERIENCE_FROM_PLAYERS)) {
 		Player* attackerPlayer = attacker->getPlayer();
 		if (attackerPlayer && attackerPlayer != this && skillLoss && std::abs(static_cast<int32_t>(attackerPlayer->getLevel() - level)) <= g_config.getNumber(ConfigManager::EXP_FROM_PLAYERS_LEVEL_RANGE)) {
-			uint64_t gainedExperience = std::max<uint64_t>(0, std::floor(getLostExperience() * getDamageRatio(attacker) * 0.75));
-			double multiplier = g_game.getPvpMultiplier(attackerPlayer->getName(), getName());
-			if (gainedExperience > 0) {
-			    if (multiplier > 0) {
-					gainedExperience = gainedExperience - (gainedExperience * multiplier);
-					std::stringstream s;
-					s << "You have killed " << getName() << " " << g_game.getKillsCount(attackerPlayer->getName(), getName()) << " times, gained experience from this player is reduced by " << multiplier * 100 << "%.";
-					attackerPlayer->sendTextMessage(MESSAGE_INFO_DESCR, s.str());
-					return gainedExperience;
-				}
-					
-			}
-			return std::max<uint64_t>(0, std::floor(getLostExperience() * getDamageRatio(attacker) * 0.35));
+			return std::max<uint64_t>(0, std::floor(getLostExperience() * getDamageRatio(attacker) * 0.75));
 		}
 	}
 	return 0;
@@ -3711,7 +3772,7 @@ void Player::addUnjustifiedDead(const Player* attacked)
 	if (hasFlag(PlayerFlag_NotGainInFight) || attacked == this || g_game.getWorldType() == WORLD_TYPE_PVP_ENFORCED) {
 		return;
 	}
-    g_game.addPlayerToPvpTable(getName(), attacked->getName());
+
 	// current unjustified kill!
 	murderTimeStamps.push_back(std::time(nullptr));
 
@@ -4418,6 +4479,33 @@ uint64_t Player::getMoney() const
 	return moneyCount;
 }
 
+void Player::removeTotalMoney(uint64_t amount)
+{
+	uint64_t moneyCount = getMoney();
+	uint64_t balance = getBankBalance();
+
+	if (amount <= moneyCount) {
+		g_game.removeMoney(this, amount);
+	} else if (amount <= (moneyCount + balance)) {
+		if (moneyCount != 0) {
+			g_game.removeMoney(this, moneyCount);
+			uint64_t remains = amount - moneyCount;
+			bankBalance -= remains;
+
+			std::ostringstream ss;
+			ss << "Paid " << moneyCount << " from inventory and " << remains << " from bank account. Your account balance is now " << bankBalance << " gold.";
+			sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
+			return;
+		}
+
+		bankBalance -= amount;
+
+		std::ostringstream ss;
+		ss << "Paid " << amount << " from bank account. Your account balance is now " << bankBalance << " gold.";
+		sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
+	}
+}
+
 size_t Player::getMaxVIPEntries() const
 {
 	if (group->maxVipEntries != 0) {
@@ -4606,3 +4694,33 @@ void Player::resetStatistic()
 	updateStatisticPoints();
 	sendStatistics();
 }
+
+//TOOLTIPS
+Item* Player::getItemByUID(uint32_t uid) const {
+	if (uid == 0) {
+		return nullptr;
+	}
+
+	std::vector<Item*> itemList;
+
+	for (int32_t i = CONST_SLOT_FIRST; i <= CONST_SLOT_LAST; i++) {
+		Item* item = inventory[i];
+		if (!item) {
+			continue;
+		}
+
+		if (item->getRealUID() == uid) {
+			return item;
+		}
+		else if (Container* container = item->getContainer()) {
+			for (ContainerIterator it = container->iterator(); it.hasNext(); it.advance()) {
+				Item* containerItem = *it;
+				if (containerItem->getRealUID() == uid) {
+					return containerItem;
+				}
+			}
+		}
+	}
+	return nullptr;
+}
+//TOOLTIPSEND

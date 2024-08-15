@@ -286,58 +286,15 @@ ReturnValue Actions::internalUseItem(Player* player, const Position& pos, uint8_
 			}
 
 			//open/close container
-/* 			int32_t oldContainerId = player->getContainerID(openContainer);
+			int32_t oldContainerId = player->getContainerID(openContainer);
 			if (oldContainerId != -1) {
 				player->onCloseContainer(openContainer);
 				player->closeContainer(oldContainerId);
 			} else {
 				player->addContainer(index, openContainer);
 				player->onSendContainer(openContainer);
-			} */
-
-		int32_t oldContainerId = player->getContainerID(openContainer);
-		if (oldContainerId == -1) {
-			player->addContainer(index, openContainer);
-			player->onSendContainer(openContainer);
-			if (player->getLevel() >= 50) {
-				std::string containerName = container->getName();
-				std::cout << "Container Name: " << containerName << std::endl;
-				std::size_t found = containerName.find("dead");
-                if (found!=std::string::npos) {
-			    //if (it.corpseType != RACE_NONE) {
-				    uint32_t collectedMoney = 0;
-				    int arr[] = { ITEM_GOLD_COIN, ITEM_PLATINUM_COIN, ITEM_CRYSTAL_COIN }; 
-				    for (Item* containerItem : container->getItemList()) {
-					    bool exists = std::find(std::begin(arr), std::end(arr), containerItem->getID()) != std::end(arr);
-					    if (exists) {
-						    collectedMoney += containerItem->getWorth();
-						    g_game.internalRemoveItem(containerItem);
-					    } else {
-							if (Container* container2 = containerItem->getContainer()) {
-								for (Item* containerItem2 : container2->getItemList()) {
-									bool exists = std::find(std::begin(arr), std::end(arr), containerItem2->getID()) != std::end(arr);
-                                    if (exists) {
-						                collectedMoney += containerItem2->getWorth();
-						                g_game.internalRemoveItem(containerItem2);	
-                                    }
-                                }
-                            }	
-                        }							
-					}
-				
-				
-				    if (collectedMoney > 0) {
-				        player->setBankBalance(player->getBankBalance() + collectedMoney);
-						std::ostringstream ss;
-						ss << "You have added " << collectedMoney << " money to bank balance.";
-				        player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
-				    }
-			    }
 			}
-		} else {
-			player->onCloseContainer(openContainer);
-			player->closeContainer(oldContainerId);
-		}
+
 			return RETURNVALUE_NOERROR;
 		}
 	}

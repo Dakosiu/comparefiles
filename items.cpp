@@ -128,6 +128,10 @@ bool Items::loadItems()
 						items[id].group = ITEM_GROUP_KEY;
 					} else if (identifier == "door") {
 						items[id].type = ITEM_TYPE_DOOR;
+						std::size_t found = items[id].name.find("closed");
+                        if (found!=std::string::npos) {
+						    items[id].blockProjectile = true;
+						}
 					} else if (identifier == "bed") {
 						items[id].type = ITEM_TYPE_BED;
 					} else if (identifier == "rune") {

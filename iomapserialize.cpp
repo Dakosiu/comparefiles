@@ -158,7 +158,12 @@ bool IOMapSerialize::loadItem(PropStream& propStream, Cylinder* parent)
 	if (!propStream.read<uint16_t>(id)) {
 		return false;
 	}
-
+    
+	
+	if (id == 3147) {
+		id = 6093;
+	}
+	
 	Tile* tile = nullptr;
 	if (parent->getParent() == nullptr) {
 		tile = parent->getTile();

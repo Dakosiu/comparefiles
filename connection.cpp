@@ -154,6 +154,59 @@ void Connection::parseHeader(const boost::system::error_code& error)
 	}
 
 	uint16_t size = msg.getLengthHeader();
+
+	// only first packet may contain IP from OTCv8 proxy / haproxy
+	if (!receivedFirstHeader) {
+		receivedFirstHeader = true;
+		// OTCv8 proxy, 6 bytes packet
+		// starts from 2 bytes 0xFFFEu, then 4 bytes with IP uint32_t
+		if (size == 0xFFFEu) {
+			readTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_READ_TIMEOUT));
+			readTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()),
+										   std::placeholders::_1));
+
+			auto self(shared_from_this());
+			boost::asio::async_read(socket,
+									boost::asio::buffer(msg.getBuffer(), 4),
+									[&, self](const boost::system::error_code &error2, size_t) {
+										std::lock_guard<std::recursive_mutex> lockClass(connectionLock);
+										readTimer.cancel();
+										if (error2) {
+											return close();
+										}
+										const uint8_t *msgBuffer = msg.getBuffer();
+										realIP = *(uint32_t *) msgBuffer;
+										isFromOtcProxy = true;
+										accept();
+									});
+			return;
+		}
+
+		// haproxy send-proxy-v2, 26 bytes packet
+		// starts from 2 bytes 0x0A0Du, IP uint32_t starts from 17th byte
+		if (size == 0x0A0Du) {
+			readTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_READ_TIMEOUT));
+			readTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()),
+										   std::placeholders::_1));
+
+			auto self(shared_from_this());
+			boost::asio::async_read(socket,
+									boost::asio::buffer(msg.getBuffer(), 26),
+									[&, self](const boost::system::error_code &error2, size_t) {
+										std::lock_guard<std::recursive_mutex> lockClass(connectionLock);
+										readTimer.cancel();
+										if (error2) {
+											return close();
+										}
+										const uint8_t *msgBuffer = msg.getBuffer();
+										realIP = *(uint32_t * ) & msgBuffer[14];
+										isFromOtcProxy = false;
+										accept();
+									});
+			return;
+		}
+	}
+
 	if (size == 0 || size >= NETWORKMESSAGE_MAXSIZE - 16) {
 		close(FORCE_CLOSE);
 		return;
@@ -237,7 +290,13 @@ void Connection::send(const OutputMessage_ptr& msg)
 	bool noPendingWrite = messageQueue.empty();
 	messageQueue.emplace_back(msg);
 	if (noPendingWrite) {
-		internalSend(msg);
+		try {
+			boost::asio::post(socket.get_executor(), std::bind(&Connection::internalSend, shared_from_this(), msg));
+		} catch (boost::system::system_error& e) {
+			std::cout << "[Network error - Connection::send] " << e.what() << std::endl;
+			messageQueue.clear();
+			close(FORCE_CLOSE);
+		}
 	}
 }
 
@@ -260,6 +319,10 @@ void Connection::internalSend(const OutputMessage_ptr& msg)
 
 uint32_t Connection::getIP()
 {
+	if (realIP > 0) {
+		return realIP;
+	}
+
 	std::lock_guard<std::recursive_mutex> lockClass(connectionLock);
 
 	// IP-address is expressed in network byte order

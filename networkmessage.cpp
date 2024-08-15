@@ -129,9 +129,9 @@ void NetworkMessage::addItem(const Item* item, bool textWindow /* = false*/)
 		if (it.stackable) {
 			addByte(std::min<uint16_t>(0xFF, item->getItemCount()));
 		}
-		else if (it.isRune()) {
+/* 		else if (it.isRune()) {
 			addByte(std::min<uint16_t>(0xFF, item->getCharges()));
-		}
+		} */
 		else if (it.isSplash() || it.isFluidContainer()) {
 			addByte(getLiquidColor(item->getFluidType()));
 		}

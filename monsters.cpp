@@ -130,6 +130,9 @@ std::vector<Item*> MonsterType::createLootItem(const LootBlock& lootBlock, Monst
 	uint32_t randvalue = Monsters::getLootRandom();
 	uint32_t extraMoney = g_config.getNumber(ConfigManager::MONEY_RATE);
 	uint32_t countMax = lootBlock.countmax + 1;
+	
+	
+	
 
 /* std::cout << "Monster Corpse: " << monster->getName() << std::endl;
    std::cout << "Config Ratio: " << g_config.getNumber(ConfigManager::RATE_LOOT) << std::endl;
@@ -143,6 +146,14 @@ std::vector<Item*> MonsterType::createLootItem(const LootBlock& lootBlock, Monst
 	
 /* 	std::cout << "Chance Final: " << chance << std::endl; */
    
+/*     std::cout << "Rand Value: " << randvalue << std::endl;
+	std::cout << "Items.xml Szansa: " << chance << std::endl; */
+	
+   
+/*    if (lootBlock.id == 3386) {
+	   std::cout << "Item Name: " << "Dragon Scale Mail" << std::endl;
+	   std::cout << "Rand Value: " <<  */
+	   
 
 
 	if (randvalue < g_config.getNumber(ConfigManager::RATE_LOOT) * chance) {
@@ -433,9 +444,15 @@ bool Monsters::deserializeSpell(const pugi::xml_node& node, spellBlock_t& sb, co
 			if ((attr = node.attribute("speedchange"))) {
 				speedChange = pugi::cast<int32_t>(attr.value());
 			}
-
+			
 			if ((attr = node.attribute("variation"))) {
 				variation = pugi::cast<int32_t>(attr.value());
+			}
+			
+			if (speedChange < 0) {
+				if (variation > 1) {
+					variation = variation / 2;
+				}
 			}
 
 			ConditionType_t conditionType;

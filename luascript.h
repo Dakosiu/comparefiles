@@ -212,6 +212,7 @@ class LuaScriptInterface
 		int32_t loadFile(const std::string& file, Npc* npc = nullptr);
 
 		const std::string& getFileById(int32_t scriptId);
+		const std::string& getFileByIdForStats(int32_t scriptId);
 		int32_t getEvent(const std::string& eventName);
 		int32_t getMetaEvent(const std::string& globalName, const std::string& eventName);
 
@@ -556,6 +557,7 @@ class LuaScriptInterface
 		static int luaGameCreateItem(lua_State* L);
 		static int luaGameCreateContainer(lua_State* L);
 		static int luaGameCreateMonster(lua_State* L);
+		static int luaGameCreateEliteMonster(lua_State* L);
 		static int luaGameCreateNpc(lua_State* L);
 		static int luaGameCreateTile(lua_State* L);
 
@@ -702,7 +704,8 @@ class LuaScriptInterface
 		static int luaItemGetArmor(lua_State* L);
 		static int luaItemGetDefense(lua_State* L);
 		static int luaItemGetAttack(lua_State* L);
-
+        static int luaItemGetRealUID(lua_State* L);
+		
 		// Container
 		static int luaContainerCreate(lua_State* L);
 
@@ -956,10 +959,8 @@ class LuaScriptInterface
 		
 		static int luaPlayerGetBuff(lua_State* L);
 		
-		static int luaPlayerGetAge(lua_State* L);
-        static int luaPlayerSetAge(lua_State* L);
-		static int luaPlayerAddAge(lua_State* L);
-		
+		static int luaPlayerGetItem(lua_State* L);
+
 		// Monster
 		static int luaMonsterCreate(lua_State* L);
 
@@ -990,6 +991,8 @@ class LuaScriptInterface
 		static int luaMonsterSelectTarget(lua_State* L);
 		static int luaMonsterSearchTarget(lua_State* L);
         static int luaMonsterSetElite(lua_State* L);
+		static int luaMonsterIsElite(lua_State* L);
+		
 		
 		// Npc
 		static int luaNpcCreate(lua_State* L);
@@ -1147,6 +1150,8 @@ class LuaScriptInterface
 		static int luaItemTypeHasSubType(lua_State* L);
 		
 		static int luaItemTypeGetRealSlot(lua_State* L);
+		static int luaItemTypeGetElementType(lua_State* L);
+		static int luaItemTypeGetElementDamage(lua_State* L);
 
 		// Combat
 		static int luaCombatCreate(lua_State* L);

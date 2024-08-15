@@ -62,6 +62,10 @@ void Npcs::reload()
 	const std::map<uint32_t, Npc*>& npcs = g_game.getNpcs();
 
 	for (const auto& it : npcs) {
+		it.second->closeAllShopWindows();
+	}
+
+	for (const auto& it : npcs) {
 		it.second->reload();
 	}
 }
@@ -154,8 +158,59 @@ bool Npc::load()
 			script.readCoordinate(masterPos.x, masterPos.y, masterPos.z);
 		} else if (ident == "radius") {
 			masterRadius = script.readNumber();
-		} else if (ident == "clientversion") {
+		}
+		else if (ident == "clientversion") {
 			clientVersion = script.readNumber();
+		} else if (ident == "shop") {
+			script.readSymbol('{');
+			while (true) {
+				script.nextToken();
+				if (script.Token == SPECIAL) {
+					if (script.getSpecial() == '}') {
+						break;
+					}
+
+					if (script.getSpecial() == ',') {
+						continue;
+					}
+
+					if (script.getSpecial() != '(') {
+						script.error("expected '(' shop entry");
+						return false;
+					}
+
+					int32_t id = script.readNumber();
+
+					script.readSymbol(',');
+
+					int32_t buyPrice = script.readNumber();
+
+					script.readSymbol(',');
+
+					int32_t sellPrice = script.readNumber();
+
+					script.readSymbol(',');
+
+					std::string name = script.readString();
+
+					script.readSymbol(')');
+
+					ShopInfo info;
+					info.buyPrice = buyPrice;
+					info.itemId = id;
+					info.sellPrice = sellPrice;
+					info.subType = 0;
+					info.realName = name;
+					if (name.empty()) {
+						info.realName = Item::items.getItemType(id).name;
+					}
+					cipShopList.push_back(info);
+				} else
+				{
+					script.error("unexpected token");
+					return false;
+				}
+			}
 		} else if (ident == "behaviour") {
 			if (behaviourDatabase) {
 				script.error("behaviour database already defined");
@@ -169,6 +224,8 @@ bool Npc::load()
 		}
 	}
 
+	behaviourDatabase->parseShop();
+
 	script.close();
 	return true;
 }
@@ -178,6 +235,7 @@ void Npc::reset()
 	loaded = false;
 	focusCreature = 0;
 	conversationEndTime = 0;
+	shopPlayerSet.clear();
 
 	if (behaviourDatabase) {
 		delete behaviourDatabase;
@@ -234,6 +292,10 @@ void Npc::onRemoveCreature(Creature* creature, bool isLogout)
 
 	if (!behaviourDatabase) {
 		return;
+	}
+
+	if (creature == this) {
+		closeAllShopWindows();
 	}
 
 	Player* player = creature->getPlayer();
@@ -295,9 +357,208 @@ void Npc::onCreatureSay(Creature* creature, SpeakClasses type, const std::string
 		} else if (focusCreature != player->getID()) {
 			behaviourDatabase->react(SITUATION_BUSY, player, text);
 		} else if (focusCreature == player->getID()) {
+			if (text.find("trade") != std::string::npos && !cipShopList.empty()) {
+				player->setShopOwner(this, 900000001, 900000002);
+				player->openShopWindow(this, cipShopList);
+				doSay("Of course, just browse through my wares.");
+				return;
+			}
+
 			behaviourDatabase->react(SITUATION_NONE, player, text);
 		}
 	}
+}
+
+void Npc::addShopPlayer(Player* player)
+{
+	shopPlayerSet.insert(player);
+}
+
+void Npc::removeShopPlayer(Player* player)
+{
+	shopPlayerSet.erase(player);
+}
+
+void Npc::closeAllShopWindows()
+{
+	while (!shopPlayerSet.empty()) {
+		Player* player = *shopPlayerSet.begin();
+		if (!player->closeShopWindow()) {
+			removeShopPlayer(player);
+		}
+	}
+}
+
+void Npc::onPlayerTrade(Player* player, int32_t callback, uint16_t itemId, int32_t count,
+	uint8_t amount, bool ignore/* = false*/, bool inBackpacks/* = false*/)
+{
+	if (callback == 900000001) { // BUY
+		ItemType& type = Item::items.getItemType(itemId);
+		for (auto& it : cipShopList) {
+			if (it.itemId == itemId && ((type.isFluidContainer() && getLiquidColor(it.subType) == count) || it.subType == count || type.isRune()) && it.buyPrice > 0) {
+				if (it.buyPrice == 0) {
+					doSay("This is an invalid sale on my part. Please report it to a gamemaster.");
+					return;
+				}
+
+				const ItemType& itItem = Item::items.getItemType(itemId);
+
+                uint64_t totalCost = amount * it.buyPrice;
+                if (inBackpacks) {
+                    totalCost = itItem.stackable ? totalCost + 20 : totalCost + (std::max(1, static_cast<int>(std::floor(amount / 20))) * 20);
+                }
+
+				if (player->getMoney() + player->getBankBalance() < totalCost) {
+					doSay("You do not have enough money to buy this item.");
+					return;
+				}
+
+				FILE* file = fopen("data/logs/shoplogs.log", "a");
+				if (!file) {
+					doSay("Contact a gamemaster. Your sale could not be arranged.");
+					return;
+				}
+
+				const Position& playerPosition = player->getPosition();
+				fprintf(file, "%s BUY (Item:%s,ID:%d,SubType:%d,Amount:%d,Price:%d)\n", player->getName().c_str(), itItem.name.c_str(), itemId, count, amount, totalCost);
+				fclose(file);
+
+				static constexpr int32_t MAX_STACK_SIZE = 100;
+
+				if (itItem.charges) {
+					count = itItem.charges;
+				} else {
+					count = it.subType;
+				}
+
+				int32_t b = 0;
+				int32_t a = 0;
+
+				if (itItem.stackable) {
+                    Item* stuff;
+                    if (inBackpacks) {
+						b = 1;
+
+                        stuff = Item::CreateItem(2854, 1);
+                        stuff->getContainer()->addItem(Item::CreateItem(itemId, std::min<int32_t>(MAX_STACK_SIZE, amount)));
+                    } else {
+                        stuff = Item::CreateItem(itemId, std::min<int32_t>(MAX_STACK_SIZE, amount));
+                    }
+
+                    if (g_game.internalPlayerAddItem(player, stuff) != RETURNVALUE_NOERROR) {
+						if (ignore)
+                    		b = b - 1;
+                    } else {
+						a = amount;
+                    }
+				}
+				else if (inBackpacks) {
+					b = 1;
+
+					Container* container = Item::CreateItem(2854, 1)->getContainer();
+
+					for (int i = 1; i <= amount; i++) {
+						container->addItem(Item::CreateItem(itemId, count));
+						std::vector<int32_t> list = { (Item::items[2854].maxItems * b), amount };
+						if (std::find(list.begin(), list.end(), i) != list.end()) {
+							if (g_game.internalPlayerAddItem(player, container) != RETURNVALUE_NOERROR) {
+								if (ignore)
+									b = b - 1;
+								break;
+							}
+
+							a = i;
+							if (amount > i) {
+								container = Item::CreateItem(2854, 1)->getContainer();
+								b = b + 1;
+							}
+						}
+					}
+                } else {
+                    for (int i = 1; i <= amount; i++) {
+                        Item* item = Item::CreateItem(itemId, count);
+                        if (g_game.internalPlayerAddItem(player, item) != RETURNVALUE_NOERROR) {
+							if (ignore)
+								b = b - 1;
+                            break;
+                        }
+						a = i;
+                    }
+                }
+
+				if (a < amount) {
+					if (a == 0) {
+						doSay("You do not have enough space to purchase all of these objects.");
+						break;
+					} else {
+						doSay("You do not have enough space to purchase most objects.");
+					}
+
+					if (a > 0) {
+						totalCost = a * (it.buyPrice + (b * 20));
+
+						std::ostringstream ss;
+						ss << "You have purchased " << static_cast<int32_t>(amount) << " " << itItem.name << (amount > 1 ? "s" : "") << " for " << totalCost << " gold.";
+						player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
+
+						player->removeTotalMoney(totalCost);
+					}
+				} else {
+					totalCost = a * (it.buyPrice + (b * 20));
+
+					std::ostringstream ss;
+					ss << "You have purchased " << static_cast<int32_t>(amount) << " " << itItem.name << (amount > 1 ? "s" : "") << " for " << totalCost << " gold.";
+					player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
+
+					player->removeTotalMoney(totalCost);
+				}
+				break;
+			}
+		}
+	}
+	else if (callback == 900000002) { // SELL
+		for (auto& it : cipShopList) {
+			if (it.itemId == itemId && it.sellPrice > 0) {
+				const ItemType& itemType = Item::items.getItemType(itemId);
+				if (itemType.stackable || !itemType.hasSubType()) {
+					count = -1;
+				}
+
+				if (player->getItemTypeCount(itemId, count) < amount) {
+					doSay("You do not have the asked items.");
+					return;
+				}
+
+				FILE* file = fopen("data/logs/shoplogs.log", "a");
+				if (!file) {
+					doSay("Contact a gamemaster. Your sale could not be arranged.");
+					return;
+				}
+
+				const Position& playerPosition = player->getPosition();
+				fprintf(file, "%s SELL (Item:%s,ID:%d,SubType:%d,Amount:%d,Price:%d)\n", player->getName().c_str(), itemType.name.c_str(), itemId, count, amount, (int)it.sellPrice * amount);
+				fclose(file);
+
+				if (!player->removeItemOfType(itemId, amount, count, true)) {
+					player->removeItemOfType(itemId, amount, count, false);
+				}
+
+				g_game.addMoney(player, it.sellPrice * amount);
+
+				std::ostringstream ss;
+				ss << "You have sold " << static_cast<int32_t>(amount) << " " << itemType.name << (amount > 1 ? "s" : "") << " for " << it.sellPrice * amount << " gold.";
+				player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
+				break;
+			}
+		}
+	}
+
+	player->sendSaleItemList();
+}
+
+void Npc::onPlayerEndTrade(Player* player, int32_t buyCallback, int32_t sellCallback)
+{
+	removeShopPlayer(player);
 }
 
 void Npc::onThink(uint32_t interval)

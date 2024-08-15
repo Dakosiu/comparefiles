@@ -24,7 +24,10 @@ bool PlayerStatistics::load()
 	REGISTER_ENUM(L, STATISTIC_DEXTERITY);
 	REGISTER_ENUM(L, STATISTIC_DEFENCE);
 	REGISTER_ENUM(L, STATISTIC_ENDURANCE);
-
+	REGISTER_ENUM(L, STATISTIC_MAGICDAMAGE);
+    REGISTER_ENUM(L, STATISTIC_PHYSICALDAMAGE);
+	
+	
 	if (luaL_dofile(L, "data/LUA/statistics.lua")) {
 		std::cout << "[Error - PlayerStatistics] " << lua_tostring(L, -1) << std::endl;
 		lua_close(L);

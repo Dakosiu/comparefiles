@@ -497,18 +497,6 @@ class Player final : public Creature, public Cylinder
 		uint32_t getMaxMana() const {
 			return std::max<int32_t>(0, manaMax + varStats[STAT_MAXMANAPOINTS]);
 		}
-		
-		uint32_t getAge() const {
-			return age;
-		}
-		
-		void setAge(uint32_t value) {
-			age = value;
-		}
-		
-		void addAge() {
-			age += 1;
-		}
 
 		Item* getInventoryItem(slots_t slot) const;
 
@@ -525,7 +513,7 @@ class Player final : public Creature, public Cylinder
 
 		void setVarStats(stats_t stat, int32_t modifier);
 		
-		void setVarBuff(uint32_t buff, int32_t modifier) {
+		void setVarBuff(buffs_t buff, int32_t modifier) {
 			varBuffs[buff] += modifier;
 		}
 		
@@ -546,6 +534,8 @@ class Player final : public Creature, public Cylinder
 		}
 
 		uint64_t getMoney() const;
+
+		void removeTotalMoney(uint64_t amount);
 
 		//safe-trade functions
 		void setTradeState(tradestate_t state) {
@@ -575,6 +565,11 @@ class Player final : public Creature, public Cylinder
 		void onWalk(Direction& dir) final;
 		void onWalkAborted() final;
 		void onWalkComplete() final;
+
+		void openShopWindow(Npc* npc, const std::list<ShopInfo>& shop);
+		bool closeShopWindow(bool sendCloseShopWindow = true);
+		bool updateSaleShopList(const Item* item);
+		bool hasShopItemForSale(uint32_t itemId, uint8_t subType) const;
 
 		void stopWalk();
 
@@ -612,7 +607,7 @@ class Player final : public Creature, public Cylinder
 			return std::max<int32_t>(0, skills[skill].level + varSkills[skill]);
 		}
 		
-		uint32_t getBuff(uint32_t value) const {
+		uint16_t getBuff(uint8_t value) const {
 			return std::max<int32_t>(0, varBuffs[value]);
 		}
 		
@@ -649,6 +644,25 @@ class Player final : public Creature, public Cylinder
 		void drainMana(Creature* attacker, int32_t manaLoss);
 		void addManaSpent(uint64_t amount);
 		void addSkillAdvance(skills_t skill, uint64_t count);
+
+		//shop functions
+		void setShopOwner(Npc* owner, int32_t onBuy, int32_t onSell) {
+			shopOwner = owner;
+			purchaseCallback = onBuy;
+			saleCallback = onSell;
+		}
+
+		Npc* getShopOwner(int32_t& onBuy, int32_t& onSell) {
+			onBuy = purchaseCallback;
+			onSell = saleCallback;
+			return shopOwner;
+		}
+
+		const Npc* getShopOwner(int32_t& onBuy, int32_t& onSell) const {
+			onBuy = purchaseCallback;
+			onSell = saleCallback;
+			return shopOwner;
+		}
 
 		int32_t getArmor() const final;
 		int32_t getDefense() final;
@@ -1019,6 +1033,21 @@ class Player final : public Creature, public Cylinder
 				client->sendTradeItemRequest(traderName, item, ack);
 			}
 		}
+		void sendShop(Npc* npc) const {
+			if (client) {
+				client->sendShop(npc, shopItemList);
+			}
+		}
+		void sendSaleItemList() const {
+			if (client) {
+				client->sendSaleItemList(shopItemList);
+			}
+		}
+		void sendCloseShop() const {
+			if (client) {
+				client->sendCloseShop();
+			}
+		}
 		void sendTradeClose() const {
 			if (client) {
 				client->sendCloseTrade();
@@ -1157,6 +1186,8 @@ class Player final : public Creature, public Cylinder
 		{
 			return openContainers;
 		}
+		
+		//Item* getFirstItemById(uint32_t id) const;
 
 	protected:
 		std::forward_list<Condition*> getMuteConditions() const;
@@ -1220,6 +1251,9 @@ class Player final : public Creature, public Cylinder
 		std::vector<OutfitEntry> outfits;
 		GuildWarList guildWarList;
 
+		std::list<ShopInfo> shopItemList;
+		Npc* shopOwner = nullptr;
+
 		std::forward_list<Party*> invitePartyList;
 		std::forward_list<std::string> learnedInstantSpellList;
 		std::forward_list<Condition*> storedConditionList; // TODO: This variable is only temporarily used when logging in, get rid of it somehow
@@ -1269,6 +1303,11 @@ class Player final : public Creature, public Cylinder
 		SchedulerTask* walkTask = nullptr;
 		Town* town = nullptr;
 		Vocation* vocation = nullptr;
+        
+		Item* getItemByUID(uint32_t uid) const;
+
+		int32_t purchaseCallback = 0;
+		int32_t saleCallback = 0;
 
 		uint32_t inventoryWeight = 0;
 		uint32_t capacity = 40000;
@@ -1312,8 +1351,6 @@ class Player final : public Creature, public Cylinder
 		uint8_t magLevelPercent = 0;
 		
 		double criticalChance = 0.0;
-		
-		uint32_t age = 0;
 
 		PlayerSex_t sex = PLAYERSEX_FEMALE;
 		OperatingSystem_t operatingSystem = CLIENTOS_NONE;
@@ -1339,47 +1376,18 @@ class Player final : public Creature, public Cylinder
 			return std::max<int32_t>(PLAYER_MIN_SPEED, std::min<int32_t>(PLAYER_MAX_SPEED, getSpeed()));
 		}
 		void updateBaseSpeed() {
-/* 			if (!hasFlag(PlayerFlag_SetMaxSpeed)) {
+			if (!hasFlag(PlayerFlag_SetMaxSpeed)) {
 				baseSpeed = vocation->getBaseSpeed() + (level - 1);
 			} else {
 				baseSpeed = PLAYER_MAX_SPEED;
-			} */
-			uint32_t base = vocation->getBaseSpeed();
-			uint16_t gain = 2;
-			if (hasFlag(PlayerFlag_SetMaxSpeed)) {
-				baseSpeed = PLAYER_MAX_SPEED;
-			} else if (level < 80) {
-				baseSpeed = base + (gain * (level - 1));
-			} else {
-				uint32_t currentSpeed = base + (gain * (80 - 1));
-				gain = 1;
-			    currentSpeed += gain * (level - 80);
-				baseSpeed = currentSpeed;
-		    }
+			}
 		}
 
 		bool isPromoted() const;
 
 		uint32_t getAttackSpeed() const {
-			uint32_t value = vocation->getAttackSpeed();
-			double multiplier;
-			
-			if (level > 1 && level < 20) {
-				return 1700;
-			}
-			
-			if (level >= 20 && level < 80) {
-				return 1500;
-			}
-			
-			if (level >= 80) {
-				return 1300;
-			}
-			
 			return vocation->getAttackSpeed();
 		}
-		
-		
 		
 		int32_t getCriticalChance() const;
 		int32_t getLifeLeech() const;

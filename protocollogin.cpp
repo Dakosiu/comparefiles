@@ -45,6 +45,11 @@ void ProtocolLogin::disconnectClient(const std::string& message, uint16_t versio
 
 void ProtocolLogin::getCharacterList(uint32_t accountNumber, const std::string& password, uint16_t version)
 {
+	auto connection = getConnection();
+	if (!connection) {
+		return;
+	}
+
 	Account account;
 	if (!IOLoginData::loginserverAuthentication(accountNumber, password, account)) {
 		disconnectClient("Accountnumber or password is not correct.", version);
@@ -74,7 +79,13 @@ void ProtocolLogin::getCharacterList(uint32_t accountNumber, const std::string& 
 	for (uint8_t i = 0; i < size; i++) {
 		output->addString(account.characters[i]);
 		output->addString(g_config.getString(ConfigManager::SERVER_NAME));
-		output->add<uint32_t>(inet_addr(g_config.getString(ConfigManager::IP).c_str()));
+		if (connection->isOtcProxy()) {
+			output->add<uint32_t>(inet_addr("127.0.0.1"));
+		} else if(connection->getRealIP() > 0) {
+			output->add<uint32_t>(inet_addr(g_config.getString(ConfigManager::STATUS_IP).c_str()));
+		} else {
+			output->add<uint32_t>(inet_addr(g_config.getString(ConfigManager::IP).c_str()));
+		}
 		output->add<uint16_t>(g_config.getNumber(ConfigManager::GAME_PORT));
 	}
 

@@ -24,6 +24,7 @@
 #include "enums.h"
 #include "position.h"
 #include "fileloader.h"
+#include <map>
 
 enum SlotPositionBits : uint32_t {
 	SLOTP_WHEREEVER = 0xFFFFFFFF,
@@ -158,7 +159,12 @@ class ItemType
 			return (type == ITEM_TYPE_BED);
 		}
 		bool isRune() const {
-			return type == ITEM_TYPE_RUNE;
+			//return type == ITEM_TYPE_RUNE;
+			std::size_t found = name.find("spell rune");
+			if (found!=std::string::npos) {
+				return true;
+			}
+			return false;
 		}
 		bool hasSubType() const {
 			return (isFluidContainer() || isSplash() || stackable || charges != 0);
@@ -326,6 +332,75 @@ class Items
 		}
 
 		nameMap nameToItems;
+		
+		std::map<int, int> replaceItems{
+          {3147, 17183},
+		  {3148, 17184},
+		  {3149, 17185},
+		  {3150, 17186},
+		  {3151, 17187},
+		  {3152, 17188},
+		  {3153, 17189},
+		  {3154, 17190},
+		  {3155, 17191},
+		  {3156, 17192},	
+          {3157, 17193},
+          {3158, 17194},	
+          {3159, 17195},
+          {3160, 17196},
+          {3161, 17197},
+          {3162, 17198},
+          {3163, 17199},	
+          {3164, 17200},		 
+          {3165, 17201},
+          {3166, 17202},
+          {3167, 17203},
+          {3168, 17204},
+          {3169, 17205},	
+          {3170, 17206},
+          {3171, 17207},		
+          {3172, 17208},
+          {3173, 17209},
+          {3174, 17210},
+          {3175, 17211},	
+          {3176, 17212},
+          {3177, 17213},
+          {3178, 17214},
+          {3179, 17215},
+          {3180, 17216},		
+          {3181, 17217},	
+          {3182, 17218},
+          {3183, 17219},	
+          {3184, 17220},	
+          {3185, 17221},	
+          {3186, 17222},	
+          {3187, 17223},	
+          {3188, 17224},	
+          {3189, 17225},
+          {3190, 17226},		  
+          {3191, 17227},
+          {3192, 17228},
+          {3193, 17229},
+          {3194, 17230},
+          {3195, 17231},			 
+          {3196, 17232},
+          {3197, 17233},
+          {3198, 17234},
+          {3199, 17235},
+          {3200, 17236},		
+          {3201, 17237},
+          {3202, 17238},
+          {3203, 17239},		  
+        };
+				
+		uint32_t getReplaceItemId(uint32_t id) {
+			if (replaceItems[id]) {
+				return replaceItems[id];
+			}
+			return id;
+		}
+		
+
 
 	protected:
 		std::vector<ItemType> items;

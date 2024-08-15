@@ -97,6 +97,7 @@ bool ConfigManager::load()
 	string[LOCATION] = getGlobalString(L, "location", "");
 	string[MOTD] = getGlobalString(L, "motd", "");
 	string[WORLD_TYPE] = getGlobalString(L, "worldType", "pvp");
+	string[STATUS_IP] = getGlobalString(L, "statusIp", "127.0.0.1");
 
 	integer[MAX_PLAYERS] = getGlobalNumber(L, "maxPlayers");
 	integer[PZ_LOCKED] = getGlobalNumber(L, "pzLocked", 60000);
@@ -137,6 +138,14 @@ bool ConfigManager::load()
 	integer[NEWBIE_LEVEL_THRESHOLD] = getGlobalNumber(L, "newbieLevelThreshold", 5);
 	integer[MONEY_RATE] = getGlobalNumber(L, "moneyRate", 1);
 	integer[CLIENT_VERSION] = getGlobalNumber(L, "clientVersion");
+	boolean[CAMS_ENABLED] = getGlobalBoolean(L, "camsEnabled", false);
+	boolean[CAMS_RECORD_INPUT_PACKETS] = getGlobalBoolean(L, "camsRecordInputPackets", false);
+	string[CAMS_DIRECTORY] = getGlobalString(L, "camsDirectory", "cams/");
+	integer[CAMS_MEMORY_BUFFER_PACKETS_NUMBER] = getGlobalNumber(L, "camsMemoryBufferPacketsNumber", 5000);
+	integer[CAMS_CLOSE_CAM_IF_NO_PACKETS_FOR_SECONDS] = getGlobalNumber(L, "camsCloseCamIfNoPacketsForSeconds", 20);
+	integer[STATS_DUMP_INTERVAL] = getGlobalNumber(L, "statsDumpInterval", 30);
+	integer[STATS_SLOW_LOG_TIME] = getGlobalNumber(L, "statsSlowLogTime", 10);
+	integer[STATS_VERY_SLOW_LOG_TIME] = getGlobalNumber(L, "statsVerySlowLogTime", 50);
 
 	loaded = true;
 	lua_close(L);
