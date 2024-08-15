@@ -3753,6 +3753,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 					    } else {
 						    multiplier = 0.25;
 					    }
+						multiplier += attackerPlayer->getCriticalDamage();
 					    damage.value = (damage.value + (damage.value * multiplier));
 					}
 				}

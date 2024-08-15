@@ -93,7 +93,11 @@ bool PlayerStatistics::load()
 			{"distanceSkill", ATTRIBUTE_DISTANCE_SKILL},
 			{"shieldSkill", ATTRIBUTE_SHIELD_SKILL},
 			{"speed", ATTRIBUTE_MOVEMENT_SPEED},
-			{"attackSpeed", ATTRIBUTE_ATTACK_SPEED}
+			{"attackSpeed", ATTRIBUTE_ATTACK_SPEED},
+			{"magicDamage", ATTRIBUTE_MAGIC_DAMAGE},
+			{"criticalDamage", ATTRIBUTE_CRITICAL_DAMAGE},
+			{"criticalChance", ATTRIBUTE_CRITICAL_CHANCE},
+			{"physicalDamage", ATTRIBUTE_PHYSICAL_DAMAGE},
 		};
 
 		Statistics_t id = static_cast<Statistics_t>(lua_tonumber(L, -1));
@@ -103,6 +107,7 @@ bool PlayerStatistics::load()
 		for (auto& [stringNode, statisticId] : m_StatisticAttributes) {
 			lua_getfield(L, -1, stringNode);
 			if (lua_isnumber(L, -1)) {
+				//std::cout << "Value: " << lua_tonumber(L, -1) << std::endl;
 				statisticSkills.skills.emplace(statisticId, lua_tonumber(L, -1));
 			}
 			lua_pop(L, 1);

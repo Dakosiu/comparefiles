@@ -209,6 +209,15 @@ class Creature : virtual public Thing
 					value = maxSpeed;
 				}
 			}
+			
+			
+			if (const Player* player = this->getPlayer()) {
+				if (value < 150) {
+					value = 150;
+				}
+			}
+			
+			
 			return value;
 		}
 		void setSpeed(int32_t varSpeedDelta) {

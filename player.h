@@ -535,8 +535,6 @@ class Player final : public Creature, public Cylinder
 
 		uint64_t getMoney() const;
 
-		void removeTotalMoney(uint64_t amount);
-
 		//safe-trade functions
 		void setTradeState(tradestate_t state) {
 			tradeState = state;
@@ -1389,10 +1387,12 @@ class Player final : public Creature, public Cylinder
 			return vocation->getAttackSpeed();
 		}
 		
-		int32_t getCriticalChance() const;
+		double getCriticalChance() const;
+		double getCriticalDamage() const;
+		
 		int32_t getLifeLeech() const;
 		int32_t getManaLeech() const;
-		int32_t getSpellDamage() const;
+		double getSpellDamage() const;
 
 		static uint8_t getPercentLevel(uint64_t count, uint64_t nextLevelCount);
 		static uint16_t getDropLootPercent();

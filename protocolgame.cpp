@@ -2865,19 +2865,26 @@ void ProtocolGame::sendStatistics()
 
 void ProtocolGame::AddPlayerStatistics(NetworkMessage& msg)
 {
-	msg.addByte(0x60);
+/* 	msg.addByte(0x60);
 	msg.add<uint16_t>(player->getStatisticPoints());
 	for (uint8_t i = STATISTIC_FIRST; i <= STATISTIC_LAST; ++i) {
 		msg.add<uint16_t>(std::min<int32_t>(player->getStatisticLevel(i), std::numeric_limits<uint16_t>::max()));
+		
+		std::cout << "Value Add Statitics 1: " << std::min<int32_t>(player->getStatisticLevel(i), std::numeric_limits<uint16_t>::max()) << std::endl;
 
-		const StatisticSkills& statisticSkills =
-			PlayerStatistics::getInstance().getStatisticsBySkillId(static_cast<Statistics_t>(i));
+		const StatisticSkills& statisticSkills = PlayerStatistics::getInstance().getStatisticsBySkillId(static_cast<Statistics_t>(i));
+		
+		std::cout << "Critical Damage: " << statisticSkills.getCriticalDamage() << std::endl;
+		
+		
+		
 		msg.addByte(statisticSkills.skills.size());
 		for (auto& [statisticId, statisticValue] : statisticSkills.skills) {
 			msg.addByte(statisticId);
-			msg.add<uint16_t>(statisticValue);
+			std::cout << "Value Add Statitics 2: " << statisticValue << std::endl;
+			msg.add<uint32_t>(statisticValue);
 		}
-	}
+	} */
 }
 
 void ProtocolGame::parseAcceptStatistic(NetworkMessage& msg)

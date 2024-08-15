@@ -408,7 +408,7 @@ void Npc::onPlayerTrade(Player* player, int32_t callback, uint16_t itemId, int32
                     totalCost = itItem.stackable ? totalCost + 20 : totalCost + (std::max(1, static_cast<int>(std::floor(amount / 20))) * 20);
                 }
 
-				if (player->getMoney() + player->getBankBalance() < totalCost) {
+				if (player->getMoney() < totalCost) {
 					doSay("You do not have enough money to buy this item.");
 					return;
 				}
@@ -501,7 +501,7 @@ void Npc::onPlayerTrade(Player* player, int32_t callback, uint16_t itemId, int32
 						ss << "You have purchased " << static_cast<int32_t>(amount) << " " << itItem.name << (amount > 1 ? "s" : "") << " for " << totalCost << " gold.";
 						player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 
-						player->removeTotalMoney(totalCost);
+						g_game.removeMoney(player, totalCost);
 					}
 				} else {
 					totalCost = a * (it.buyPrice + (b * 20));
@@ -510,7 +510,7 @@ void Npc::onPlayerTrade(Player* player, int32_t callback, uint16_t itemId, int32
 					ss << "You have purchased " << static_cast<int32_t>(amount) << " " << itItem.name << (amount > 1 ? "s" : "") << " for " << totalCost << " gold.";
 					player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 
-					player->removeTotalMoney(totalCost);
+					g_game.removeMoney(player, totalCost);
 				}
 				break;
 			}

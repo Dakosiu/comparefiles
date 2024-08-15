@@ -706,6 +706,10 @@ class LuaScriptInterface
 		static int luaItemGetAttack(lua_State* L);
         static int luaItemGetRealUID(lua_State* L);
 		
+		
+		static int luaItemGetExtraAttack(lua_State* L);
+		static int luaItemGetExtraDefense(lua_State* L);
+		static int luaItemGetExtraArmor(lua_State* L);
 		// Container
 		static int luaContainerCreate(lua_State* L);
 
@@ -960,6 +964,10 @@ class LuaScriptInterface
 		static int luaPlayerGetBuff(lua_State* L);
 		
 		static int luaPlayerGetItem(lua_State* L);
+		
+		static int luaPlayerGetStatistics(lua_State* L);
+		static int luaPlayerGetStatisticsPoints(lua_State* L);
+		static int luaPlayerGetStatisticValue(lua_State* L);
 
 		// Monster
 		static int luaMonsterCreate(lua_State* L);
@@ -1143,7 +1151,7 @@ class LuaScriptInterface
 		static int luaItemTypeGetVocationString(lua_State* L);
 		static int luaItemTypeHasShowCharges(lua_State* L);
 		static int luaItemTypeGetAbilities(lua_State* L);
-
+		
 		static int luaItemTypeGetMarketBuyStatistics(lua_State* L);
 		static int luaItemTypeGetMarketSellStatistics(lua_State* L);
 
@@ -1152,7 +1160,14 @@ class LuaScriptInterface
 		static int luaItemTypeGetRealSlot(lua_State* L);
 		static int luaItemTypeGetElementType(lua_State* L);
 		static int luaItemTypeGetElementDamage(lua_State* L);
-
+		
+		static int luaItemTypeGetHealthGain(lua_State* L);
+		static int luaItemTypeGetHealthTicks(lua_State* L);
+		static int luaItemTypeGetManaGain(lua_State* L);
+		static int luaItemTypeGetManaTicks(lua_State* L);
+        
+		static int luaItemTypeGetSpeed(lua_State* L);
+		
 		// Combat
 		static int luaCombatCreate(lua_State* L);
 

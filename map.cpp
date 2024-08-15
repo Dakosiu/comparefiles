@@ -675,6 +675,10 @@ bool Map::getPathMatching(const Creature& creature, std::forward_list<Direction>
 				}
 			}
 
+			if (!tile || !neighborNode && tile->hasFlag(TILESTATE_BLOCKSOLID)) {
+				continue;
+			}
+
 			//The cost (g) for this neighbor
 			const int_fast32_t cost = AStarNodes::getMapWalkCost(n, pos);
 			const int_fast32_t extraCost = AStarNodes::getTileWalkCost(creature, tile);

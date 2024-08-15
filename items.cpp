@@ -132,6 +132,10 @@ bool Items::loadItems()
                         if (found!=std::string::npos) {
 						    items[id].blockProjectile = true;
 						}
+						found = items[id].name.find("gate");
+                        if (found!=std::string::npos) {
+						    items[id].blockProjectile = true;
+						}
 					} else if (identifier == "bed") {
 						items[id].type = ITEM_TYPE_BED;
 					} else if (identifier == "rune") {

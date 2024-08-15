@@ -98,11 +98,11 @@ bool Mailbox::sendItem(Item* item) const
 		return false;
 	}
 
-	if (receiver.empty() || townName.empty()) {
+	if (receiver.empty()) {
 		return false;
 	}
 
-	Town* town = g_game.map.towns.getTown(townName);
+	Town* town = g_game.map.towns.getTown("Carlin");
 	if (!town) {
 		return false;
 	}

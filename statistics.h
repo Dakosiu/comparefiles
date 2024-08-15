@@ -13,7 +13,11 @@ enum StatisticAttribute_t {
 	ATTRIBUTE_SHIELD_SKILL = 7,
 	ATTRIBUTE_MOVEMENT_SPEED = 8,
 	ATTRIBUTE_ATTACK_SPEED = 9,
-	ATTRIBUTE_LAST = ATTRIBUTE_ATTACK_SPEED
+	ATTRIBUTE_MAGIC_DAMAGE = 10,
+	ATTRIBUTE_CRITICAL_DAMAGE = 11,
+	ATTRIBUTE_CRITICAL_CHANCE = 12,
+	ATTRIBUTE_PHYSICAL_DAMAGE = 13,
+	ATTRIBUTE_LAST = ATTRIBUTE_PHYSICAL_DAMAGE
 };
 
 struct StatisticLevelPoints {
@@ -24,6 +28,14 @@ struct StatisticLevelPoints {
 
 struct StatisticSkills {
 	uint16_t getValue(StatisticAttribute_t id) const {
+		const auto& it = skills.find(id);
+		if (it == skills.end()) {
+			return 0;
+		}
+		return it->second;
+	}
+	
+	double getValuePercent(StatisticAttribute_t id) const {
 		const auto& it = skills.find(id);
 		if (it == skills.end()) {
 			return 0;
@@ -58,8 +70,20 @@ struct StatisticSkills {
 	uint16_t getAttackSpeed() const {
 		return getValue(ATTRIBUTE_ATTACK_SPEED);
 	}
+	
+	double getCriticalDamage() const {
+		return getValuePercent(ATTRIBUTE_CRITICAL_DAMAGE);
+	}
+	
+	double getCriticalChance() const {
+		return getValuePercent(ATTRIBUTE_CRITICAL_CHANCE);
+	}
+	
+	double getSpellDamage() const {
+		return getValuePercent(ATTRIBUTE_MAGIC_DAMAGE);
+	}
 
-	std::map<StatisticAttribute_t, uint16_t> skills;
+	std::map<StatisticAttribute_t, double> skills;
 };
 
 class PlayerStatistics

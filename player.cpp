@@ -241,9 +241,9 @@ int32_t Player::getArmor() const
 	return armor;
 }
 
-int32_t Player::getCriticalChance() const
+double Player::getCriticalChance() const
 {
-	int value = 0; // base armor
+	double value = 0; // base armor
 
 	static const slots_t handsSlots[] = { CONST_SLOT_RIGHT, CONST_SLOT_LEFT };
 	for (slots_t slot : handsSlots) {
@@ -253,11 +253,38 @@ int32_t Player::getCriticalChance() const
 			if (attr) {
 				value += static_cast<uint32_t>(attr->getInt());
 			}
-			//armor += inventoryItem->getArmor();
 		}
 	}
+	
+	
+	const StatisticSkills& statisticSkills = PlayerStatistics::getInstance().getStatisticsBySkillId(STATISTIC_DEFENCE);
+	double multiplier = statisticSkills.getCriticalChance();
+	uint32_t statisticLevel = getStatisticLevel(STATISTIC_DEFENCE);
+	if (statisticLevel > 0) {
+		value += statisticLevel * multiplier;
+	}
+/* 	std::cout << "Crit Chance Level: " << statisticLevel << std::endl;
+	std::cout << "Multiplier: " << multiplier << std::endl;
+	std::cout << "Mnoznik: " << statisticLevel * multiplier << std::endl; */
+	
+	
+	
+
+	
 
 	return value;
+}
+
+double Player::getCriticalDamage() const
+{
+    double value = 0;
+	const StatisticSkills& statisticSkills = PlayerStatistics::getInstance().getStatisticsBySkillId(STATISTIC_DEXTERITY);
+	double multiplier = statisticSkills.getCriticalDamage();
+	uint32_t statisticLevel = getStatisticLevel(STATISTIC_DEXTERITY);
+	if (statisticLevel > 0) {
+		value += statisticLevel * multiplier;
+	}
+    return value;
 }
 
 int32_t Player::getLifeLeech() const
@@ -298,9 +325,9 @@ int32_t Player::getManaLeech() const
 	return value;
 }
 
-int32_t Player::getSpellDamage() const
+double Player::getSpellDamage() const
 {
-	int32_t value = 0;
+	double value = 0;
 
 	static const slots_t inventorySlots[] = { CONST_SLOT_RIGHT, CONST_SLOT_LEFT, CONST_SLOT_BACKPACK, CONST_SLOT_HEAD, CONST_SLOT_NECKLACE, CONST_SLOT_ARMOR, CONST_SLOT_LEGS, CONST_SLOT_FEET, CONST_SLOT_RING };
 	for (slots_t slot : inventorySlots) {
@@ -311,6 +338,13 @@ int32_t Player::getSpellDamage() const
 				value += static_cast<uint32_t>(attr->getInt());
 			}			
 		}
+	}
+	
+	const StatisticSkills& statisticSkills = PlayerStatistics::getInstance().getStatisticsBySkillId(STATISTIC_MAGICDAMAGE);
+	double multiplier = statisticSkills.getSpellDamage();
+	uint32_t statisticLevel = getStatisticLevel(STATISTIC_MAGICDAMAGE);
+	if (statisticLevel > 0) {
+		value += statisticLevel * multiplier;
 	}
 
 
@@ -4479,33 +4513,6 @@ uint64_t Player::getMoney() const
 	return moneyCount;
 }
 
-void Player::removeTotalMoney(uint64_t amount)
-{
-	uint64_t moneyCount = getMoney();
-	uint64_t balance = getBankBalance();
-
-	if (amount <= moneyCount) {
-		g_game.removeMoney(this, amount);
-	} else if (amount <= (moneyCount + balance)) {
-		if (moneyCount != 0) {
-			g_game.removeMoney(this, moneyCount);
-			uint64_t remains = amount - moneyCount;
-			bankBalance -= remains;
-
-			std::ostringstream ss;
-			ss << "Paid " << moneyCount << " from inventory and " << remains << " from bank account. Your account balance is now " << bankBalance << " gold.";
-			sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
-			return;
-		}
-
-		bankBalance -= amount;
-
-		std::ostringstream ss;
-		ss << "Paid " << amount << " from bank account. Your account balance is now " << bankBalance << " gold.";
-		sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
-	}
-}
-
 size_t Player::getMaxVIPEntries() const
 {
 	if (group->maxVipEntries != 0) {
@@ -4580,6 +4587,10 @@ void Player::updateStatisticById(const Statistics_t statisticId, const int16_t p
 	{
 		case STATISTIC_STRENGTH:
 		{
+			healthMax += points * statisticSkills.getHealth();
+			health += points * statisticSkills.getHealth();
+			g_game.addCreatureHealth(this);
+			sendStats();
 			// Melee skills, no update needed
 			return;
 		}
@@ -4600,18 +4611,19 @@ void Player::updateStatisticById(const Statistics_t statisticId, const int16_t p
 		case STATISTIC_DEFENCE:
 		{
 			// Update maximum health
-			healthMax += points * statisticSkills.getHealth();
-			health += points * statisticSkills.getHealth();
-			g_game.addCreatureHealth(this);
+
 			break;
 		}
 		case STATISTIC_ENDURANCE:
 		{
 			// Update maximum health and cap
-			capacity += points * statisticSkills.getCapacity();
+/* 			capacity += points * statisticSkills.getCapacity();
 			healthMax += points * statisticSkills.getHealth();
-			health += points * statisticSkills.getHealth();
-			g_game.addCreatureHealth(this);
+			health += points * statisticSkills.getHealth(); */
+			baseSpeed += points * statisticSkills.getSpeed();
+			g_game.changeSpeed(this, 0);
+			
+			/* g_game.addCreatureHealth(this); */
 			break;
 		}
 	}
