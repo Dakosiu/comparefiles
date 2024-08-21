@@ -3861,9 +3861,13 @@ end
 CREATURE_INFORMATION = 220
 			
 function Player.getPointsBalance(self)
-	resultId = db.storeQuery("SELECT `"..GameStore.tableName.."` FROM `"..GameStore.table.."` WHERE `id` = " .. self:getAccountId())
-	if not resultId then return 0 end
-	return result.getDataInt(resultId, ""..GameStore.tableName.."")
+	-- resultId = db.storeQuery("SELECT `"..GameStore.tableName.."` FROM `"..GameStore.table.."` WHERE `id` = " .. self:getAccountId())
+	-- if not resultId then return 0 end
+	-- return result.getDataInt(resultId, ""..GameStore.tableName.."")
+	
+	
+	return POINTS_SYSTEM:getAlphaPoints(self)
+	
 end
 
 function Player.setPointsBalance(self, points)
@@ -3911,10 +3915,20 @@ function Creature:sendAttributes(player)
 		sendTable.pointsBalance = self:getPointsBalance()
 		sendTable.chests = {} 
 		
-
-		sendTable.chests[1] = {ammount = self:getStorageValue(Wikipedia.storageTable["Chest"]), icon="/images/game/store/chest_wooden_64"}
-		sendTable.chests[2] = {ammount = self:getStorageValue(Wikipedia.storageTable["Chest2"]), icon="/images/game/store/chest_bronze_64"}
-		sendTable.chests[3] = {ammount = self:getStorageValue(Wikipedia.storageTable["Chest3"]), icon="/images/game/store/chest_artifact_64"}
+        
+		
+		local t = storeIndex[1].offers
+		for i, v in ipairs(t) do
+		    sendTable.chests[i] = {}
+			sendTable.chests[i].ammount = self:getChestCount(v.id)--math.max(0, self:getStorageValue(Wikipedia.storageTable["Chest" .. i]))
+			sendTable.chests[i].icon = v.icon
+			if v.materials then
+			    sendTable.chests[i].materials = v.materials
+			end
+		    --sendTable.chests[i] = {ammount = self:getStorageValue(Wikipedia.storageTable["Chest"]), icon="/images/game/store/chest_wooden_64"}
+		    --sendTable.chests[i] = {ammount = self:getStorageValue(Wikipedia.storageTable["Chest2"]), icon="/images/game/store/chest_bronze_64"}
+		    --sendTable.chests[3] = {ammount = self:getStorageValue(Wikipedia.storageTable["Chest3"]), icon="/images/game/store/chest_artifact_64"}
+		end
 		
 	end
 	

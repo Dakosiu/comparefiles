@@ -124,6 +124,7 @@ function survivalEventDeath.onPrepareDeath(player, killer)
 	if player:findEvent() then 
 		player:addHealth(player:getMaxHealth())
 		player:addMana(player:getMaxMana())
+		DAILY_SYSTEM:addProgress(player, "Daily")
 		QUEUE_ROOM_SYSTEM:removePlayer(player)
 		return false 
 	end

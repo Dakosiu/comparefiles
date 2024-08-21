@@ -341,6 +341,7 @@ function QUEUE_ROOM_SYSTEM:teleportPlayers(eventName, roomID, roomRealID, posTab
 	    local player = Player(v.id) 
 		if player then
 		    player:prepareEventCharacter(v.vocation)
+			print("Vocation: " .. v.vocation)
  			player:addHealth(player:getMaxHealth())
 			player:addMana(player:getMaxMana())
 			if not playerRoomMemory[player:getId()] then
@@ -350,6 +351,7 @@ function QUEUE_ROOM_SYSTEM:teleportPlayers(eventName, roomID, roomRealID, posTab
 			playerRoomMemory[player:getId()].kills = 0
 			playerRoomMemory[player:getId()].asistance = 0
 			playerRoomMemory[player:getId()].eventName = eventName
+			playerRoomMemory[player:getId()].vocation = v.vocation
 			
 			
 			print("Room ID:" .. roomID)

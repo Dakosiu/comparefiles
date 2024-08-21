@@ -3,9 +3,9 @@ function onSay(player, words, param)
 		return true
 	end
 
-	if player:getAccountType() < ACCOUNT_TYPE_GOD then
-		return false
-	end
+	-- if player:getAccountType() < ACCOUNT_TYPE_GOD then
+		-- return false
+	-- end
 
 	if param == "shutdown" then
 		Game.setGameState(GAME_STATE_SHUTDOWN)

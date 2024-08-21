@@ -43,8 +43,8 @@ endif ()
 
 find_package(Threads REQUIRED)
 find_package(PugiXML REQUIRED)
-
-# Selects LuaJIT if user defines or auto-detected
+#find_package(Lua REQUIRED)
+#Selects LuaJIT if user defines or auto-detected
 if (DEFINED USE_LUAJIT AND NOT USE_LUAJIT)
     set(FORCE_LUAJIT ${USE_LUAJIT})
 else ()

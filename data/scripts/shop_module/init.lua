@@ -57,29 +57,101 @@ function onShopCallback(player, opcode, buffer)
 	elseif action == "getGender" then
 		player:sendPlayerGender()
 	elseif action == "openChest" then
-		player:openChest(data['chestId'])
-		player:sendAttributes()
+		player:openChest(data.id, data.count)
+		player:sendAttributes(player)
 	end
 end
 
-function Player.openChest(chest)
---local openChest = 
-    print("Chest ID:" .. chest)
-	for i,child in pairs(storeIndex) do
-	    
-		for _i,_child in pairs(child.offers) do
-		     
-			if _child.actionId and item:getActionId() == _child.actionId then
-				local getData = deepCopy(_child)
-				getData.packageId = nil
-				getData.actionId = nil
-				if player:storeBuyItem(getData) then
-					item:remove()
-					return true
-				end
+
+function Player.addRewards(self, t)
+    for i, v in pairs(t) do
+		if v.type == "alpha points" then
+			if v.count > 0 then
+			    local vocation = v.vocation
+				local t = POINTS_SYSTEM.earnPoints[vocation]
+				print("POINTS TABLE: " .. dump(t))
+				POINTS_SYSTEM:generatePoints(self, v.count, t)
+			    --self:setPointsBalance(self:getPointsBalance() + v.count)
 			end
+		elseif v.type == "item" then
+		    self:addToInventory(v.id, v.count)
 		end
 	end
+end
+
+
+
+function Player.addToInventory(self, id, count)
+	local inventory = self:getStoreInbox()
+	inventory:addItem(id, count, INDEX_WHEREEVER, FLAG_NOLIMIT)
+	--inventory:addItem(id, count)
+	return true
+end
+	
+function Player.sendChestRewards(self, items)
+    local packet = NetworkMessage()
+	local t = {}
+	t.buffer = "displayRewards"
+	t.data = items
+    packet:addByte(0x32)
+    packet:addByte(0x6F) 
+	packet:addString(json.encode(t))
+	packet:sendToPlayer(self)
+	packet:delete()
+end
+
+function Player.openChest(self, index, count)
+    local t = storeIndex[1].offers[index]
+	
+	if not t then
+	    print("This chest has no table yet, return.")
+		return
+	end
+	
+	local player_count = self:getChestCount(t.id)
+	if player_count < 1 then
+	    return
+	end
+	
+	if not self:removeChestCount(index, count) then
+	    return
+	end
+	
+	
+	local rewards = {}
+	
+	for i = 1, count do
+	    local rewardTable = POINTS_SYSTEM:generateRewards(self, t)
+		--print("Reward Table: " .. dump(rewardTable))
+		
+		
+		for i, v in pairs(rewardTable) do
+		    if not rewards[i] then
+			    rewards[i] = {}
+			    rewards[i].count = 0
+				rewards[i].name = v.name
+			    rewards[i].id = v.id
+			end
+			rewards[i].count = rewards[i].count + v.count
+		end
+		--self:sendChestRewards(rewardTable)
+		--print(dump(rewardTable))
+	end
+	self:sendChestRewards(rewards)
+	self:sendAttributes(self)
+	
+	-- local materialsTable = t.materials
+	-- if not materialsTable  then
+	    -- return
+	-- end
+	
+	-- for i, v in ipairs(materialsTable) do
+	    -- self:addToInventory(v.id, v.count)
+		
+	-- end
+	
+    
+
 end
 
 function Player.parseNameChange(self, data)
@@ -248,6 +320,8 @@ function Player.getShopData(self)
 		end
 		filterData[i].offers = newOffers
 	end
+	
+	--print("Filter Data: " .. dump(filterData))
 	repetitiveSend(self, CS_SHOP_SERVERSIDE, "sendStoreData", {data=filterData})
 end
 
@@ -320,7 +394,6 @@ local shopOpenBag = Action()
 
 function shopOpenBag.onUse(player, item, fromPosition, target, toPosition, isHotkey)
 --storage inventory chest
-    print("Chest Here?")
 	for i,child in pairs(storeIndex) do
 		for _i,_child in pairs(child.offers) do
 			if _child.actionId and item:getActionId() == _child.actionId then
@@ -346,6 +419,57 @@ for i,child in pairs(storeIndex) do
 	end
 end
 shopOpenBag:register()
+
+function Player.getChestCount(self, index)
+	local key = Wikipedia.storageTable["Chest"..index]
+	local value = self:getStorageValue(key)
+	if value < 0 then
+	    value = 0
+	end
+	return value
+end
+
+function Player.sendClaimedChest(self, name, image)
+    local t = {}
+	t.buffer = "displayClaimedChest"
+	t.data = {}
+	local text = "YOU'VE EARNED A"
+	if name:lower() == "artifact chest" then
+	    text = text .. "N"
+	end
+	text = text .. " " .. name
+	t.data.text = text
+	t.data.image = image
+	local packet = NetworkMessage()
+	packet:addByte(0x32)
+    packet:addByte(0x71) 
+	packet:addString(json.encode(t))
+	packet:sendToPlayer(self)
+	packet:delete()
+end
+	
+	
+	
+function Player.addChestCount(self, index, count)
+    local key = Wikipedia.storageTable["Chest"..index]
+	local value = self:getChestCount(index)
+	local t = storeIndex[1].offers[index]
+	self:sendClaimedChest(t.name, t.image2)
+	self:sendAttributes(self)
+	return self:setStorageValue(key, value + count)
+end
+
+function Player.removeChestCount(self, index, count)
+    local key = Wikipedia.storageTable["Chest"..index]
+	local value = self:getChestCount(index)
+	if value < 1 then
+	    return false
+	end
+	self:setStorageValue(key, value - count)
+	self:sendAttributes(self)
+	return true
+end
+
 
 function Player.storeBuyItem(self, data)
 	local playerId = self:getId()	
@@ -408,15 +532,25 @@ function Player.storeBuyItem(self, data)
 				io.write(logFormat:format(os.date("%d/%m/%Y %H:%M"), self:getName(), data.name):trim() .. "\n")
 				io.close(file)
 			elseif data.type == GameStore_OfferTypes.OFFER_TYPE_STORAGE then
-				if type(data.id) == "string" then 
-					if not Wikipedia.storageTable[data.id] then
-						return addPlayerEvent(sendMessageBox, 350, playerId, "Error", "Bad storage id in config.")
-					end
-					self:setStorageValue(Wikipedia.storageTable[data.id], math.max(0, self:getStorageValue(Wikipedia.storageTable[data.id])) + data.count)
-					self:sendAttributes(self)
-				else
-					self:setStorageValue(data.id, math.max(0, self:getStorageValue(data.id)) + data.count)
-				end
+			    self:addChestCount(data.id, data.count, data.name, data.image)
+				
+			    --print("Dodao skrzynke")
+			    --print("Reward type storage")
+				-- if type(data.id) == "string" then 
+					-- if not Wikipedia.storageTable[data.id] then
+						-- return addPlayerEvent(sendMessageBox, 350, playerId, "Error", "Bad storage id in config.")
+					-- end
+					-- local count = self:getChestCount(data.id)
+					-- self:addChestCount(data.id, data.count)
+					-- --print("Tu jestem?")
+					-- --self:setStorageValue(Wikipedia.storageTable[data.id], math.max(0, self:getStorageValue(Wikipedia.storageTable[data.id])) + data.count)
+					-- --self:sendAttributes(self)
+				-- else
+				    -- --print("Tu jestem? 2")
+					-- --self:setStorageValue(data.id, math.max(0, self:getStorageValue(data.id)) + data.count)
+				-- end
+				--self:sendAttributes(self)
+				
 			elseif data.type == GameStore_OfferTypes.OFFER_TYPE_OUTFIT then
 
 				if not looktype then
@@ -537,8 +671,8 @@ function Player.storeBuyItem(self, data)
 		self:sendShopBalance()
 		self:sendHideStore()
 		GameStore.insertHistory(self:getAccountId(), data.name, (data.price) * -1)
-		local message = string.format("You have purchased %s for %d points.", data.name, data.price)
-		addPlayerEvent(sendMessageBox, 350, playerId, "Purchase Successfull", message)
+		--local message = string.format("You have purchased %s for %d points.", data.name, data.price)
+		--addPlayerEvent(sendMessageBox, 350, playerId, "Purchase Successfull", message)
 	end
 	return true
 end

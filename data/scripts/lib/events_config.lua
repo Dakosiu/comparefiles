@@ -308,16 +308,16 @@ EVENTS_CONFIG = {
 				[48] =  {monster={name="Helmet Gladiator",		spawnBonus={"spell wave","fire buff"}}, pos={x = 516, y = 583, z = 7}},
 			}, 
 			players = {
-				[1] = {pos={x = 509, y = 564, z = 7},points=50},
-				[2] = {pos={x = 521, y = 564, z = 7},points=40},
-				[3] = {pos={x = 623, y = 564, z = 7},points=30},
-				[4] = {pos={x = 636, y = 577, z = 7},points=0},
-				[5] = {pos={x = 636, y = 589, z = 7},points=0},
-				[6] = {pos={x = 624, y = 601, z = 7},points=0},
-				[7] = {pos={x = 612, y = 601, z = 7},points=0},
-				[8] = {pos={x = 600, y = 601, z = 7},points=0},
-				[9] = {pos={x = 587, y = 588, z = 7},points=0},
-				[10] = {pos={x = 587, y = 576, z = 7},points=0},
+				[1] = {pos={x = 509, y = 564, z = 7},points=50, alphaPoints = 12},
+				[2] = {pos={x = 521, y = 564, z = 7},points=40, alphaPoints = 6},
+				[3] = {pos={x = 623, y = 564, z = 7},points=30, alphaPoints = 4},
+				[4] = {pos={x = 636, y = 577, z = 7},points=0, alphaPoints = 2},
+				[5] = {pos={x = 636, y = 589, z = 7},points=0, alphaPoints = 1},
+				[6] = {pos={x = 624, y = 601, z = 7},points=0, alphaPoints = 0},
+				[7] = {pos={x = 612, y = 601, z = 7},points=0, alphaPoints = 0},
+				[8] = {pos={x = 600, y = 601, z = 7},points=0, alphaPoints = 0},
+				[9] = {pos={x = 587, y = 588, z = 7},points=0, alphaPoints = 0},
+				[10] = {pos={x = 587, y = 576, z = 7},points=0, alphaPoints = 0}
 			},
 			playerEvents = {"event_zone_damage"},
 			doors = {
@@ -408,10 +408,10 @@ EVENTS_CONFIG = {
 				[4] = {monster={name="Gladiator Fisherman",spawnBonus={"spell wave","fire buff"}}, pos={x = 270, y = 657, z = 7}},
 			}, 
 			players = {
-				[1] = {pos={x = 241, y = 676, z = 7}, points = 50},
-				[2] = {pos={x = 270, y = 704, z = 7}, points = 40},
-				[3] = {pos={x = 300, y = 676, z = 7}, points = 30},
-				[4] = {pos={x = 270, y = 647, z = 7}, points = 20},
+				[1] = {pos={x = 241, y = 676, z = 7}, points = 50, alphaPoints = 4},
+				[2] = {pos={x = 270, y = 704, z = 7}, points = 40, alphaPoints = 2},
+				[3] = {pos={x = 300, y = 676, z = 7}, points = 30, alphaPoints = 1},
+				[4] = {pos={x = 270, y = 647, z = 7}, points = 20, alphaPoints = 0},
 			}, 
 			playerEvents = {"event_zone_damage"},
 			doors = {
@@ -477,8 +477,8 @@ EVENTS_CONFIG = {
 				[2] = {monster={name="Helmet Gladiator",spawnBonus={"spell wave","fire buff"}}, pos={x = 319, y = 821, z = 7}},
 			}, 
 			players = {
-				[1] = {pos={x = 330, y = 821, z = 7}, points = 50},
-				[2] = {pos={x = 249, y = 821, z = 7}, points = 25},
+				[1] = {pos={x = 330, y = 821, z = 7}, points = 50, alphaPoints = 2},
+				[2] = {pos={x = 249, y = 821, z = 7}, points = 25, alphaPoints = 0},
 			}, 
 			doors = {
 				[1] = {pos={x = 251, y = 822, z = 7}},
@@ -486,7 +486,14 @@ EVENTS_CONFIG = {
 			}, 
 			level = {1,100}, 
 			roomFrom = {x = 246, y = 809, z = 7}, 
-			roomTo = {x = 334, y = 834, z = 7}
+			roomTo = {x = 334, y = 834, z = 7},
+			
+			rewards = {
+			             --[1] = { type = "alpha points", count = 100 },
+				         [2] = { type = "item", id = 875, count = 7 },
+						 [3] = { type = "item", id = 874, count = 20 },
+						 [4] = { type = "item", id = 873, count = 30 },
+					  }
 		},
 			
 		[34] = { offset={110,0}, copyId=33},
@@ -512,9 +519,15 @@ EVENTS_CONFIG = {
 			name="Rival", 
 			eventStartTimer = 10,
 			players = {
-				[1] = {pos={x = 249, y = 1015, z = 7}, points = 50},
-                [2] = {pos={x = 273, y = 1014, z = 7}, points = 25},
+				[1] = {pos={x = 249, y = 1015, z = 7}, points = 50, alphaPoints = 2},
+                [2] = {pos={x = 273, y = 1014, z = 7}, points = 25, alphaPoints = 0},
 			}, 
+			rewards = {
+			             --[1] = { type = "alpha points", count = 100 },
+				         [2] = { type = "item", id = 875, count = 7 },
+						 [3] = { type = "item", id = 874, count = 20 },
+						 [4] = { type = "item", id = 873, count = 30 },
+					  },
 			doors = {
 				[1] = {pos={x = 252, y = 1015, z = 7}},
 				[2] = {pos={x = 270, y = 1014, z = 7}},

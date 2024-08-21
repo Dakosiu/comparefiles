@@ -88,44 +88,56 @@ storeIndex = {
 		name = 'Recommended', -- name of category
 		id = '1', -- category id
 		offers = {
-			{
-				image = {"128/chest_wooden_128"},
+			[1] = {
+			    image = {"128/chest_wooden_128"},
+				image2 = "/images/newUI/chest_wooden",
 				name = "Wooden Chest",
 				price = 750,
-                id = 0,
-                packageId = 865,
-                actionId = 1240,
-				count = 100,
-				description = "+100 premium points",
+                id = 1,
+				count = 1,
+				description = "Wooden Chest that constains crafting materials.",
+				icon = "/images/game/store/chest_wooden_64",
 				type = GameStore_OfferTypes.OFFER_TYPE_STORAGE,
-				
-				-- Internal variables
 				category_id = "1",
-			},
-			{
+				--rewardsTable = POINTS_SYSTEM.chests[1]
+				},
+			[2] = {
 				image = {"128/chest_bronze_128"},
+				image2 = "/images/newUI/chest_bronze",
                 name = "Bronze Chest",
                 price = 750,
-                packageId = 865,
-                actionId = 1241,
-                id = 0,
+				icon = "/images/game/store/chest_bronze_64",
+				materials = { 
+				                { type = "item", id = 877, count = 3 },
+								{ type = "item", id = 872, count = 10 },
+							},				
+                -- packageId = 865,
+                -- actionId = 1241,
+                id = 2,
                 count = 1,
                 type = GameStore_OfferTypes.OFFER_TYPE_STORAGE,
                 
                 -- Internal variables
                 category_id = "1",
             },
-			{
+			[3] = {
 				image = {"128/chest_artifact_128"},
-                name = "Artifact-Chest",
+                name = "Artifact Chest",
+				image2 = "/images/newUI/chest_artifact",
                 price = 750,
-                id = 0,
+                id = 3,
                 count = 1,
+				icon = "/images/game/store/chest_artifact_64",
+				materials = { 
+				                { type = "item", id = 875, count = 7 },
+								{ type = "item", id = 874, count = 20 },
+								{ type = "item", id = 873, count = 30 },
+							},					
                 type = GameStore_OfferTypes.OFFER_TYPE_STORAGE,
                 
                 -- Internal variables
                 category_id = "1",
-            },
+            }
 		}
 	},
 	[2] = {

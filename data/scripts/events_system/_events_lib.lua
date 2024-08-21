@@ -343,6 +343,8 @@ function finishRoomEvent(eventName, roomId, index)
 			if child:isMonster() then
 				child:remove()
 			elseif child:isPlayer() then
+				DAILY_SYSTEM:addProgress(child, "Daily")
+				
 				if getConfig.playerEvents then
 					for _i, ev in ipairs(getConfig.playerEvents) do
 						child:unregisterEvent(ev)
@@ -511,6 +513,26 @@ function getEventName(name)
     return name
 end
 	
+
+if not REAL_CONFIG_NAME_TABLE then
+    REAL_CONFIG_NAME_TABLE = {}
+end
+
+function getRealConfigByName(name)
+    if REAL_CONFIG_NAME_TABLE[name] then
+	    return REAL_CONFIG_NAME_TABLE[name]
+	end
+    local t = EVENTS_CONFIG.rooms
+	for i, v in pairs(t) do
+	    if v.name and v.name:lower() == name:lower() then
+		    REAL_CONFIG_NAME_TABLE[name] = v
+			return REAL_CONFIG_NAME_TABLE[name]
+		end
+	end
+	return false
+end
+	
+	
 	
 function Player:findEvent(room, vocation, vocation_string)
     local player = self
@@ -548,6 +570,12 @@ function Player:findEvent(room, vocation, vocation_string)
 		--local getKillsPoints = evconfig.killsCombo[kills]
 		local getRewardPoints = getConfig.players[getPlayers].points or 0
 		local kills = playerRoomMemory[player:getId()].kills or 0
+		
+		local comboId = DAILY_SYSTEM:getComboId(player, kills)
+		if comboId > 0 then
+		    DAILY_SYSTEM:addComboProgress(player, id)
+		end
+		
 		local getKillsPoints = evconfig.killsCombo[kills] and evconfig.killsCombo[kills] or 0
 		local getPoints = getRewardPoints + getKillsPoints
 		
@@ -607,7 +635,39 @@ function Player:findEvent(room, vocation, vocation_string)
 		table.insert(getResult, {"Total Points",total.." points"})
 		local divisionValue = { str = DIVISION_SYSTEM:getPointsString(player), value = player:getDivision() }
 		--getResult["Division"] = { str = DIVISION_SYSTEM:getPointsString(player), division = player:getDivision() }
-		repetitiveSend(player, HIGHSCORE_OPCODE, "eventResult",{rewards = {}, result = getResult, members = getMembers, division = divisionValue })
+		
+		local eventTable = QUEUE_ROOM_SYSTEM:getPlayerEvent(player)
+		--print(dump(eventTable))
+		local eventName = eventTable.eventName
+		local finalTable = {}
+		local realEventConfig = getRealConfigByName(eventName)
+		
+
+		    
+		if realEventConfig then
+		    finalTable.rewards = realEventConfig.rewards
+			if not finalTable.rewards then
+			    finalTable.rewards = {}
+			end
+			
+			local alphaPoints = getConfig.players[getPlayers].alphaPoints
+		    if alphaPoints and alphaPoints > 0 then
+			    local vocation = playerRoomMemory[player:getId()].vocation
+				--print("Wokacja: " .. vocation)
+			    local alphaTable = { type = "alpha points", count = alphaPoints, vocation = vocation }
+			    table.insert(finalTable.rewards, alphaTable)
+			end
+			
+			--print(dump(finalTable.rewards))
+			player:addRewards(finalTable.rewards)
+		end
+		finalTable.result = getResult
+		finalTable.members = getMembers
+		finalTable.division = divisionValue
+		
+		
+		
+		repetitiveSend(player, HIGHSCORE_OPCODE, "eventResult", finalTable)
 		
 		eventRoomMemory[roomId].players = eventRoomMemory[roomId].players - 1
 		if eventRoomMemory[roomId].players < 2 then
@@ -896,22 +956,22 @@ function repetitiveSend(player,opcode,action,data)
 	end
 end
 
-function getAlphaPoints(accId)
-	local resultId = db.storeQuery("SELECT `alpha_points` FROM `accounts` WHERE `account_id` = " .. accId)
-	local getValue = 0
-	if resultId then
-		getValue = result.getDataInt(resultId, "alpha_points")
-	end
-	result.free(resultId)
-	print("Points: " .. points)
-	return getValue
-end
+-- function getAlphaPoints(accId)
+	-- local resultId = db.storeQuery("SELECT `alpha_points` FROM `accounts` WHERE `account_id` = " .. accId)
+	-- local getValue = 0
+	-- if resultId then
+		-- getValue = result.getDataInt(resultId, "alpha_points")
+	-- end
+	-- result.free(resultId)
+	-- print("Points: " .. points)
+	-- return getValue
+-- end
 
-function changeAlphaPoints(accId, points)
-	local getValue = getAlphaPoints(accId) + points
-	db.query("UPDATE `accounts` SET `alpha_points` = " .. getValue .. " WHERE `account_id` = " .. accId)
-	return getValue
-end
+-- function changeAlphaPoints(accId, points)
+	-- local getValue = getAlphaPoints(accId) + points
+	-- db.query("UPDATE `accounts` SET `alpha_points` = " .. getValue .. " WHERE `account_id` = " .. accId)
+	-- return getValue
+-- end
 
 function eventStepInCallback(player, position, fromPosition)
 	if not player or player:isInGhostMode() or not playerRoomMemory[player:getId()] then
@@ -1001,11 +1061,11 @@ function Player:prepareEventCharacter(vocation)
 	end
 	
 	
-	print("SKILLS:" .. dump((vocationData.data[getVoc].skills)))
+	--print("SKILLS:" .. dump((vocationData.data[getVoc].skills)))
 	if vocationData.skillsEnabled then
 		for skillId, skillValue in pairs(vocationData.data[getVoc].skills) do
-		    print("SKILL_LEVEL: " .. SKILL_LEVEL)
-			print("Skill ID: " .. skillId)
+		    --print("SKILL_LEVEL: " .. SKILL_LEVEL)
+			--print("Skill ID: " .. skillId)
 			
 			
 			if skillId == SKILL_LEVEL then
