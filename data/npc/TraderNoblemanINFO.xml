@@ -1,0 +1,12 @@
+<npc name="TraderNoblemanINFO" script="infonpc.lua">
+    <look type="13"/>
+    <health>100</health>
+    <talks>
+        <talk type="hello">¡Hola! ¿Te gustaría saber más sobre el juego?</talk>
+        <talk type="game_modes">Cuéntame sobre los modos de juego.</talk>
+        <talk type="forge_nfts">¿Qué es la forja de NFT?</talk>
+        <talk type="nobleman">Háblame del Trader Nobleman y los beneficios del premium.</talk>
+        <talk type="bye">Adiós, ¡nos vemos pronto!</talk>
+    </talks>
+</npc>
+
