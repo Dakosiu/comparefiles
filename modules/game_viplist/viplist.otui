@@ -1,0 +1,94 @@
+VipListLabel < GameLabel
+  margin-top: 2
+  text-offset: 16 0
+  image-rect: 0 0 12 12
+  image-clip: 0 0 12 12
+  image-source: /images/game/viplist/icons
+  font: verdana-11px-monochrome
+  phantom: false
+
+  $first:
+    margin-top: 5
+
+VipWindow < MainWindow
+  id: vipWindow
+  size: 300 600
+  @onEscape: modules.game_viplist.hide()
+
+  Label
+    id: topBar
+    image-source: /images/newUI/header
+    anchors.bottom: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 220 100
+    text: FRIENDS
+    color: #6b2e33
+    font: lithos-pro-26px
+    color: #6b2e33
+    margin-bottom: -16
+    text-offset: 0 30
+    text-align: center
+    phantom: true
+
+  Label
+    id: cornerRight
+    image-source: /images/newUI/rightCornerDeco
+    anchors.bottom: parent.top
+    anchors.left: parent.right
+    size: 50 30
+    margin-bottom: 15
+    margin-right: -2
+    phantom: true
+
+  Label
+    id: cornerLeft
+    image-source: /images/newUI/leftCornerDeco
+    anchors.bottom: parent.top
+    anchors.right: parent.left
+    size: 50 30
+    margin-bottom: 15
+    margin-left: -2
+    phantom: true
+
+  Button
+    id: close2
+    anchors.right: parent.right
+    anchors.top: parent.top
+    font: lithos-pro-26px
+    margin-top: 20 
+    size: 21 20
+    @onClick: modules.game_viplist.hide()
+    image-source: /images/newUI/exit
+    image-clip: 0 0 73 68
+
+    $hover:
+      image-clip: 0 68 73 68
+
+    $pressed:
+      image-clip: 0 68 73 68
+
+  TextEdit
+    id: addText
+    anchors.bottom: contentsPanel.top
+    anchors.left: contentsPanel.left
+    margin-left: 5
+    margin-bottom: 5
+
+  Button
+    id: addButton
+    text: ADD FRIEND
+    anchors.verticalCenter: addText.verticalCenter
+    anchors.left: addText.right
+    margin-left: 10
+    @onClick: modules.game_viplist.addVipButton()
+
+  FlatLabel
+    id: contentsPanel
+    height: 500
+    width: 250
+    anchors.bottom: parent.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    layout: verticalBox
+    padding-left: 5
+    padding-right: 5
+    &onMousePress: modules.game_viplist.onVipListMousePress

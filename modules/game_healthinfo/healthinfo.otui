@@ -1,0 +1,3 @@
+HealthInfoWindow
+  id: healthInfoWindow
+  @onClose: modules.game_healthinfo.onMiniWindowClose()

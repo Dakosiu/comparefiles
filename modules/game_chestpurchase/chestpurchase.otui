@@ -1,0 +1,76 @@
+MainWindow
+  size: 520 450
+  Label
+    id: topBar
+    image-source: /images/newUI/header
+    anchors.bottom: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 260 88
+    text: Chest Claimed
+    color: #6b2e33
+    font: lithos-pro-26px
+    color: #6b2e33
+    margin-bottom: -10
+    text-offset: 0 28
+    text-align: center
+    phantom: true
+  Button
+    id: close
+    anchors.right: parent.right
+    anchors.top: parent.top
+    font: lithos-pro-26px
+    margin-right: 10
+    margin-top: -5
+    size: 21 20
+    @onClick: modules.game_chestpurchase.terminate()
+    image-source: /images/newUI/exit
+    image-clip: 0 0 73 68
+
+    $hover:
+      image-clip: 0 68 73 68
+
+    $pressed:
+      image-clip: 0 68 73 68
+  Header
+    id: chestDescription
+    margin-top: 40
+    anchors.top: parent.top
+    margin-left: 30
+    margin-right: 10
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.left: parent.left
+    anchors.right: parent.right
+    text: "YOU'VE EARNED A ARTIFACT CHEST!"
+    text-wrap: true
+    text-auto-resize: true
+    text-align: center
+    font: lithos-pro-26px
+  Label
+    id: chestImage
+    phantom: true
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: prev.top
+    margin-top: 10
+    image-source: /images/newUI/chest_bronze.png
+    size: 284 284
+  Header
+    id: description
+    margin-top: -30
+    anchors.top: prev.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    margin-left: 50
+    margin-right: 50
+    text-wrap: true
+    text-auto-resize: true
+    text-align: center
+    font: lithos-pro-26px
+    text: "GO TO YOUR INVENTORY TO OPEN IT!"
+  Button
+    id: inventoryButton
+    anchors.top: prev.bottom
+    margin-top: 25
+    anchors.horizontalCenter: parent.horizontalCenter
+    text: "GO TO INVENTORY"
+    width: 155
+    height: 30
+    @onClick: modules.game_inventory.togglePurse(self)

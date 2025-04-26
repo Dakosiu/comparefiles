@@ -1,0 +1,7 @@
+Module
+  name: game_simplequeue
+  sandboxed: true
+  autoload: true
+  scripts: [ game_simplequeue ]
+  @onLoad: init()
+  @onUnload: terminate()

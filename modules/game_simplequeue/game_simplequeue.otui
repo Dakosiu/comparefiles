@@ -1,0 +1,74 @@
+MainWindow
+  size: 300 450
+
+  Label
+    id: topBar
+    image-source: /images/newUI/header
+    anchors.bottom: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 240 88
+    text: FIND MATCH
+    color: #6b2e33
+    font: lithos-pro-26px
+    color: #6b2e33
+    margin-bottom: -10
+    text-offset: 0 28
+    text-align: center
+    phantom: true
+
+  Label
+    text: Game Type:
+    id: gameLabel
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 35
+    margin-left: 50
+    text-auto-resize: true
+
+  Label
+    id: gameId
+    text: DEATHMATH
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-left: 7
+    text-auto-resize: true
+
+
+  Label
+    text: Players:
+    anchors.top: prev.bottom
+    anchors.left: gameLabel.left
+    text-auto-resize: true
+    margin-top: 5
+
+  Label
+    id: gamePlayers
+    text: 666
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-left: 7
+    text-auto-resize: true
+
+  Label
+    text: Status:
+    anchors.top: prev.bottom
+    anchors.left: gameLabel.left
+    text-auto-resize: true
+    margin-top: 5
+
+  Label
+    id: gameStatus
+    text: in Queue
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-left: 7
+    text-auto-resize: true
+
+  Button
+    id: cancelQueue
+    text: Cancel
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    @onClick: removeFromQueue(self)
+
+    

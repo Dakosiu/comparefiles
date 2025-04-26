@@ -1,0 +1,7 @@
+Module
+  name: game_openchest
+  sandboxed: true
+  autoload: true
+  scripts: [ openchest ]
+  @onLoad: init()
+  @onUnload: terminate()

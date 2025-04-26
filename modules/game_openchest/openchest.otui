@@ -1,0 +1,51 @@
+MainWindow
+  size: 500 480
+
+  Label
+    id: topBar
+    image-source: /images/newUI/header
+    anchors.bottom: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 260 88
+    text: Open Chest
+    color: #6b2e33
+    font: lithos-pro-26px
+    color: #6b2e33
+    margin-bottom: -10
+    text-offset: 0 28
+    text-align: center
+    phantom: true
+
+  Panel
+    size: 390 136
+    id: itemsPanel
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-left: 40
+    margin-top: 205
+    padding: 8
+    layout:
+      type: grid
+      cell-size: 34 34
+      flow: true
+      cell-spacing: 8
+    image-source: /images/ui/panel_flat
+    image-border: 5
+
+  Label
+    id: chestImage
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-left: 100
+    margin-top: 20
+    image-source: /images/newUI/chests/Wooden-Chest-open
+    size: 240 240
+
+  Button
+    id: OkButton
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: itemsPanel.bottom
+    text: OK
+    margin-top: 20 
+    size: 120 30
+    @onClick: modules.game_openchest.terminate(self)

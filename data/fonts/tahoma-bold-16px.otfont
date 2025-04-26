@@ -1,0 +1,6 @@
+Font
+  name: tahoma-bold-16px
+  texture: tahoma-bold-16px
+  height: 18
+  glyph-size: 18 18
+  space-width: 5

@@ -1,0 +1,394 @@
+comboPanel < Panel
+  anchors.top: parent.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+  height: 70
+  visible: false
+  Panel
+    id: comboKill
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 20
+    margin-left: 30
+    size: 220 35
+    background-color: #90a969d9
+    Label
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: parent.top
+      margin-top: 10
+      id: title
+      text: "COMBO 4-5 KILLS"
+      text-align: center
+      font: tahoma-bold-16px
+      text-auto-resize: true
+      color: #d1e6e2
+  Button
+    id: claimCombo
+    text: "CLAIM"
+    anchors.top: prev.top
+    anchors.left: prev.right
+    margin-left: 20
+    margin-top: 7
+    $disabled:
+      image-source: /images/ui/disabled button
+    $checked:
+      image-source: /images/ui/claim button
+      image-clip: 0 0 0 0
+
+  Label
+    id: chestImage
+    image-source: /images/newUI/chest_wooden_small
+    anchors.top: parent.top
+    anchors.left: prev.right
+    margin-left: -20
+    margin-top: -20
+    size: 145 118
+
+dailyPanel < Panel
+  id: dailyPanel
+  anchors.top: parent.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+  anchors.bottom: parent.bottom
+  Panel
+    id: chestCount1
+    text: X1
+    anchors.top: parent.top
+    margin-top: 40
+    anchors.horizontalCenter: parent.horizontalCenter
+    background-color: #90a969d9
+    size: 45 20
+  Panel
+    id: dailyChestPanel1
+    phantom: false
+    anchors.top: prev.bottom
+    margin-top: 10
+    anchors.horizontalCenter: parent.horizontalCenter
+    background-color: #90a969d9
+    size: 120 120
+    Label
+      id: chestImage
+      phantom: true
+      image-source: /images/newUI/chest_wooden
+      anchors.top: parent.top
+      anchors.left: parent.left
+      margin-left: -18
+      margin-top: 0
+      size: 142 142
+  Label
+    id: arrowDown1
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: prev.bottom
+    margin-top: 4
+    size: 24 34
+    image-source: /images/newUI/down arrow
+  Panel
+    id: chestCount2
+    text: X1
+    anchors.top: chestCount1.top
+    anchors.right: parent.right
+    margin-right: 57
+    background-color: #90a969d9
+    size: 45 20
+  Panel
+    id: dailyChestPanel2
+    phantom: false
+    anchors.top: prev.bottom
+    margin-top: 10
+    anchors.horizontalCenter: prev.horizontalCenter
+    background-color: #90a969d9
+    size: 120 120
+    Label
+      id: chestImage
+      phantom: true
+      image-source: /images/newUI/chest_wooden
+      anchors.top: parent.top
+      anchors.left: parent.left
+      margin-left: -18
+      margin-top: 0
+      size: 142 142
+  Label
+    id: arrowDown2
+    anchors.horizontalCenter: prev.horizontalCenter
+    anchors.top: prev.bottom
+    margin-top: 4
+    size: 24 34
+    image-source: /images/newUI/down arrow
+  UIProgressBar
+    id: progressBar
+    anchors.top: arrowDown1.bottom
+    margin-top: -125
+    anchors.left: parent.left
+    anchors.right: parent.right
+    image-source: /images/newUI/bar
+    height: 280
+    phantom: true
+    UIProgressBar
+      id: fill
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      image-source: /images/newUI/fill bar
+      margin-top: 133
+      margin-left: 61
+      margin-right: 435
+      height: 11
+      phantom: true
+  Panel
+    id: progressCount
+    text: "7/14"
+    anchors.top: arrowDown2.bottom
+    margin-top: 33
+    anchors.horizontalCenter: parent.horizontalCenter
+    background-color: #90a969d9
+    size: 75 30
+
+weeklyPanel < Panel
+  id: weeklyPanel
+  anchors.top: parent.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+  anchors.bottom: parent.bottom
+  Panel
+    id: chestCount1
+    text: X1
+    anchors.top: parent.top
+    margin-top: 40
+    anchors.horizontalCenter: parent.horizontalCenter
+    background-color: #90a969d9
+    size: 45 20
+  Panel
+    id: weeklyChestPanel1
+    phantom: false
+    anchors.top: prev.bottom
+    margin-top: 10
+    anchors.horizontalCenter: parent.horizontalCenter
+    background-color: #90a969d9
+    size: 120 120
+    Label
+      id: chestImage
+      phantom: true
+      image-source: /images/newUI/chest_wooden
+      anchors.top: parent.top
+      anchors.left: parent.left
+      margin-left: -18
+      margin-top: 0
+      size: 142 142
+  Label
+    id: arrowDown1
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: prev.bottom
+    margin-top: 4
+    size: 24 34
+    image-source: /images/newUI/down arrow
+  Panel
+    id: chestCount2
+    text: X1
+    anchors.top: chestCount1.top
+    anchors.right: parent.right
+    margin-right: 57
+    background-color: #90a969d9
+    size: 45 20
+  Panel
+    id: weeklyChestPanel2
+    phantom: false
+    anchors.top: prev.bottom
+    margin-top: 10
+    anchors.horizontalCenter: prev.horizontalCenter
+    background-color: #90a969d9
+    size: 120 120
+    Label
+      id: chestImage
+      phantom: true
+      image-source: /images/newUI/chest_wooden
+      anchors.top: parent.top
+      anchors.left: parent.left
+      margin-left: -18
+      margin-top: 0
+      size: 142 142
+  Label
+    id: arrowDown2
+    anchors.horizontalCenter: prev.horizontalCenter
+    anchors.top: prev.bottom
+    margin-top: 4
+    size: 24 34
+    image-source: /images/newUI/down arrow
+  UIProgressBar
+    id: progressBar
+    anchors.top: arrowDown1.bottom
+    margin-top: -125
+    anchors.left: parent.left
+    anchors.right: parent.right
+    image-source: /images/newUI/bar
+    height: 280
+    phantom: true
+    UIProgressBar
+      id: fill
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      image-source: /images/newUI/fill bar
+      margin-top: 133
+      margin-left: 61
+      margin-right: 435
+      height: 11
+      phantom: true
+  Panel
+    id: progressCount
+    text: "7/14"
+    anchors.top: arrowDown2.bottom
+    margin-top: 33
+    anchors.horizontalCenter: parent.horizontalCenter
+    background-color: #90a969d9
+    size: 75 30
+
+MainWindow
+  size: 710 465
+  Label
+    id: topBar
+    image-source: /images/newUI/header
+    anchors.bottom: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    size: 260 88
+    text: Missions
+    color: #6b2e33
+    font: lithos-pro-26px
+    color: #6b2e33
+    margin-bottom: -10
+    text-offset: 0 28
+    text-align: center
+    phantom: true
+
+  Button
+    id: close
+    anchors.right: parent.right
+    anchors.top: parent.top
+    font: lithos-pro-26px
+    margin-right: 10
+    margin-top: -5
+    size: 21 20
+    @onClick: modules.game_dailyrewards.terminate()
+    image-source: /images/newUI/exit
+    image-clip: 0 0 73 68
+
+    $hover:
+      image-clip: 0 68 73 68
+
+    $pressed:
+      image-clip: 0 68 73 68
+
+  Panel
+    size: 390 136
+    id: panel1
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 20
+    margin-bottom: 10
+    margin-right: 10
+    margin-left: 10
+    background-color: #c0d2e7
+    Panel
+      id: categoryPanel
+      image-source: /images/ui/panel_flat
+      image-border: 5
+      anchors.bottom: parent.bottom
+      margin-bottom: 3
+      anchors.top: parent.top
+      margin-top: 3
+      anchors.left: parent.left
+      margin-left: 3
+      width: 150
+      Button
+        id: dailyButton
+        text: DAILY
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 35
+        @onClick: modules.game_dailyrewards.displayCategory(self)
+        Label
+          id: redDot
+          anchors.top: parent.top
+          anchors.right: parent.right
+          image-source: /images/ui/red dot
+          size: 18 18
+          margin-right: -5
+          visible: false
+      Button
+        id: weeklyButton
+        text: WEEKLY
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 35
+        @onClick: modules.game_dailyrewards.displayCategory(self)
+        Label
+          id: redDot
+          anchors.top: parent.top
+          anchors.right: parent.right
+          image-source: /images/ui/red dot
+          size: 18 18
+          margin-right: -5
+          visible: false
+      Button
+        id: comboKillsButton
+        text: COMBO KILLS
+        anchors.top: prev.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 35
+        @onClick: modules.game_dailyrewards.displayCategory(self)
+        Label
+          id: redDot
+          anchors.top: parent.top
+          anchors.right: parent.right
+          image-source: /images/ui/red dot
+          size: 18 18
+          margin-right: -5
+          visible: false
+  Panel
+    id: panel2
+    image-source: /images/ui/panel_flat
+    image-border: 5
+    anchors.left: panel1.left
+    margin-left: 160
+    anchors.right: panel1.right
+    margin-right: 5
+    anchors.top: panel1.top
+    margin-top: 3
+    anchors.bottom: panel1.bottom
+    margin-bottom: 3
+    MenuLabel
+      id: categoryDescription
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: parent.top
+      margin-top: 10
+      margin-left: 5
+      margin-right: 5
+      text-wrap: true
+      text-auto-resize: true
+      text-align: center
+      font: lithos-pro-26px
+      text: "PERFORM A COMBO KILL IN SURVIVAL MODE AND EARN INCREDIBLE PRIZES"
+
+    comboPanel
+      anchors.top: prev.bottom
+      margin-top: 10
+      id: comboPanel1
+    comboPanel
+      anchors.top: prev.bottom
+      margin-top: 25
+      id: comboPanel2
+    comboPanel
+      anchors.top: prev.bottom
+      margin-top: 25
+      id: comboPanel3
+    dailyPanel
+      anchors.top: categoryDescription.bottom
+      margin-top: 10
+    weeklyPanel
+      anchors.top: categoryDescription.bottom
+      margin-top: 10
