@@ -1,9 +1,0 @@
-Module
-  name: game_store
-  description: Game premium shop
-  author: InSaiyan#8460
-  sandboxed: true
-  autoload: true
-  scripts: [ store ]
-  @onLoad: init()
-  @onUnload: terminate()

@@ -1,7 +1,0 @@
-Module
-  name: game_dailyrewards
-  sandboxed: true
-  autoload: true
-  scripts: [ dailyrewards ]
-  @onLoad: init()
-  @onUnload: terminate()

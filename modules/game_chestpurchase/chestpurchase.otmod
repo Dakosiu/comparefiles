@@ -1,7 +1,0 @@
-Module
-  name: game_chestpurchase
-  sandboxed: true
-  autoload: true
-  scripts: [ chestpurchase ]
-  @onLoad: init()
-  @onUnload: terminate()

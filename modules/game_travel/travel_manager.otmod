@@ -1,9 +1,0 @@
-Module
-  name: game_travel
-  description: Manage player travel
-  author: InSaiyan#8460
-  autoload: true
-  sandboxed: true
-  scripts: [ travel_manager ]
-  @onLoad: init()
-  @onUnload: terminate()
