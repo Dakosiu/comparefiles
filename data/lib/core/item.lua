@@ -125,10 +125,22 @@ do
 	end
 
 	local function addGenerics(item, it, abilities, ss, begin)
-		local obj = item or it
+		--local obj = item or it
+		local defense = nil
+		local attack = nil
+		if item then
+		    obj = item
+			defense = obj:getDefense2()
+			attack = obj:getAttack2()
+		else
+		    obj = it
+			defense = obj:getDefense()
+			attack = obj:getAttack()
+		end
+		
 		if it:getWeaponType() == WEAPON_DISTANCE and it:getAmmoType() ~= 0 then
 			ss:append(' (Range:%d', obj:getShootRange())
-			local attack = obj:getAttack()
+			--local attack = obj:getAttack()
 			local hitChance = obj:getHitChance()
 			if attack ~= 0 then
 				ss:append(', Atk%s%d', showpos(attack), math.abs(attack))
@@ -140,8 +152,8 @@ do
 
 			begin = false
 		elseif it:getWeaponType() ~= WEAPON_AMMO then
-			local attack = obj:getAttack()
-			local defense = obj:getDefense()
+			--local attack = obj:getAttack()
+			--local defense = obj:getDefense()
 			local extraDefense = obj:getExtraDefense()
 
 			if attack ~= 0 then
@@ -257,13 +269,23 @@ do
 		local subType = subType or (item and item:getSubType() or -1)
 		local text = nil
 		local begin = true
-		local obj = item or it
+		local obj = nil
+		local armor = nil
+		if item then
+		    obj = item
+            armor = obj:getArmor2()
+		else
+		    obj = it
+			armor = obj:getArmor()
+		end
 
 		if item then
 			ss:append(item:getNameDescription(subType, addArticle or true))
 		else
 			ss:append(it:getNameDescription(subType, addArticle or true))
 		end
+		
+		
 
 		if it:isRune() then
 			local rune = Spell(it:getId())
@@ -323,15 +345,63 @@ do
 			if not begin then
 				ss:append(')')
 			end
+			local advancedAttributes = ADVANCED_ATTRIBUTES:getAttributes(item)
+			if advancedAttributes then
+			    ss:append('\n' .. 'Attributes: (')
+				local begin2 = true
+			    for i,v in pairs(advancedAttributes) do
+				    if not begin2 then
+					    ss:append(', ')
+					end
+					local str = ADVANCED_ATTRIBUTES:getAttributeDescription(v.id, v.value)
+					if str then
+				       ss:append(str)
+					end
+					begin2 = false
+				end
+				ss:append(')')
+			else
+			   	if not begin then
+				    ss:append(')')
+			    end
+			end
+			ss:append('\n' .. 'Item Classification: ' .. it:getClassification())
+			
+			
+			
+			
+			
 		elseif obj:getArmor() ~= 0 or it:hasShowAttributes() then
 			if obj:getArmor() ~= 0 then
-				ss:append(' (Arm:%d', obj:getArmor())
+				ss:append(' (Arm:%d', armor)
 				begin = false
 			end
 			begin = addGenerics(item, it, abilities, ss, begin)
-			if not begin then
+			ss:append(')')
+			local advancedAttributes = ADVANCED_ATTRIBUTES:getAttributes(item)
+			if advancedAttributes then
+			    ss:append('\n' .. 'Attributes: (')
+				local begin2 = true
+			    for i,v in pairs(advancedAttributes) do
+					local str = ADVANCED_ATTRIBUTES:getAttributeDescription(v.id, v.value)
+					if str then
+				        if not begin2 then
+					        ss:append(', ')
+					    end					
+				        ss:append(str)
+						begin2 = false
+					end
+				end
 				ss:append(')')
+			else
+			   	if not begin then
+				    ss:append(')')
+			    end
 			end
+			
+			ss:append('\n' .. 'Item Classification: ' .. it:getClassification())
+			
+			
 		elseif it:isContainer() or item and item:isContainer() then
 			local volume = 0
 

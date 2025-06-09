@@ -66,7 +66,7 @@ Item* Item::CreateItem(const uint16_t type, uint16_t count /*= 0*/)
 		} else {
 			newItem = new Item(type, count);
 		}
-
+		
 		newItem->incrementReferenceCounter();
 	}
 
@@ -885,8 +885,16 @@ uint32_t Item::getWeight() const
 {
 	uint32_t weight = getBaseWeight();
 	if (isStackable()) {
-		return weight * std::max<uint32_t>(1, getItemCount());
+		weight = weight * std::max<uint32_t>(1, getItemCount());
 	}
+	
+	double advancedBonus = (double)getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_WEIGHT) / 100;
+	if (advancedBonus > 0) {
+		std::cout << "Weight: " << weight << std::endl;
+		weight = (weight - (weight * advancedBonus));
+		std::cout << "Weight Bonus: " << weight << std::endl;
+	}
+
 	return weight;
 }
 
@@ -1172,7 +1180,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 				s << "speed " << std::showpos << (it.abilities->speed >> 1) << std::noshowpos;
 			}
 		}
-
+		
 		if (!begin) {
 			s << ')';
 		}

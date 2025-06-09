@@ -153,6 +153,7 @@ enum ItemParseAttributes_t {
 	ITEM_PARSE_BLOCKING,
 	ITEM_PARSE_ALLOWDISTREAD,
 	ITEM_PARSE_STOREITEM,
+	ITEM_PARSE_CLASSIFICATION,
 };
 
 struct Abilities {
@@ -328,6 +329,7 @@ class ItemType
 		uint16_t slotPosition = SLOTP_HAND;
 		uint16_t speed = 0;
 		uint16_t wareId = 0;
+		uint8_t classification = 0;
 
 		MagicEffectClasses magicEffect = CONST_ME_NONE;
 		Direction bedPartnerDir = DIRECTION_NONE;

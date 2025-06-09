@@ -6,6 +6,7 @@
 
 #include "luascript.h"
 #include "const.h"
+#include "creature.h"
 
 class Party;
 class ItemType;
@@ -49,6 +50,9 @@ class Events
 		int32_t playerOnLoseExperience = -1;
 		int32_t playerOnGainSkillTries = -1;
 		int32_t playerOnWrapItem = -1;
+		
+		int32_t playerOnEquipItem = -1;
+		int32_t playerOnDeEquipItem = -1;
 
 		// Monster
 		int32_t monsterOnDropLoot = -1;
@@ -91,7 +95,10 @@ class Events
 		void eventPlayerOnLoseExperience(Player* player, uint64_t& exp);
 		void eventPlayerOnGainSkillTries(Player* player, skills_t skill, uint64_t& tries);
 		void eventPlayerOnWrapItem(Player* player, Item* item);
-
+		
+        void eventPlayerOnEquipItem(Player* player, Item* item, slots_t slot);
+        void eventPlayerOnDeEquipItem(Player* player, Item* item, slots_t slot);
+		
 		// Monster
 		void eventMonsterOnDropLoot(Monster* monster, Container* corpse);
 		bool eventMonsterOnSpawn(Monster* monster, const Position& position, bool startup, bool artificial);

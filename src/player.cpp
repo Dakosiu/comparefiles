@@ -350,12 +350,21 @@ int32_t Player::getDefense() const
 
 uint32_t Player::getAttackSpeed() const
 {
+	uint32_t value = 0;
 	const Item* weapon = getWeapon(true);
 	if (!weapon || weapon->getAttackSpeed() == 0) {
-		return vocation->getAttackSpeed();
+		value = vocation->getAttackSpeed();
+	} 
+	else 
+	{
+		value = weapon->getAttackSpeed();
 	}
 
-	return weapon->getAttackSpeed();
+	double multiplier = (double)advancedAttributes[ADVANCED_ATTRIBUTE_PLAYER_ATTACK_INTERVAL] / 100;
+	if (multiplier > 0) {
+	    value = (value - (value * multiplier));
+	}
+	return value;
 }
 
 float Player::getAttackFactor() const
@@ -4612,5 +4621,84 @@ void Player::updateRegeneration()
 		condition->setParam(CONDITION_PARAM_HEALTHTICKS, vocation->getHealthGainTicks() * 1000);
 		condition->setParam(CONDITION_PARAM_MANAGAIN, vocation->getManaGainAmount());
 		condition->setParam(CONDITION_PARAM_MANATICKS, vocation->getManaGainTicks() * 1000);
+	}
+}
+
+void Player::applyAdvancedCondition(Creature* target, uint8_t status)
+{
+	if (!target) {
+		return;
+	}
+	
+	int32_t rounds = 5;
+	int32_t interval = 3000;
+	int32_t damage = advancedAttributes[status];
+	int32_t chance;
+	std::string statusName;
+	
+	ConditionType_t conditionType;
+	uint8_t chanceAttribute;
+	
+	bool isParalyze = false;
+	
+	switch(status) {
+		case ADVANCED_ATTRIBUTE_PLAYER_STATUS_BURNING_AMOUNT: {
+			conditionType = CONDITION_FIRE;
+			chanceAttribute = ADVANCED_ATTRIBUTE_PLAYER_STATUS_BURNING_CHANCE;
+			statusName = "burning";
+			break;
+		}
+		case ADVANCED_ATTRIBUTE_PLAYER_STATUS_POISON_AMOUNT: {
+		    conditionType = CONDITION_POISON;
+			chanceAttribute = ADVANCED_ATTRIBUTE_PLAYER_STATUS_POISON_CHANCE;
+			statusName = "poison";
+			break;
+		}
+		case ADVANCED_ATTRIBUTE_PLAYER_STATUS_ELECTRIFY_AMOUNT: {
+		    conditionType = CONDITION_ENERGY;
+			chanceAttribute = ADVANCED_ATTRIBUTE_PLAYER_STATUS_ELECTRIFY_CHANCE;
+			statusName = "electrify";
+			break;
+		}	
+		case ADVANCED_ATTRIBUTE_PLAYER_STATUS_BLEEDING_AMOUNT: {
+		    conditionType = CONDITION_BLEEDING;
+			chanceAttribute = ADVANCED_ATTRIBUTE_PLAYER_STATUS_BLEEDING_CHANCE;
+			statusName = "bleeding";
+			break;
+		}		
+		case ADVANCED_ATTRIBUTE_PLAYER_STATUS_FREEZING_CHANCE: {
+		    conditionType = CONDITION_PARALYZE;
+			chanceAttribute = status;
+			statusName = "freezing";
+			isParalyze = true;
+			break;
+		}	
+	}
+	
+	chance = advancedAttributes[chanceAttribute];
+	
+	if(normal_random(1, 100) <= chance) {
+		if (!isParalyze) {
+			ConditionDamage* condition = nullptr;
+	        condition = new ConditionDamage(CONDITIONID_COMBAT, conditionType);
+			if (!condition) {
+				return;
+			}
+			condition->setParam(CONDITION_PARAM_OWNER, this->getID());
+			condition->addDamage(rounds, interval, -damage);
+			target->addCondition(condition);
+		} 
+		else
+		{
+            ConditionSpeed* condition = static_cast<ConditionSpeed*>(Condition::createCondition(CONDITIONID_COMBAT, CONDITION_PARALYZE, 0, 0));
+            condition->setParam(CONDITION_PARAM_OWNER, this->getID());
+			condition->setParam(CONDITION_PARAM_TICKS, 20000);
+			condition->setFormulaVars(-1, 80, -1, 80);
+			target->addCondition(condition);
+		}
+					
+		std::stringstream ss;
+		ss << "You have applied " << statusName << " status on " << target->getName();
+		sendTextMessage(MESSAGE_STATUS_DEFAULT, ss.str());
 	}
 }

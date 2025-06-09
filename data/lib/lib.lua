@@ -7,3 +7,11 @@ dofile('data/lib/compat/compat.lua')
 -- Debugging helper function for Lua developers
 dofile('data/lib/debugging/dump.lua')
 dofile('data/lib/debugging/lua_version.lua')
+
+
+dofile('data/lib/json.lua')
+
+
+
+
+dofile('data/lib/item attributes.lib.lua')

@@ -1506,6 +1506,136 @@ void LuaScriptInterface::registerFunctions()
 	registerEnum(ITEM_ATTRIBUTE_WRAPID)
 	registerEnum(ITEM_ATTRIBUTE_STOREITEM)
 	registerEnum(ITEM_ATTRIBUTE_ATTACK_SPEED)
+	
+	
+	
+	
+	//Advanced Attributes Type
+	registerEnum(ADVANCED_ATTRIBUTE_TYPE_STATS)
+    registerEnum(ADVANCED_ATTRIBUTE_TYPE_SKILL)
+    registerEnum(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS)
+    registerEnum(ADVANCED_ATTRIBUTE_TYPE_PLAYER_PROTECTION)
+    registerEnum(ADVANCED_ATTRIBUTE_TYPE_PLAYER_REFLECT)
+    registerEnum(ADVANCED_ATTRIBUTE_TYPE_ITEM)
+	
+	//Advanced Attributes
+	registerEnum(ADVANCED_ATTRIBUTE_SKILL_SWORD_FIGHTING)
+	registerEnum(ADVANCED_ATTRIBUTE_SKILL_AXE_FIGHTING)
+	registerEnum(ADVANCED_ATTRIBUTE_SKILL_CLUB_FIGHTING)
+	registerEnum(ADVANCED_ATTRIBUTE_SKILL_DISTANCE_FIGHTING)
+	registerEnum(ADVANCED_ATTRIBUTE_SKILL_SHIELDING)
+	registerEnum(ADVANCED_ATTRIBUTE_SKILL_MAGIC_LEVEL)
+	registerEnum(ADVANCED_ATTRIBUTE_STAT_MAX_HEALTH)
+	registerEnum(ADVANCED_ATTRIBUTE_STAT_MAX_MANA)
+	
+	registerEnum(ADVANCED_ATTRIBUTE_ITEM_BONUS_COUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_ITEM_ATTACK)
+	registerEnum(ADVANCED_ATTRIBUTE_ITEM_DEFENSE)
+	registerEnum(ADVANCED_ATTRIBUTE_ITEM_ARMOR)
+	registerEnum(ADVANCED_ATTRIBUTE_ITEM_SPEED)
+	registerEnum(ADVANCED_ATTRIBUTE_ITEM_HIT_CHANCE)
+	registerEnum(ADVANCED_ATTRIBUTE_ITEM_WEIGHT)
+	
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_HEALTH_REGENERATION)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_MANA_REGENERATION)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_HEALTH_HEALING)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_MANA_HEALING)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_HEALTH_ABSORB)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_MANA_ABSORB)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_ATTACK_INTERVAL)
+	
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_PROTECTION_PHYSICAL)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_PROTECTION_FIRE)  
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_PROTECTION_ENERGY)  
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_PROTECTION_POISON)     
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_PROTECTION_LIFE_DRAIN)  
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_PROTECTION_MANA_DRAIN)  
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_PROTECTION_ELEMENTS)
+	
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_PHYSICAL_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_PHYSICAL_CHANCE)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_FIRE_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_FIRE_CHANCE)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_ENERGY_AMOUNT)  
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_ENERGY_CHANCE) 
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_POISON_AMOUNT)  
+    registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_POISON_CHANCE)   
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_ELEMENTS_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_REFLECT_ELEMENTS_CHANCE)
+	
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_CRITICAL_HIT_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_CRITICAL_HIT_CHANCE)
+	
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_CRITICAL_SPELL_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_CRITICAL_SPELL_CHANCE)
+	
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_HEALTH_LEECH_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_HEALTH_LEECH_CHANCE)
+	
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_MANA_LEECH_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_MANA_LEECH_CHANCE)
+	
+	
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_STORE)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_BURNING_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_BURNING_CHANCE)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_POISON_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_POISON_CHANCE)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_ELECTRIFY_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_ELECTRIFY_CHANCE)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_BLEEDING_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_BLEEDING_CHANCE)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_FREEZING_AMOUNT)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_STATUS_FREEZING_CHANCE)
+	
+	
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_DODGE)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_ARROW_GUARD)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_PERFURATION)
+	registerEnum(ADVANCED_ATTRIBUTE_PLAYER_CRUSHING_BLOW)
+	
+/* 	registerEnum(ADVANCED_ATTRIBUTE_HEALTH_REGENERATION)
+	registerEnum(ADVANCED_ATTRIBUTE_MANA_REGENERATION)
+	registerEnum(ADVANCED_ATTRIBUTE_HEALING)
+	registerEnum(ADVANCED_ATTRIBUTE_MANA_HEALING)
+	registerEnum(ADVANCED_ATTRIBUTE_ABSORB_HEALTH)
+	registerEnum(ADVANCED_ATTRIBUTE_ABSORB_MANA)
+	registerEnum(ADVANCED_ATTRIBUTE_SPEED)
+	registerEnum(ADVANCED_ATTRIBUTE_PROTECT_PHYSICAL)
+	registerEnum(ADVANCED_ATTRIBUTE_PROTECT_FIRE)
+	registerEnum(ADVANCED_ATTRIBUTE_PROTECT_ENERGY)
+	registerEnum(ADVANCED_ATTRIBUTE_PROTECT_POISON)
+	registerEnum(ADVANCED_ATTRIBUTE_PROTECT_HEALTH_DRAIN)
+	registerEnum(ADVANCED_ATTRIBUTE_PROTECT_MANA_DRAIN)
+	registerEnum(ADVANCED_ATTRIBUTE_PROTECT_ELEMENTS)
+	registerEnum(ADVANCED_ATTRIBUTE_REFLECT_PHYSICAL)
+	registerEnum(ADVANCED_ATTRIBUTE_CRITICAL_HIT)
+	registerEnum(ADVANCED_ATTRIBUTE_CRITICAL_SPELL)
+	registerEnum(ADVANCED_ATTRIBUTE_ATTACK_INTERVAL)
+	registerEnum(ADVANCED_ATTRIBUTE_LIFE_LEECH)
+	registerEnum(ADVANCED_ATTRIBUTE_MANA_LEECH)
+	registerEnum(ADVANCED_ATTRIBUTE_HIT_CHANCE)
+	registerEnum(ADVANCED_ATTRIBUTE_BURNING)
+	registerEnum(ADVANCED_ATTRIBUTE_POISON)
+	registerEnum(ADVANCED_ATTRIBUTE_ELECTRIFY)
+	registerEnum(ADVANCED_ATTRIBUTE_BLEEDING)
+	registerEnum(ADVANCED_ATTRIBUTE_FREEZE)
+	registerEnum(ADVANCED_ATTRIBUTE_DODGE)
+	registerEnum(ADVANCED_ATTRIBUTE_ARROW_GUARD)
+	registerEnum(ADVANCED_ATTRIBUTE_PERFURATION)
+	registerEnum(ADVANCED_ATTRIBUTE_CRUSHING_BLOW)
+	registerEnum(ADVANCED_ATTRIBUTE_DOUBLE_BASH)
+	registerEnum(ADVANCED_ATTRIBUTE_BERSERK)
+	registerEnum(ADVANCED_ATTRIBUTE_MOMENTUM)
+	registerEnum(ADVANCED_ATTRIBUTE_MITIGATION)
+	registerEnum(ADVANCED_ATTRIBUTE_VIBRANCY)
+	registerEnum(ADVANCED_ATTRIBUTE_WEIGHT)
+	registerEnum(ADVANCED_ATTRIBUTE_LAST) 
+	registerEnum(ADVANCED_ATTRIBUTE_NONE)
+	registerEnum(ADVANCED_ATTRIBUTE_ATTACK)
+	registerEnum(ADVANCED_ATTRIBUTE_DEFENSE)
+	registerEnum(ADVANCED_ATTRIBUTE_ARMOR)
+	*/
 
 	registerEnum(ITEM_TYPE_DEPOT)
 	registerEnum(ITEM_TYPE_MAILBOX)
@@ -1646,6 +1776,17 @@ void LuaScriptInterface::registerFunctions()
 	registerEnum(SKILL_FISHING)
 	registerEnum(SKILL_MAGLEVEL)
 	registerEnum(SKILL_LEVEL)
+	
+	registerEnum(SKILL_FIRST)
+	registerEnum(SKILL_LAST)
+	
+	
+	registerEnum(STAT_MAXHITPOINTS)
+	registerEnum(STAT_MAXMANAPOINTS)
+	registerEnum(STAT_SOULPOINTS)
+	registerEnum(STAT_MAGICPOINTS)
+	registerEnum(STAT_FIRST)
+	registerEnum(STAT_LAST)
 
 	registerEnum(SPECIALSKILL_CRITICALHITCHANCE)
 	registerEnum(SPECIALSKILL_CRITICALHITAMOUNT)
@@ -2214,7 +2355,10 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Item", "getCustomAttribute", LuaScriptInterface::luaItemGetCustomAttribute);
 	registerMethod("Item", "setCustomAttribute", LuaScriptInterface::luaItemSetCustomAttribute);
 	registerMethod("Item", "removeCustomAttribute", LuaScriptInterface::luaItemRemoveCustomAttribute);
-
+	
+	registerMethod("Item", "setAdvancedAttribute", LuaScriptInterface::luaItemSetAdvancedAttribute);
+    registerMethod("Item", "getAdvancedAttribute", LuaScriptInterface::luaItemGetAdvancedAttribute);
+	
 	registerMethod("Item", "moveTo", LuaScriptInterface::luaItemMoveTo);
 	registerMethod("Item", "transform", LuaScriptInterface::luaItemTransform);
 	registerMethod("Item", "decay", LuaScriptInterface::luaItemDecay);
@@ -2227,7 +2371,15 @@ void LuaScriptInterface::registerFunctions()
 
 	registerMethod("Item", "setStoreItem", LuaScriptInterface::luaItemSetStoreItem);
 	registerMethod("Item", "isStoreItem", LuaScriptInterface::luaItemIsStoreItem);
-
+	
+	
+	registerMethod("Item", "getAttack2", LuaScriptInterface::luaItemGetAttack);
+	registerMethod("Item", "getDefense2", LuaScriptInterface::luaItemGetDefense);
+	registerMethod("Item", "getArmor2", LuaScriptInterface::luaItemGetArmor);
+    registerMethod("Item", "getHitChance2", LuaScriptInterface::luaItemGetHitChance);
+	
+	
+	
 	// Container
 	registerClass("Container", "Item", LuaScriptInterface::luaContainerCreate);
 	registerMetaMethod("Container", "__eq", LuaScriptInterface::luaUserdataCompare);
@@ -2509,6 +2661,14 @@ void LuaScriptInterface::registerFunctions()
 
 	registerMethod("Player", "getStoreInbox", LuaScriptInterface::luaPlayerGetStoreInbox);
 
+    
+	registerMethod("Player", "sendSkills", LuaScriptInterface::luaPlayerSendSkills);
+	registerMethod("Player", "sendStats", LuaScriptInterface::luaPlayerSendStats);
+
+    registerMethod("Player", "addAdvancedAttribute", LuaScriptInterface::luaPlayerAddAdvancedAttribute);
+	registerMethod("Player", "removeAdvancedAttribute", LuaScriptInterface::luaPlayerRemoveAdvancedAttribute);
+	registerMethod("Player", "getAdvancedAttribute", LuaScriptInterface::luaPlayerGetAdvancedAttribute);
+	
 	// Monster
 	registerClass("Monster", "Creature", LuaScriptInterface::luaMonsterCreate);
 	registerMetaMethod("Monster", "__eq", LuaScriptInterface::luaUserdataCompare);
@@ -2729,6 +2889,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("ItemType", "hasSubType", LuaScriptInterface::luaItemTypeHasSubType);
 
 	registerMethod("ItemType", "isStoreItem", LuaScriptInterface::luaItemTypeIsStoreItem);
+	registerMethod("ItemType", "getClassification", LuaScriptInterface::luaItemTypeGetClassification);
 
 	// Combat
 	registerClass("Combat", "", LuaScriptInterface::luaCombatCreate);
@@ -6638,6 +6799,54 @@ int LuaScriptInterface::luaItemRemoveCustomAttribute(lua_State* L) {
 	}
 	return 1;
 }
+/* 
+int LuaScriptInterface::luaItemGetAdvancedAttribute(lua_State* L) {
+	// item:getAdvancedAttribute(key)
+	Item* item = getUserdata<Item>(L, 1);
+	if (!item) {
+		lua_pushnil(L);
+		return 1;
+	}
+	
+	const ItemAttributes::CustomAttribute* attr;
+	std::stringstream ss;
+    ss << "ADVANCED_ATTRIBUTES" << getNumber<int64_t>(L, 2);
+    attr = item->getCustomAttribute(ss.str());
+	if (attr) {
+		attr->pushToLua(L);
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+} */
+
+int LuaScriptInterface::luaItemGetAdvancedAttribute(lua_State* L)
+{
+	Item* item = getUserdata<Item>(L, 1);
+	if (!item) {
+		lua_pushnil(L);
+		return 1;
+	}
+	
+	lua_pushnumber(L, item->getAdvancedAttribute(getNumber<uint8_t>(L, 2)));
+	return 1;
+}
+
+int LuaScriptInterface::luaItemSetAdvancedAttribute(lua_State* L)
+{
+	Item* item = getUserdata<Item>(L, 1);
+	if (!item) {
+		lua_pushnil(L);
+		return 1;
+	}
+	
+	ItemAttributes::CustomAttribute val;
+	val.set<int64_t>(getNumber<int64_t>(L, 3));
+	item->setAdvancedAttribute(getNumber<int8_t>(L, 2), val);
+	pushBoolean(L, true); 
+	return 1;
+}
+
 
 int LuaScriptInterface::luaItemMoveTo(lua_State* L)
 {
@@ -6840,6 +7049,54 @@ int LuaScriptInterface::luaItemIsStoreItem(lua_State* L)
 	Item* item = getUserdata<Item>(L, 1);
 	if (item) {
 		pushBoolean(L, item->isStoreItem());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int LuaScriptInterface::luaItemGetAttack(lua_State* L)
+{
+	// item:getCount()
+	Item* item = getUserdata<Item>(L, 1);
+	if (item) {
+		lua_pushnumber(L, item->getAttack());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int LuaScriptInterface::luaItemGetDefense(lua_State* L)
+{
+	// item:getCount()
+	Item* item = getUserdata<Item>(L, 1);
+	if (item) {
+		lua_pushnumber(L, item->getDefense());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int LuaScriptInterface::luaItemGetArmor(lua_State* L)
+{
+	// item:getCount()
+	Item* item = getUserdata<Item>(L, 1);
+	if (item) {
+		lua_pushnumber(L, item->getArmor());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int LuaScriptInterface::luaItemGetHitChance(lua_State* L)
+{
+	// item:getCount()
+	Item* item = getUserdata<Item>(L, 1);
+	if (item) {
+		lua_pushnumber(L, item->getHitChance());
 	} else {
 		lua_pushnil(L);
 	}
@@ -10275,6 +10532,81 @@ int LuaScriptInterface::luaPlayerGetStoreInbox(lua_State* L)
 	return 1;
 }
 
+int LuaScriptInterface::luaPlayerAddAdvancedAttribute(lua_State* L)
+{
+	// player:addAdvancedAttribute()
+	Player* player = getUserdata<Player>(L, 1);
+	if (!player) {
+		lua_pushnil(L);
+		return 1;
+	}
+
+    int8_t method = getNumber<int8_t>(L, 2);
+	int8_t attribute = getNumber<int8_t>(L, 3);
+	int8_t value = getNumber<uint8_t>(L, 4);
+	
+	player->addAdvancedAttribute(method, attribute, value);
+	return 1;
+}
+
+int LuaScriptInterface::luaPlayerRemoveAdvancedAttribute(lua_State* L)
+{
+	// player:removeAdvancedAttribute()
+	Player* player = getUserdata<Player>(L, 1);
+	if (!player) {
+		lua_pushnil(L);
+		return 1;
+	}
+    int8_t method = getNumber<int8_t>(L, 2);
+	int8_t attribute = getNumber<int8_t>(L, 3);
+	int8_t value = getNumber<uint8_t>(L, 4);
+	
+	player->removeAdvancedAttribute(method, attribute, value);
+	return 1;
+}
+
+int LuaScriptInterface::luaPlayerGetAdvancedAttribute(lua_State* L)
+{
+	// player:getAdvancedAttribute()
+	Player* player = getUserdata<Player>(L, 1);
+	if (player) {
+		int8_t method = getNumber<int8_t>(L, 2);
+		int8_t attribute = getNumber<int8_t>(L, 3);
+		lua_pushnumber(L, player->getAdvancedAttribute(method, attribute));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int LuaScriptInterface::luaPlayerSendSkills(lua_State* L)
+{
+	// player:sendSkills()
+	Player* player = getUserdata<Player>(L, 1);
+	if (!player) {
+		lua_pushnil(L);
+		return 1;
+	}
+	
+	player->sendSkills();
+	return 1;
+}
+
+int LuaScriptInterface::luaPlayerSendStats(lua_State* L)
+{
+	// player:sendStats()
+	Player* player = getUserdata<Player>(L, 1);
+	if (!player) {
+		lua_pushnil(L);
+		return 1;
+	}
+	
+	player->sendStats();
+	return 1;
+}
+
+
+
 // Monster
 int LuaScriptInterface::luaMonsterCreate(lua_State* L)
 {
@@ -12488,6 +12820,17 @@ int LuaScriptInterface::luaItemTypeIsStoreItem(lua_State* L)
 	const ItemType* itemType = getUserdata<const ItemType>(L, 1);
 	if (itemType) {
 		pushBoolean(L, itemType->storeItem);
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int LuaScriptInterface::luaItemTypeGetClassification(lua_State* L)
+{
+	const ItemType* itemType = getUserdata<const ItemType>(L, 1);
+	if (itemType) {
+		lua_pushnumber(L, itemType->classification);
 	} else {
 		lua_pushnil(L);
 	}

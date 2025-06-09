@@ -180,6 +180,7 @@ class ProtocolGame final : public Protocol
 		void sendStats();
 		void sendBasicData();
 		void sendTextMessage(const TextMessage& message);
+		void sendAnimatedText(const Position& pos, uint8_t color, const std::string& text);
 		void sendReLoginWindow(uint8_t unfairFightReduction);
 
 		void sendTutorial(uint8_t tutorialId);

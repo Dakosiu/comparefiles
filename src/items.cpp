@@ -134,6 +134,7 @@ const std::unordered_map<std::string, ItemParseAttributes_t> ItemParseAttributes
 	{"blocking", ITEM_PARSE_BLOCKING},
 	{"allowdistread", ITEM_PARSE_ALLOWDISTREAD},
 	{"storeitem", ITEM_PARSE_STOREITEM},
+	{"classification", ITEM_PARSE_CLASSIFICATION},
 };
 
 const std::unordered_map<std::string, ItemTypes_t> ItemTypesMap = {
@@ -1352,6 +1353,11 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 
 				case ITEM_PARSE_STOREITEM: {
 					it.storeItem = booleanString(valueAttribute.as_string());
+					break;
+				}
+				//wroc tu
+				case ITEM_PARSE_CLASSIFICATION: {
+					it.classification = pugi::cast<uint32_t>(valueAttribute.value());
 					break;
 				}
 

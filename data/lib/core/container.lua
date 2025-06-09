@@ -11,12 +11,62 @@ function Container.createLootItem(self, item)
 	local randvalue = getLootRandom()
 	local itemType = ItemType(item.itemId)
 	
+	local _applyBonuses = false
+	local bonusCount = 0
+			
 	if randvalue < item.chance then
 		if itemType:isStackable() then
 			itemCount = randvalue % item.maxCount + 1
 		else
 			itemCount = 1
 		end
+		
+		local classification = itemType:getClassification()
+		if classification > 0 then
+		    if ADVANCED_ATTRIBUTES:isInList(itemType:getName():lower()) then
+			    bonusCount = math.random(1, classification)
+		        -- local currentClassification = classification
+		        -- local maxItemChance = 100000
+			    -- local classificationTable = {}
+				-- local factorTable = ADVANCED_ATTRIBUTES:getFactorTable()
+			    -- while factorTable[currentClassification] do
+					-- classificationTable[currentClassification] = {}
+				    -- classificationTable[currentClassification].id = currentClassification
+				    -- classificationTable[currentClassification].factor = CLASSIFICATION_FACTOR[currentClassification].factor
+				    -- currentClassification = currentClassification - 1
+			    -- end
+
+				-- table.sort(classificationTable, function(a, b) return a.factor < b.factor end)
+				
+				-- local rand_factor = math.random(1, 100)
+				
+				-- for i, v in ipairs(classificationTable) do
+				    -- local factor = v.factor
+					-- local chance = 5000 / 100000
+					-- print("Chance: " .. chance)
+					-- local value = (factor / chance)--* 100000
+					-- print("Value1:" .. value)
+					-- --value = value / 100000
+					-- --print("Value2:" .. value)
+					-- local percentage = 100 - value
+					-- print("Percentage: " .. percentage)
+				-- end
+				
+
+				-- for i, v in ipairs(classificationTable) do
+				    -- --if rand_factor <= v.factor then
+					    -- print("Tu jestem 1")
+					    -- bonusCount = v.id
+						-- break
+					-- --end
+				-- end
+				
+				if bonusCount > 0 then
+				    _applyBonuses = true
+				end	
+				
+			end
+		end		
 	end
 
 	while itemCount > 0 do
@@ -56,6 +106,10 @@ function Container.createLootItem(self, item)
 
 		if item.text and item.text ~= "" then
 			tmpItem:setText(item.text)
+		end
+		
+		if _applyBonuses then
+		    ADVANCED_ATTRIBUTES:rollBonuses(tmpItem, bonusCount)
 		end
 
 		local ret = self:addItemEx(tmpItem)

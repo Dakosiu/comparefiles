@@ -96,6 +96,22 @@ using MuteCountMap = std::map<uint32_t, uint32_t>;
 static constexpr int32_t PLAYER_MAX_SPEED = 1500;
 static constexpr int32_t PLAYER_MIN_SPEED = 10;
 
+
+
+
+/* struct AdvancedAttributes {
+	//stats modifiers
+	std::array<int32_t, STAT_LAST + 1> stats = {0};
+	std::array<int32_t, STAT_LAST + 1> statsPercent = {0};
+
+	//extra skill modifiers
+	std::array<int32_t, SKILL_LAST + 1> skills = {0};
+	std::array<int32_t, SPECIALSKILL_LAST + 1> specialSkills = {0};
+};
+	 */
+
+
+
 class Player final : public Creature, public Cylinder
 {
 	public:
@@ -464,13 +480,13 @@ class Player final : public Creature, public Cylinder
 		}
 
 		int32_t getMaxHealth() const override {
-			return std::max<int32_t>(1, healthMax + varStats[STAT_MAXHITPOINTS]);
+			return std::max<int32_t>(1, healthMax + varStats[STAT_MAXHITPOINTS] + advancedStats[STAT_MAXHITPOINTS]);
 		}
 		uint32_t getMana() const {
 			return mana;
 		}
 		uint32_t getMaxMana() const {
-			return std::max<int32_t>(0, manaMax + varStats[STAT_MAXMANAPOINTS]);
+			return std::max<int32_t>(0, manaMax + varStats[STAT_MAXMANAPOINTS] + advancedStats[STAT_MAXMANAPOINTS]);
 		}
 
 		Item* getInventoryItem(slots_t slot) const;
@@ -963,6 +979,13 @@ class Player final : public Creature, public Cylinder
 				client->sendTextMessage(message);
 			}
 		}
+		
+		void sendAnimatedText(const Position& pos, uint8_t color, const std::string& text) const {
+			if (client) {
+				client->sendAnimatedText(pos, color, text);
+			}
+		}
+		
 		void sendReLoginWindow(uint8_t unfairFightReduction) const {
 			if (client) {
 				client->sendReLoginWindow(unfairFightReduction);
@@ -1146,7 +1169,86 @@ class Player final : public Creature, public Cylinder
 		bool hasLearnedInstantSpell(const std::string& spellName) const;
 
 		void updateRegeneration();
-
+				
+		void addAdvancedAttribute(uint8_t method, uint8_t attribute, uint8_t value) {
+		    switch(method) {
+				case ADVANCED_ATTRIBUTE_TYPE_STATS: {
+					setVarStats(static_cast<stats_t>(attribute), value);
+					advancedStats[attribute] += value;
+					return;
+				}
+				case ADVANCED_ATTRIBUTE_TYPE_SKILL: {
+					setVarSkill(static_cast<skills_t>(attribute), value);
+					advancedSkills[attribute] += value;
+					return;
+				}
+				case ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS: {
+					advancedAttributes[attribute] += value;
+					return;
+				}
+				case ADVANCED_ATTRIBUTE_TYPE_PLAYER_PROTECTION: {
+					advancedProtection[attribute] += value;
+					return;
+				}	
+                case ADVANCED_ATTRIBUTE_TYPE_PLAYER_REFLECT: {
+                    advancedReflection[attribute] += value;
+                    return;					
+			    }					
+					
+			}
+        }
+		
+		void removeAdvancedAttribute(uint8_t method, uint8_t attribute, uint8_t value) {
+		    switch(method) {
+				case ADVANCED_ATTRIBUTE_TYPE_STATS: {
+					setVarStats(static_cast<stats_t>(attribute), -value);
+					advancedStats[attribute] -= value;
+					return;
+				}
+				case ADVANCED_ATTRIBUTE_TYPE_SKILL: {
+					setVarSkill(static_cast<skills_t>(attribute), -value);
+					advancedSkills[attribute] -= value;
+					return;
+				}
+				case ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS: {
+					advancedAttributes[attribute] -= value;
+					return;
+				}
+				case ADVANCED_ATTRIBUTE_TYPE_PLAYER_PROTECTION: {
+					advancedProtection[attribute] -= value;
+					return;
+				}	
+                case ADVANCED_ATTRIBUTE_TYPE_PLAYER_REFLECT: {
+                    advancedReflection[attribute] -= value;
+                    return;					
+			    }					
+			}
+        }		
+		
+		int8_t getAdvancedAttribute(uint8_t method, uint8_t attribute) {
+		    switch(method) {
+				case ADVANCED_ATTRIBUTE_TYPE_STATS: {
+					return advancedStats[attribute];
+				}
+				case ADVANCED_ATTRIBUTE_TYPE_SKILL: {
+					return advancedSkills[attribute];
+				}
+				case ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS: {
+					return advancedAttributes[attribute];
+				}
+				case ADVANCED_ATTRIBUTE_TYPE_PLAYER_PROTECTION: {
+					return advancedProtection[attribute];
+				}	
+                case ADVANCED_ATTRIBUTE_TYPE_PLAYER_REFLECT: {
+                    return advancedReflection[attribute];	
+			    }					
+			}
+			return 0;
+        }
+		
+		
+		void applyAdvancedCondition(Creature* target, uint8_t status);
+		
 	private:
 		std::forward_list<Condition*> getMuteConditions() const;
 
@@ -1346,6 +1448,13 @@ class Player final : public Creature, public Cylinder
 		}
 		uint16_t getLookCorpse() const override;
 		void getPathSearchParams(const Creature* creature, FindPathParams& fpp) const override;
+		
+		
+	    std::array<int32_t, SKILL_LAST + 1> advancedSkills = {0};
+		std::array<int32_t, STAT_LAST + 1> advancedStats = {0};
+		std::array<int32_t, ADVANCED_ATTRIBUTE_PLAYER_LAST + 1> advancedAttributes = {0};
+		std::array<int16_t, COMBAT_COUNT> advancedProtection = {0};
+		std::array<int16_t, COMBAT_COUNT> advancedReflection = {0};
 
 		friend class Game;
 		friend class Npc;

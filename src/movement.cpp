@@ -9,7 +9,11 @@
 
 #include "movement.h"
 
+#include "events.h"
+
+
 extern Game g_game;
+extern Events* g_events;
 extern Vocations g_vocations;
 
 MoveEvents::MoveEvents() :
@@ -458,6 +462,11 @@ uint32_t MoveEvents::onCreatureMove(Creature* creature, const Tile* tile, MoveEv
 
 ReturnValue MoveEvents::onPlayerEquip(Player* player, Item* item, slots_t slot, bool isCheck)
 {
+	if (!isCheck) {
+	    //std::cout << "Player Equip?" << std::endl;
+		g_events->eventPlayerOnEquipItem(player, item, slot);
+	}
+	
 	MoveEvent* moveEvent = getEvent(item, MOVE_EVENT_EQUIP, slot);
 	if (!moveEvent) {
 		return RETURNVALUE_NOERROR;
@@ -467,6 +476,7 @@ ReturnValue MoveEvents::onPlayerEquip(Player* player, Item* item, slots_t slot, 
 
 ReturnValue MoveEvents::onPlayerDeEquip(Player* player, Item* item, slots_t slot)
 {
+	g_events->eventPlayerOnDeEquipItem(player, item, slot);
 	MoveEvent* moveEvent = getEvent(item, MOVE_EVENT_DEEQUIP, slot);
 	if (!moveEvent) {
 		return RETURNVALUE_NOERROR;

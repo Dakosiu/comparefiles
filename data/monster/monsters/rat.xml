@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <monster name="Rat" nameDescription="a rat" race="blood" experience="5" speed="134" manacost="200">
-	<health now="20" max="20" />
+	<health now="2000000" max="2000000" />
 	<look type="21" corpse="5964" />
 	<targetchange interval="4000" chance="0" />
 	<flags>
@@ -20,7 +20,6 @@
 		<flag canwalkonpoison="0" />
 	</flags>
 	<attacks>
-		<attack name="melee" interval="2000" min="0" max="-8" />
 	</attacks>
 	<defenses armor="1" defense="1" />
 	<elements>

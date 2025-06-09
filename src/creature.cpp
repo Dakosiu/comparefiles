@@ -822,6 +822,37 @@ BlockType_t Creature::blockHit(Creature* attacker, CombatType_t combatType, int3
 {
 	BlockType_t blockType = BLOCK_NONE;
 
+
+
+    Player* attackerPlayer = attacker->getPlayer();
+	//Player* targetPlayer = this->getPlayer();
+	if (attackerPlayer) {
+		int32_t perfuration = attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_PERFURATION);
+		if (perfuration > 0) {
+			if(normal_random(1, 100) <= perfuration) {
+				std::stringstream ss;
+				ss << "You have applied " << "perfuration" << " status on " << getName();
+				attackerPlayer->sendTextMessage(MESSAGE_STATUS_DEFAULT, ss.str());
+				checkArmor = false;
+			}
+		}
+		int32_t crushingblow = attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_CRUSHING_BLOW);
+		if (crushingblow > 0) {
+			if(normal_random(1, 100) <= crushingblow) {
+				std::stringstream ss;
+				ss << "You have applied " << "crushing blow" << " status on " << getName();
+				attackerPlayer->sendTextMessage(MESSAGE_STATUS_DEFAULT, ss.str());
+				checkDefense = false;
+			}
+		}
+	}
+	
+				
+	
+    
+
+
+
 	if (isImmune(combatType)) {
 		damage = 0;
 		blockType = BLOCK_IMMUNITY;

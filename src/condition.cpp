@@ -827,7 +827,7 @@ void ConditionRegeneration::addCondition(Creature*, const Condition* condition)
 {
 	if (updateCondition(condition)) {
 		setTicks(condition->getTicks());
-
+		
 		const ConditionRegeneration& conditionRegen = static_cast<const ConditionRegeneration&>(*condition);
 
 		healthTicks = conditionRegen.healthTicks;
@@ -878,11 +878,16 @@ bool ConditionRegeneration::executeCondition(Creature* creature, int32_t interva
 		return ConditionGeneric::executeCondition(creature, interval);
 	}
 
+    uint32_t hpValue = healthGain;
+	
 	if (internalHealthTicks >= healthTicks) {
+		Player* player = creature->getPlayer();
+		if (player) {
+			hpValue += player->getAdvancedAttribute(3, ADVANCED_ATTRIBUTE_PLAYER_HEALTH_REGENERATION);
+		}
 		internalHealthTicks = 0;
-
 		int32_t realHealthGain = creature->getHealth();
-		creature->changeHealth(healthGain);
+		creature->changeHealth(hpValue);
 		realHealthGain = creature->getHealth() - realHealthGain;
 
 		if (isBuff && realHealthGain > 0) {
@@ -912,10 +917,11 @@ bool ConditionRegeneration::executeCondition(Creature* creature, int32_t interva
 
 	if (internalManaTicks >= manaTicks) {
 		internalManaTicks = 0;
-
+        uint32_t mpValue = manaGain;
 		if (Player* player = creature->getPlayer()) {
+			mpValue += player->getAdvancedAttribute(3, ADVANCED_ATTRIBUTE_PLAYER_MANA_REGENERATION);
 			int32_t realManaGain = player->getMana();
-			player->changeMana(manaGain);
+			player->changeMana(mpValue);
 			realManaGain = player->getMana() - realManaGain;
 
 			if (isBuff && realManaGain > 0) {

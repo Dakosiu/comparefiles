@@ -3968,7 +3968,7 @@ void Game::combatGetTypeInfo(CombatType_t combatType, Creature* target, TextColo
 }
 
 bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage& damage)
-{
+{	
 	const Position& targetPos = target->getPosition();
 	if (damage.primary.value > 0) {
 		if (target->getHealth() <= 0) {
@@ -3999,6 +3999,12 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 		}
 
 		int32_t realHealthChange = target->getHealth();
+		
+		if (targetPlayer) {
+		   double multiplier = (double)targetPlayer->getAdvancedAttribute(3, ADVANCED_ATTRIBUTE_PLAYER_HEALTH_HEALING) / 100;
+		   damage.primary.value = (damage.primary.value + (damage.primary.value * multiplier));
+		}
+		
 		target->gainHealth(attacker, damage.primary.value);
 		realHealthChange = target->getHealth() - realHealthChange;
 
@@ -4059,12 +4065,16 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 		} else {
 			attackerPlayer = nullptr;
 		}
-
-		Player* targetPlayer = target->getPlayer();
+        
+		Player* targetPlayer;
+		if (target) {
+			targetPlayer = target->getPlayer();
+		}
+		
 		if (attackerPlayer && targetPlayer && attackerPlayer->getSkull() == SKULL_BLACK && attackerPlayer->getSkullClient(targetPlayer) == SKULL_NONE) {
 			return false;
 		}
-
+		
 		damage.primary.value = std::abs(damage.primary.value);
 		damage.secondary.value = std::abs(damage.secondary.value);
 
@@ -4152,7 +4162,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			return true;
 		}
 
-		if (damage.origin != ORIGIN_NONE) {
+		if (damage.origin != ORIGIN_NONE && damage.origin != ORIGIN_REFLECT) {
 			const auto& events = target->getCreatureEvents(CREATURE_EVENT_HEALTHCHANGE);
 			if (!events.empty()) {
 				for (CreatureEvent* creatureEvent : events) {
@@ -4170,16 +4180,196 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 		} else if (damage.secondary.value) {
 			damage.secondary.value = std::min<int32_t>(damage.secondary.value, targetHealth - damage.primary.value);
 		}
-
+		
 		realDamage = damage.primary.value + damage.secondary.value;
 		if (realDamage == 0) {
 			return true;
 		}
+		
+		
+		///wroc tu
+        
+		bool isCritical = false;
+		bool isDodge = false;
+		bool isCriticalSpell = false;
+		bool isArrowGuard = false;
+		int32_t reducedDamage;
+		
+		if (targetPlayer && attacker) {
+		    if (damage.primary.type == COMBAT_PHYSICALDAMAGE) {
 
+				//std::cout << "Attacker: " << attacker->getName() << std::endl;
+				//std::cout << "Osoba Atakowana: " << targetPlayer->getName() << std::endl;
+				double multiplier = (double)targetPlayer->getAdvancedAttribute(3, ADVANCED_ATTRIBUTE_PLAYER_HEALTH_ABSORB) / 100;
+				if (multiplier > 0) {
+					CombatDamage absorbDamage;
+					absorbDamage.origin = ORIGIN_SPELL;
+					absorbDamage.primary.type = COMBAT_HEALING;
+					
+					//std::cout << "Real Damage:" << realDamage << std::endl;
+					//std::cout << "Absorb Damage: " << static_cast<int32_t>(realDamage * multiplier) << std::endl;
+					
+                    absorbDamage.primary.value = static_cast<int32_t>(realDamage * multiplier);
+					return combatChangeHealth(attacker, target, absorbDamage);
+				}
+				int32_t value = targetPlayer->getAdvancedAttribute(3, ADVANCED_ATTRIBUTE_PLAYER_DODGE);
+				if (value > 0) {
+					if(normal_random(1, 100) <= value) {
+						isDodge = true;
+						realDamage = 0;
+						damage.primary.value = 0;
+					}
+				}
+		    } 
+			else 
+			{
+				double multiplier = (double)targetPlayer->getAdvancedAttribute(3, ADVANCED_ATTRIBUTE_PLAYER_MANA_ABSORB) / 100;
+				if (multiplier > 0) {
+					CombatDamage absorbDamage;
+					absorbDamage.origin = ORIGIN_SPELL;
+					absorbDamage.primary.type = COMBAT_MANADRAIN;
+					
+/* 					std::cout << "Real Damage:" << realDamage << std::endl;
+					std::cout << "Absorb Damage: " << static_cast<int32_t>(realDamage * multiplier) << std::endl; */
+					
+                    absorbDamage.primary.value = static_cast<int32_t>(realDamage * multiplier);
+					return combatChangeMana(attacker, target, absorbDamage);
+				}
+            }				
+			
+			
+			double resist = (double)targetPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_PROTECTION, combatTypeToIndex(damage.primary.type)) / 100;
+			//std::cout << "Resist: " << resist << std::endl;	
+			if (damage.primary.type == COMBAT_ENERGYDAMAGE || damage.primary.type == COMBAT_EARTHDAMAGE || damage.primary.type == COMBAT_FIREDAMAGE) {	
+			    resist += (double)targetPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_PROTECTION_ELEMENTS) / 100;
+				//std::cout << "Additional Resist: " << resist << std::endl;
+		    }			
+			//std::cout << "Damage Before: " << realDamage << std::endl;
+			//std::cout << "Resist: " << resist << std::endl;			
+			//std::cout << "Combat Index:" << combatTypeToIndex(damage.primary.type) << std::endl;
+			realDamage = (realDamage - (realDamage * resist));
+			damage.primary.value = (damage.primary.value - (damage.primary.value * resist));
+			//std::cout << "Damage After: " << realDamage << std::endl;
+			
+			
+			
+			int32_t reflectChance = targetPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_REFLECT, combatTypeToIndex(damage.primary.type));
+			reflectChance += targetPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_REFLECT_ELEMENTS_CHANCE);
+			
+			if (reflectChance > 0) {
+				double reflect = (double)targetPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_REFLECT, combatTypeToIndex(damage.primary.type)) / 100;
+				reflect += (double)targetPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_REFLECT_ELEMENTS_AMOUNT) / 100;
+			    if (reflect > 0 && damage.origin != ORIGIN_REFLECT) {
+				    CombatDamage reflectDamage;
+				    reflectDamage.origin = ORIGIN_REFLECT;
+				    reflectDamage.primary.type = damage.primary.type;
+				    reflectDamage.primary.value = static_cast<int32_t>(-damage.primary.value * reflect);
+				    combatChangeHealth(target, attacker, reflectDamage);
+				}
+			}
+			
+			//wroc tu fast
+			if (damage.origin == ORIGIN_RANGED) {
+				double arrowguard = (double)targetPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_ARROW_GUARD) / 100;
+				if (arrowguard > 0 && !isDodge) {
+					std::cout << "Damage Before: " << realDamage << std::endl;
+					damage.primary.value = (damage.primary.value - (damage.primary.value * arrowguard));
+					realDamage = (realDamage - (realDamage * arrowguard));
+					reducedDamage = realDamage * arrowguard;
+					isArrowGuard = true;
+				}
+			}
+				
+				
+			
+			
+			
+		}
+		
+
+		
+		
+		if (attackerPlayer && target) {
+			//double chance = 100;
+			if (damage.primary.type == COMBAT_PHYSICALDAMAGE) {
+			    int32_t criticalhitChance = attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_CRITICAL_HIT_CHANCE);
+				if (criticalhitChance > 0) {
+					if(normal_random(1, 100) <= criticalhitChance) {
+					std::cout << "Damage Before: " << damage.primary.value << std::endl;
+					std::cout << "Real Damage Before: " << realDamage << std::endl;
+					isCritical = true;
+					double multiplier = (double)attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_CRITICAL_HIT_AMOUNT) / 100; 
+					damage.primary.value = (damage.primary.value + (damage.primary.value * multiplier));
+					realDamage = (realDamage + (realDamage * multiplier));
+					std::cout << "Damage After: " << damage.primary.value << std::endl;
+					std::cout << "Real Damage After: " << realDamage << std::endl;
+				  }
+				}
+				
+				int32_t lifeleechChance = attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_HEALTH_LEECH_CHANCE) / 100;
+				if (lifeleechChance > 0) {
+					if(normal_random(1, 100) <= lifeleechChance) {
+						double multiplier = (double)attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_HEALTH_LEECH_AMOUNT) / 100; 
+					    std::cout << "Leeching: " << multiplier << std::endl;
+					    CombatDamage leechDamage;
+				        leechDamage.primary.type = COMBAT_LIFEDRAIN;
+				        leechDamage.primary.value = static_cast<int32_t>(damage.primary.value * multiplier);
+				        combatChangeHealth(target, attacker, leechDamage);
+					}
+				}
+				
+				uint8_t specialStatus = attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_STATUS_STORE);
+				if (specialStatus > 0) {
+					attackerPlayer->applyAdvancedCondition(target, specialStatus);
+					//std::cout << "Condition Status Amount: " << specialStatus << std::endl;
+					//int32_t chance = attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_STATUS_STORE_CHANCE);
+					//std::cout << "Condition Status Chance: " << chance << std::endl;
+					//if(normal_random(1, 100) <= chance) {
+						
+				}	
+				
+
+				
+			}
+			else 
+			{
+			    int32_t criticalspellChance = attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_CRITICAL_SPELL_CHANCE);
+				if (criticalspellChance > 0) {
+					if(normal_random(1, 100) <= criticalspellChance) {
+					std::cout << "Damage Before: " << damage.primary.value << std::endl;
+					std::cout << "Real Damage Before: " << realDamage << std::endl;
+					isCritical = true;
+					double multiplier = (double)attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_CRITICAL_SPELL_AMOUNT) / 100; 
+					damage.primary.value = (damage.primary.value + (damage.primary.value * multiplier));
+					realDamage = (realDamage + (realDamage * multiplier));
+					std::cout << "Damage After: " << damage.primary.value << std::endl;
+					std::cout << "Real Damage After: " << realDamage << std::endl;
+				  }
+				}
+				int32_t manaleechChance = attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_MANA_LEECH_CHANCE) / 100;
+				if (manaleechChance > 0) {
+					if(normal_random(1, 100) <= manaleechChance) {
+						double multiplier = (double)attackerPlayer->getAdvancedAttribute(ADVANCED_ATTRIBUTE_TYPE_PLAYER_EFFECTS, ADVANCED_ATTRIBUTE_PLAYER_MANA_LEECH_AMOUNT) / 100; 
+					    std::cout << "Mana Leeching: " << multiplier << std::endl;
+					    CombatDamage leechDamage;
+				        leechDamage.primary.type = COMBAT_MANADRAIN;
+				        leechDamage.primary.value = static_cast<int32_t>(damage.primary.value * multiplier);
+				        combatChangeHealth(target, attacker, leechDamage);
+					}
+				}
+			}
+				
+		}
+
+		if (realDamage <= 0 && !isDodge) {
+			return true;
+		}
+		
 		if (spectators.empty()) {
 			map.getSpectators(spectators, targetPos, true, true);
 		}
 
+        
 		message.primary.value = damage.primary.value;
 		message.secondary.value = damage.secondary.value;
 
@@ -4213,6 +4403,18 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 					message.type = MESSAGE_DAMAGE_DEALT;
 					message.text = fmt::format("{:s} loses {:s} due to your attack.", target->getNameDescription(), damageString);
 					message.text[0] = std::toupper(message.text[0]);
+					if (isCritical) {
+						tmpPlayer->sendAnimatedText(attacker->getPosition(), TEXTCOLOR_RED, "Critical!");
+						message.text = fmt::format("{:s} loses {:s} due to your critical attack.", target->getNameDescription(), damageString);
+					} else if (isCriticalSpell) {
+						tmpPlayer->sendAnimatedText(attacker->getPosition(), TEXTCOLOR_BLUE, "Critical!");
+						message.text = fmt::format("{:s} loses {:s} due to your critical spell attack.", target->getNameDescription(), damageString);
+					} else if (isDodge) {
+						tmpPlayer->sendAnimatedText(target->getPosition(), TEXTCOLOR_LIGHTGREEN, "Dodge!");
+                        message.text = fmt::format("{:s} dodged your hit.", target->getNameDescription());		
+					} else if (isArrowGuard) {
+                        message.text = fmt::format("{:s} loses reduced damage by using arrow guard {:s} due to your attack.", target->getNameDescription(), damageString);							
+					}	
 				} else if (tmpPlayer == targetPlayer) {
 					message.type = MESSAGE_DAMAGE_RECEIVED;
 					if (!attacker) {
@@ -4221,6 +4423,15 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 						message.text = fmt::format("You lose {:s} due to your own attack.", damageString);
 					} else {
 						message.text = fmt::format("You lose {:s} due to an attack by {:s}.", damageString, attacker->getNameDescription());
+						if (isCritical) {
+							message.text = fmt::format("You lose {:s} due to an critical attack by {:s}.", damageString, attacker->getNameDescription());
+						} else if (isCriticalSpell) {
+							message.text = fmt::format("You lose {:s} due to an critical attack spell by {:s}.", damageString, attacker->getNameDescription());
+						} else if (isDodge) {
+							message.text = fmt::format("You have dodged attack by {:s}.", attacker->getNameDescription());
+						} else if (isArrowGuard) {
+							message.text = fmt::format("You lose reduced damage by using arrow guard {:s} due to an attack by {:s}.", damageString, attacker->getNameDescription());						
+						}
 					}
 				} else {
 					message.type = MESSAGE_DAMAGE_OTHERS;
@@ -4283,6 +4494,10 @@ bool Game::combatChangeMana(Creature* attacker, Creature* target, CombatDamage& 
 		}
 
 		int32_t realManaChange = targetPlayer->getMana();
+		double multiplier = (double)targetPlayer->getAdvancedAttribute(3, ADVANCED_ATTRIBUTE_PLAYER_MANA_HEALING) / 100;
+		std::cout << "Mana Change Before: " << manaChange << std::endl;
+		manaChange = (manaChange + (manaChange * multiplier));
+		std::cout << "Mana Change After: " << manaChange << std::endl;
 		targetPlayer->changeMana(manaChange);
 		realManaChange = targetPlayer->getMana() - realManaChange;
 
@@ -4429,6 +4644,22 @@ void Game::addDistanceEffect(const SpectatorVec& spectators, const Position& fro
 	for (Creature* spectator : spectators) {
 		if (Player* tmpPlayer = spectator->getPlayer()) {
 			tmpPlayer->sendDistanceShoot(fromPos, toPos, effect);
+		}
+	}
+}
+
+void Game::addAnimatedText(const Position& pos, uint8_t color, const std::string& text)
+{
+	SpectatorVec spectators;
+	map.getSpectators(spectators, pos, false, true);
+	addAnimatedText(spectators, pos, color, text);
+}
+
+void Game::addAnimatedText(const SpectatorVec& spectators, const Position& pos, uint8_t color, const std::string& text)
+{
+	for (Creature* spectator : spectators) {
+		if (Player* tmpPlayer = spectator->getPlayer()) {
+			tmpPlayer->sendAnimatedText(pos, color, text);
 		}
 	}
 }

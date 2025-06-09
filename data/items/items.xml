@@ -3286,6 +3286,7 @@
 		<attribute key="attack" value="55" />
 		<attribute key="weaponType" value="sword" />
 		<attribute key="slotType" value="two-handed" />
+		<attribute key="classification" value="5"/>
 	</item>
 	<item id="2391" article="a" name="war hammer">
 		<attribute key="weight" value="8500" />
@@ -3601,6 +3602,7 @@
 		<attribute key="defense" value="20" />
 		<attribute key="attack" value="32" />
 		<attribute key="weaponType" value="club" />
+		<attribute key="classification" value="3" />
 	</item>
 	<item id="2435" article="a" name="dwarven axe">
 		<attribute key="weight" value="8200" />

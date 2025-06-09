@@ -744,7 +744,10 @@ class LuaScriptInterface
 		static int luaItemGetCustomAttribute(lua_State* L);
 		static int luaItemSetCustomAttribute(lua_State* L);
 		static int luaItemRemoveCustomAttribute(lua_State* L);
-
+		
+		static int luaItemSetAdvancedAttribute(lua_State* L);
+        static int luaItemGetAdvancedAttribute(lua_State* L);
+		
 		static int luaItemMoveTo(lua_State* L);
 		static int luaItemTransform(lua_State* L);
 		static int luaItemDecay(lua_State* L);
@@ -757,6 +760,12 @@ class LuaScriptInterface
 
 		static int luaItemSetStoreItem(lua_State* L);
 		static int luaItemIsStoreItem(lua_State* L);
+		
+		
+		static int luaItemGetAttack(lua_State* L);
+		static int luaItemGetDefense(lua_State* L);
+		static int luaItemGetArmor(lua_State* L);
+		static int luaItemGetHitChance(lua_State* L);
 
 		// Container
 		static int luaContainerCreate(lua_State* L);
@@ -1035,6 +1044,14 @@ class LuaScriptInterface
 		static int luaPlayerGetFightMode(lua_State* L);
 
 		static int luaPlayerGetStoreInbox(lua_State* L);
+		
+		
+		static int luaPlayerSendSkills(lua_State* L);
+		static int luaPlayerSendStats(lua_State* L);
+		
+		static int luaPlayerAddAdvancedAttribute(lua_State* L);
+		static int luaPlayerRemoveAdvancedAttribute(lua_State* L);
+		static int luaPlayerGetAdvancedAttribute(lua_State* L);
 
 		// Monster
 		static int luaMonsterCreate(lua_State* L);
@@ -1245,7 +1262,8 @@ class LuaScriptInterface
 		static int luaItemTypeHasSubType(lua_State* L);
 
 		static int luaItemTypeIsStoreItem(lua_State* L);
-
+        static int luaItemTypeGetClassification(lua_State* L);
+		
 		// Combat
 		static int luaCombatCreate(lua_State* L);
 		static int luaCombatDelete(lua_State* L);

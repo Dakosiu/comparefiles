@@ -439,7 +439,8 @@ class Game
 		static void addMagicEffect(const SpectatorVec& spectators, const Position& pos, uint8_t effect);
 		void addDistanceEffect(const Position& fromPos, const Position& toPos, uint8_t effect);
 		static void addDistanceEffect(const SpectatorVec& spectators, const Position& fromPos, const Position& toPos, uint8_t effect);
-
+		void addAnimatedText(const Position& pos, uint8_t color, const std::string& text);
+		static void addAnimatedText(const SpectatorVec& list, const Position& pos, uint8_t color, const std::string& text);
 		void setAccountStorageValue(const uint32_t accountId, const uint32_t key, const int32_t value);
 		int32_t getAccountStorageValue(const uint32_t accountId, const uint32_t key) const;
 		void loadAccountStorageValues();

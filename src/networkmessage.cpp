@@ -114,6 +114,8 @@ void NetworkMessage::addItem(const Item* item)
 	if (it.isAnimation) {
 		addByte(0xFE); // random phase (0xFF for async)
 	}
+	
+	//addByte(item->getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_BONUS_COUNT));
 }
 
 void NetworkMessage::addItemId(uint16_t itemId)

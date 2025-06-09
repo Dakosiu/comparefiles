@@ -1446,6 +1446,16 @@ void ProtocolGame::sendTextMessage(const TextMessage& message)
 	writeToOutputBuffer(msg);
 }
 
+void ProtocolGame::sendAnimatedText(const Position& pos, uint8_t color, const std::string& text)
+{
+	NetworkMessage msg;
+	msg.addByte(0x84);
+	msg.addPosition(pos);
+	msg.addByte(color);
+	msg.addString(text);
+	writeToOutputBuffer(msg);
+}
+
 void ProtocolGame::sendClosePrivate(uint16_t channelId)
 {
 	NetworkMessage msg;
@@ -1560,7 +1570,9 @@ void ProtocolGame::sendContainer(uint8_t cid, const Container* container, bool h
 
 		msg.addByte(itemsToSend);
 		for (auto it = container->getItemList().begin() + firstIndex, end = it + itemsToSend; it != end; ++it) {
+			Item* item = (*it);
 			msg.addItem(*it);
+			msg.addByte(item->getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_BONUS_COUNT));
 		}
 	} else {
 		msg.addByte(0x00);
@@ -2150,10 +2162,12 @@ void ProtocolGame::sendTradeItemRequest(const std::string& traderName, const Ite
 		msg.addByte(itemList.size());
 		for (const Item* listItem : itemList) {
 			msg.addItem(listItem);
+			msg.addByte(listItem->getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_BONUS_COUNT));
 		}
 	} else {
 		msg.addByte(0x01);
 		msg.addItem(item);
+		msg.addByte(item->getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_BONUS_COUNT));
 	}
 	writeToOutputBuffer(msg);
 }
@@ -2661,6 +2675,7 @@ void ProtocolGame::sendInventoryItem(slots_t slot, const Item* item)
 		msg.addByte(0x78);
 		msg.addByte(slot);
 		msg.addItem(item);
+		msg.addByte(item->getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_BONUS_COUNT));
 	} else {
 		msg.addByte(0x79);
 		msg.addByte(slot);
@@ -2697,6 +2712,7 @@ void ProtocolGame::sendAddContainerItem(uint8_t cid, uint16_t slot, const Item* 
 	msg.addByte(cid);
 	msg.add<uint16_t>(slot);
 	msg.addItem(item);
+	msg.addByte(item->getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_BONUS_COUNT));
 	writeToOutputBuffer(msg);
 }
 
@@ -2707,6 +2723,7 @@ void ProtocolGame::sendUpdateContainerItem(uint8_t cid, uint16_t slot, const Ite
 	msg.addByte(cid);
 	msg.add<uint16_t>(slot);
 	msg.addItem(item);
+	msg.addByte(item->getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_BONUS_COUNT));
 	writeToOutputBuffer(msg);
 }
 

@@ -57,3 +57,62 @@ function tdump(title, input)
 
 	return dump_str
 end
+
+function deepCopy(object)
+
+    local lookup_table = {}
+
+    local function _copy(object)
+        local new_table = {}
+
+        if type(object) ~= "table" then
+            return object
+        elseif lookup_table[object] then
+            return lookup_table[object]
+        end
+
+        lookup_table[object] = new_table
+
+        for index, value in pairs(object) do
+            new_table[_copy(index)] = _copy(value)
+        end
+
+        return setmetatable(new_table, getmetatable(object))
+    end
+    return _copy(object)
+end
+
+function removeFromTableByValue(tbl, val, _allentries) 
+    for i,v in pairs(tbl) do
+        if v == val then
+            table.remove(tbl,i)
+			if not _allentries then
+			   break
+			end
+        end
+    end
+end
+
+function removeFromTableAdvancedByValue(tbl, val, _allentries) 
+    for i,v in pairs(tbl) do
+        if v.ID and v.ID == val then
+            table.remove(tbl,i)
+			if not _allentries then
+			   break
+			end
+        end
+    end
+end
+
+-- function round(num, numDecimalPlaces)
+  -- local mult = 10^(numDecimalPlaces or 0)
+  -- return math.floor(num * mult + 0.5) / mult
+-- end
+function math.sign(v)
+	return (v >= 0 and 1) or -1
+end
+
+function math.round(v, bracket)
+	bracket = bracket or 1
+	return math.floor(v/bracket + math.sign(v) * 0.5) * bracket
+end

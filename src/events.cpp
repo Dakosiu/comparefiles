@@ -106,6 +106,10 @@ bool Events::load()
 				info.playerOnGainSkillTries = event;
 			} else if (methodName == "onWrapItem") {
 				info.playerOnWrapItem = event;
+			} else if (methodName == "onEquipItem") {
+				info.playerOnEquipItem = event;
+			} else if (methodName == "onDeEquipItem") {
+				info.playerOnDeEquipItem = event;
 			} else {
 				std::cout << "[Warning - Events::load] Unknown player method: " << methodName << std::endl;
 			}
@@ -984,8 +988,67 @@ void Events::eventPlayerOnWrapItem(Player* player, Item* item)
 
 	LuaScriptInterface::pushUserdata<Item>(L, item);
 	LuaScriptInterface::setItemMetatable(L, -1, item);
+	
 
 	scriptInterface.callVoidFunction(2);
+}
+
+void Events::eventPlayerOnEquipItem(Player* player, Item* item, slots_t slot)
+{
+	// Player:onWrapItem(item)
+	if (info.playerOnEquipItem == -1) {
+		return;
+	}
+
+	if (!scriptInterface.reserveScriptEnv()) {
+		std::cout << "[Error - Events::eventPlayerOnWrapItem] Call stack overflow" << std::endl;
+		return;
+	}
+
+	ScriptEnvironment* env = scriptInterface.getScriptEnv();
+	env->setScriptId(info.playerOnEquipItem, &scriptInterface);
+
+	lua_State* L = scriptInterface.getLuaState();
+	scriptInterface.pushFunction(info.playerOnEquipItem);
+
+	LuaScriptInterface::pushUserdata<Player>(L, player);
+	LuaScriptInterface::setMetatable(L, -1, "Player");
+
+	LuaScriptInterface::pushUserdata<Item>(L, item);
+	LuaScriptInterface::setItemMetatable(L, -1, item);
+	lua_pushnumber(L, slot);
+	
+
+	scriptInterface.callVoidFunction(3);
+}
+
+void Events::eventPlayerOnDeEquipItem(Player* player, Item* item, slots_t slot)
+{
+	// Player:onWrapItem(item)
+	if (info.playerOnDeEquipItem == -1) {
+		return;
+	}
+
+	if (!scriptInterface.reserveScriptEnv()) {
+		std::cout << "[Error - Events::eventPlayerOnWrapItem] Call stack overflow" << std::endl;
+		return;
+	}
+
+	ScriptEnvironment* env = scriptInterface.getScriptEnv();
+	env->setScriptId(info.playerOnDeEquipItem, &scriptInterface);
+
+	lua_State* L = scriptInterface.getLuaState();
+	scriptInterface.pushFunction(info.playerOnDeEquipItem);
+
+	LuaScriptInterface::pushUserdata<Player>(L, player);
+	LuaScriptInterface::setMetatable(L, -1, "Player");
+
+	LuaScriptInterface::pushUserdata<Item>(L, item);
+	LuaScriptInterface::setItemMetatable(L, -1, item);
+	lua_pushnumber(L, slot);
+	
+
+	scriptInterface.callVoidFunction(3);
 }
 
 void Events::eventMonsterOnDropLoot(Monster* monster, Container* corpse)

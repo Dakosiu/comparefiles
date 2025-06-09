@@ -203,7 +203,7 @@ class ItemAttributes
 		ItemDecayState_t getDecaying() const {
 			return static_cast<ItemDecayState_t>(getIntAttr(ITEM_ATTRIBUTE_DECAYSTATE));
 		}
-
+		
 		struct CustomAttribute
 		{
 			typedef boost::variant<boost::blank, std::string, int64_t, double, bool> VariantAttribute;
@@ -229,6 +229,22 @@ class ItemAttributes
 
 			template<typename T>
 			const T& get();
+			
+			const std::string& getString() const {
+				if (value.type() == typeid(std::string)) {
+					return boost::get<std::string>(value);
+				}
+
+				return emptyString;
+			}
+			
+			const int64_t& getInt() const {
+				if (value.type() == typeid(int64_t)) {
+					return boost::get<int64_t>(value);
+				}
+
+				return emptyInt;
+			}
 
 			struct PushLuaVisitor : public boost::static_visitor<> {
 				lua_State* L;
@@ -463,7 +479,20 @@ class ItemAttributes
 			}
 			getAttr(ITEM_ATTRIBUTE_CUSTOM).value.custom->insert(std::make_pair(std::move(key), std::move(value)));
 		}
-
+		
+		void setAdvancedAttribute(uint32_t attribute, CustomAttribute& value) {
+	        std::stringstream ss;			
+            ss << "ADVANCED_ATTRIBUTES" << std::to_string(attribute);
+			std::string key = ss.str();
+			toLowerCaseString(key);
+			if (hasAttribute(ITEM_ATTRIBUTE_CUSTOM)) {
+				removeCustomAttribute(key);
+			} else {
+				getAttr(ITEM_ATTRIBUTE_CUSTOM).value.custom = new CustomAttributeMap();
+			}
+			getAttr(ITEM_ATTRIBUTE_CUSTOM).value.custom->insert(std::make_pair(std::move(key), std::move(value)));
+		}
+		
 		const CustomAttribute* getCustomAttribute(int64_t key) {
 			auto tmp = std::to_string(key);
 			return getCustomAttribute(tmp);
@@ -494,6 +523,7 @@ class ItemAttributes
 			}
 			return false;
 		}
+		
 
 		const static uint32_t intAttributeTypes = ITEM_ATTRIBUTE_ACTIONID | ITEM_ATTRIBUTE_UNIQUEID | ITEM_ATTRIBUTE_DATE
 			| ITEM_ATTRIBUTE_WEIGHT | ITEM_ATTRIBUTE_ATTACK | ITEM_ATTRIBUTE_DEFENSE | ITEM_ATTRIBUTE_EXTRADEFENSE
@@ -629,6 +659,10 @@ class Item : virtual public Thing
 		void setCustomAttribute(std::string& key, ItemAttributes::CustomAttribute& value) {
 			getAttributes()->setCustomAttribute(key, value);
 		}
+		
+		void setAdvancedAttribute(uint8_t attribute, ItemAttributes::CustomAttribute& value) {
+			getAttributes()->setAdvancedAttribute(attribute, value);
+		}
 
 		const ItemAttributes::CustomAttribute* getCustomAttribute(int64_t key) {
 			if (!attributes) {
@@ -642,6 +676,33 @@ class Item : virtual public Thing
 				return nullptr;
 			}
 			return getAttributes()->getCustomAttribute(key);
+		}
+		
+		
+		
+		const ItemAttributes::CustomAttribute* getCustomAttribute(uint32_t attribute) const {
+			std::stringstream ss;
+            ss << "ADVANCED_ATTRIBUTES" << std::to_string(attribute);
+			std::string key = ss.str();
+						
+			if (!attributes) {
+				return nullptr;
+			}
+
+			if (!attributes->hasAttribute(ITEM_ATTRIBUTE_CUSTOM)) {
+				return nullptr;
+			}
+
+			ItemAttributes::CustomAttributeMap* customAttrMap = attributes->getAttr(ITEM_ATTRIBUTE_CUSTOM).value.custom;
+			if (!customAttrMap) {
+				return nullptr;
+			}
+
+			auto it = customAttrMap->find(asLowerCaseString(key));
+			if (it != customAttrMap->end()) {
+				return &(it->second);
+			}
+			return nullptr;
 		}
 
 		bool removeCustomAttribute(int64_t key) {
@@ -842,29 +903,49 @@ class Item : virtual public Thing
 			}
 			return items[id].weight;
 		}
+		
 		int32_t getAttack() const {
+			int32_t value = 0;
 			if (hasAttribute(ITEM_ATTRIBUTE_ATTACK)) {
-				return getIntAttr(ITEM_ATTRIBUTE_ATTACK);
+				value = getIntAttr(ITEM_ATTRIBUTE_ATTACK);
+			} else {
+			    value = items[id].attack;
 			}
-			return items[id].attack;
+			
+			value += getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_ATTACK);
+			return value;
 		}
+		
 		uint32_t getAttackSpeed() const {
 			if (hasAttribute(ITEM_ATTRIBUTE_ATTACK_SPEED)) {
 				return getIntAttr(ITEM_ATTRIBUTE_ATTACK_SPEED);
 			}
 			return items[id].attackSpeed;
 		}
+		
 		int32_t getArmor() const {
+			int32_t value = 0;
 			if (hasAttribute(ITEM_ATTRIBUTE_ARMOR)) {
-				return getIntAttr(ITEM_ATTRIBUTE_ARMOR);
+				value = getIntAttr(ITEM_ATTRIBUTE_ARMOR);
+			} else {
+			    value = items[id].armor;
 			}
-			return items[id].armor;
+			
+			value += getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_ARMOR);
+			return value;
 		}
+		
 		int32_t getDefense() const {
+			int32_t value = 0;
 			if (hasAttribute(ITEM_ATTRIBUTE_DEFENSE)) {
-				return getIntAttr(ITEM_ATTRIBUTE_DEFENSE);
+				value = getIntAttr(ITEM_ATTRIBUTE_DEFENSE);
+			} else {
+			    value = items[id].defense;
 			}
-			return items[id].defense;
+			
+			value += getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_DEFENSE);
+			
+			return value;
 		}
 		int32_t getExtraDefense() const {
 			if (hasAttribute(ITEM_ATTRIBUTE_EXTRADEFENSE)) {
@@ -875,11 +956,17 @@ class Item : virtual public Thing
 		int32_t getSlotPosition() const {
 			return items[id].slotPosition;
 		}
-		int8_t getHitChance() const {
+		int8_t getHitChance() const {			
+			int32_t value = 0;
 			if (hasAttribute(ITEM_ATTRIBUTE_HITCHANCE)) {
-				return getIntAttr(ITEM_ATTRIBUTE_HITCHANCE);
+				value = getIntAttr(ITEM_ATTRIBUTE_HITCHANCE);
+			} else {
+			    value = items[id].hitChance;
 			}
-			return items[id].hitChance;
+			
+			//value += getAdvancedAttribute(ADVANCED_ATTRIBUTE_ITEM_HIT_CHANCE);
+			
+			return value;
 		}
 
 		uint32_t getWorth() const;
@@ -1034,7 +1121,15 @@ class Item : virtual public Thing
 		bool isRemoved() const override {
 			return !parent || parent->isRemoved();
 		}
-
+		
+		int64_t getAdvancedAttribute(uint32_t attr) const {
+			const ItemAttributes::CustomAttribute* attribute = getCustomAttribute(attr);
+			if (attribute != nullptr) {
+			    return attribute->getInt();
+			}
+			return 0;
+		}
+		
 	protected:
 		Cylinder* parent = nullptr;
 

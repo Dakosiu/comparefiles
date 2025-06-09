@@ -215,3 +215,16 @@ function Player:onWrapItem(item)
 		end
 	end
 end
+
+
+function Player:onEquipItem(item)
+    addEvent(function() 
+       ADVANCED_ATTRIBUTES:onEquip(self, item) 
+    end, 1)	   
+	return true
+end
+
+function Player:onDeEquipItem(item)	
+	ADVANCED_ATTRIBUTES:onDeEquip(self, item)
+	return true
+end
