@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #include "otpch.h"
 
@@ -7,6 +23,10 @@
 #include "game.h"
 
 extern Game g_game;
+
+Teleport::Teleport(uint16_t _type) : Item(_type)
+{
+}
 
 Attr_ReadValue Teleport::readAttr(AttrTypes_t attr, PropStream& propStream)
 {
@@ -59,32 +79,6 @@ void Teleport::addThing(int32_t, Thing* thing)
 	Tile* destTile = g_game.map.getTile(destPos);
 	if (!destTile) {
 		return;
-	}
-
-	// Prevent infinite loop
-	Teleport* destTeleport = destTile->getTeleportItem();
-	if (destTeleport) {
-		std::vector<Position> lastPositions = { getPosition() };
-
-		while (true) {
-			const Position& nextPos = destTeleport->getDestPos();
-			if (std::find(lastPositions.begin(), lastPositions.end(), nextPos) != lastPositions.end()) {
-				std::cout << "Warning: possible infinite loop teleport. " << nextPos << std::endl;
-				return;
-			}
-
-			const Tile* tile = g_game.map.getTile(nextPos);
-			if (!tile) {
-				break;
-			}
-
-			destTeleport = tile->getTeleportItem();
-			if (!destTeleport) {
-				break;
-			}
-
-			lastPositions.push_back(nextPos);
-		}
 	}
 
 	const MagicEffectClasses effect = Item::items[id].magicEffect;

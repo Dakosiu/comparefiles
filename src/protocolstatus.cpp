@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #include "otpch.h"
 
@@ -101,7 +117,25 @@ void ProtocolStatus::sendStatusString()
 	owner.append_attribute("email") = g_config.getString(ConfigManager::OWNER_EMAIL).c_str();
 
 	pugi::xml_node players = tsqp.append_child("players");
-	players.append_attribute("online") = std::to_string(g_game.getPlayersOnline()).c_str();
+    uint32_t real = 0;
+ 
+    std::map<uint32_t, uint32_t> listIP;
+ 
+    for (const auto& it : g_game.getPlayers()) {
+        if (it.second->getIP() != 0) {
+            auto ip = listIP.find(it.second->getIP());
+            if (ip != listIP.end()) {
+                listIP[it.second->getIP()]++;
+                if (listIP[it.second->getIP()] < 5) {
+                    real++;
+                }
+            } else {
+                listIP[it.second->getIP()] = 1;
+                real++;
+            }
+        }
+    }
+    players.append_attribute("online") = std::to_string(real).c_str();
 	players.append_attribute("max") = std::to_string(g_config.getNumber(ConfigManager::MAX_PLAYERS)).c_str();
 	players.append_attribute("peak") = std::to_string(g_game.getPlayersRecord()).c_str();
 

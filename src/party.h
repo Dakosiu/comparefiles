@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #ifndef FS_PARTY_H_41D4D7CF417C4CC99FAE94D552255044
 #define FS_PARTY_H_41D4D7CF417C4CC99FAE94D552255044
@@ -10,18 +26,7 @@
 class Player;
 class Party;
 
-using PlayerVector = std::vector<Player*>;
-
-static constexpr int32_t EXPERIENCE_SHARE_RANGE = 30;
-static constexpr int32_t EXPERIENCE_SHARE_FLOORS = 1;
-
-enum SharedExpStatus_t : uint8_t {
-	SHAREDEXP_OK,
-	SHAREDEXP_TOOFARAWAY,
-	SHAREDEXP_LEVELDIFFTOOLARGE,
-	SHAREDEXP_MEMBERINACTIVE,
-	SHAREDEXP_EMPTYPARTY
-};
+typedef std::vector<Player*> PlayerVector;
 
 class Party
 {
@@ -56,13 +61,14 @@ class Party
 		bool isPlayerInvited(const Player* player) const;
 		void updateAllPartyIcons();
 		void broadcastPartyMessage(MessageClasses msgClass, const std::string& msg, bool sendToInvitations = false);
+		void broadcastPartyLoot(const std::string& loot);
 		bool empty() const {
 			return memberList.empty() && inviteList.empty();
 		}
 		bool canOpenCorpse(uint32_t ownerId) const;
 
 		void shareExperience(uint64_t experience, Creature* source = nullptr);
-		bool setSharedExperience(Player* player, bool sharedExpActive);
+		bool setSharedExperience(Player* player, bool _sharedExpActive);
 		bool isSharedExperienceActive() const {
 			return sharedExpActive;
 		}
@@ -70,14 +76,15 @@ class Party
 			return sharedExpEnabled;
 		}
 		bool canUseSharedExperience(const Player* player) const;
-		SharedExpStatus_t getMemberSharedExperienceStatus(const Player* player) const;
 		void updateSharedExperience();
+
+		void updateVocationsList();
 
 		void updatePlayerTicks(Player* player, uint32_t points);
 		void clearPlayerPoints(Player* player);
 
-	private:
-		SharedExpStatus_t getSharedExperienceStatus();
+	protected:
+		bool canEnableSharedExperience();
 
 		std::map<uint32_t, int64_t> ticksMap;
 
@@ -86,8 +93,10 @@ class Party
 
 		Player* leader;
 
-		bool sharedExpActive = false;
-		bool sharedExpEnabled = false;
+		float extraExpRate;
+
+		bool sharedExpActive;
+		bool sharedExpEnabled;
 };
 
 #endif

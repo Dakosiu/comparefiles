@@ -1,10 +1,26 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #ifndef FS_CONST_H_0A49B5996F074465BF44B90F4F780E8B
 #define FS_CONST_H_0A49B5996F074465BF44B90F4F780E8B
 
-static constexpr int32_t NETWORKMESSAGE_MAXSIZE = 24590;
+#define NETWORKMESSAGE_MAXSIZE 24590
 
 enum MagicEffectClasses : uint8_t {
 	CONST_ME_NONE,
@@ -164,46 +180,32 @@ enum SpeakClasses : uint8_t {
 	TALKTYPE_SAY = 1,
 	TALKTYPE_WHISPER = 2,
 	TALKTYPE_YELL = 3,
-	TALKTYPE_PRIVATE_FROM = 4,
-	TALKTYPE_PRIVATE_TO = 5,
-	TALKTYPE_CHANNEL_Y = 7,
-	TALKTYPE_CHANNEL_O = 8,
-	TALKTYPE_PRIVATE_NP = 10,
-	TALKTYPE_PRIVATE_PN = 12,
-	TALKTYPE_BROADCAST = 13,
-	TALKTYPE_CHANNEL_R1 = 14, //red - #c text
-	TALKTYPE_PRIVATE_RED_FROM = 15, //@name@text
-	TALKTYPE_PRIVATE_RED_TO = 16, //@name@text
-	TALKTYPE_MONSTER_SAY = 36,
-	TALKTYPE_MONSTER_YELL = 37,
+	TALKTYPE_PRIVATE = 4,
+	TALKTYPE_CHANNEL_Y = 5,
+	TALKTYPE_RVR_CHANNEL = 6,
+	TALKTYPE_RVR_ANSWER = 7,
+	TALKTYPE_RVR_CONTINUE = 8,
+	TALKTYPE_BROADCAST = 9,
+	TALKTYPE_CHANNEL_R1 = 10, //red - #c text
+	TALKTYPE_PRIVATE_RED = 11, //@name@text
+	TALKTYPE_CHANNEL_O = 12, //@name@text
+	TALKTYPE_CHANNEL_R2 = 14, //#d
+	TALKTYPE_MONSTER_SAY = 16,
+	TALKTYPE_MONSTER_YELL = 17,
 };
 
 enum MessageClasses : uint8_t {
-	MESSAGE_STATUS_CONSOLE_BLUE = 4, /*FIXME Blue message in the console*/
-
-	MESSAGE_STATUS_CONSOLE_RED = 13, /*Red message in the console*/
-
-	MESSAGE_STATUS_DEFAULT = 17, /*White message at the bottom of the game window and in the console*/
+	MESSAGE_STATUS_CONSOLE_YELLOW = 1, /*Yellow message in the console*/
+	MESSAGE_STATUS_CONSOLE_LIGHTBLUE = 4, /*Light blue message in the console*/
+	MESSAGE_STATUS_CONSOLE_ORANGE = 17, /*Orange message in the console*/
 	MESSAGE_STATUS_WARNING = 18, /*Red message in game window and in the console*/
 	MESSAGE_EVENT_ADVANCE = 19, /*White message in game window and in the console*/
-
-	MESSAGE_STATUS_SMALL = 21, /*White message at the bottom of the game window"*/
+	MESSAGE_EVENT_DEFAULT = 20, /*White message at the bottom of the game window and in the console*/
+	MESSAGE_STATUS_DEFAULT = 21, /*White message at the bottom of the game window and in the console*/
 	MESSAGE_INFO_DESCR = 22, /*Green message in game window and in the console*/
-	MESSAGE_DAMAGE_DEALT = 23,
-	MESSAGE_DAMAGE_RECEIVED = 24,
-	MESSAGE_HEALED = 25,
-	MESSAGE_EXPERIENCE = 26,
-	MESSAGE_DAMAGE_OTHERS = 27,
-	MESSAGE_HEALED_OTHERS = 28,
-	MESSAGE_EXPERIENCE_OTHERS = 29,
-	MESSAGE_EVENT_DEFAULT = 30, /*White message at the bottom of the game window and in the console*/
-	MESSAGE_LOOT = 31,
-
-	MESSAGE_GUILD = 33, /*White message in channel (+ channelId)*/
-	MESSAGE_PARTY_MANAGEMENT = 34, /*White message in channel (+ channelId)*/
-	MESSAGE_PARTY = 35, /*White message in channel (+ channelId)*/
-	MESSAGE_EVENT_ORANGE = 36, /*Orange message in the console*/
-	MESSAGE_STATUS_CONSOLE_ORANGE = 37,  /*Orange message in the console*/
+	MESSAGE_STATUS_SMALL = 23, /*White message at the bottom of the game window"*/
+	MESSAGE_STATUS_CONSOLE_BLUE	= 24, /*Blue message in the console*/
+	MESSAGE_STATUS_CONSOLE_RED = 25, /*Red message in the console*/
 };
 
 enum FluidColors_t : uint8_t {
@@ -220,14 +222,14 @@ enum FluidColors_t : uint8_t {
 enum FluidTypes_t : uint8_t {
 	FLUID_NONE = FLUID_EMPTY,
 	FLUID_WATER = FLUID_BLUE,
-	FLUID_BLOOD = FLUID_RED,
+	FLUID_LIFE = FLUID_RED,
 	FLUID_BEER = FLUID_BROWN,
 	FLUID_SLIME = FLUID_GREEN,
 	FLUID_LEMONADE = FLUID_YELLOW,
 	FLUID_MILK = FLUID_WHITE,
 	FLUID_MANA = FLUID_PURPLE,
 
-	FLUID_LIFE = FLUID_RED + 8,
+	FLUID_BLOOD = FLUID_RED + 8,
 	FLUID_OIL = FLUID_BROWN + 8,
 	FLUID_URINE = FLUID_YELLOW + 8,
 	FLUID_COCONUTMILK = FLUID_WHITE + 8,
@@ -251,7 +253,7 @@ const uint8_t reverseFluidMap[] = {
 	FLUID_MANA,
 	FLUID_BEER,
 	FLUID_EMPTY,
-	FLUID_BLOOD,
+	FLUID_LIFE,
 	FLUID_SLIME,
 	FLUID_EMPTY,
 	FLUID_LEMONADE,
@@ -264,13 +266,13 @@ const uint8_t clientToServerFluidMap[] = {
 	FLUID_MANA,
 	FLUID_BEER,
 	FLUID_MUD,
-	FLUID_BLOOD,
+	FLUID_LIFE,
 	FLUID_SLIME,
 	FLUID_RUM,
 	FLUID_LEMONADE,
 	FLUID_MILK,
 	FLUID_WINE,
-	FLUID_LIFE,
+	FLUID_BLOOD,
 	FLUID_URINE,
 	FLUID_OIL,
 	FLUID_FRUITJUICE,
@@ -309,8 +311,10 @@ enum SquareColor_t : uint8_t {
 
 enum TextColor_t : uint8_t {
 	TEXTCOLOR_BLUE = 5,
+	TEXTCOLOR_GREEN = 18,
 	TEXTCOLOR_LIGHTGREEN = 30,
 	TEXTCOLOR_LIGHTBLUE = 35,
+	TEXTCOLOR_TEAL = 65,
 	TEXTCOLOR_MAYABLUE = 95,
 	TEXTCOLOR_DARKRED = 108,
 	TEXTCOLOR_LIGHTGREY = 129,
@@ -335,13 +339,6 @@ enum Icons_t {
 	ICON_HASTE = 1 << 6,
 	ICON_SWORDS = 1 << 7,
 	ICON_DROWNING = 1 << 8,
-	ICON_FREEZING = 1 << 9,
-	ICON_DAZZLED = 1 << 10,
-	ICON_CURSED = 1 << 11,
-	ICON_PARTY_BUFF = 1 << 12,
-	ICON_REDSWORDS = 1 << 13,
-	ICON_PIGEON = 1 << 14,
-	ICON_BLEEDING = 1 << 15,
 };
 
 enum WeaponType_t : uint8_t {
@@ -374,7 +371,6 @@ enum WeaponAction_t : uint8_t {
 };
 
 enum WieldInfo_t {
-	WIELDINFO_NONE = 0 << 0,
 	WIELDINFO_LEVEL = 1 << 0,
 	WIELDINFO_MAGLV = 1 << 1,
 	WIELDINFO_VOCREQ = 1 << 2,
@@ -387,8 +383,6 @@ enum Skulls_t : uint8_t {
 	SKULL_GREEN = 2,
 	SKULL_WHITE = 3,
 	SKULL_RED = 4,
-	SKULL_BLACK = 5,
-	SKULL_ORANGE = 6,
 };
 
 enum PartyShields_t : uint8_t {
@@ -397,27 +391,9 @@ enum PartyShields_t : uint8_t {
 	SHIELD_WHITEBLUE = 2,
 	SHIELD_BLUE = 3,
 	SHIELD_YELLOW = 4,
-	SHIELD_BLUE_SHAREDEXP = 5,
-	SHIELD_YELLOW_SHAREDEXP = 6,
-	SHIELD_BLUE_NOSHAREDEXP_BLINK = 7,
-	SHIELD_YELLOW_NOSHAREDEXP_BLINK = 8,
-	SHIELD_BLUE_NOSHAREDEXP = 9,
-	SHIELD_YELLOW_NOSHAREDEXP = 10,
-	SHIELD_GRAY = 11,
-};
-
-enum GuildEmblems_t : uint8_t {
-	GUILDEMBLEM_NONE = 0,
-	GUILDEMBLEM_ALLY = 1,
-	GUILDEMBLEM_ENEMY = 2,
-	GUILDEMBLEM_NEUTRAL = 3,
-	GUILDEMBLEM_MEMBER = 4,
-	GUILDEMBLEM_OTHER = 5,
 };
 
 enum item_t : uint16_t {
-	ITEM_BROWSEFIELD = 460, // for internal use
-
 	ITEM_FIREFIELD_PVP_FULL = 1487,
 	ITEM_FIREFIELD_PVP_MEDIUM = 1488,
 	ITEM_FIREFIELD_PVP_SMALL = 1489,
@@ -436,44 +412,20 @@ enum item_t : uint16_t {
 
 	ITEM_MAGICWALL = 1497,
 	ITEM_MAGICWALL_PERSISTENT = 1498,
-	ITEM_MAGICWALL_SAFE = 11098,
-	ITEM_MAGICWALL_NOPVP = 20669,
+	ITEM_MAGICWALL_SAFE = 1497,
 
 	ITEM_WILDGROWTH = 1499,
 	ITEM_WILDGROWTH_PERSISTENT = 2721,
-	ITEM_WILDGROWTH_SAFE = 11099,
-	ITEM_WILDGROWTH_NOPVP = 20670,
+	ITEM_WILDGROWTH_SAFE = 1499,
 
 	ITEM_BAG = 1987,
-	ITEM_SHOPPING_BAG = 23782,
 
 	ITEM_GOLD_COIN = 2148,
 	ITEM_PLATINUM_COIN = 2152,
 	ITEM_CRYSTAL_COIN = 2160,
-	ITEM_STORE_COIN = 24774, // in-game store currency
 
 	ITEM_DEPOT = 2594,
-	ITEM_LOCKER1 = 2589,
-	ITEM_INBOX = 14404,
-	ITEM_MARKET = 14405,
-	ITEM_STORE_INBOX = 26052,
-	ITEM_DEPOT_BOX_I = 25453,
-	ITEM_DEPOT_BOX_II = 25454,
-	ITEM_DEPOT_BOX_III = 25455,
-	ITEM_DEPOT_BOX_IV = 25456,
-	ITEM_DEPOT_BOX_V = 25457,
-	ITEM_DEPOT_BOX_VI = 25458,
-	ITEM_DEPOT_BOX_VII = 25459,
-	ITEM_DEPOT_BOX_VIII = 25460,
-	ITEM_DEPOT_BOX_IX = 25461,
-	ITEM_DEPOT_BOX_X = 25462,
-	ITEM_DEPOT_BOX_XI = 25463,
-	ITEM_DEPOT_BOX_XII = 25464,
-	ITEM_DEPOT_BOX_XIII = 25465,
-	ITEM_DEPOT_BOX_XIV = 25466,
-	ITEM_DEPOT_BOX_XV = 25467,
-	ITEM_DEPOT_BOX_XVI = 25468,
-	ITEM_DEPOT_BOX_XVII = 25469,
+	ITEM_LOCKER = 2589,
 
 	ITEM_MALE_CORPSE = 3058,
 	ITEM_FEMALE_CORPSE = 3065,
@@ -524,51 +476,27 @@ enum PlayerFlags : uint64_t {
 	PlayerFlag_SetMaxSpeed = 1 << 29,
 	PlayerFlag_SpecialVIP = 1 << 30,
 	PlayerFlag_NotGenerateLoot = static_cast<uint64_t>(1) << 31,
-	// PlayerFlag with exponent 32 existed but was deprecated (feature dropped from client).
+	PlayerFlag_CanTalkRedChannelAnonymous = static_cast<uint64_t>(1) << 32,
 	PlayerFlag_IgnoreProtectionZone = static_cast<uint64_t>(1) << 33,
 	PlayerFlag_IgnoreSpellCheck = static_cast<uint64_t>(1) << 34,
 	PlayerFlag_IgnoreWeaponCheck = static_cast<uint64_t>(1) << 35,
 	PlayerFlag_CannotBeMuted = static_cast<uint64_t>(1) << 36,
 	PlayerFlag_IsAlwaysPremium = static_cast<uint64_t>(1) << 37,
+	PlayerFlag_CanAnswerRuleViolations = static_cast<uint64_t>(1) << 38,
 };
 
-enum ReloadTypes_t : uint8_t  {
-	RELOAD_TYPE_ALL,
-	RELOAD_TYPE_ACTIONS,
-	RELOAD_TYPE_CHAT,
-	RELOAD_TYPE_CONFIG,
-	RELOAD_TYPE_CREATURESCRIPTS,
-	RELOAD_TYPE_EVENTS,
-	RELOAD_TYPE_GLOBAL,
-	RELOAD_TYPE_GLOBALEVENTS,
-	RELOAD_TYPE_ITEMS,
-	RELOAD_TYPE_MONSTERS,
-	RELOAD_TYPE_MOUNTS,
-	RELOAD_TYPE_MOVEMENTS,
-	RELOAD_TYPE_NPCS,
-	RELOAD_TYPE_QUESTS,
-	RELOAD_TYPE_RAIDS,
-	RELOAD_TYPE_SCRIPTS,
-	RELOAD_TYPE_SPELLS,
-	RELOAD_TYPE_TALKACTIONS,
-	RELOAD_TYPE_WEAPONS,
-};
+#define CHANNEL_GUILD 0x00
+#define CHANNEL_PARTY 0x01
+#define CHANNEL_LOOT 0x09
+#define CHANNEL_PRIVATE 0xFFFF
 
-static constexpr int32_t CHANNEL_GUILD = 0x00;
-static constexpr int32_t CHANNEL_PARTY = 0x01;
-static constexpr int32_t CHANNEL_PRIVATE = 0xFFFF;
-
-//Reserved player storage key ranges;
-//[10000000 - 20000000];
-static constexpr int32_t PSTRG_RESERVED_RANGE_START = 10000000;
-static constexpr int32_t PSTRG_RESERVED_RANGE_SIZE = 10000000;
-//[1000 - 1500];
-static constexpr int32_t PSTRG_OUTFITS_RANGE_START = (PSTRG_RESERVED_RANGE_START + 1000);
-static constexpr int32_t PSTRG_OUTFITS_RANGE_SIZE = 500;
-//[2001 - 2011];
-static constexpr int32_t PSTRG_MOUNTS_RANGE_START = (PSTRG_RESERVED_RANGE_START + 2001);
-static constexpr int32_t PSTRG_MOUNTS_RANGE_SIZE = 10;
-static constexpr int32_t PSTRG_MOUNTS_CURRENTMOUNT = (PSTRG_MOUNTS_RANGE_START + 10);
+//Reserved player storage key ranges
+//[10000000 - 20000000]
+#define PSTRG_RESERVED_RANGE_START 10000000
+#define PSTRG_RESERVED_RANGE_SIZE 10000000
+//[1000 - 1500]
+#define PSTRG_OUTFITS_RANGE_START (PSTRG_RESERVED_RANGE_START + 1000)
+#define PSTRG_OUTFITS_RANGE_SIZE 500
 
 #define IS_IN_KEYRANGE(key, range) (key >= PSTRG_##range##_START && ((key - PSTRG_##range##_START) <= PSTRG_##range##_SIZE))
 

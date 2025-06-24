@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #include "otpch.h"
 
@@ -10,19 +26,20 @@
 extern Game g_game;
 extern LuaEnvironment g_luaEnvironment;
 
+enum {
+	EVENT_ID_LOADING = 1,
+	EVENT_ID_USER = 1000,
+};
+
 uint32_t Npc::npcAutoID = 0x80000000;
 NpcScriptInterface* Npc::scriptInterface = nullptr;
 
 void Npcs::reload()
 {
-	const std::map<uint32_t, Npc*>& npcs = g_game.getNpcs();
-	for (const auto& it : npcs) {
-		it.second->closeAllShopWindows();
-	}
-
 	delete Npc::scriptInterface;
 	Npc::scriptInterface = nullptr;
 
+	const std::map<uint32_t, Npc*>& npcs = g_game.getNpcs();
 	for (const auto& it : npcs) {
 		it.second->reload();
 	}
@@ -37,13 +54,14 @@ Npc* Npc::createNpc(const std::string& name)
 	return npc.release();
 }
 
-Npc::Npc(const std::string& name) :
-	Creature(),
-	filename("data/npc/" + name + ".xml"),
-	npcEventHandler(nullptr),
-	masterRadius(-1),
-	loaded(false)
+Npc::Npc(const std::string& _name) :
+	Creature(), filename("data/npc/" + _name + ".xml")
 {
+	loaded = false;
+
+	masterRadius = -1;
+
+	npcEventHandler = nullptr;
 	reset();
 }
 
@@ -82,21 +100,16 @@ bool Npc::load()
 void Npc::reset()
 {
 	loaded = false;
-	isIdle = true;
 	walkTicks = 1500;
-	pushable = true;
 	floorChange = false;
 	attackable = false;
 	ignoreHeight = false;
 	focusCreature = 0;
-	speechBubble = SPEECHBUBBLE_NONE;
 
 	delete npcEventHandler;
 	npcEventHandler = nullptr;
 
 	parameters.clear();
-	shopPlayerSet.clear();
-	spectators.clear();
 }
 
 void Npc::reload()
@@ -104,22 +117,13 @@ void Npc::reload()
 	reset();
 	load();
 
-	SpectatorVec players;
-	g_game.map.getSpectators(players, getPosition(), true, true);
-	for (const auto& player : players) {
-		spectators.insert(player->getPlayer());
-	}
-
-	const bool hasSpectators = !spectators.empty();
-	setIdle(!hasSpectators);
-
-	if (hasSpectators && walkTicks > 0) {
-		addEventWalk();
-	}
-
 	// Simulate that the creature is placed on the map again.
 	if (npcEventHandler) {
 		npcEventHandler->onCreatureAppear(this);
+	}
+
+	if (walkTicks > 0) {
+		addEventWalk();
 	}
 }
 
@@ -149,10 +153,6 @@ bool Npc::loadFromXml()
 		baseSpeed = 100;
 	}
 
-	if ((attr = npcNode.attribute("pushable"))) {
-		pushable = attr.as_bool();
-	}
-
 	if ((attr = npcNode.attribute("walkinterval"))) {
 		walkTicks = pugi::cast<uint32_t>(attr.value());
 	}
@@ -165,12 +165,8 @@ bool Npc::loadFromXml()
 		ignoreHeight = attr.as_bool();
 	}
 
-	if ((attr = npcNode.attribute("speechbubble"))) {
-		speechBubble = pugi::cast<uint32_t>(attr.value());
-	}
-
 	if ((attr = npcNode.attribute("skull"))) {
-		setSkull(getSkullType(asLowerCaseString(attr.as_string())));
+		setSkull(getSkullType(attr.as_string()));
 	}
 
 	pugi::xml_node healthNode = npcNode.child("health");
@@ -185,11 +181,6 @@ bool Npc::loadFromXml()
 			healthMax = pugi::cast<int32_t>(attr.value());
 		} else {
 			healthMax = 100;
-		}
-
-		if (health > healthMax) {
-			health = healthMax;
-			std::cout << "[Warning - Npc::loadFromXml] Health now is greater than health max in " << filename << std::endl;
 		}
 	}
 
@@ -206,7 +197,6 @@ bool Npc::loadFromXml()
 		} else if ((attr = lookNode.attribute("typeex"))) {
 			defaultOutfit.lookTypeEx = pugi::cast<uint16_t>(attr.value());
 		}
-		defaultOutfit.lookMount = pugi::cast<uint16_t>(lookNode.attribute("mount").value());
 
 		currentOutfit = defaultOutfit;
 	}
@@ -249,29 +239,17 @@ void Npc::onCreatureAppear(Creature* creature, bool isLogin)
 	Creature::onCreatureAppear(creature, isLogin);
 
 	if (creature == this) {
-		SpectatorVec players;
-		g_game.map.getSpectators(players, getPosition(), true, true);
-		for (const auto& player : players) {
-			spectators.insert(player->getPlayer());
-		}
-
-		const bool hasSpectators = !spectators.empty();
-		setIdle(!hasSpectators);
-
-		if (hasSpectators && walkTicks > 0) {
+		if (walkTicks > 0) {
 			addEventWalk();
 		}
 
 		if (npcEventHandler) {
 			npcEventHandler->onCreatureAppear(creature);
 		}
-	} else if (Player* player = creature->getPlayer()) {
+	} else if (creature->getPlayer()) {
 		if (npcEventHandler) {
 			npcEventHandler->onCreatureAppear(creature);
 		}
-
-		spectators.insert(player);
-		setIdle(false);
 	}
 }
 
@@ -280,17 +258,13 @@ void Npc::onRemoveCreature(Creature* creature, bool isLogout)
 	Creature::onRemoveCreature(creature, isLogout);
 
 	if (creature == this) {
-		closeAllShopWindows();
 		if (npcEventHandler) {
 			npcEventHandler->onCreatureDisappear(creature);
 		}
-	} else if (Player* player = creature->getPlayer()) {
+	} else if (creature->getPlayer()) {
 		if (npcEventHandler) {
 			npcEventHandler->onCreatureDisappear(creature);
 		}
-
-		spectators.erase(player);
-		setIdle(spectators.empty());
 	}
 }
 
@@ -303,25 +277,12 @@ void Npc::onCreatureMove(Creature* creature, const Tile* newTile, const Position
 		if (npcEventHandler) {
 			npcEventHandler->onCreatureMove(creature, oldPos, newPos);
 		}
-
-		if (creature != this) {
-			Player* player = creature->getPlayer();
-
-			// if player is now in range, add to spectators list, otherwise erase
-			if (player->canSee(position)) {
-				spectators.insert(player);
-			} else {
-				spectators.erase(player);
-			}
-
-			setIdle(spectators.empty());
-		}
 	}
 }
 
 void Npc::onCreatureSay(Creature* creature, SpeakClasses type, const std::string& text)
 {
-	if (creature == this) {
+	if (creature->getID() == id) {
 		return;
 	}
 
@@ -334,13 +295,6 @@ void Npc::onCreatureSay(Creature* creature, SpeakClasses type, const std::string
 	}
 }
 
-void Npc::onPlayerCloseChannel(Player* player)
-{
-	if (npcEventHandler) {
-		npcEventHandler->onPlayerCloseChannel(player);
-	}
-}
-
 void Npc::onThink(uint32_t interval)
 {
 	Creature::onThink(interval);
@@ -349,7 +303,7 @@ void Npc::onThink(uint32_t interval)
 		npcEventHandler->onThink();
 	}
 
-	if (!isIdle && getTimeSinceLastMove() >= walkTicks) {
+	if (getTimeSinceLastMove() >= walkTicks) {
 		addEventWalk();
 	}
 }
@@ -362,36 +316,8 @@ void Npc::doSay(const std::string& text)
 void Npc::doSayToPlayer(Player* player, const std::string& text)
 {
 	if (player) {
-		player->sendCreatureSay(this, TALKTYPE_PRIVATE_NP, text);
-		player->onCreatureSay(this, TALKTYPE_PRIVATE_NP, text);
-	}
-}
-
-void Npc::onPlayerTrade(Player* player, int32_t callback, uint16_t itemId, uint8_t count,
-                        uint8_t amount, bool ignore/* = false*/, bool inBackpacks/* = false*/)
-{
-	if (npcEventHandler) {
-		npcEventHandler->onPlayerTrade(player, callback, itemId, count, amount, ignore, inBackpacks);
-	}
-	player->sendSaleItemList();
-}
-
-void Npc::onPlayerEndTrade(Player* player, int32_t buyCallback, int32_t sellCallback)
-{
-	lua_State* L = getScriptInterface()->getLuaState();
-
-	if (buyCallback != -1) {
-		luaL_unref(L, LUA_REGISTRYINDEX, buyCallback);
-	}
-
-	if (sellCallback != -1) {
-		luaL_unref(L, LUA_REGISTRYINDEX, sellCallback);
-	}
-
-	removeShopPlayer(player);
-
-	if (npcEventHandler) {
-		npcEventHandler->onPlayerEndTrade(player);
+		player->sendCreatureSay(this, TALKTYPE_SAY, text);
+		player->onCreatureSay(this, TALKTYPE_SAY, text);
 	}
 }
 
@@ -401,7 +327,7 @@ bool Npc::getNextStep(Direction& dir, uint32_t& flags)
 		return true;
 	}
 
-	if (walkTicks == 0) {
+	if (walkTicks <= 0) {
 		return false;
 	}
 
@@ -414,23 +340,6 @@ bool Npc::getNextStep(Direction& dir, uint32_t& flags)
 	}
 
 	return getRandomStep(dir);
-}
-
-void Npc::setIdle(const bool idle)
-{
-	if (idle == isIdle) {
-		return;
-	}
-
-	if (isRemoved() || getHealth() <= 0) {
-		return;
-	}
-
-	isIdle = idle;
-
-	if (isIdle) {
-		onIdleStatus();
-	}
 }
 
 bool Npc::canWalkTo(const Position& fromPos, Direction dir) const
@@ -489,15 +398,12 @@ bool Npc::getRandomStep(Direction& dir) const
 	return true;
 }
 
-bool Npc::doMoveTo(const Position& pos, int32_t minTargetDist/* = 1*/, int32_t maxTargetDist/* = 1*/,
-                   bool fullPathSearch/* = true*/, bool clearSight/* = true*/, int32_t maxSearchDist/* = 0*/)
+void Npc::doMoveTo(const Position& target)
 {
-	listWalkDir.clear();
-	if (getPathTo(pos, listWalkDir, minTargetDist, maxTargetDist, fullPathSearch, clearSight, maxSearchDist)) {
-		startAutoWalk();
-		return true;
+	std::forward_list<Direction> listDir;
+	if (getPathTo(target, listDir, 1, 1, true, true)) {
+		startAutoWalk(listDir);
 	}
-	return false;
 }
 
 void Npc::turnToCreature(Creature* creature)
@@ -538,26 +444,6 @@ void Npc::setCreatureFocus(Creature* creature)
 		turnToCreature(creature);
 	} else {
 		focusCreature = 0;
-	}
-}
-
-void Npc::addShopPlayer(Player* player)
-{
-	shopPlayerSet.insert(player);
-}
-
-void Npc::removeShopPlayer(Player* player)
-{
-	shopPlayerSet.erase(player);
-}
-
-void Npc::closeAllShopWindows()
-{
-	while (!shopPlayerSet.empty()) {
-		Player* player = *shopPlayerSet.begin();
-		if (!player->closeShopWindow()) {
-			removeShopPlayer(player);
-		}
 	}
 }
 
@@ -622,16 +508,11 @@ void NpcScriptInterface::registerFunctions()
 	lua_register(luaState, "doNpcSetCreatureFocus", NpcScriptInterface::luaSetNpcFocus);
 	lua_register(luaState, "getNpcCid", NpcScriptInterface::luaGetNpcCid);
 	lua_register(luaState, "getNpcParameter", NpcScriptInterface::luaGetNpcParameter);
-	lua_register(luaState, "openShopWindow", NpcScriptInterface::luaOpenShopWindow);
-	lua_register(luaState, "closeShopWindow", NpcScriptInterface::luaCloseShopWindow);
 	lua_register(luaState, "doSellItem", NpcScriptInterface::luaDoSellItem);
 
 	// metatable
 	registerMethod("Npc", "getParameter", NpcScriptInterface::luaNpcGetParameter);
 	registerMethod("Npc", "setFocus", NpcScriptInterface::luaNpcSetFocus);
-
-	registerMethod("Npc", "openShopWindow", NpcScriptInterface::luaNpcOpenShopWindow);
-	registerMethod("Npc", "closeShopWindow", NpcScriptInterface::luaNpcCloseShopWindow);
 }
 
 int NpcScriptInterface::luaActionSay(lua_State* L)
@@ -667,33 +548,18 @@ int NpcScriptInterface::luaActionMove(lua_State* L)
 
 int NpcScriptInterface::luaActionMoveTo(lua_State* L)
 {
-	//selfMoveTo(x, y, z[, minTargetDist = 1[, maxTargetDist = 1[, fullPathSearch = true[, clearSight = true[, maxSearchDist = 0]]]]])
-	//selfMoveTo(position[, minTargetDist = 1[, maxTargetDist = 1[, fullPathSearch = true[, clearSight = true[, maxSearchDist = 0]]]]])
+	//selfMoveTo(x,y,z)
 	Npc* npc = getScriptEnv()->getNpc();
 	if (!npc) {
 		return 0;
 	}
 
-	Position position;
-	int32_t argsStart = 2;
-	if (isTable(L, 1)) {
-		position = getPosition(L, 1);
-	} else {
-		position.x = getNumber<uint16_t>(L, 1);
-		position.y = getNumber<uint16_t>(L, 2);
-		position.z = getNumber<uint8_t>(L, 3);
-		argsStart = 4;
-	}
-
-	pushBoolean(L, npc->doMoveTo(
-		position,
-		getNumber<int32_t>(L, argsStart, 1),
-		getNumber<int32_t>(L, argsStart + 1, 1),
-		getBoolean(L, argsStart + 2, true),
-		getBoolean(L, argsStart + 3, true),
-		getNumber<int32_t>(L, argsStart + 4, 0)
+	npc->doMoveTo(Position(
+		getNumber<uint16_t>(L, 1),
+		getNumber<uint16_t>(L, 2),
+		getNumber<uint8_t>(L, 3)
 	));
-	return 1;
+	return 0;
 }
 
 int NpcScriptInterface::luaActionTurn(lua_State* L)
@@ -726,7 +592,7 @@ int NpcScriptInterface::luagetDistanceTo(lua_State* L)
 
 	Npc* npc = env->getNpc();
 	if (!npc) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_THING_NOT_FOUND));
+		reportErrorFunc(getErrorDesc(LUA_ERROR_THING_NOT_FOUND));
 		lua_pushnil(L);
 		return 1;
 	}
@@ -735,7 +601,7 @@ int NpcScriptInterface::luagetDistanceTo(lua_State* L)
 
 	Thing* thing = env->getThingByUID(uid);
 	if (!thing) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_THING_NOT_FOUND));
+		reportErrorFunc(getErrorDesc(LUA_ERROR_THING_NOT_FOUND));
 		lua_pushnil(L);
 		return 1;
 	}
@@ -793,126 +659,12 @@ int NpcScriptInterface::luaGetNpcParameter(lua_State* L)
 	return 1;
 }
 
-int NpcScriptInterface::luaOpenShopWindow(lua_State* L)
-{
-	//openShopWindow(cid, items, onBuy callback, onSell callback)
-	int32_t sellCallback;
-	if (lua_isfunction(L, -1) == 0) {
-		sellCallback = -1;
-		lua_pop(L, 1); // skip it - use default value
-	} else {
-		sellCallback = popCallback(L);
-	}
-
-	int32_t buyCallback;
-	if (lua_isfunction(L, -1) == 0) {
-		buyCallback = -1;
-		lua_pop(L, 1); // skip it - use default value
-	} else {
-		buyCallback = popCallback(L);
-	}
-
-	if (lua_istable(L, -1) == 0) {
-		reportError(__FUNCTION__, "item list is not a table.");
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	std::list<ShopInfo> items;
-	lua_pushnil(L);
-	while (lua_next(L, -2) != 0) {
-		const auto tableIndex = lua_gettop(L);
-		ShopInfo item;
-
-		item.itemId = getField<uint32_t>(L, tableIndex, "id");
-		item.subType = getField<int32_t>(L, tableIndex, "subType");
-		if (item.subType == 0) {
-			item.subType = getField<int32_t>(L, tableIndex, "subtype");
-			lua_pop(L, 1);
-		}
-
-		item.buyPrice = getField<uint32_t>(L, tableIndex, "buy");
-		item.sellPrice = getField<uint32_t>(L, tableIndex, "sell");
-		item.realName = getFieldString(L, tableIndex, "name");
-
-		items.push_back(item);
-		lua_pop(L, 6);
-	}
-	lua_pop(L, 1);
-
-	Player* player = getPlayer(L, -1);
-	if (!player) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_PLAYER_NOT_FOUND));
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	//Close any eventual other shop window currently open.
-	player->closeShopWindow(false);
-
-	Npc* npc = getScriptEnv()->getNpc();
-	if (!npc) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	npc->addShopPlayer(player);
-	player->setShopOwner(npc, buyCallback, sellCallback);
-	player->openShopWindow(npc, items);
-
-	pushBoolean(L, true);
-	return 1;
-}
-
-int NpcScriptInterface::luaCloseShopWindow(lua_State* L)
-{
-	//closeShopWindow(cid)
-	Npc* npc = getScriptEnv()->getNpc();
-	if (!npc) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	Player* player = getPlayer(L, 1);
-	if (!player) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_PLAYER_NOT_FOUND));
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	int32_t buyCallback;
-	int32_t sellCallback;
-
-	Npc* merchant = player->getShopOwner(buyCallback, sellCallback);
-
-	//Check if we actually have a shop window with this player.
-	if (merchant == npc) {
-		player->sendCloseShop();
-
-		if (buyCallback != -1) {
-			luaL_unref(L, LUA_REGISTRYINDEX, buyCallback);
-		}
-
-		if (sellCallback != -1) {
-			luaL_unref(L, LUA_REGISTRYINDEX, sellCallback);
-		}
-
-		player->setShopOwner(nullptr, -1, -1);
-		npc->removeShopPlayer(player);
-	}
-
-	pushBoolean(L, true);
-	return 1;
-}
-
 int NpcScriptInterface::luaDoSellItem(lua_State* L)
 {
 	//doSellItem(cid, itemid, amount, <optional> subtype, <optional> actionid, <optional: default: 1> canDropOnMap)
 	Player* player = getPlayer(L, 1);
 	if (!player) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_PLAYER_NOT_FOUND));
+		reportErrorFunc(getErrorDesc(LUA_ERROR_PLAYER_NOT_FOUND));
 		pushBoolean(L, false);
 		return 1;
 	}
@@ -1004,125 +756,24 @@ int NpcScriptInterface::luaNpcSetFocus(lua_State* L)
 	return 1;
 }
 
-int NpcScriptInterface::luaNpcOpenShopWindow(lua_State* L)
+NpcEventsHandler::NpcEventsHandler(const std::string& file, Npc* npc)
 {
-	// npc:openShopWindow(cid, items, buyCallback, sellCallback)
-	if (!isTable(L, 3)) {
-		reportErrorFunc(L, "item list is not a table.");
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	Player* player = getPlayer(L, 2);
-	if (!player) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_PLAYER_NOT_FOUND));
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	Npc* npc = getUserdata<Npc>(L, 1);
-	if (!npc) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	int32_t sellCallback = -1;
-	if (LuaScriptInterface::isFunction(L, 5)) {
-		sellCallback = luaL_ref(L, LUA_REGISTRYINDEX);
-	}
-
-	int32_t buyCallback = -1;
-	if (LuaScriptInterface::isFunction(L, 4)) {
-		buyCallback = luaL_ref(L, LUA_REGISTRYINDEX);
-	}
-
-	std::list<ShopInfo> items;
-
-	lua_pushnil(L);
-	while (lua_next(L, 3) != 0) {
-		const auto tableIndex = lua_gettop(L);
-		ShopInfo item;
-
-		item.itemId = getField<uint32_t>(L, tableIndex, "id");
-		item.subType = getField<int32_t>(L, tableIndex, "subType");
-		if (item.subType == 0) {
-			item.subType = getField<int32_t>(L, tableIndex, "subtype");
-			lua_pop(L, 1);
-		}
-
-		item.buyPrice = getField<uint32_t>(L, tableIndex, "buy");
-		item.sellPrice = getField<uint32_t>(L, tableIndex, "sell");
-		item.realName = getFieldString(L, tableIndex, "name");
-
-		items.push_back(item);
-		lua_pop(L, 6);
-	}
-	lua_pop(L, 1);
-
-	player->closeShopWindow(false);
-	npc->addShopPlayer(player);
-
-	player->setShopOwner(npc, buyCallback, sellCallback);
-	player->openShopWindow(npc, items);
-
-	pushBoolean(L, true);
-	return 1;
-}
-
-int NpcScriptInterface::luaNpcCloseShopWindow(lua_State* L)
-{
-	// npc:closeShopWindow(player)
-	Player* player = getPlayer(L, 2);
-	if (!player) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_PLAYER_NOT_FOUND));
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	Npc* npc = getUserdata<Npc>(L, 1);
-	if (!npc) {
-		reportErrorFunc(L, getErrorDesc(LUA_ERROR_CREATURE_NOT_FOUND));
-		pushBoolean(L, false);
-		return 1;
-	}
-
-	int32_t buyCallback;
-	int32_t sellCallback;
-
-	Npc* merchant = player->getShopOwner(buyCallback, sellCallback);
-	if (merchant == npc) {
-		player->sendCloseShop();
-		if (buyCallback != -1) {
-			luaL_unref(L, LUA_REGISTRYINDEX, buyCallback);
-		}
-
-		if (sellCallback != -1) {
-			luaL_unref(L, LUA_REGISTRYINDEX, sellCallback);
-		}
-
-		player->setShopOwner(nullptr, -1, -1);
-		npc->removeShopPlayer(player);
-	}
-
-	pushBoolean(L, true);
-	return 1;
-}
-
-NpcEventsHandler::NpcEventsHandler(const std::string& file, Npc* npc) :
-	npc(npc), scriptInterface(npc->getScriptInterface())
-{
+	this->npc = npc;
+	scriptInterface = npc->getScriptInterface();
 	loaded = scriptInterface->loadFile("data/npc/scripts/" + file, npc) == 0;
 	if (!loaded) {
 		std::cout << "[Warning - NpcScript::NpcScript] Can not load script: " << file << std::endl;
 		std::cout << scriptInterface->getLastLuaError() << std::endl;
+		creatureSayEvent = -1;
+		creatureDisappearEvent = -1;
+		creatureAppearEvent = -1;
+		creatureMoveEvent = -1;
+		thinkEvent = -1;
 	} else {
 		creatureSayEvent = scriptInterface->getEvent("onCreatureSay");
 		creatureDisappearEvent = scriptInterface->getEvent("onCreatureDisappear");
 		creatureAppearEvent = scriptInterface->getEvent("onCreatureAppear");
 		creatureMoveEvent = scriptInterface->getEvent("onCreatureMove");
-		playerCloseChannelEvent = scriptInterface->getEvent("onPlayerCloseChannel");
-		playerEndTradeEvent = scriptInterface->getEvent("onPlayerEndTrade");
 		thinkEvent = scriptInterface->getEvent("onThink");
 	}
 }
@@ -1141,7 +792,6 @@ void NpcEventsHandler::onCreatureAppear(Creature* creature)
 	//onCreatureAppear(creature)
 	if (!scriptInterface->reserveScriptEnv()) {
 		std::cout << "[Error - NpcScript::onCreatureAppear] Call stack overflow" << std::endl;
-		return;
 	}
 
 	ScriptEnvironment* env = scriptInterface->getScriptEnv();
@@ -1226,81 +876,6 @@ void NpcEventsHandler::onCreatureSay(Creature* creature, SpeakClasses type, cons
 	lua_pushnumber(L, type);
 	LuaScriptInterface::pushString(L, text);
 	scriptInterface->callFunction(3);
-}
-
-void NpcEventsHandler::onPlayerTrade(Player* player, int32_t callback, uint16_t itemId,
-                              uint8_t count, uint8_t amount, bool ignore, bool inBackpacks)
-{
-	if (callback == -1) {
-		return;
-	}
-
-	//onBuy(player, itemid, count, amount, ignore, inbackpacks)
-	if (!scriptInterface->reserveScriptEnv()) {
-		std::cout << "[Error - NpcScript::onPlayerTrade] Call stack overflow" << std::endl;
-		return;
-	}
-
-	ScriptEnvironment* env = scriptInterface->getScriptEnv();
-	env->setScriptId(-1, scriptInterface);
-	env->setNpc(npc);
-
-	lua_State* L = scriptInterface->getLuaState();
-	LuaScriptInterface::pushCallback(L, callback);
-	LuaScriptInterface::pushUserdata<Player>(L, player);
-	LuaScriptInterface::setMetatable(L, -1, "Player");
-	lua_pushnumber(L, itemId);
-	lua_pushnumber(L, count);
-	lua_pushnumber(L, amount);
-	LuaScriptInterface::pushBoolean(L, ignore);
-	LuaScriptInterface::pushBoolean(L, inBackpacks);
-	scriptInterface->callFunction(6);
-}
-
-void NpcEventsHandler::onPlayerCloseChannel(Player* player)
-{
-	if (playerCloseChannelEvent == -1) {
-		return;
-	}
-
-	//onPlayerCloseChannel(player)
-	if (!scriptInterface->reserveScriptEnv()) {
-		std::cout << "[Error - NpcScript::onPlayerCloseChannel] Call stack overflow" << std::endl;
-		return;
-	}
-
-	ScriptEnvironment* env = scriptInterface->getScriptEnv();
-	env->setScriptId(playerCloseChannelEvent, scriptInterface);
-	env->setNpc(npc);
-
-	lua_State* L = scriptInterface->getLuaState();
-	scriptInterface->pushFunction(playerCloseChannelEvent);
-	LuaScriptInterface::pushUserdata<Player>(L, player);
-	LuaScriptInterface::setMetatable(L, -1, "Player");
-	scriptInterface->callFunction(1);
-}
-
-void NpcEventsHandler::onPlayerEndTrade(Player* player)
-{
-	if (playerEndTradeEvent == -1) {
-		return;
-	}
-
-	//onPlayerEndTrade(player)
-	if (!scriptInterface->reserveScriptEnv()) {
-		std::cout << "[Error - NpcScript::onPlayerEndTrade] Call stack overflow" << std::endl;
-		return;
-	}
-
-	ScriptEnvironment* env = scriptInterface->getScriptEnv();
-	env->setScriptId(playerEndTradeEvent, scriptInterface);
-	env->setNpc(npc);
-
-	lua_State* L = scriptInterface->getLuaState();
-	scriptInterface->pushFunction(playerEndTradeEvent);
-	LuaScriptInterface::pushUserdata<Player>(L, player);
-	LuaScriptInterface::setMetatable(L, -1, "Player");
-	scriptInterface->callFunction(1);
 }
 
 void NpcEventsHandler::onThink()

@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #include "otpch.h"
 
@@ -51,10 +67,10 @@ void Connection::close(bool force)
 	ConnectionManager::getInstance().releaseConnection(shared_from_this());
 
 	std::lock_guard<std::recursive_mutex> lockClass(connectionLock);
-	if (closed) {
+	if (connectionState != CONNECTION_STATE_OPEN) {
 		return;
 	}
-	closed = true;
+	connectionState = CONNECTION_STATE_CLOSED;
 
 	if (protocol) {
 		g_dispatcher.addTask(
@@ -100,7 +116,7 @@ void Connection::accept()
 {
 	std::lock_guard<std::recursive_mutex> lockClass(connectionLock);
 	try {
-		readTimer.expires_from_now(std::chrono::seconds(CONNECTION_READ_TIMEOUT));
+		readTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_READ_TIMEOUT));
 		readTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()), std::placeholders::_1));
 
 		// Read size of the first packet
@@ -118,10 +134,12 @@ void Connection::parseHeader(const boost::system::error_code& error)
 	std::lock_guard<std::recursive_mutex> lockClass(connectionLock);
 	readTimer.cancel();
 
-	if (error) {
+	int32_t size = msg.decodeHeader();
+	if (error || size <= 0 || size >= NETWORKMESSAGE_MAXSIZE - 16) {
 		close(FORCE_CLOSE);
-		return;
-	} else if (closed) {
+	}
+
+	if (connectionState != CONNECTION_STATE_OPEN) {
 		return;
 	}
 
@@ -137,14 +155,8 @@ void Connection::parseHeader(const boost::system::error_code& error)
 		packetsSent = 0;
 	}
 
-	uint16_t size = msg.getLengthHeader();
-	if (size == 0 || size >= NETWORKMESSAGE_MAXSIZE - 16) {
-		close(FORCE_CLOSE);
-		return;
-	}
-
 	try {
-		readTimer.expires_from_now(std::chrono::seconds(CONNECTION_READ_TIMEOUT));
+		readTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_READ_TIMEOUT));
 		readTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()),
 		                                    std::placeholders::_1));
 
@@ -165,24 +177,10 @@ void Connection::parsePacket(const boost::system::error_code& error)
 
 	if (error) {
 		close(FORCE_CLOSE);
-		return;
-	} else if (closed) {
-		return;
 	}
 
-	//Check packet checksum
-	uint32_t checksum;
-	int32_t len = msg.getLength() - msg.getBufferPosition() - NetworkMessage::CHECKSUM_LENGTH;
-	if (len > 0) {
-		checksum = adlerChecksum(msg.getBuffer() + msg.getBufferPosition() + NetworkMessage::CHECKSUM_LENGTH, len);
-	} else {
-		checksum = 0;
-	}
-
-	uint32_t recvChecksum = msg.get<uint32_t>();
-	if (recvChecksum != checksum) {
-		// it might not have been the checksum, step back
-		msg.skipBytes(-NetworkMessage::CHECKSUM_LENGTH);
+	if (connectionState != CONNECTION_STATE_OPEN) {
+		return;
 	}
 
 	if (!receivedFirst) {
@@ -191,22 +189,22 @@ void Connection::parsePacket(const boost::system::error_code& error)
 
 		if (!protocol) {
 			// Game protocol has already been created at this point
-			protocol = service_port->make_protocol(recvChecksum == checksum, msg, shared_from_this());
+			protocol = service_port->make_protocol(msg, shared_from_this());
 			if (!protocol) {
 				close(FORCE_CLOSE);
 				return;
 			}
 		} else {
-			msg.skipBytes(1); // Skip protocol ID
+			msg.skipBytes(1);    // Skip protocol ID
 		}
 
 		protocol->onRecvFirstMessage(msg);
 	} else {
-		protocol->onRecvMessage(msg); // Send the packet to the current protocol
+		protocol->onRecvMessage(msg);    // Send the packet to the current protocol
 	}
 
 	try {
-		readTimer.expires_from_now(std::chrono::seconds(CONNECTION_READ_TIMEOUT));
+		readTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_READ_TIMEOUT));
 		readTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()),
 		                                    std::placeholders::_1));
 
@@ -223,7 +221,7 @@ void Connection::parsePacket(const boost::system::error_code& error)
 void Connection::send(const OutputMessage_ptr& msg)
 {
 	std::lock_guard<std::recursive_mutex> lockClass(connectionLock);
-	if (closed) {
+	if (connectionState != CONNECTION_STATE_OPEN) {
 		return;
 	}
 
@@ -238,7 +236,7 @@ void Connection::internalSend(const OutputMessage_ptr& msg)
 {
 	protocol->onSendMessage(msg);
 	try {
-		writeTimer.expires_from_now(std::chrono::seconds(CONNECTION_WRITE_TIMEOUT));
+		writeTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_WRITE_TIMEOUT));
 		writeTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()),
 		                                     std::placeholders::_1));
 
@@ -279,7 +277,7 @@ void Connection::onWriteOperation(const boost::system::error_code& error)
 
 	if (!messageQueue.empty()) {
 		internalSend(messageQueue.front());
-	} else if (closed) {
+	} else if (connectionState == CONNECTION_STATE_CLOSED) {
 		closeSocket();
 	}
 }
@@ -287,7 +285,7 @@ void Connection::onWriteOperation(const boost::system::error_code& error)
 void Connection::handleTimeout(ConnectionWeak_ptr connectionWeak, const boost::system::error_code& error)
 {
 	if (error == boost::asio::error::operation_aborted) {
-		//The timer has been manually canceled
+		//The timer has been manually cancelled
 		return;
 	}
 

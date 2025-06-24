@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #ifndef FS_OUTFIT_H_C56E7A707E3F422C8C93D9BE09916AA3
 #define FS_OUTFIT_H_C56E7A707E3F422C8C93D9BE09916AA3
@@ -7,13 +23,7 @@
 #include "enums.h"
 
 struct Outfit {
-	Outfit(std::string name, uint16_t lookType, bool premium, bool unlocked) :
-		name(std::move(name)), lookType(lookType), premium(premium), unlocked(unlocked) {}
-
-	bool operator==(const Outfit& otherOutfit) const
-	{
-		return name == otherOutfit.name && lookType == otherOutfit.lookType && premium == otherOutfit.premium && unlocked == otherOutfit.unlocked;
-	}
+	Outfit(std::string name, uint16_t lookType, bool premium, bool unlocked) : name(name), lookType(lookType), premium(premium), unlocked(unlocked) {}
 
 	std::string name;
 	uint16_t lookType;
@@ -22,10 +32,9 @@ struct Outfit {
 };
 
 struct ProtocolOutfit {
-	ProtocolOutfit(const std::string& name, uint16_t lookType, uint8_t addons) :
-		name(name), lookType(lookType), addons(addons) {}
+	ProtocolOutfit(const std::string* name, uint16_t lookType, uint8_t addons) : name(name), lookType(lookType), addons(addons) {}
 
-	const std::string& name;
+	const std::string* name;
 	uint16_t lookType;
 	uint8_t addons;
 };
@@ -33,15 +42,14 @@ struct ProtocolOutfit {
 class Outfits
 {
 	public:
-		static Outfits& getInstance() {
+		static Outfits* getInstance() {
 			static Outfits instance;
-			return instance;
+			return &instance;
 		}
 
 		bool loadFromXml();
 
 		const Outfit* getOutfitByLookType(PlayerSex_t sex, uint16_t lookType) const;
-		const Outfit* getOutfitByLookType(uint16_t lookType) const;
 		const std::vector<Outfit>& getOutfits(PlayerSex_t sex) const {
 			return outfits[sex];
 		}

@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #include "otpch.h"
 
@@ -15,20 +31,17 @@ TalkActions::TalkActions()
 
 TalkActions::~TalkActions()
 {
-	clear(false);
+	clear();
 }
 
-void TalkActions::clear(bool fromLua)
+void TalkActions::clear()
 {
-	for (auto it = talkActions.begin(); it != talkActions.end(); ) {
-		if (fromLua == it->second.fromLua) {
-			it = talkActions.erase(it);
-		} else {
-			++it;
-		}
+	for (TalkAction* talkAction : talkActions) {
+		delete talkAction;
 	}
+	talkActions.clear();
 
-	reInitState(fromLua);
+	scriptInterface.reInitState();
 }
 
 LuaScriptInterface& TalkActions::getScriptInterface()
@@ -41,54 +54,27 @@ std::string TalkActions::getScriptBaseName() const
 	return "talkactions";
 }
 
-Event_ptr TalkActions::getEvent(const std::string& nodeName)
+Event* TalkActions::getEvent(const std::string& nodeName)
 {
 	if (strcasecmp(nodeName.c_str(), "talkaction") != 0) {
 		return nullptr;
 	}
-	return Event_ptr(new TalkAction(&scriptInterface));
+	return new TalkAction(&scriptInterface);
 }
 
-bool TalkActions::registerEvent(Event_ptr event, const pugi::xml_node&)
+bool TalkActions::registerEvent(Event* event, const pugi::xml_node&)
 {
-	TalkAction_ptr talkAction{static_cast<TalkAction*>(event.release())}; // event is guaranteed to be a TalkAction
-	std::vector<std::string> words = talkAction->getWordsMap();
-
-	for (size_t i = 0; i < words.size(); i++) {
-		if (i == words.size() - 1) {
-			talkActions.emplace(words[i], std::move(*talkAction));
-		} else {
-			talkActions.emplace(words[i], *talkAction);
-		}
-	}
-
-	return true;
-}
-
-bool TalkActions::registerLuaEvent(TalkAction* event)
-{
-	TalkAction_ptr talkAction{ event };
-	std::vector<std::string> words = talkAction->getWordsMap();
-
-	for (size_t i = 0; i < words.size(); i++) {
-		if (i == words.size() - 1) {
-			talkActions.emplace(words[i], std::move(*talkAction));
-		} else {
-			talkActions.emplace(words[i], *talkAction);
-		}
-	}
-
+	talkActions.push_front(static_cast<TalkAction*>(event)); // event is guaranteed to be a TalkAction
 	return true;
 }
 
 TalkActionResult_t TalkActions::playerSaySpell(Player* player, SpeakClasses type, const std::string& words) const
 {
 	size_t wordsLength = words.length();
-	for (auto it = talkActions.begin(); it != talkActions.end(); ) {
-		const std::string& talkactionWords = it->first;
+	for (TalkAction* talkAction : talkActions) {
+		const std::string& talkactionWords = talkAction->getWords();
 		size_t talkactionLength = talkactionWords.length();
 		if (wordsLength < talkactionLength || strncasecmp(words.c_str(), talkactionWords.c_str(), talkactionLength) != 0) {
-			++it;
 			continue;
 		}
 
@@ -96,16 +82,14 @@ TalkActionResult_t TalkActions::playerSaySpell(Player* player, SpeakClasses type
 		if (wordsLength != talkactionLength) {
 			param = words.substr(talkactionLength);
 			if (param.front() != ' ') {
-				++it;
 				continue;
 			}
 			trim_left(param, ' ');
 
-			std::string separator = it->second.getSeparator();
-			if (separator != " ") {
+			char separator = talkAction->getSeparator();
+			if (separator != ' ') {
 				if (!param.empty()) {
-					if (param != separator) {
-						++it;
+					if (param.front() != separator) {
 						continue;
 					} else {
 						param.erase(param.begin());
@@ -114,23 +98,19 @@ TalkActionResult_t TalkActions::playerSaySpell(Player* player, SpeakClasses type
 			}
 		}
 
-		if (it->second.fromLua) {
-			if (it->second.getNeedAccess() && !player->getGroup()->access) {
-				return TALKACTION_CONTINUE;
-			}
-
-			if (player->getAccountType() < it->second.getRequiredAccountType()) {
-				return TALKACTION_CONTINUE;
-			}
-		}
-
-		if (it->second.executeSay(player, talkactionWords, param, type)) {
+		if (talkAction->executeSay(player, param, type)) {
 			return TALKACTION_CONTINUE;
 		} else {
 			return TALKACTION_BREAK;
 		}
 	}
 	return TALKACTION_CONTINUE;
+}
+
+TalkAction::TalkAction(LuaScriptInterface* _interface) :
+	Event(_interface)
+{
+	separator = '"';
 }
 
 bool TalkAction::configureEvent(const pugi::xml_node& node)
@@ -146,9 +126,7 @@ bool TalkAction::configureEvent(const pugi::xml_node& node)
 		separator = pugi::cast<char>(separatorAttribute.value());
 	}
 
-	for (auto word : explodeString(wordsAttribute.as_string(), ";")) {
-		setWords(word);
-	}
+	words = wordsAttribute.as_string();
 	return true;
 }
 
@@ -157,7 +135,7 @@ std::string TalkAction::getScriptEventName() const
 	return "onSay";
 }
 
-bool TalkAction::executeSay(Player* player, const std::string& words, const std::string& param, SpeakClasses type) const
+bool TalkAction::executeSay(Player* player, const std::string& param, SpeakClasses type) const
 {
 	//onSay(player, words, param, type)
 	if (!scriptInterface->reserveScriptEnv()) {

@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #include "otpch.h"
 
@@ -12,13 +28,18 @@
 #include "scheduler.h"
 #include "monster.h"
 
-#include <fmt/format.h>
-
 extern Game g_game;
 extern ConfigManager g_config;
 
 Raids::Raids()
+	: scriptInterface("Raid Interface")
 {
+	loaded = false;
+	started = false;
+	running = nullptr;
+	lastRaidEnd = 0;
+	checkRaidsEvent = 0;
+
 	scriptInterface.initState();
 }
 
@@ -57,7 +78,9 @@ bool Raids::loadFromXml()
 		if ((attr = raidNode.attribute("file"))) {
 			file = attr.as_string();
 		} else {
-			file = fmt::format("raids/{:s}.xml", name);
+			std::ostringstream ss;
+			ss << "raids/" << name << ".xml";
+			file = ss.str();
 			std::cout << "[Warning - Raids::loadFromXml] File tag missing for raid " << name << ". Using default: " << file << std::endl;
 		}
 
@@ -94,7 +117,7 @@ bool Raids::loadFromXml()
 	return true;
 }
 
-static constexpr int32_t MAX_RAND_RANGE = 10000000;
+#define MAX_RAND_RANGE 10000000
 
 bool Raids::startup()
 {
@@ -176,16 +199,16 @@ Raid::~Raid()
 	}
 }
 
-bool Raid::loadFromXml(const std::string& filename)
+bool Raid::loadFromXml(const std::string& _filename)
 {
 	if (isLoaded()) {
 		return true;
 	}
 
 	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file(filename.c_str());
+	pugi::xml_parse_result result = doc.load_file(_filename.c_str());
 	if (!result) {
-		printXMLError("Error - Raid::loadFromXml", filename, result);
+		printXMLError("Error - Raid::loadFromXml", _filename, result);
 		return false;
 	}
 
@@ -206,15 +229,13 @@ bool Raid::loadFromXml(const std::string& filename)
 		if (event->configureRaidEvent(eventNode)) {
 			raidEvents.push_back(event);
 		} else {
-			std::cout << "[Error - Raid::loadFromXml] In file (" << filename << "), eventNode: " << eventNode.name() << std::endl;
+			std::cout << "[Error - Raid::loadFromXml] In file (" << _filename << "), eventNode: " << eventNode.name() << std::endl;
 			delete event;
 		}
 	}
 
 	//sort by delay time
-	std::sort(raidEvents.begin(), raidEvents.end(), [](const RaidEvent* lhs, const RaidEvent* rhs) {
-		return lhs->getDelay() < rhs->getDelay();
-	});
+	std::sort(raidEvents.begin(), raidEvents.end(), RaidEvent::compareEvents);
 
 	loaded = true;
 	return true;
@@ -530,6 +551,11 @@ bool AreaSpawnEvent::executeEvent()
 		}
 	}
 	return true;
+}
+
+ScriptEvent::ScriptEvent(LuaScriptInterface* _interface) :
+	Event(_interface)
+{
 }
 
 bool ScriptEvent::configureRaidEvent(const pugi::xml_node& eventNode)

@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #ifndef FS_VOCATION_H_ADCAA356C0DB44CEBA994A0D678EC92D
 #define FS_VOCATION_H_ADCAA356C0DB44CEBA994A0D678EC92D
@@ -10,7 +26,7 @@
 class Vocation
 {
 	public:
-		explicit Vocation(uint16_t id) : id(id) {}
+		Vocation(uint16_t id);
 
 		const std::string& getVocName() const {
 			return name;
@@ -70,47 +86,38 @@ class Vocation
 			return fromVocation;
 		}
 
-		uint32_t getNoPongKickTime() const {
-			return noPongKickTime;
-		}
+		float meleeDamageMultiplier, distDamageMultiplier, defenseMultiplier, armorMultiplier;
 
-		bool allowsPvp() const {
-			return allowPvp;
-		}
-
-		float meleeDamageMultiplier = 1.0f;
-		float distDamageMultiplier = 1.0f;
-		float defenseMultiplier = 1.0f;
-		float armorMultiplier = 1.0f;
-
-	private:
+	protected:
 		friend class Vocations;
 
-		std::string name = "none";
+		std::map<uint32_t, uint64_t> cacheMana;
+		std::map<uint32_t, uint32_t> cacheSkill[SKILL_LAST + 1];
+
+		std::string name;
 		std::string description;
 
-		double skillMultipliers[SKILL_LAST + 1] = {1.5, 2.0, 2.0, 2.0, 2.0, 1.5, 1.1};
-		float manaMultiplier = 4.0f;
+		float skillMultipliers[SKILL_LAST + 1];
+		float manaMultiplier;
 
-		uint32_t gainHealthTicks = 6;
-		uint32_t gainHealthAmount = 1;
-		uint32_t gainManaTicks = 6;
-		uint32_t gainManaAmount = 1;
-		uint32_t gainCap = 500;
-		uint32_t gainMana = 5;
-		uint32_t gainHP = 5;
-		uint32_t fromVocation = VOCATION_NONE;
-		uint32_t attackSpeed = 1500;
-		uint32_t baseSpeed = 220;
-		uint32_t noPongKickTime = 60000;
-
+		uint32_t gainHealthTicks;
+		uint32_t gainHealthAmount;
+		uint32_t gainManaTicks;
+		uint32_t gainManaAmount;
+		uint32_t gainCap;
+		uint32_t gainMana;
+		uint32_t gainHP;
+		uint32_t fromVocation;
+		uint32_t attackSpeed;
+		uint32_t baseSpeed;
 		uint16_t id;
-		uint16_t gainSoulTicks = 120;
 
-		uint8_t soulMax = 100;
-		uint8_t clientId = 0;
+		uint16_t gainSoulTicks;
 
-		bool allowPvp = true;
+		uint8_t soulMax;
+		uint8_t clientId;
+
+		static uint32_t skillBase[SKILL_LAST + 1];
 };
 
 class Vocations

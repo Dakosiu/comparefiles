@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #ifndef FS_NPC_H_B090D0CB549D4435AFA03647195D156F
 #define FS_NPC_H_B090D0CB549D4435AFA03647195D156F
@@ -25,7 +41,7 @@ class NpcScriptInterface final : public LuaScriptInterface
 
 		bool loadNpcLib(const std::string& file);
 
-	private:
+	protected:
 		void registerFunctions();
 
 		static int luaActionSay(lua_State* L);
@@ -37,20 +53,15 @@ class NpcScriptInterface final : public LuaScriptInterface
 		static int luaSetNpcFocus(lua_State* L);
 		static int luaGetNpcCid(lua_State* L);
 		static int luaGetNpcParameter(lua_State* L);
-		static int luaOpenShopWindow(lua_State* L);
-		static int luaCloseShopWindow(lua_State* L);
 		static int luaDoSellItem(lua_State* L);
 
 		// metatable
 		static int luaNpcGetParameter(lua_State* L);
 		static int luaNpcSetFocus(lua_State* L);
 
-		static int luaNpcOpenShopWindow(lua_State* L);
-		static int luaNpcCloseShopWindow(lua_State* L);
-
 	private:
-		bool initState() override;
-		bool closeState() override;
+		bool initState() final;
+		bool closeState() final;
 
 		bool libLoaded;
 };
@@ -64,25 +75,20 @@ class NpcEventsHandler
 		void onCreatureDisappear(Creature* creature);
 		void onCreatureMove(Creature* creature, const Position& oldPos, const Position& newPos);
 		void onCreatureSay(Creature* creature, SpeakClasses, const std::string& text);
-		void onPlayerTrade(Player* player, int32_t callback, uint16_t itemId, uint8_t count, uint8_t amount, bool ignore = false, bool inBackpacks = false);
-		void onPlayerCloseChannel(Player* player);
-		void onPlayerEndTrade(Player* player);
 		void onThink();
 
 		bool isLoaded() const;
 
-	private:
+	protected:
 		Npc* npc;
 		NpcScriptInterface* scriptInterface;
 
-		int32_t creatureAppearEvent = -1;
-		int32_t creatureDisappearEvent = -1;
-		int32_t creatureMoveEvent = -1;
-		int32_t creatureSayEvent = -1;
-		int32_t playerCloseChannelEvent = -1;
-		int32_t playerEndTradeEvent = -1;
-		int32_t thinkEvent = -1;
-		bool loaded = false;
+		int32_t creatureAppearEvent;
+		int32_t creatureDisappearEvent;
+		int32_t creatureMoveEvent;
+		int32_t creatureSayEvent;
+		int32_t thinkEvent;
+		bool loaded;
 };
 
 class Npc final : public Creature
@@ -94,56 +100,48 @@ class Npc final : public Creature
 		Npc(const Npc&) = delete;
 		Npc& operator=(const Npc&) = delete;
 
-		Npc* getNpc() override {
+		Npc* getNpc() final {
 			return this;
 		}
-		const Npc* getNpc() const override {
+		const Npc* getNpc() const final {
 			return this;
 		}
 
-		bool isPushable() const override {
-			return pushable && walkTicks != 0;
+		bool isPushable() const final {
+			return walkTicks > 0;
 		}
 
-		void setID() override {
+		void setID() final {
 			if (id == 0) {
 				id = npcAutoID++;
 			}
 		}
 
-		void removeList() override;
-		void addList() override;
+		void removeList() final;
+		void addList() final;
 
 		static Npc* createNpc(const std::string& name);
 
-		bool canSee(const Position& pos) const override;
+		bool canSee(const Position& pos) const final;
 
 		bool load();
 		void reload();
 
-		const std::string& getName() const override {
+		const std::string& getName() const final {
 			return name;
 		}
-		const std::string& getNameDescription() const override {
+		const std::string& getNameDescription() const final {
 			return name;
 		}
 
-		CreatureType_t getType() const override {
+		CreatureType_t getType() const final {
 			return CREATURETYPE_NPC;
-		}
-
-		uint8_t getSpeechBubble() const override {
-			return speechBubble;
-		}
-		void setSpeechBubble(const uint8_t bubble) {
-			speechBubble = bubble;
 		}
 
 		void doSay(const std::string& text);
 		void doSayToPlayer(Player* player, const std::string& text);
 
-		bool doMoveTo(const Position& pos, int32_t minTargetDist = 1, int32_t maxTargetDist = 1,
-		              bool fullPathSearch = true, bool clearSight = true, int32_t maxSearchDist = 0);
+		void doMoveTo(const Position& pos);
 
 		int32_t getMasterRadius() const {
 			return masterRadius;
@@ -158,11 +156,6 @@ class Npc final : public Creature
 			}
 		}
 
-		void onPlayerCloseChannel(Player* player);
-		void onPlayerTrade(Player* player, int32_t callback, uint16_t itemId, uint8_t count,
-		                   uint8_t amount, bool ignore = false, bool inBackpacks = false);
-		void onPlayerEndTrade(Player* player, int32_t buyCallback, int32_t sellCallback);
-
 		void turnToCreature(Creature* creature);
 		void setCreatureFocus(Creature* creature);
 
@@ -170,30 +163,28 @@ class Npc final : public Creature
 
 		static uint32_t npcAutoID;
 
-	private:
-		explicit Npc(const std::string& name);
+	protected:
+		explicit Npc(const std::string& _name);
 
-		void onCreatureAppear(Creature* creature, bool isLogin) override;
-		void onRemoveCreature(Creature* creature, bool isLogout) override;
+		void onCreatureAppear(Creature* creature, bool isLogin) final;
+		void onRemoveCreature(Creature* creature, bool isLogout) final;
 		void onCreatureMove(Creature* creature, const Tile* newTile, const Position& newPos,
-		                            const Tile* oldTile, const Position& oldPos, bool teleport) override;
+		                            const Tile* oldTile, const Position& oldPos, bool teleport) final;
 
-		void onCreatureSay(Creature* creature, SpeakClasses type, const std::string& text) override;
-		void onThink(uint32_t interval) override;
-		std::string getDescription(int32_t lookDistance) const override;
+		void onCreatureSay(Creature* creature, SpeakClasses type, const std::string& text) final;
+		void onThink(uint32_t interval) final;
+		std::string getDescription(int32_t lookDistance) const final;
 
-		bool isImmune(CombatType_t) const override {
+		bool isImmune(CombatType_t) const final {
 			return !attackable;
 		}
-		bool isImmune(ConditionType_t) const override {
+		bool isImmune(ConditionType_t) const final {
 			return !attackable;
 		}
-		bool isAttackable() const override {
+		bool isAttackable() const final {
 			return attackable;
 		}
-		bool getNextStep(Direction& dir, uint32_t& flags) override;
-
-		void setIdle(const bool idle);
+		bool getNextStep(Direction& dir, uint32_t& flags) final;
 
 		bool canWalkTo(const Position& fromPos, Direction dir) const;
 		bool getRandomStep(Direction& dir) const;
@@ -201,14 +192,7 @@ class Npc final : public Creature
 		void reset();
 		bool loadFromXml();
 
-		void addShopPlayer(Player* player);
-		void removeShopPlayer(Player* player);
-		void closeAllShopWindows();
-
 		std::map<std::string, std::string> parameters;
-
-		std::set<Player*> shopPlayerSet;
-		std::set<Player*> spectators;
 
 		std::string name;
 		std::string filename;
@@ -221,14 +205,10 @@ class Npc final : public Creature
 		int32_t focusCreature;
 		int32_t masterRadius;
 
-		uint8_t speechBubble;
-
 		bool floorChange;
 		bool attackable;
 		bool ignoreHeight;
 		bool loaded;
-		bool isIdle;
-		bool pushable;
 
 		static NpcScriptInterface* scriptInterface;
 

@@ -1,14 +1,36 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #include "otpch.h"
 
 #include "configmanager.h"
 #include "database.h"
 
-#include <mysql/errmsg.h>
+#include <errmsg.h>
 
 extern ConfigManager g_config;
+
+Database::Database()
+{
+	handle = nullptr;
+	maxPacketSize = 1048576;
+}
 
 Database::~Database()
 {
@@ -27,7 +49,7 @@ bool Database::connect()
 	}
 
 	// automatic reconnect
-	bool reconnect = true;
+	my_bool reconnect = true;
 	mysql_options(handle, MYSQL_OPT_RECONNECT, &reconnect);
 
 	// connects to database
@@ -229,7 +251,7 @@ bool DBResult::next()
 	return row != nullptr;
 }
 
-DBInsert::DBInsert(std::string query) : query(std::move(query))
+DBInsert::DBInsert(std::string query) : query(query)
 {
 	this->length = this->query.length();
 }
@@ -239,7 +261,7 @@ bool DBInsert::addRow(const std::string& row)
 	// adds new row to buffer
 	const size_t rowLength = row.length();
 	length += rowLength;
-	if (length > Database::getInstance().getMaxPacketSize() && !execute()) {
+	if (length > Database::getInstance()->getMaxPacketSize() && !execute()) {
 		return false;
 	}
 
@@ -272,7 +294,7 @@ bool DBInsert::execute()
 	}
 
 	// executes buffer
-	bool res = Database::getInstance().executeQuery(query + values);
+	bool res = Database::getInstance()->executeQuery(query + values);
 	values.clear();
 	length = query.length();
 	return res;

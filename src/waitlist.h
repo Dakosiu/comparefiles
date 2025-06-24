@@ -17,32 +17,41 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef FS_PROTOCOLLOGIN_H_1238F4B473074DF2ABC595C29E81C46D
-#define FS_PROTOCOLLOGIN_H_1238F4B473074DF2ABC595C29E81C46D
+#ifndef FS_WAITLIST_H_7E4299E552E44F10BC4F4E50BF3D7241
+#define FS_WAITLIST_H_7E4299E552E44F10BC4F4E50BF3D7241
 
-#include "protocol.h"
+#include "player.h"
 
-class NetworkMessage;
-class OutputMessage;
+struct Wait {
+	Wait(int64_t timeout, uint32_t playerGUID) :
+		timeout(timeout), playerGUID(playerGUID) {}
 
-class ProtocolLogin : public Protocol
+	int64_t timeout;
+	uint32_t playerGUID;
+};
+
+typedef std::list<Wait> WaitList;
+typedef WaitList::iterator WaitListIterator;
+
+class WaitingList
 {
 	public:
-		// static protocol information
-		enum {server_sends_first = false};
-		enum {protocol_identifier = 0x01};
-		static const char* protocol_name() {
-			return "login protocol";
+		static WaitingList* getInstance() {
+			static WaitingList waitingList;
+			return &waitingList;
 		}
 
-		explicit ProtocolLogin(Connection_ptr connection) : Protocol(connection) {}
-
-		void onRecvFirstMessage(NetworkMessage& msg);
+		bool clientLogin(const Player* player);
+		uint32_t getClientSlot(const Player* player);
+		static uint32_t getTime(uint32_t slot);
 
 	protected:
-		void disconnectClient(const std::string& message);
+		WaitList priorityWaitList;
+		WaitList waitList;
 
-		void getCharacterList(uint32_t accountName, const std::string& password);
+		static uint32_t getTimeout(uint32_t slot);
+		WaitListIterator findClient(const Player* player, uint32_t& slot);
+		static void cleanupList(WaitList& list);
 };
 
 #endif

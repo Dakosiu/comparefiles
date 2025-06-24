@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #ifndef FS_CYLINDER_H_54BBCEB2A5B7415DAD837E4D58115150
 #define FS_CYLINDER_H_54BBCEB2A5B7415DAD837E4D58115150
@@ -10,7 +26,7 @@
 class Item;
 class Creature;
 
-static constexpr int32_t INDEX_WHEREEVER = -1;
+#define INDEX_WHEREEVER -1
 
 enum cylinderflags_t {
 	FLAG_NOLIMIT = 1 << 0, //Bypass limits like capacity/container limits, blocking items/creatures etc.
@@ -223,7 +239,7 @@ class VirtualCylinder final : public Cylinder
 			return 1;
 		}
 		std::string getDescription(int32_t) const override {
-			return {};
+			return std::string();
 		}
 		bool isRemoved() const override {
 			return false;

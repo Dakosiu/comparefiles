@@ -1,5 +1,21 @@
-// Copyright 2022 The Forgotten Server Authors. All rights reserved.
-// Use of this source code is governed by the GPL-2.0 License that can be found in the LICENSE file.
+/**
+ * The Forgotten Server - a free and open-source MMORPG server emulator
+ * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #include "otpch.h"
 
@@ -7,15 +23,15 @@
 #include "databasemanager.h"
 #include "luascript.h"
 
-#include <fmt/format.h>
-
 extern ConfigManager g_config;
 
 bool DatabaseManager::optimizeTables()
 {
-	Database& db = Database::getInstance();
+	Database* db = Database::getInstance();
+	std::ostringstream query;
 
-	DBResult_ptr result = db.storeQuery(fmt::format("SELECT `TABLE_NAME` FROM `information_schema`.`TABLES` WHERE `TABLE_SCHEMA` = {:s} AND `DATA_FREE` > 0", db.escapeString(g_config.getString(ConfigManager::MYSQL_DB))));
+	query << "SELECT `TABLE_NAME` FROM `information_schema`.`TABLES` WHERE `TABLE_SCHEMA` = " << db->escapeString(g_config.getString(ConfigManager::MYSQL_DB)) << " AND `DATA_FREE` > 0";
+	DBResult_ptr result = db->storeQuery(query.str());
 	if (!result) {
 		return false;
 	}
@@ -24,7 +40,10 @@ bool DatabaseManager::optimizeTables()
 		std::string tableName = result->getString("TABLE_NAME");
 		std::cout << "> Optimizing table " << tableName << "..." << std::flush;
 
-		if (db.executeQuery(fmt::format("OPTIMIZE TABLE `{:s}`", tableName))) {
+		query.str(std::string());
+		query << "OPTIMIZE TABLE `" << tableName << '`';
+
+		if (db->executeQuery(query.str())) {
 			std::cout << " [success]" << std::endl;
 		} else {
 			std::cout << " [failed]" << std::endl;
@@ -35,22 +54,27 @@ bool DatabaseManager::optimizeTables()
 
 bool DatabaseManager::tableExists(const std::string& tableName)
 {
-	Database& db = Database::getInstance();
-	return db.storeQuery(fmt::format("SELECT `TABLE_NAME` FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = {:s} AND `TABLE_NAME` = {:s} LIMIT 1", db.escapeString(g_config.getString(ConfigManager::MYSQL_DB)), db.escapeString(tableName))).get() != nullptr;
+	Database* db = Database::getInstance();
+
+	std::ostringstream query;
+	query << "SELECT `TABLE_NAME` FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = " << db->escapeString(g_config.getString(ConfigManager::MYSQL_DB)) << " AND `TABLE_NAME` = " << db->escapeString(tableName) << " LIMIT 1";
+	return db->storeQuery(query.str()).get() != nullptr;
 }
 
 bool DatabaseManager::isDatabaseSetup()
 {
-	Database& db = Database::getInstance();
-	return db.storeQuery(fmt::format("SELECT `TABLE_NAME` FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = {:s}", db.escapeString(g_config.getString(ConfigManager::MYSQL_DB)))).get() != nullptr;
+	Database* db = Database::getInstance();
+	std::ostringstream query;
+	query << "SELECT `TABLE_NAME` FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = " << db->escapeString(g_config.getString(ConfigManager::MYSQL_DB));
+	return db->storeQuery(query.str()).get() != nullptr;
 }
 
 int32_t DatabaseManager::getDatabaseVersion()
 {
 	if (!tableExists("server_config")) {
-		Database& db = Database::getInstance();
-		db.executeQuery("CREATE TABLE `server_config` (`config` VARCHAR(50) NOT NULL, `value` VARCHAR(256) NOT NULL DEFAULT '', UNIQUE(`config`)) ENGINE = InnoDB");
-		db.executeQuery("INSERT INTO `server_config` VALUES ('db_version', 0)");
+		Database* db = Database::getInstance();
+		db->executeQuery("CREATE TABLE `server_config` (`config` VARCHAR(50) NOT NULL, `value` VARCHAR(256) NOT NULL DEFAULT '', UNIQUE(`config`)) ENGINE = InnoDB");
+		db->executeQuery("INSERT INTO `server_config` VALUES ('db_version', 0)");
 		return 0;
 	}
 
@@ -84,7 +108,9 @@ void DatabaseManager::updateDatabase()
 
 	int32_t version = getDatabaseVersion();
 	do {
-		if (luaL_dofile(L, fmt::format("data/migrations/{:d}.lua", version).c_str()) != 0) {
+		std::ostringstream ss;
+		ss << "data/migrations/" << version << ".lua";
+		if (luaL_dofile(L, ss.str().c_str()) != 0) {
 			std::cout << "[Error - DatabaseManager::updateDatabase - Version: " << version << "] " << lua_tostring(L, -1) << std::endl;
 			break;
 		}
@@ -116,9 +142,11 @@ void DatabaseManager::updateDatabase()
 
 bool DatabaseManager::getDatabaseConfig(const std::string& config, int32_t& value)
 {
-	Database& db = Database::getInstance();
+	Database* db = Database::getInstance();
+	std::ostringstream query;
+	query << "SELECT `value` FROM `server_config` WHERE `config` = " << db->escapeString(config);
 
-	DBResult_ptr result = db.storeQuery(fmt::format("SELECT `value` FROM `server_config` WHERE `config` = {:s}", db.escapeString(config)));
+	DBResult_ptr result = db->storeQuery(query.str());
 	if (!result) {
 		return false;
 	}
@@ -129,13 +157,16 @@ bool DatabaseManager::getDatabaseConfig(const std::string& config, int32_t& valu
 
 void DatabaseManager::registerDatabaseConfig(const std::string& config, int32_t value)
 {
-	Database& db = Database::getInstance();
+	Database* db = Database::getInstance();
+	std::ostringstream query;
 
 	int32_t tmp;
 
 	if (!getDatabaseConfig(config, tmp)) {
-		db.executeQuery(fmt::format("INSERT INTO `server_config` VALUES ({:s}, '{:d}')", db.escapeString(config), value));
+		query << "INSERT INTO `server_config` VALUES (" << db->escapeString(config) << ", '" << value << "')";
 	} else {
-		db.executeQuery(fmt::format("UPDATE `server_config` SET `value` = '{:d}' WHERE `config` = {:s}", value, db.escapeString(config)));
+		query << "UPDATE `server_config` SET `value` = '" << value << "' WHERE `config` = " << db->escapeString(config);
 	}
+
+	db->executeQuery(query.str());
 }
