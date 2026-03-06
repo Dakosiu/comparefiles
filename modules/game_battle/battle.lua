@@ -1,4 +1,5 @@
 battleWindow = nil
+battleButton = nil
 battlePanel = nil
 filterPanel = nil
 toggleFilterButton = nil
@@ -16,7 +17,8 @@ local ages = {}
 
 function init()  
   g_ui.importStyle('battlebutton')
-
+  battleButton = modules.client_topmenu.addRightGameToggleButton('battleButton', tr('Battle') .. ' (Ctrl+B)', '/images/topbuttons/battle', toggle, false, 2)
+  battleButton:setOn(true)
   battleWindow = g_ui.loadUI('battle', modules.game_interface.getRightPanel())
   g_keyboard.bindKeyDown('Ctrl+B', toggle)
 
@@ -41,7 +43,7 @@ function init()
   mouseWidget:setFocusable(false)
   mouseWidget.cancelNextRelease = false
 
-  battleWindow:setContentMinimumHeight(51)
+  battleWindow:setContentMinimumHeight(80)
 
   sortTypeBox:addOption('Name', 'name')
   sortTypeBox:addOption('Distance', 'distance')
@@ -90,6 +92,7 @@ function terminate()
   battleButtons = {}
   
   g_keyboard.unbindKeyDown('Ctrl+B')
+  battleButton:destroy()
   battleWindow:destroy()
   mouseWidget:destroy()
 	
@@ -109,17 +112,17 @@ function terminate()
 end
 
 function toggle()
-  if modules.game_sidebuttons.battleButton:isOn() then
+  if battleButton:isOn() then
     battleWindow:close()
-    modules.game_sidebuttons.battleButton:setOn(false)
+    battleButton:setOn(false)
   else
     battleWindow:open()
-    modules.game_sidebuttons.battleButton:setOn(true)
+    battleButton:setOn(true)
   end
 end
 
 function onMiniWindowClose()
-  modules.game_sidebuttons.battleButton:setOn(false)
+  battleButton:setOn(false)
 end
 
 function getSortType()
@@ -128,7 +131,7 @@ function getSortType()
     if g_app.isMobile() then
       return 'distance'
     else
-      return 'age'
+      return 'name'
     end
   end
   return settings['sortType']
@@ -280,7 +283,7 @@ function checkCreatures()
   for i=#creatures + 1,maxCreatures do
     if battleButtons[i]:isHidden() then break end
     battleButtons[i]:hide()
-    --modules.game_inventory.battleButton:setOn(false)
+    battleButton:setOn(false)
   end
 
   battlePanel:getLayout():enableUpdates()
@@ -407,9 +410,9 @@ function onPlayerPositionChange(creature, newPos, oldPos)
 end
 
 local CreatureButtonColors = {
-  onIdle = {notHovered = '#888888', hovered = '#f8f8f8' },
-  onTargeted = {notHovered = '#df3f3f', hovered = '#f7a3a3' },
-  onFollowed = {notHovered = '#3fdf3f', hovered = '#b3f7b3' }
+  onIdle = {notHovered = '#888888', hovered = '#FFFFFF' },
+  onTargeted = {notHovered = '#FF0000', hovered = '#FF8888' },
+  onFollowed = {notHovered = '#00FF00', hovered = '#88FF88' }
 }
 
 function updateSquare()

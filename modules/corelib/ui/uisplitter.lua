@@ -23,12 +23,12 @@ function UISplitter:onHoverChange(hovered)
     self.hovering = true
     g_mouse.pushCursor(self.cursortype)
     if not self:isPressed() then
-      --g_effects.fadeIn(self)
+      g_effects.fadeIn(self)
     end
   else
     if not self:isPressed() and self.hovering then
       g_mouse.popCursor(self.cursortype)
-      --g_effects.fadeOut(self)
+      g_effects.fadeOut(self)
       self.hovering = false
     end
   end
@@ -69,7 +69,7 @@ end
 function UISplitter:onMouseRelease(mousePos, mouseButton)
   if not self:isHovered() then
     g_mouse.popCursor(self.cursortype)
-    --g_effects.fadeOut(self)
+    g_effects.fadeOut(self)
     self.hovering = false
   end
 end

@@ -43,7 +43,7 @@ function UIMiniWindowContainer:fitAll(noRemoveChild)
 
   -- try to resize noRemoveChild
   local maximumHeight = selfHeight - (sumHeight - noRemoveChild:getHeight())
-  if noRemoveChild:isResizeable() and noRemoveChild:getMinimumHeight() <= maximumHeight and noRemoveChild:getMinimumHeight() > 0 then
+  if noRemoveChild:isResizeable() and noRemoveChild:getMinimumHeight() <= maximumHeight then
     sumHeight = sumHeight - noRemoveChild:getHeight() + maximumHeight
     addEvent(function() noRemoveChild:setHeight(maximumHeight) end)
   end
@@ -55,7 +55,7 @@ function UIMiniWindowContainer:fitAll(noRemoveChild)
     end
 
     local child = children[i]
-    if child ~= noRemoveChild and not child.save and child:getMinimumHeight() > 0 then
+    if child ~= noRemoveChild and not child.save then
       local childHeight = child:getHeight()
       sumHeight = sumHeight - childHeight
       table.insert(removeChildren, child)
@@ -69,7 +69,7 @@ function UIMiniWindowContainer:fitAll(noRemoveChild)
     end
 
     local child = children[i]
-    if child ~= noRemoveChild and child:isVisible() and not child.forceOpen and child:getMinimumHeight() > 0 then
+    if child ~= noRemoveChild and child:isVisible() and not child.forceOpen then
       local childHeight = child:getHeight()
       sumHeight = sumHeight - childHeight
       table.insert(removeChildren, child)
@@ -83,7 +83,7 @@ function UIMiniWindowContainer:fitAll(noRemoveChild)
     end
 
     local child = children[i]
-    if child ~= noRemoveChild and child:isVisible() and child:getMinimumHeight() > 0 then
+    if child ~= noRemoveChild and child:isVisible() then
       local childHeight = child:getHeight() - 50
       sumHeight = sumHeight - childHeight
       table.insert(removeChildren, child)

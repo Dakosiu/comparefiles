@@ -36,14 +36,14 @@ topHealthBar = nil
 topManaBar = nil
 
 function init()
-  -- connect(LocalPlayer, { onHealthChange = onHealthChange,
-                         -- onManaChange = onManaChange,
-                         -- onLevelChange = onLevelChange,
-                         -- onStatesChange = onStatesChange,
-                         -- onSoulChange = onSoulChange,
-                         -- onFreeCapacityChange = onFreeCapacityChange })
+  connect(LocalPlayer, { onHealthChange = onHealthChange,
+                         onManaChange = onManaChange,
+                         onLevelChange = onLevelChange,
+                         onStatesChange = onStatesChange,
+                         onSoulChange = onSoulChange,
+                         onFreeCapacityChange = onFreeCapacityChange })
 
-  -- connect(g_game, { onGameEnd = offline })
+  connect(g_game, { onGameEnd = offline })
 
   healthInfoWindow = g_ui.loadUI('healthinfo', modules.game_interface.getRightPanel())
   healthInfoWindow:disableResize()
@@ -71,30 +71,28 @@ function init()
   topHealthBar = overlay:getChildById('topHealthBar')
   topManaBar = overlay:getChildById('topManaBar')
   
-  --connect(overlay, { onGeometryChange = onOverlayGeometryChange })
+  connect(overlay, { onGeometryChange = onOverlayGeometryChange })
   
   -- load condition icons
   for k,v in pairs(Icons) do
     g_textures.preload(v.path)
   end
 
-  -- if g_game.isOnline() then
-    -- local localPlayer = g_game.getLocalPlayer()
-    -- onHealthChange(localPlayer, localPlayer:getHealth(), localPlayer:getMaxHealth())
-    -- onManaChange(localPlayer, localPlayer:getMana(), localPlayer:getMaxMana())
-    -- onLevelChange(localPlayer, localPlayer:getLevel(), localPlayer:getLevelPercent())
-    -- onStatesChange(localPlayer, localPlayer:getStates(), 0)
-    -- onSoulChange(localPlayer, localPlayer:getSoul())
-    -- onFreeCapacityChange(localPlayer, localPlayer:getFreeCapacity())
-  -- end
+  if g_game.isOnline() then
+    local localPlayer = g_game.getLocalPlayer()
+    onHealthChange(localPlayer, localPlayer:getHealth(), localPlayer:getMaxHealth())
+    onManaChange(localPlayer, localPlayer:getMana(), localPlayer:getMaxMana())
+    onLevelChange(localPlayer, localPlayer:getLevel(), localPlayer:getLevelPercent())
+    onStatesChange(localPlayer, localPlayer:getStates(), 0)
+    onSoulChange(localPlayer, localPlayer:getSoul())
+    onFreeCapacityChange(localPlayer, localPlayer:getFreeCapacity())
+  end
 
-  healthInfoWindow:setup()
-  healthInfoWindow:open()
 
   hideLabels()
   hideExperience()
 
-  healthInfoWindow:setHeight(32)
+  healthInfoWindow:setup()
   
   if g_app.isMobile() then
     healthInfoWindow:close()
@@ -103,15 +101,15 @@ function init()
 end
 
 function terminate()
-  -- disconnect(LocalPlayer, { onHealthChange = onHealthChange,
-                            -- onManaChange = onManaChange,
-                            -- onLevelChange = onLevelChange,
-                            -- onStatesChange = onStatesChange,
-                            -- onSoulChange = onSoulChange,
-                            -- onFreeCapacityChange = onFreeCapacityChange })
+  disconnect(LocalPlayer, { onHealthChange = onHealthChange,
+                            onManaChange = onManaChange,
+                            onLevelChange = onLevelChange,
+                            onStatesChange = onStatesChange,
+                            onSoulChange = onSoulChange,
+                            onFreeCapacityChange = onFreeCapacityChange })
 
-  -- disconnect(g_game, { onGameEnd = offline })
-  -- disconnect(overlay, { onGeometryChange = onOverlayGeometryChange })
+  disconnect(g_game, { onGameEnd = offline })
+  disconnect(overlay, { onGeometryChange = onOverlayGeometryChange })
   
   healthInfoWindow:destroy()
   if healthInfoButton then
@@ -167,9 +165,7 @@ function onHealthChange(localPlayer, health, maxHealth)
     maxHealth = health
   end
 
-  healthInfoWindow:recursiveGetChildById("healthLabel"):setText(comma_value(health))
-
-  --healthBar:setText(comma_value(health) .. ' / ' .. comma_value(maxHealth))
+  healthBar:setText(comma_value(health) .. ' / ' .. comma_value(maxHealth))
   healthBar:setTooltip(tr(healthTooltip, health, maxHealth))
   healthBar:setValue(health, 0, maxHealth)
 
@@ -203,9 +199,7 @@ function onManaChange(localPlayer, mana, maxMana)
     maxMana = mana
   end
   
-  healthInfoWindow:recursiveGetChildById("manaLabel"):setText(comma_value(mana))
-
-  --manaBar:setText(comma_value(mana) .. ' / ' .. comma_value(maxMana))
+  manaBar:setText(comma_value(mana) .. ' / ' .. comma_value(maxMana))
   manaBar:setTooltip(tr(manaTooltip, mana, maxMana))
   manaBar:setValue(mana, 0, maxMana)
 

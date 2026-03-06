@@ -1,10 +1,9 @@
 GameSidePanel < UIMiniWindowContainer
   image-source: /images/ui/panel_side
-  image-border: 2
-  margin-right: 1
-  border-width: 2
-  border-color: alpha
-  width: 176
+  image-border: 4
+  padding: 3
+  padding-top: 0
+  width: 198
   focusable: false
   on: true
   layout:
@@ -15,7 +14,7 @@ GameSidePanel < UIMiniWindowContainer
   
 
 GameMapPanel < UIGameMap
-  padding: 6
+  padding: 4
   image-source: /images/ui/panel_map
   image-border: 4
 
@@ -147,10 +146,6 @@ UIWidget
     anchors.right: gameRightPanels.left
     anchors.bottom: parent.bottom
     height: 5
-    image-source: /images/ui/splitter
-    size: 300 5
-    opacity: 100
-    margin-right: 1
     relative-margin: bottom
     margin-bottom: 150
     @canUpdateMargin: function(self, newMargin) if modules.client_options.getOption('dontStretchShrink') then return self:getMarginBottom() end return math.max(math.min(newMargin, self:getParent():getHeight() - 150), 80) end
@@ -163,7 +158,6 @@ UIWidget
     id: gameBottomActionPanel
     phantom: true
     focusable: false
-    margin-right: -1
 
     $!mobile:
       anchors.left: bottomSplitter.left

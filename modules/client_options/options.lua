@@ -4,7 +4,7 @@ local defaultOptions = {
   showFps = true,
   showPing = true,
   fullscreen = false,
-  classicView = true,
+  classicView = not g_app.isMobile(),
   cacheMap = g_app.isMobile(),
   classicControl = not g_app.isMobile(),
   smartWalk = false,
@@ -18,26 +18,26 @@ local defaultOptions = {
   showPrivateMessagesInConsole = true,
   showPrivateMessagesOnScreen = true,
   rightPanels = 1,
-  leftPanels = 0,
+  leftPanels = g_app.isMobile() and 1 or 2,
   containerPanel = 8,
   backgroundFrameRate = 60,
-  enableAudio = false,
+  enableAudio = true,
   enableMusicSound = false,
-  musicSoundVolume = 0,
-  botSoundVolume = 0,
-  enableLights = true,
+  musicSoundVolume = 100,
+  botSoundVolume = 100,
+  enableLights = false,
   floorFading = 500,
-  crosshair = 1,
-  ambientLight = 0,
+  crosshair = 2,
+  ambientLight = 100,
   optimizationLevel = 1,
   displayNames = true,
   displayHealth = true,
   displayMana = true,
   displayHealthOnTop = false,
   showHealthManaCircle = false,
-  hidePlayerBars = true,
-  highlightThingsUnderCursor = false,
-  topHealtManaBar = false,
+  hidePlayerBars = false,
+  highlightThingsUnderCursor = true,
+  topHealtManaBar = true,
   displayText = true,
   dontStretchShrink = false,
   turnDelay = 30,
@@ -50,9 +50,9 @@ local defaultOptions = {
   walkTeleportDelay = 200,
   walkCtrlTurnDelay = 150,
 
-  topBar = false,
+  topBar = true,
 
-  actionbar1 = false,
+  actionbar1 = true,
   actionbar2 = false,
   actionbar3 = false,
   actionbar4 = false,
@@ -106,7 +106,7 @@ function init()
   optionsTabBar:addTab(tr('Game'), generalPanel, '/images/optionstab/game')
   
   interfacePanel = g_ui.loadUI('interface')
-  optionsTabBar:addTab(tr('Interface'), interfacePanel, '/images/optionstab/interface')  
+  optionsTabBar:addTab(tr('Interface'), interfacePanel, '/images/optionstab/game')  
 
   consolePanel = g_ui.loadUI('console')
   optionsTabBar:addTab(tr('Console'), consolePanel, '/images/optionstab/console')
@@ -115,7 +115,7 @@ function init()
   optionsTabBar:addTab(tr('Graphics'), graphicsPanel, '/images/optionstab/graphics')
 
   audioPanel = g_ui.loadUI('audio')
-  -- optionsTabBar:addTab(tr('Audio'), audioPanel, '/images/optionstab/audio')
+  optionsTabBar:addTab(tr('Audio'), audioPanel, '/images/optionstab/audio')
 
 
   extrasPanel = g_ui.createWidget('OptionPanel')
@@ -126,11 +126,11 @@ function init()
     extrasPanel:addChild(extrasButton)
   end
   if not g_game.getFeature(GameNoDebug) and not g_app.isMobile() then
-    -- optionsTabBar:addTab(tr('Extras'), extrasPanel, '/images/optionstab/extras')
+    optionsTabBar:addTab(tr('Extras'), extrasPanel, '/images/optionstab/extras')
   end
 
   customPanel = g_ui.loadUI('custom')
-  -- optionsTabBar:addTab(tr('Custom'), customPanel, '/images/optionstab/features')
+  optionsTabBar:addTab(tr('Custom'), customPanel, '/images/optionstab/features')
 
   optionsButton = modules.client_topmenu.addLeftButton('optionsButton', tr('Options'), '/images/topbuttons/options', toggle)
   audioButton = modules.client_topmenu.addLeftButton('audioButton', tr('Audio'), '/images/topbuttons/audio', function() toggleOption('enableAudio') end)
@@ -231,7 +231,7 @@ function setOption(key, value, force)
     end
     return
   end
-
+  
   if modules.game_interface == nil then
     return
   end
@@ -253,7 +253,7 @@ function setOption(key, value, force)
     end
   elseif key == 'fullscreen' then
     g_window.setFullscreen(value)
-     elseif key == 'enableAudio' then
+  elseif key == 'enableAudio' then
     if g_sounds ~= nil then
       g_sounds.setAudioEnabled(value)
     end
@@ -277,27 +277,34 @@ function setOption(key, value, force)
     end
     audioPanel:getChildById('botSoundVolumeLabel'):setText(tr('Bot sound volume: %d', value))    
   elseif key == 'showHealthManaCircle' then
-    --modules.game_healthinfo.healthCircle:setVisible(value)
-    --modules.game_healthinfo.healthCircleFront:setVisible(value)
-    --modules.game_healthinfo.manaCircle:setVisible(value)
-    --modules.game_healthinfo.manaCircleFront:setVisible(value)
+    modules.game_healthinfo.healthCircle:setVisible(value)
+    modules.game_healthinfo.healthCircleFront:setVisible(value)
+    modules.game_healthinfo.manaCircle:setVisible(value)
+    modules.game_healthinfo.manaCircleFront:setVisible(value)
   elseif key == 'backgroundFrameRate' then
     local text, v = value, value
     if value <= 0 or value >= 201 then text = 'max' v = 0 end
     graphicsPanel:getChildById('backgroundFrameRateLabel'):setText(tr('Game framerate limit: %s', text))
     g_app.setMaxFps(v)
+  elseif key == 'enableLights' then
+    gameMapPanel:setDrawLights(value and options['ambientLight'] < 100)
+    graphicsPanel:getChildById('ambientLight'):setEnabled(value)
+    graphicsPanel:getChildById('ambientLightLabel'):setEnabled(value)
   elseif key == 'floorFading' then
     gameMapPanel:setFloorFading(value)
     interfacePanel:getChildById('floorFadingLabel'):setText(tr('Floor fading: %s ms', value))
   elseif key == 'crosshair' then
-    gameMapPanel:setCrosshair("")    
-    --if value == 1 then
-    --  gameMapPanel:setCrosshair("")    
-    --elseif value == 2 then
-    --  gameMapPanel:setCrosshair("/images/crosshair/default.png")        
-    --elseif value == 3 then
-    --  gameMapPanel:setCrosshair("/images/crosshair/full.png")    
-    --end
+    if value == 1 then
+      gameMapPanel:setCrosshair("")    
+    elseif value == 2 then
+      gameMapPanel:setCrosshair("/images/crosshair/default.png")        
+    elseif value == 3 then
+      gameMapPanel:setCrosshair("/images/crosshair/full.png")    
+    end
+  elseif key == 'ambientLight' then
+    graphicsPanel:getChildById('ambientLightLabel'):setText(tr('Ambient light: %s%%', value))
+    gameMapPanel:setMinimumAmbientLight(value/100)
+    gameMapPanel:setDrawLights(options['enableLights'] and value < 100)
   elseif key == 'optimizationLevel' then
     g_adaptiveRenderer.setLevel(value - 2)
   elseif key == 'displayNames' then
@@ -306,13 +313,13 @@ function setOption(key, value, force)
     gameMapPanel:setDrawHealthBars(value)
   elseif key == 'displayMana' then
     gameMapPanel:setDrawManaBar(value)
-      elseif key == 'displayHealthOnTop' then
+  elseif key == 'displayHealthOnTop' then
     gameMapPanel:setDrawHealthBarsOnTop(value)
   elseif key == 'hidePlayerBars' then
-    --gameMapPanel:setDrawPlayerBars(value)
+    gameMapPanel:setDrawPlayerBars(value)
   elseif key == 'topHealtManaBar' then
-    -- modules.game_healthinfo.topHealthBar:setVisible(value)
-    -- modules.game_healthinfo.topManaBar:setVisible(value)
+    modules.game_healthinfo.topHealthBar:setVisible(value)
+    modules.game_healthinfo.topManaBar:setVisible(value)
   elseif key == 'displayText' then
     gameMapPanel:setDrawTexts(value)
   elseif key == 'dontStretchShrink' then
@@ -320,12 +327,11 @@ function setOption(key, value, force)
       modules.game_interface.updateStretchShrink()
     end)
   elseif key == 'dash' then
-   --if value then
-   --  g_game.setMaxPreWalkingSteps(2)
-   --else 
-   --  g_game.setMaxPreWalkingSteps(1)    
-   --end
-      g_game.setMaxPreWalkingSteps(1)
+    if value then
+      g_game.setMaxPreWalkingSteps(2)
+    else 
+      g_game.setMaxPreWalkingSteps(1)    
+    end
   elseif key == 'wsadWalking' then
     if modules.game_console and modules.game_console.consoleToggleChat:isChecked() ~= value then
       modules.game_console.consoleToggleChat:setChecked(value)
@@ -380,11 +386,11 @@ function setOption(key, value, force)
   if key == 'classicView' or key == 'rightPanels' or key == 'leftPanels' or key == 'cacheMap' then
     modules.game_interface.refreshViewMode()    
   elseif key:find("actionbar") then
-    --modules.game_actionbar.show()
+    modules.game_actionbar.show()
   end
 
   if key == 'topBar' then
-    --modules.game_topbar.show()
+    modules.game_topbar.show()
   end
 end
 
@@ -415,6 +421,9 @@ end
 
 -- graphics
 function setLightOptionsVisibility(value)
+  graphicsPanel:getChildById('enableLights'):setEnabled(value)
+  graphicsPanel:getChildById('ambientLightLabel'):setEnabled(value)
+  graphicsPanel:getChildById('ambientLight'):setEnabled(value)  
   interfacePanel:getChildById('floorFading'):setEnabled(value)
   interfacePanel:getChildById('floorFadingLabel'):setEnabled(value)
   interfacePanel:getChildById('floorFadingLabel2'):setEnabled(value)  

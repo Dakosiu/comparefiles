@@ -1,5 +1,4 @@
 StatsPanel < Panel
-  visible: false
   height: 19
 
   ProgressBar
@@ -34,7 +33,6 @@ StatsPanel < Panel
         type: horizontalBox
 
 SkillPanel < Panel
-  visible: false
   height: 19
 
   UIWidget
@@ -104,8 +102,8 @@ SkillPanel < Panel
 
 Panel
   id: topbar
-  visible: false
   focusable: false
+  padding-top: 4
   padding-left: 7
   padding-right: 7
   layout:

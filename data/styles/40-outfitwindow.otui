@@ -22,9 +22,9 @@ RotateButton < UIButton
 
 PresetButton < Panel
   height: 100
-  image-source: /images/ui/buttons
+  image-source: /images/ui/button
   image-color: #dfdfdf
-  image-clip: 0 0 43 20
+  image-clip: 0 0 22 23
   image-border: 3
   border: 1 alpha
   focusable: true
@@ -85,9 +85,9 @@ PresetButton < Panel
       text: Save
 
 SelectionButton < Panel
-  image-source: /images/ui/buttons
+  image-source: /images/ui/button
   image-color: #dfdfdf
-  image-clip: 0 0 43 20
+  image-clip: 0 0 22 23
   image-border: 3
   border: 1 alpha
   focusable: true
@@ -610,7 +610,7 @@ OutfitWindow < MainWindow
       height: 117
       layout:
         type: grid
-        cell-size: 16 16
+        cell-size: 15 15
         cell-spacing: 2
         num-columns: 19
         num-lines: 7

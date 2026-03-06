@@ -64,11 +64,7 @@ function UIProgressBar:updateBackground()
     local width = math.round(math.max((self:getProgress() * (self:getWidth() - self.bgBorderLeft - self.bgBorderRight)), 1))
     local height = self:getHeight() - self.bgBorderTop - self.bgBorderBottom
     local rect = { x = self.bgBorderLeft, y = self.bgBorderTop, width = width, height = height }
-    if not self.usingImage then
-      self:setBackgroundRect(rect)
-    else
-      self:setImageRect(rect)
-    end
+    self:setBackgroundRect(rect)
   end
 end
 

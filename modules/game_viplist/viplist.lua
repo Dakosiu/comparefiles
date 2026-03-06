@@ -1,4 +1,5 @@
 vipWindow = nil
+vipButton = nil
 addVipWindow = nil
 editVipWindow = nil
 vipInfo = {}
@@ -12,11 +13,9 @@ function init()
 
   g_keyboard.bindKeyDown('Ctrl+P', toggle)
 
+  vipButton = modules.client_topmenu.addRightGameToggleButton('vipListButton', tr('VIP List') .. ' (Ctrl+P)', '/images/topbuttons/viplist', toggle, false, 3)
+  vipButton:setOn(true)
   vipWindow = g_ui.loadUI('viplist', modules.game_interface.getRightPanel())
-
-    -- this disables scrollbar auto hiding
-  local scrollbar = vipWindow:getChildById('miniwindowScrollBar')
-  scrollbar:mergeStyle({ ['$!on'] = { }})
 
   if not g_game.getFeature(GameAdditionalVipInfo) then
     loadVipInfo()
@@ -45,6 +44,7 @@ function terminate()
   end
 
   vipWindow:destroy()
+  vipButton:destroy()
 end
 
 function loadVipInfo()
@@ -69,7 +69,7 @@ function refresh()
     onAddVip(id, unpack(vip))
   end
 
-  vipWindow:setContentMinimumHeight(43)
+  vipWindow:setContentMinimumHeight(38)
 end
 
 function clear()
@@ -78,17 +78,17 @@ function clear()
 end
 
 function toggle()
-  if modules.game_sidebuttons.vipButton:isOn() then
+  if vipButton:isOn() then
     vipWindow:close()
-    modules.game_sidebuttons.vipButton:setOn(false)
+    vipButton:setOn(false)
   else
     vipWindow:open()
-    modules.game_sidebuttons.vipButton:setOn(true)
+    vipButton:setOn(true)
   end
 end
 
 function onMiniWindowClose()
-  modules.game_sidebuttons.vipButton:setOn(false)
+  vipButton:setOn(false)
 end
 
 function createAddWindow()
@@ -116,7 +116,7 @@ function createEditWindow(widget)
   local descriptionText = editVipWindow:getChildById('descriptionText')
   descriptionText:appendText(widget:getTooltip())
 
-  local notifyCheckBox = editVipWindow:recursiveGetChildById('checkBoxNotify')
+  local notifyCheckBox = editVipWindow:getChildById('checkBoxNotify')
   notifyCheckBox:setChecked(widget.notifyLogin)
 
   local iconRadioGroup = UIRadioGroup.create()
@@ -284,11 +284,11 @@ function onAddVip(id, name, state, description, iconId, notify)
   end
 
   if state == VipState.Online then
-    label:setColor('#5ff75f')
+    label:setColor('#00ff00')
   elseif state == VipState.Pending then
     label:setColor('#ffca38')
   else
-    label:setColor('#f75f5f')
+    label:setColor('#ff0000')
   end
 
   label.vipState = state

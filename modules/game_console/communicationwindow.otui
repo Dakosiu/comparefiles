@@ -20,39 +20,33 @@ WhiteListLabel < Label
     background-color: #ffffff22
     color: #ffffff
 
+
 MainWindow
   id: communicationWindow
-  !text: tr('Edit Ignore List and White List')
-  size: 540 375
+  !text: tr('Ignore List')
+  size: 515 410
   @onEscape: self:destroy()
 
-  FlatPanel
-    id: checkboxUseIgnoreListPanel
-    size: 244 22
+  CheckBox
+    id: checkboxUseIgnoreList
+    !text: tr('Activate ignorelist')
     anchors.left: parent.left
     anchors.top: parent.top
-
-    CheckBox
-      id: checkboxUseIgnoreList
-      !text: tr('Activate Ignore List')
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.verticalCenter: parent.verticalCenter
-      margin: 5
+    width: 180
 
   Label
-    !text: tr('Characters you wish to ignore:')
+    !text: tr('Ignored Players:')
     anchors.left: parent.left
     anchors.top: prev.bottom
-    margin-top: 15
+    margin-top: 10
 
   TextList
     id: ignoreList
     vertical-scrollbar: ignoreListScrollBar
     anchors.left: parent.left
     anchors.top: prev.bottom
-    anchors.right: checkboxUseIgnoreListPanel.right
-    height: 110
+    height: 150
+    width: 230
     margin-bottom: 10
     margin-top: 3
     padding: 1
@@ -62,14 +56,13 @@ MainWindow
     id: ignoreNameEdit
     anchors.top: prev.bottom
     anchors.left: parent.left
-    width: 150
-    margin-top: 7
+    width: 110
+    margin-top: 5
 
   Button
     id: buttonIgnoreAdd
     !text: tr('Add')
-    width: 43
-    margin-top: -2
+    width: 48
     height: 20
     margin-left: 5
     anchors.top: prev.top
@@ -77,75 +70,56 @@ MainWindow
 
   Button
     id: buttonIgnoreRemove
-    !text: tr('Delete')
-    width: 43
+    !text: tr('Remove')
+    width: 64
     height: 20
     margin-left: 5
     anchors.top: prev.top
     anchors.left: prev.right
 
   Label
-    !text: tr('Global settings for ignoring messages:')
+    !text: tr('Global ignore settings')
     anchors.left: parent.left
     anchors.top: prev.bottom
-    margin-top: 15
+    margin-top: 20
 
-  FlatPanel
-    size: 244 22
+  CheckBox
+    id: checkboxIgnorePrivateMessages
+    !text: tr('Ignore Private Messages')
     anchors.left: parent.left
     anchors.top: prev.bottom
-    margin-top: 4
+    width: 180
+    margin-top: 5
 
-    CheckBox
-      id: checkboxIgnoreYelling
-      !text: tr('Ignore Yelling')
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.verticalCenter: parent.verticalCenter
-      margin: 5
-
-  FlatPanel
-    size: 244 22
+  CheckBox
+    id: checkboxIgnoreYelling
+    !text: tr('Ignore Yelling')
     anchors.left: parent.left
     anchors.top: prev.bottom
-    margin-top: 14
+    width: 180
+    margin-top: 5
 
-    CheckBox
-      id: checkboxIgnorePrivateMessages
-      !text: tr('Ignore Private Messages')
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.verticalCenter: parent.verticalCenter
-      margin: 5
-
-  FlatPanel
-    id: checkboxUseWhiteListPanel
-    size: 244 22
+  CheckBox
+    id: checkboxUseWhiteList
+    !text: tr('Activate whitelist')
     anchors.top: parent.top
     anchors.left: ignoreList.right
     margin-left: 20
-
-    CheckBox
-      id: checkboxUseWhiteList
-      !text: tr('Activate Ignore List')
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.verticalCenter: parent.verticalCenter
-      margin: 5
+    width: 180
 
   Label
-    !text: tr('Characters you allow to message you:')
+    !text: tr('Allowed Players:')
     anchors.top: prev.bottom
     anchors.left: prev.left
-    margin-top: 15
+    margin-top: 10
 
   TextList
     id: whiteList
     vertical-scrollbar: whiteListScrollBar
     anchors.left: prev.left
     anchors.top: prev.bottom
-    anchors.right: checkboxUseWhiteListPanel.right
-    height: 110
+    height: 150
+    width: 230
     margin-bottom: 10
     margin-top: 3
     padding: 1
@@ -155,69 +129,65 @@ MainWindow
     id: whitelistNameEdit
     anchors.top: prev.bottom
     anchors.left: prev.left
-    width: 150
-    margin-top: 7
+    width: 110
+    margin-top: 5
 
   Button
     id: buttonWhitelistAdd
     !text: tr('Add')
-    width: 43
+    width: 48
     height: 20
-    margin-top: -2
     margin-left: 5
     anchors.top: prev.top
     anchors.left: prev.right
 
   Button
     id: buttonWhitelistRemove
-    !text: tr('Delete')
-    width: 43
+    !text: tr('Remove')
+    width: 64
     height: 20
     margin-left: 5
     anchors.top: prev.top
     anchors.left: prev.right
 
   Label
-    !text: tr('Global settings for allowing messages:')
+    !text: tr('Global whitelist settings')
     anchors.left: whiteList.left
     anchors.top: prev.bottom
-    margin-top: 15
+    margin-top: 20
 
-  FlatPanel
-    size: 244 22
+  CheckBox
+    id: checkboxAllowVIPs
+    !text: tr('Allow VIPs to message you')
     anchors.left: prev.left
     anchors.top: prev.bottom
-    margin-top: 4
+    width: 180
+    margin-top: 5
 
-    CheckBox
-      id: checkboxAllowVIPs
-      !text: tr('Allow VIPs to message you')
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.verticalCenter: parent.verticalCenter
-      margin: 5
-  
-  HorizontalSeparator
-    id: separator
+  Panel
+    anchors.bottom: parent.bottom
     anchors.left: parent.left
     anchors.right: parent.right
-    anchors.bottom: next.top
-    margin-bottom: 8
+    height: 30
 
-  Button
-    id: buttonSave
-    !text: tr('Ok')
-    width: 44
-    anchors.bottom: next.bottom
-    anchors.right: next.left
-    margin-right: 10
+    Panel
+      size: 160 30
+      anchors.horizontalCenter: parent.horizontalCenter
 
-  Button
-    id: buttonCancel
-    !text: tr('Cancel')
-    width: 44
-    anchors.bottom: parent.bottom
-    anchors.right: parent.right
+      Button
+        id: buttonSave
+        !text: tr('Save')
+        width: 75
+        anchors.top: parent.top
+        anchors.left: parent.left
+
+      Button
+        id: buttonCancel
+        !text: tr('Cancel')
+        width: 75
+        anchors.top: parent.top
+        anchors.left: prev.right
+        margin-left: 10
 
   VerticalScrollBar
     id: ignoreListScrollBar

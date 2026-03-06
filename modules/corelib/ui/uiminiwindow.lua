@@ -34,12 +34,6 @@ function UIMiniWindow:minimize(dontSave)
   self:getChildById('contentsPanel'):hide()
   self:getChildById('miniwindowScrollBar'):hide()
   self:getChildById('bottomResizeBorder'):hide()
-
-  local miniborder = self:recursiveGetChildById("miniborder")
-  if miniborder then
-    miniborder:hide()
-  end
-
   if self.minimizeButton then
     self.minimizeButton:setOn(true)
   end
@@ -58,12 +52,6 @@ function UIMiniWindow:maximize(dontSave)
   self:getChildById('contentsPanel'):show()
   self:getChildById('miniwindowScrollBar'):show()
   self:getChildById('bottomResizeBorder'):show()
-
-  local miniborder = self:recursiveGetChildById("miniborder")
-  if miniborder then
-    miniborder:show()
-  end
-
   if self.minimizeButton then
     self.minimizeButton:setOn(false)
   end
@@ -107,12 +95,13 @@ function UIMiniWindow:unlock(dontSave)
 end
 
 function UIMiniWindow:setup()
-  if self.closeButton then
-      self.closeButton.onClick = function() self:close() end
-      if self.forceOpen then
-          if self.closeButton then
-            self.closeButton:hide()
-          end
+  self:getChildById('closeButton').onClick =
+    function()
+      self:close()
+    end
+  if self.forceOpen then
+      if self.closeButton then
+        self.closeButton:hide()
       end
   end
 
@@ -139,8 +128,7 @@ function UIMiniWindow:setup()
       end
   end
 
-  if self.miniwindowTopBar then
-  self.miniwindowTopBar.onDoubleClick =
+  self:getChildById('miniwindowTopBar').onDoubleClick =
     function()
       if self:isOn() then
         self:maximize()
@@ -148,15 +136,13 @@ function UIMiniWindow:setup()
         self:minimize()
       end
     end
-  end
-
-  if self.bottomResizeBorder then
-    self.bottomResizeBorder.onDoubleClick = function()
-      self:setHeight(self.bottomResizeBorder:getMinimum())
-    end
+  self:getChildById('bottomResizeBorder').onDoubleClick = function()
+    local resizeBorder = self:getChildById('bottomResizeBorder')
+    self:setHeight(resizeBorder:getMinimum())
   end
 
   local oldParent = self:getParent()
+
 
   local settings = {}
   if g_settings.getNodeSize('MiniWindows') < 50 then
@@ -166,20 +152,6 @@ function UIMiniWindow:setup()
   if settings then
     local selfSettings = settings[self:getId()]
     if selfSettings then
-
-      -- Hacky way of keeping buttons enabled when logging in and/or reloading widgets.
-      if self:getId() == 'skillWindow' and not selfSettings.closed then
-          modules.game_sidebuttons.skillsButton:setOn(true)
-      end
-
-      if self:getId() == 'battleWindow' and not selfSettings.closed then
-          modules.game_sidebuttons.battleButton:setOn(true)
-      end
-
-      if self:getId() == 'vipWindow' and not selfSettings.closed then
-          modules.game_sidebuttons.vipButton:setOn(true)
-      end
-
       if selfSettings.parentId then
         local parent = rootWidget:recursiveGetChildById(selfSettings.parentId)
         if parent then
@@ -428,15 +400,11 @@ function UIMiniWindow:saveParentIndex(parentId, index)
 end
 
 function UIMiniWindow:disableResize()
-  if self.bottomResizeBorder then
-    self.bottomResizeBorder:disable()
-  end
+  self:getChildById('bottomResizeBorder'):disable()
 end
 
 function UIMiniWindow:enableResize()
-  if self.bottomResizeBorder then
-    self.bottomResizeBorder:enable()
-  end
+  self:getChildById('bottomResizeBorder'):enable()
 end
 
 function UIMiniWindow:fitOnParent()
@@ -464,9 +432,7 @@ function UIMiniWindow:setContentHeight(height)
   local minHeight = contentsPanel:getMarginTop() + contentsPanel:getMarginBottom() + contentsPanel:getPaddingTop() + contentsPanel:getPaddingBottom()
 
   local resizeBorder = self:getChildById('bottomResizeBorder')
-  if resizeBorder then
-    resizeBorder:setParentSize(minHeight + height)
-  end
+  resizeBorder:setParentSize(minHeight + height)
 end
 
 function UIMiniWindow:setContentMinimumHeight(height)
@@ -474,9 +440,7 @@ function UIMiniWindow:setContentMinimumHeight(height)
   local minHeight = contentsPanel:getMarginTop() + contentsPanel:getMarginBottom() + contentsPanel:getPaddingTop() + contentsPanel:getPaddingBottom()
 
   local resizeBorder = self:getChildById('bottomResizeBorder')
-  if resizeBorder then
-    resizeBorder:setMinimum(minHeight + height)
-  end
+  resizeBorder:setMinimum(minHeight + height)
 end
 
 function UIMiniWindow:setContentMaximumHeight(height)
@@ -484,31 +448,20 @@ function UIMiniWindow:setContentMaximumHeight(height)
   local minHeight = contentsPanel:getMarginTop() + contentsPanel:getMarginBottom() + contentsPanel:getPaddingTop() + contentsPanel:getPaddingBottom()
 
   local resizeBorder = self:getChildById('bottomResizeBorder')
-  if resizeBorder then
-    resizeBorder:setMaximum(minHeight + height)
-  end
+  resizeBorder:setMaximum(minHeight + height)
 end
 
 function UIMiniWindow:getMinimumHeight()
   local resizeBorder = self:getChildById('bottomResizeBorder')
-  if not resizeBorder then
-    return 0
-  end
   return resizeBorder:getMinimum()
 end
 
 function UIMiniWindow:getMaximumHeight()
   local resizeBorder = self:getChildById('bottomResizeBorder')
-  if not resizeBorder then
-    return 0
-  end
   return resizeBorder:getMaximum()
 end
 
 function UIMiniWindow:isResizeable()
   local resizeBorder = self:getChildById('bottomResizeBorder')
-  if not resizeBorder then
-    return 0
-  end
   return resizeBorder:isExplicitlyVisible() and resizeBorder:isEnabled()
 end

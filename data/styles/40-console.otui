@@ -24,10 +24,7 @@ ConsolePhantomLabel < UILabel
   selection-background-color: #999999
 
 ConsoleTabBar < MoveableTabBar
-  height: 14
-  padding: 0 5
-  border-width-top: 0
-  margin-top:3
+  height: 28
 
 ConsoleTabBarPanel < MoveableTabBarPanel
   id: consoleTab
@@ -40,151 +37,150 @@ ConsoleTabBarPanel < MoveableTabBarPanel
     layout:
       type: verticalBox
       align-bottom: true
+    border-width: 1
+    border-color: #202327
+    background: #00000066
     inverted-scroll: true
-    image-border: 7
-    padding: 6
-    padding-bottom: 2
-    padding-left: 2
+    padding: 1
 
   VerticalScrollBar
     id: consoleScrollBar
     anchors.top: parent.top
     anchors.bottom: parent.bottom
     anchors.right: parent.right
-    margin-top: 3
-    margin-right: 3
-    margin-bottom: 3
     step: 14
     pixels-scroll: true
 
-ConsoleIconButton < UIButton
-  image-source: /images/ui/console
-  size: 16 16
-
-ConsoleTabBarButton < UIButton
-  size: 20 20
-  font: verdana-11px-rounded
-  image-source: /images/ui/chat_channel_deselected
-  image-border: 2
-  anchors.top: parent.top
-  anchors.left: parent.left
-  anchors.bottom: parent.bottom
-  color: #7F7F7F
-  text-offset: 0 4
-  margin-bottom: 0
-  &tabWidth: 96
-  
-  $checked:
-    color: #FFFFFF
-    image-source: /images/ui/chat_channel_selected
-    margin-bottom: -2
-
-  $on !checked:
-    color: #de6f6f
+ConsoleTabBarButton < MoveableTabBarButton
+  height: 28
+  padding: 15
 
 ConsolePanel < Panel
-  id: consolePanel
-  anchors.fill: parent
-
-  Panel
-    id: parentPanel
-    image-source: /images/ui/console
-    image-clip: 184 0 166 150
-    image-border: 3
-    anchors.top: next.bottom
+  image-source: /images/ui/panel_bottom
+  image-border: 4
+  
+  $first:
+    anchors.fill: parent
+    
+  $!first:
+    anchors.top: prev.bottom
+    anchors.bottom: parent.bottom
     anchors.left: parent.left
     anchors.right: parent.right
-    anchors.bottom: parent.bottom
-    margin-top: 1
-    padding: 3
 
-    CheckBox
-      id: toggleChat
-      !tooltip: tr('Disable chat mode, allow to walk using ASDW')
-      anchors.right: parent.right
-      anchors.bottom: parent.bottom
-      margin-bottom: 3
-      @onCheckChange: toggleChat()
+  CheckBox
+    id: toggleChat
+    !tooltip: tr('Disable chat mode, allow to walk using ASDW')
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-left: 13
+    margin-top: 8
+    @onCheckChange: toggleChat()
 
-    TextEdit
-      id: consoleTextEdit
-      anchors.top: next.top
-      anchors.left: next.right
-      anchors.right: prev.left
-      anchors.bottom: parent.bottom
-      margin-left: 3
-      margin-right: 4
-      shift-navigation: true
-      max-length: 255
-      text-auto-submit: true
-
-    ConsoleIconButton
-      id: sayModeButton
-      icon: /images/game/console/say
-      !tooltip: tr('Adjust volume')
-      &sayMode: 2
-      size: 16 16
-      anchors.left: parent.left
-      anchors.bottom: parent.bottom
-      margin-left: 2
-      margin-bottom: 1
-      @onClick: sayModeChange()
-
-    Panel
-      id: consoleContentPanel
-      image-source: /images/ui/console
-      image-clip: 0 50 184 124
-      image-border: 4
-      anchors.top: parent.top
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.bottom: consoleTextEdit.top
-      margin-bottom: 3
-      margin-left: 1
-      margin-top: 2
-      focusable: false
+  TabButton
+    id: prevChannelButton
+    icon: /images/game/console/leftarrow
+    anchors.left: toggleChat.right
+    anchors.top: parent.top
+    margin-left: 3
+    margin-top: 6
 
   ConsoleTabBar
     id: consoleTabBar
-    anchors.left: parent.left
-    anchors.right: parent.right
+    anchors.left: prev.right
     anchors.top: parent.top
-    height: 16
-    padding: 0 16
+    anchors.right: next.left
+    margin-left: 5
+    margin-top: 3
+    margin-right: 5
+    tab-spacing: 2
     movable: true
 
-  ConsoleIconButton
-    id: ignoreButton
-    image-clip: 48 0 16 16
-    anchors.right: consoleTabBar.right
-    anchors.bottom: consoleTabBar.bottom
-    @onClick: onClickIgnoreButton()
-    !tooltip: tr('Ignore and unignore other players (CTRL+I)')
+  TabButton
+    id: nextChannelButton
+    icon: /images/game/console/rightarrow
+    anchors.right: next.left
+    anchors.top: parent.top
+    margin-right: 5
+    margin-top: 6
 
-    $pressed:
-      image-clip: 48 16 16 16
-
-  ConsoleIconButton
-    id: channelsButton
-    image-clip: 16 0 16 16
-    anchors.right: prev.left
-    anchors.bottom: prev.bottom
-    margin-right: 1
-    @onClick: g_game.requestChannels()
-    !tooltip: tr('Open new channel (CTRL+O)')
-
-    $pressed:
-      image-clip: 16 16 16 16
-
-  ConsoleIconButton
+  TabButton
     id: closeChannelButton
-    image-clip: 160 0 16 16
-    anchors.right: prev.left
-    anchors.bottom: prev.bottom
-    margin-right: 1
-    visible: false
+    !tooltip: tr('Close this channel') .. ' (Ctrl+E)'
+    icon: /images/game/console/closechannel
+    anchors.right: next.left
+    anchors.top: parent.top
+    enabled: false
+    margin-right: 5
+    margin-top: 6
     @onClick: removeCurrentTab()
-    !tooltip: tr('Close this channel (CTRL+E)')
 
-    $pressed:
-      image-clip: 160 16 16 16
+  TabButton
+    id: clearChannelButton
+    !tooltip: tr('Clear current message window')
+    icon: /images/game/console/clearchannel
+    anchors.right: next.left
+    anchors.top: parent.top
+    margin-right: 5
+    margin-top: 6
+    @onClick: |
+      local consoleTabBar = self:getParent():getChildById('consoleTabBar')
+      clearChannel(consoleTabBar)
+
+  TabButton
+    id: channelsButton
+    !tooltip: tr('Open new channel') .. ' (Ctrl+O)'
+    icon: /images/game/console/channels
+    anchors.right: next.left
+    anchors.top: parent.top
+    margin-right: 5
+    margin-top: 6
+    @onClick: g_game.requestChannels()
+
+  TabButton
+    id: ignoreButton
+    !tooltip: tr('Ignore players')
+    icon: /images/game/console/ignore
+    anchors.right: parent.right
+    anchors.top: parent.top
+    margin-right: 5
+    margin-top: 6
+    @onClick: onClickIgnoreButton()
+
+  Panel
+    id: consoleContentPanel
+    anchors.top: prev.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: consoleTextEdit.top
+    margin-left: 6
+    margin-right: 6
+    margin-bottom: 4
+    margin-top: 4
+    padding: 1
+    focusable: false
+    phantom: true
+
+  TabButton
+    id: sayModeButton
+    icon: /images/game/console/say
+    !tooltip: tr('Adjust volume')
+    &sayMode: 2
+    size: 20 20
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    margin-left: 6
+    margin-bottom: 6
+    @onClick: sayModeChange()
+
+  TextEdit
+    id: consoleTextEdit
+    anchors.left: sayModeButton.right
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-right: 6
+    margin-left: 6
+    margin-bottom: 6
+    shift-navigation: true
+    max-length: 255
+    text-auto-submit: true

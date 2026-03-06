@@ -1,6 +1,5 @@
 OptionPanel
   Label
-    visible: false
     width: 130
     id: layoutLabel
     !text: tr("Layout (change requries client restart)")
@@ -9,7 +8,6 @@ OptionPanel
   
   ComboBox
     id: layout
-    visible: false
     margin-top: 3
     margin-right: 2
     margin-left: 2
@@ -28,14 +26,12 @@ OptionPanel
     id: classicView
     !text: tr('Classic view')
     margin-top: 5
-    visible: false
     
     $mobile:
       visible: false
 
   OptionCheckBox
     id: cacheMap
-    visible: false
     !text: tr('Cache map (for non-classic view)')
 
     $mobile:
@@ -43,7 +39,7 @@ OptionPanel
     
   OptionCheckBox
     id: showPing
-    !text: tr('Show ping')
+    !text: tr('Show connection ping')
     !tooltip: tr('Display connection speed to the server (milliseconds)')
 
   OptionCheckBox
@@ -61,6 +57,10 @@ OptionPanel
       visible: false
 
   OptionCheckBox
+    id: hidePlayerBars
+    !text: tr('Show player health bar')
+
+  OptionCheckBox
     id: displayMana
     !text: tr('Show player mana bar')
     $mobile:
@@ -69,7 +69,6 @@ OptionPanel
   OptionCheckBox
     id: highlightThingsUnderCursor
     !text: tr('Highlight things under cursor')
-    visible: false
 
   Panel
     height: 40
@@ -147,11 +146,9 @@ OptionPanel
     margin-top: 3
     id: crosshairLabel
     !text: tr("Crosshair")
-    visible: false
     
   ComboBox
     id: crosshair
-    visible: false
     margin-top: 3
     margin-right: 2
     margin-left: 2

@@ -28,7 +28,7 @@ local function calcValues(self)
     proportion = math.min(math.max(self.step, 1), range)/range
   end
 
-  local px = math.max(proportion * pxrange, 12)
+  local px = math.max(proportion * pxrange, 6)
   if g_app.isMobile() then
     px = math.max(proportion * pxrange, 24)  
   end
