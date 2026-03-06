@@ -1,5 +1,4 @@
 skillsWindow = nil
-skillsButton = nil
 
 function init()
   connect(LocalPlayer, {
@@ -10,7 +9,7 @@ function init()
     onSoulChange = onSoulChange,
     onFreeCapacityChange = onFreeCapacityChange,
     onTotalCapacityChange = onTotalCapacityChange,
-    onStaminaChange = onStaminaChange,
+    --onStaminaChange = onStaminaChange,
     onOfflineTrainingChange = onOfflineTrainingChange,
     onRegenerationChange = onRegenerationChange,
     onSpeedChange = onSpeedChange,
@@ -25,10 +24,14 @@ function init()
     onGameEnd = offline
   })
 
-  skillsButton = modules.client_topmenu.addRightGameToggleButton('skillsButton', tr('Skills'), '/images/topbuttons/skills', toggle, false, 1)
-  skillsButton:setOn(true)
+  g_keyboard.bindKeyDown('Ctrl+S', toggle)
+
   skillsWindow = g_ui.loadUI('skills', modules.game_interface.getRightPanel())
-  
+
+  -- this disables scrollbar auto hiding
+  local scrollbar = skillsWindow:getChildById('miniwindowScrollBar')
+  scrollbar:mergeStyle({ ['$!on'] = { }})
+
   refresh()
   skillsWindow:setup()
 end
@@ -42,7 +45,7 @@ function terminate()
     onSoulChange = onSoulChange,
     onFreeCapacityChange = onFreeCapacityChange,
     onTotalCapacityChange = onTotalCapacityChange,
-    onStaminaChange = onStaminaChange,
+    --onStaminaChange = onStaminaChange,
     onOfflineTrainingChange = onOfflineTrainingChange,
     onRegenerationChange = onRegenerationChange,
     onSpeedChange = onSpeedChange,
@@ -57,8 +60,9 @@ function terminate()
     onGameEnd = offline
   })
 
+  g_keyboard.unbindKeyDown('Ctrl+S')
+
   skillsWindow:destroy()
-  skillsButton:destroy()
 end
 
 function expForLevel(level)
@@ -206,7 +210,7 @@ function refresh()
   onManaChange(player, player:getMana(), player:getMaxMana())
   onSoulChange(player, player:getSoul())
   onFreeCapacityChange(player, player:getFreeCapacity())
-  onStaminaChange(player, player:getStamina())
+  --onStaminaChange(player, player:getStamina())
   onMagicLevelChange(player, player:getMagicLevel(), player:getMagicLevelPercent())
   onOfflineTrainingChange(player, player:getOfflineTrainingTime())
   onRegenerationChange(player, player:getRegenerationTime())
@@ -225,11 +229,11 @@ function refresh()
   update()
 
   local contentsPanel = skillsWindow:getChildById('contentsPanel')
-  skillsWindow:setContentMinimumHeight(44)
+  skillsWindow:setContentMinimumHeight(38)
   if hasAdditionalSkills then
     skillsWindow:setContentMaximumHeight(480)
   else
-    skillsWindow:setContentMaximumHeight(390)
+    skillsWindow:setContentMaximumHeight(340)
   end
 end
 
@@ -238,12 +242,12 @@ function offline()
 end
 
 function toggle()
-  if skillsButton:isOn() then
+  if modules.game_sidebuttons.skillsButton:isOn() then
     skillsWindow:close()
-    skillsButton:setOn(false)
+    modules.game_sidebuttons.skillsButton:setOn(false)
   else
     skillsWindow:open()
-    skillsButton:setOn(true)
+    modules.game_sidebuttons.skillsButton:setOn(true)
   end
 end
 
@@ -266,7 +270,7 @@ function checkExpSpeed()
 end
 
 function onMiniWindowClose()
-  skillsButton:setOn(false)
+  modules.game_sidebuttons.skillsButton:setOn(false)
 end
 
 function onSkillButtonClick(button)
@@ -331,7 +335,7 @@ function onSoulChange(localPlayer, soul)
 end
 
 function onFreeCapacityChange(localPlayer, freeCapacity)
-  setSkillValue('capacity', freeCapacity)
+  setSkillValue('capacity', (freeCapacity*100))
   checkAlert('capacity', freeCapacity, localPlayer:getTotalCapacity(), 20)
 end
 

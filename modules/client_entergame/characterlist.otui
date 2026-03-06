@@ -19,7 +19,7 @@ CharacterWidget < UIWidget
     color: #bbbbbb
     anchors.top: parent.top
     anchors.left: parent.left
-    font: verdana-11px-monochrome
+    font: verdana-11px-antialised
     text-auto-resize: true
     background-color: alpha
     text-offset: 2 0
@@ -27,25 +27,11 @@ CharacterWidget < UIWidget
     $on:
       color: #ffffff
 
-  Label
-    id: worldName
-    color: #bbbbbb
-    anchors.top: parent.top
-    anchors.right: parent.right
-    margin-right: 5
-    font: verdana-11px-monochrome
-    text-auto-resize: true
-    background-color: alpha
-    &baseText: '(%s)'
-
-    $on:
-      color: #ffffff
-
-StaticMainWindow
+MainWindow
   id: charactersWindow
-  !text: tr('Character List')
+  !text: tr('Select Character')
   visible: false
-  size: 350 400
+  size: 236 294
   $mobile:
     size: 350 280
   @onEnter: CharacterList.doLogin()
@@ -54,41 +40,47 @@ StaticMainWindow
     g_keyboard.bindKeyPress('Up', function() self:getChildById('characters'):focusPreviousChild(KeyboardFocusReason) end, self)
     g_keyboard.bindKeyPress('Down', function() self:getChildById('characters'):focusNextChild(KeyboardFocusReason) end, self)  
 
+  Label
+    text: Select character:
+    anchors.left: parent.left
+    anchors.top: parent.top
+    text-auto-resize: true
+
   TextList
     id: characters
-    background-color: #565656
-    anchors.top: parent.top
+    anchors.top: prev.bottom
     anchors.left: parent.left
-    anchors.right: characterListScrollBar.left
-    anchors.bottom: accountStatusCaption.top
-    margin-bottom: 5
-    padding: 1
+    anchors.right: parent.right
+    height: 146
     focusable: false
     vertical-scrollbar: characterListScrollBar
     auto-focus: first
+    margin-top: 2
 
   VerticalScrollBar
     id: characterListScrollBar
-    anchors.top: parent.top
-    anchors.bottom: accountStatusCaption.top
-    anchors.right: parent.right
-    margin-bottom: 5
+    anchors.top: prev.top
+    anchors.bottom: prev.bottom
+    anchors.right: prev.right
     step: 14
+    margin-top: 1
+    margin-right: 1
+    margin-bottom: 1
     pixels-scroll: true
 
   Label
     id: accountStatusCaption
     !text: tr('Account Status') .. ':'
     anchors.left: parent.left
-    anchors.bottom: separator.top
-    margin-bottom: 5
+    anchors.top: characters.bottom
+    margin-top: 10
 
   Label
     id: accountStatusLabel
     !text: tr('Free Account')
-    anchors.right: parent.right
-    anchors.bottom: separator.top
-    margin-bottom: 5
+    anchors.left: parent.left
+    anchors.top: prev.bottom
+    margin-top: 1
     text-auto-resize: true
 
     $on:
@@ -99,35 +91,49 @@ StaticMainWindow
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.bottom: next.top
-    margin-bottom: 10
+    margin-bottom: 9
 
   Button
     id: autoReconnect
-    width: 140
+    width: 100
+    size: 100 20
     anchors.left: parent.left
     anchors.bottom: parent.bottom
+    image-source: /images/ui/longbutton
+    image-clip: 0 0 86 20
+    image-border: 3
     
     $!on:
-      image-color: red    
+      image-color: #FF5252
       !text: tr('Auto reconnect: Off')
 
     $on:
       !text: tr('Auto reconnect: On')
-      image-color: green
+      image-color: #52FF52
+      image-clip: 0 20 86 20
+      text-offset: 1 1
 
-  Button
+    $hover !disabled:
+      image-clip: 0 0 86 20
+
+    $pressed:
+      image-clip: 0 20 86 20
+      text-offset: 1 1
+
+    $checked:
+      image-clip: 0 20 86 20
+
+  EnterGameButton
     id: buttonOk
     !text: tr('Ok')
-    width: 64
     anchors.right: next.left
     anchors.bottom: parent.bottom
     margin-right: 10
     @onClick: CharacterList.doLogin()
 
-  Button
+  EnterGameButton
     id: buttonCancel
     !text: tr('Cancel')
-    width: 64
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     @onClick: CharacterList.hide(true)

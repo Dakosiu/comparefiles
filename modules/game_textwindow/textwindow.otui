@@ -7,6 +7,8 @@ TextWindow < MainWindow
     virtual: true
     anchors.top: parent.top
     anchors.left: parent.left
+    image-source: 
+    margin-top: -4
 
   Label
     id: description
@@ -19,23 +21,32 @@ TextWindow < MainWindow
     text-wrap: true
 
   MultilineTextEdit
+    margin-top: 15
     id: text
-    anchors.top: textScroll.top
+    anchors.top: prev.bottom
     anchors.left: parent.left
-    anchors.right: textScroll.left
-    anchors.bottom: textScroll.bottom
+    anchors.right: parent.right
+    height: 140
     vertical-scrollbar: textScroll
     text-wrap: true
 
   VerticalScrollBar
     id: textScroll
-    anchors.top: description.bottom
-    anchors.bottom: okButton.top
+    anchors.top: prev.top
+    anchors.bottom: prev.bottom
     anchors.right: parent.right
-    margin-top: 10
-    margin-bottom: 10
+    margin-right: 1
+    margin-top: 1
+    margin-bottom: 1
     step: 16
     pixels-scroll: true
+  
+  HorizontalSeparator
+    anchors.bottom: okButton.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 20
+    margin-bottom: 9
 
   Button
     id: okButton
@@ -43,11 +54,9 @@ TextWindow < MainWindow
     anchors.bottom: parent.bottom
     anchors.right: next.left
     margin-right: 10
-    width: 60
 
   Button
     id: cancelButton
     !text: tr('Cancel')
     anchors.bottom: parent.bottom
     anchors.right: parent.right
-    width: 60

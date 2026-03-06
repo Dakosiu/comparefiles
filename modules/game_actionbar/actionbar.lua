@@ -89,6 +89,8 @@ function terminate()
 end
 
 function createActionBars()
+  if true then return end -- Don't setup action bars, even if enabled in config manually. 
+
   local bottomPanel = modules.game_interface.getBottomActionPanel()
   local leftPanel = modules.game_interface.getLeftActionPanel()
   local rightPanel = modules.game_interface.getRightActionPanel()
@@ -422,6 +424,8 @@ function setupButton(widget)
 
   -- popupmenu & execute action
   widget.onMouseRelease = function(widget, mousePos, mouseButton)
+    if true then return end -- Don't allow any clicking of action bar buttons. They shouldn't be accessible or visible.
+
     if mouseButton == MouseRightButton then 
 
       local menu = g_ui.createWidget('PopupMenu')

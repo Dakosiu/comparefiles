@@ -25,6 +25,7 @@ OptionPanel
     id: dash
     !text: tr('Enable fast walking (DASH)')
     !tooltip: tr('Allows to execute next move without server confirmation of previous one')
+    visible: false
 
   OptionCheckBox
     id: smartWalk

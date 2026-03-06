@@ -39,17 +39,24 @@ function onGameEditText(id, itemId, maxLength, text, writer, time)
     textItem:show()
   end
 
+  local thing = g_things.getThingType(itemId)
+  if writeable and thing:hasAttribute(ThingAttrWritableOnce) and #writer > 0 then
+    writeable = false
+  end
+
   textItem:setItemId(itemId)
   textEdit:setMaxLength(maxLength)
   textEdit:setText(text)
   textEdit:setEditable(writeable)
   textEdit:setCursorVisible(writeable)
 
-  local desc = ''
+  local desc = 'You read the following.'
   if #writer > 0 then
-    desc = tr('You read the following, written by \n%s\n', writer)
+    desc = tr('You read the following, written by \n%s', writer)
     if #time > 0 then
       desc = desc .. tr('on %s.\n', time)
+    else 
+      desc = desc .. tr('.\n')
     end
   elseif #time > 0 then
     desc = tr('You read the following, written on \n%s.\n', time)
@@ -57,6 +64,8 @@ function onGameEditText(id, itemId, maxLength, text, writer, time)
 
   if #text == 0 and not writeable then
     desc = tr("It is empty.")
+  elseif writeable and #text == 0 then
+    desc = tr('It is currently empty.\nYou can enter new text.')
   elseif writeable then
     desc = desc .. tr('You can enter new text.')
   end
@@ -80,6 +89,7 @@ function onGameEditText(id, itemId, maxLength, text, writer, time)
   end
 
   local function destroy()
+    textEdit:destroy()
     textWindow:destroy()
     table.removevalue(windows, textWindow)
   end

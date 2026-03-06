@@ -234,7 +234,7 @@ function UIMinimap:onMouseRelease(pos, button)
   elseif button == MouseRightButton then
     local menu = g_ui.createWidget('PopupMenu')
     menu:setGameMenu(true)
-    menu:addOption(tr('Create mark'), function() self:createFlagWindow(mapPos) end)
+    menu:addOption(tr('Set mark'), function() self:createFlagWindow(mapPos) end)
     menu:display(pos)
     return true
   end
@@ -274,12 +274,10 @@ function UIMinimap:createFlagWindow(pos)
 
   self.flagWindow = g_ui.createWidget('MinimapFlagWindow', rootWidget)
 
-  local positionLabel = self.flagWindow:getChildById('position')
   local description = self.flagWindow:getChildById('description')
   local okButton = self.flagWindow:getChildById('okButton')
   local cancelButton = self.flagWindow:getChildById('cancelButton')
 
-  positionLabel:setText(string.format('%i, %i, %i', pos.x, pos.y, pos.z))
 
   local flagRadioGroup = UIRadioGroup.create()
   for i=0,19 do

@@ -27,7 +27,7 @@ function UIGameMap:markThing(thing, color)
   
   self.markedThing = thing
   if self.markedThing and g_settings.getBoolean('highlightThingsUnderCursor') then
-    self.markedThing:setMarked(color)
+    -- self.markedThing:setMarked(color)
   end
 end
 

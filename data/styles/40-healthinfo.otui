@@ -41,7 +41,7 @@ CapLabel < GameLabel
     height: 0
 
 ConditionWidget < UIWidget
-  size: 18 18
+  size: 9 9
 
   $!first:
     margin-left: 2
@@ -50,6 +50,7 @@ HealthOverlay < UIWidget
   id: healthOverlay
   anchors.fill: parent
   phantom: true
+  visible: false
   
   HealthBar
     id: topHealthBar
@@ -57,6 +58,7 @@ HealthOverlay < UIWidget
     anchors.left: parent.left
     anchors.right: parent.horizontalCenter
     phantom: true
+    visible: false
 
   ManaBar
     id: topManaBar
@@ -64,6 +66,7 @@ HealthOverlay < UIWidget
     anchors.right: parent.right
     anchors.left: parent.horizontalCenter
     phantom: true
+    visible: false
     
   UIProgressBar
     id: healthCircle
@@ -74,6 +77,7 @@ HealthOverlay < UIWidget
     margin-bottom: 16
     opacity: 0.5
     phantom: true
+    visible: false
 
   UIProgressBar
     id: healthCircleFront
@@ -84,6 +88,7 @@ HealthOverlay < UIWidget
     margin-bottom: 16
     opacity: 0.5
     phantom: true
+    visible: false
 
   UIProgressBar
     id: manaCircle
@@ -95,6 +100,7 @@ HealthOverlay < UIWidget
     margin-bottom: 16
     opacity: 0.5
     phantom: true
+    visible: false
 
   UIProgressBar
     id: manaCircleFront
@@ -106,42 +112,4 @@ HealthOverlay < UIWidget
     opacity: 0.4
     image-color: #0000FFFF
     phantom: true
-  
-HealthInfoWindow < MiniWindow
-  icon: /images/topbuttons/healthinfo
-  !text: tr('Health Info')
-  height: 123
-
-  MiniWindowContents
-    HealthBar
-      id: healthBar
-      anchors.top: parent.top
-      anchors.left: parent.left
-      anchors.right: parent.right
-      margin: 2
-      margin-top: 1
-      
-    ManaBar
-      id: manaBar
-      anchors.top: prev.bottom
-      anchors.left: parent.left
-      anchors.right: parent.right
-      margin: 2
-      
-    ExperienceBar
-    Panel
-      id: conditionPanel
-      layout:
-        type: horizontalBox
-      height: 22
-      margin-top: 4
-      padding: 2
-      anchors.top: prev.bottom
-      anchors.left: parent.left
-      anchors.right: parent.right
-      border-width: 1
-      border-color: #00000077
-      background-color: #ffffff11
-    SoulLabel
-    CapLabel
-
+    visible: false

@@ -85,8 +85,8 @@ function bindKeys()
     lastAction = g_clock.millis()
     g_game.cancelAttackAndFollow() 
   end, gameRootPanel)
-  g_keyboard.bindKeyPress('Ctrl+=', function() if g_game.getFeature(GameNoDebug) then return end gameMapPanel:zoomIn() end, gameRootPanel)
-  g_keyboard.bindKeyPress('Ctrl+-', function() if g_game.getFeature(GameNoDebug) then return end gameMapPanel:zoomOut() end, gameRootPanel)
+  --g_keyboard.bindKeyPress('Ctrl+=', function() if g_game.getFeature(GameNoDebug) then return end gameMapPanel:zoomIn() end, gameRootPanel)
+  --g_keyboard.bindKeyPress('Ctrl+-', function() if g_game.getFeature(GameNoDebug) then return end gameMapPanel:zoomOut() end, gameRootPanel)
   g_keyboard.bindKeyDown('Ctrl+Q', function() tryLogout(false) end, gameRootPanel)
   g_keyboard.bindKeyDown('Ctrl+L', function() tryLogout(false) end, gameRootPanel)
   g_keyboard.bindKeyDown('Ctrl+W', function() g_map.cleanTexts() modules.game_textmessage.clearMessages() end, gameRootPanel)
@@ -206,10 +206,10 @@ function tryExit()
   local cancelFunc = function() exitWindow:destroy() exitWindow = nil end
 
   exitWindow = displayGeneralBox(tr('Exit'), tr("If you shut down the program, your character might stay in the game.\nClick on 'Logout' to ensure that you character leaves the game properly.\nClick on 'Exit' if you want to exit the program without logging out your character."),
-  { { text=tr('Force Exit'), callback=exitFunc },
+  { { text=tr('Exit'), callback=exitFunc },
     { text=tr('Logout'), callback=logoutFunc },
     { text=tr('Cancel'), callback=cancelFunc },
-    anchor=AnchorHorizontalCenter }, logoutFunc, cancelFunc)
+  }, logoutFunc, cancelFunc)
 
   return true
 end
@@ -239,7 +239,7 @@ function tryLogout(prompt)
       end
     end
   else
-    msg = 'Are you sure you want to logout?'
+    msg = 'Are you sure you want to leave Tibia?'
 
     yesCallback = function()
       g_game.safeLogout()
@@ -256,10 +256,10 @@ function tryLogout(prompt)
   end
 
   if prompt then
-    logoutWindow = displayGeneralBox(tr('Logout'), tr(msg), {
+    logoutWindow = displayGeneralBox(tr('Warning'), tr(msg), {
       { text=tr('Yes'), callback=yesCallback },
       { text=tr('No'), callback=noCallback },
-      anchor=AnchorHorizontalCenter}, yesCallback, noCallback)
+    }, yesCallback, noCallback)
   else
      yesCallback()
   end
@@ -302,9 +302,9 @@ function onUseWith(clickedWidget, mousePosition)
       if selectedThing:isFluidContainer() or selectedThing:isMultiUse() then      
         if selectedThing:getId() == 3180 or selectedThing:getId() == 3156 then
           -- special version for mwall
-          g_game.useWith(selectedThing, tile:getTopUseThing(), selectedSubtype)      
+          g_game.useWith(selectedThing, tile:getTopUseThing(), selectedSubtype)
         else
-          g_game.useWith(selectedThing, tile:getTopMultiUseThingEx(clickedWidget:getPositionOffset(mousePosition)), selectedSubtype)
+            g_game.useWith(selectedThing, tile:getTopUseThing(), selectedSubtype)
         end
       else
         g_game.useWith(selectedThing, tile:getTopUseThing(), selectedSubtype)
@@ -315,7 +315,11 @@ function onUseWith(clickedWidget, mousePosition)
   elseif clickedWidget:getClassName() == 'UICreatureButton' then
     local creature = clickedWidget:getCreature()
     if creature then
-      g_game.useWith(selectedThing, creature, selectedSubtype)
+        if creature:isMonster() then
+            g_game.useWith(selectedThing, creature, selectedSubtype)
+        else
+            modules.game_textmessage.displayFailureMessage(tr("You are not allowed to shoot directly on players."))
+        end
     end
   end
 end
@@ -472,13 +476,6 @@ function createThingMenu(menuPosition, lookThing, useThing, creatureThing)
       end
       
       if creatureThing:isPartyMember() then
-        if creatureThing:isPartyLeader() then
-          if creatureThing:isPartySharedExperienceActive() then
-            menu:addOption(tr('Disable Shared Experience'), function() g_game.partyShareExperience(false) end)
-          else
-            menu:addOption(tr('Enable Shared Experience'), function() g_game.partyShareExperience(true) end)
-          end
-        end
         menu:addOption(tr('Leave Party'), function() g_game.partyLeave() end)
       end
 
@@ -673,6 +670,12 @@ function processMouseAction(menuPosition, mouseButton, autoWalkPos, lookThing, u
     end
   else -- classic control
     if useThing and keyboardModifiers == KeyboardNoModifier and mouseButton == MouseRightButton and not g_mouse.isPressed(MouseLeftButton) then
+      local thing = g_things.getThingType(useThing:getId())
+      if thing:hasAttribute(ThingAttrForceUse) then
+        g_game.use(useThing)
+        return true
+      end
+
       local player = g_game.getLocalPlayer()
       if attackCreature and attackCreature ~= player then
         g_game.attack(attackCreature)
@@ -901,7 +904,7 @@ function getTopBar()
 end
 
 function refreshViewMode()  
-  local classic = g_settings.getBoolean("classicView") and not g_app.isMobile()
+  local classic = true -- g_settings.getBoolean("classicView") and not g_app.isMobile()
   local rightPanels = g_settings.getNumber("rightPanels") - gameRightPanels:getChildCount()
   local leftPanels = g_settings.getNumber("leftPanels") - 1 - gameLeftPanels:getChildCount()
 
@@ -950,6 +953,11 @@ function refreshViewMode()
     else
       panel:setImageColor('alpha')
     end
+  end
+
+  panel = gameRightPanels:getChildByIndex(gameRightPanels:getChildCount())
+  if panel then
+    panel:setMarginRight(0)
   end
   
   if classic then
@@ -1016,7 +1024,7 @@ end
 function updateSize()
   if g_app.isMobile() then return end
 
-  local classic = g_settings.getBoolean("classicView")
+  local classic = true -- g_settings.getBoolean("classicView")
   local height = gameMapPanel:getHeight()
   local width = gameMapPanel:getWidth()
      

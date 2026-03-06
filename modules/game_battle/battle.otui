@@ -47,11 +47,12 @@ MiniWindow
 
   Panel
     id: filterPanel
-    margin-top: 26
+    visible: false
+    margin-top: 0
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: miniwindowScrollBar.left
-    height: 45
+    height: 0
 
     Panel
       id: buttons
@@ -115,7 +116,8 @@ MiniWindow
         margin-left: 4
 
   Panel
-    height: 18
+    visible: false
+    height: 0
     anchors.top: prev.bottom
     anchors.left: parent.left
     anchors.right: miniwindowScrollBar.left
@@ -132,16 +134,12 @@ MiniWindow
       @onClick: modules.game_battle.toggleFilterPanel()
       phantom: false
 
-  HorizontalSeparator
-    anchors.top: prev.top
-    anchors.left: parent.left
-    anchors.right: miniwindowScrollBar.left
-    margin-right: 1
-    margin-top: 11
+
 
   MiniWindowContents
     anchors.top: prev.bottom
-    margin-top: 6
+    margin-top: 7
+    padding-bottom: 1
 
     Panel
       id: battlePanel
@@ -153,3 +151,12 @@ MiniWindow
       layout:
         type: verticalBox
         fit-children: true
+
+  UIWidget
+    id: miniborder
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    image-source: /images/ui/miniborder
+    size: 14 14
+    margin-left: 2
+    margin-bottom: 2

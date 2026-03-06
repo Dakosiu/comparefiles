@@ -23,10 +23,12 @@ function init()
   g_keyboard.bindKeyPress('Alt+Right', function() minimapWidget:move(-1,0) end, gameRootPanel)
   g_keyboard.bindKeyPress('Alt+Up', function() minimapWidget:move(0,1) end, gameRootPanel)
   g_keyboard.bindKeyPress('Alt+Down', function() minimapWidget:move(0,-1) end, gameRootPanel)
-  g_keyboard.bindKeyDown('Ctrl+M', toggle)
-  g_keyboard.bindKeyDown('Ctrl+Shift+M', toggleFullMap)
+  -- g_keyboard.bindKeyDown('Ctrl+M', toggle)
+  -- g_keyboard.bindKeyDown('Ctrl+Shift+M', toggleFullMap)
 
   minimapWindow:setup()
+
+  minimapWindow:open()
 
   connect(g_game, {
     onGameStart = online,
@@ -61,8 +63,8 @@ function terminate()
   g_keyboard.unbindKeyPress('Alt+Right', gameRootPanel)
   g_keyboard.unbindKeyPress('Alt+Up', gameRootPanel)
   g_keyboard.unbindKeyPress('Alt+Down', gameRootPanel)
-  g_keyboard.unbindKeyDown('Ctrl+M')
-  g_keyboard.unbindKeyDown('Ctrl+Shift+M')
+  -- g_keyboard.unbindKeyDown('Ctrl+M')
+  -- g_keyboard.unbindKeyDown('Ctrl+Shift+M')
 
   minimapWindow:destroy()
   if minimapButton then

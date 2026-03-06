@@ -1,10 +1,11 @@
 CreatureButton < UICreatureButton
-  height: 20
-  margin-bottom: 5
+  height: 22
 
   UICreature
     id: creature
-    size: 22 22
+    size: 20 20
+    margin-top: 2
+    margin-left: 2
     anchors.left: parent.left
     anchors.top: parent.top
     phantom: true

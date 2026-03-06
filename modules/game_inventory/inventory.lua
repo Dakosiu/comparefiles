@@ -17,6 +17,11 @@ Icons[PlayerStates.Pz] = { tooltip = tr('You are within a protection zone'), pat
 Icons[PlayerStates.Bleeding] = { tooltip = tr('You are bleeding'), path = '/images/game/states/bleeding', id = 'condition_bleeding' }
 Icons[PlayerStates.Hungry] = { tooltip = tr('You are hungry'), path = '/images/game/states/hungry', id = 'condition_hungry' }
 
+SkullIcons = {}
+SkullIcons[SkullGreen] = { tooltip = tr('You are a member of a party'), path = '/images/game/states/skullgreen', id = 'skullIcon' } 
+SkullIcons[SkullWhite] = { tooltip = tr('You have attacked an unmarked player'), path = '/images/game/states/skullwhite', id = 'skullIcon' } 
+SkullIcons[SkullRed] = { tooltip = tr('You have killed too many unmarked players'), path = '/images/game/states/skullred', id = 'skullIcon' } 
+
 InventorySlotStyles = {
   [InventorySlotHead] = "HeadSlot",
   [InventorySlotNeck] = "NeckSlot",
@@ -43,7 +48,13 @@ chaseModeButton = nil
 safeFightButton = nil
 mountButton = nil
 fightModeRadioGroup = nil
+chaseModeRadioGroup = nil
+chaseModeStandBox = nil
+chaseModeChaseBox = nil
 buttonPvp = nil
+skillsButton = nil
+battleButton = nil
+vipButton = nil
 
 soulLabel = nil
 capLabel = nil
@@ -56,12 +67,10 @@ function init()
   })
   connect(g_game, { onGameStart = refresh })
 
-  g_keyboard.bindKeyDown('Ctrl+I', toggle)
-
 
   inventoryWindow = g_ui.loadUI('inventory', modules.game_interface.getRightPanel())
   inventoryWindow:disableResize()
-  inventoryPanel = inventoryWindow:getChildById('contentsPanel'):getChildById('inventoryPanel')
+  inventoryPanel = inventoryWindow:getChildById('contentsPanel')
   if not inventoryWindow.forceOpen then
     inventoryButton = modules.client_topmenu.addRightGameToggleButton('inventoryButton', tr('Inventory') .. ' (Ctrl+I)', '/images/topbuttons/inventory', toggle)
     inventoryButton:setOn(true)
@@ -75,10 +84,17 @@ function init()
     end
   end
   
+  skillsButton = inventoryWindow:recursiveGetChildById('skillsButton')
+  battleButton = inventoryWindow:recursiveGetChildById('battleButton')
+  vipButton = inventoryWindow:recursiveGetChildById('vipButton')
+
   -- controls
   fightOffensiveBox = inventoryWindow:recursiveGetChildById('fightOffensiveBox')
   fightBalancedBox = inventoryWindow:recursiveGetChildById('fightBalancedBox')
   fightDefensiveBox = inventoryWindow:recursiveGetChildById('fightDefensiveBox')
+  
+  chaseModeStandBox = inventoryWindow:recursiveGetChildById('chaseModeBoxStand')
+  chaseModeChaseBox = inventoryWindow:recursiveGetChildById('chaseModeBoxChase')
 
   chaseModeButton = inventoryWindow:recursiveGetChildById('chaseModeBox')
   safeFightButton = inventoryWindow:recursiveGetChildById('safeFightBox')
@@ -97,12 +113,17 @@ function init()
   fightModeRadioGroup:addWidget(fightBalancedBox)
   fightModeRadioGroup:addWidget(fightDefensiveBox)
 
+  chaseModeRadioGroup = UIRadioGroup.create()
+  chaseModeRadioGroup:addWidget(chaseModeStandBox)
+  chaseModeRadioGroup:addWidget(chaseModeChaseBox)
+
   connect(fightModeRadioGroup, { onSelectionChange = onSetFightMode })
-  connect(chaseModeButton, { onCheckChange = onSetChaseMode })
+  connect(chaseModeRadioGroup, { onSelectionChange = onSetChaseMode })
   connect(safeFightButton, { onCheckChange = onSetSafeFight })
   if buttonPvp then
     connect(buttonPvp, { onClick = onSetSafeFight2 })  
   end
+  
   connect(g_game, {
     onGameStart = online,
     onGameEnd = offline,
@@ -132,8 +153,11 @@ function init()
                          onFreeCapacityChange = onFreeCapacityChange })
 -- status end
   
+  connect(LocalPlayer, { onSkullChange = onSkullChange } )
+
   refresh()
   inventoryWindow:setup()
+  inventoryWindow:open()
 end
 
 function terminate()
@@ -142,8 +166,6 @@ function terminate()
     onBlessingsChange = onBlessingsChange
   })
   disconnect(g_game, { onGameStart = refresh })
-
-  g_keyboard.unbindKeyDown('Ctrl+I')
 
   -- controls
   if g_game.isOnline() then
@@ -170,6 +192,8 @@ function terminate()
                          onSoulChange = onSoulChange,
                          onFreeCapacityChange = onFreeCapacityChange })
   -- status end
+
+  disconnect(LocalPlayer, { onSkullChange = onSkullChange } )
 
   inventoryWindow:destroy()
   if inventoryButton then
@@ -266,7 +290,11 @@ function update()
   end
 
   local chaseMode = g_game.getChaseMode()
-  chaseModeButton:setChecked(chaseMode == ChaseOpponent)
+  if chaseMode == ChaseOpponent then
+    chaseModeRadioGroup:selectWidget(chaseModeChaseBox)
+  else
+    chaseModeRadioGroup:selectWidget(chaseModeStandBox)
+  end
 
   local safeFight = g_game.isSafeFight()
   safeFightButton:setChecked(not safeFight)
@@ -274,7 +302,7 @@ function update()
     if safeFight then
       buttonPvp:setOn(false)
     else
-      buttonPvp:setOn(true)  
+      buttonPvp:setOn(true)
     end
   end
   
@@ -361,9 +389,11 @@ function onSetFightMode(self, selectedFightButton)
   g_game.setFightMode(fightMode)
 end
 
-function onSetChaseMode(self, checked)
+function onSetChaseMode(self, selectedButton)
+  if selectedButton == nil then return end
+  local buttonId = selectedButton:getId()
   local chaseMode
-  if checked then
+  if buttonId == 'chaseModeBoxChase' then
     chaseMode = ChaseOpponent
   else
     chaseMode = DontChase
@@ -470,7 +500,7 @@ function onFreeCapacityChange(player, freeCapacity)
   if freeCapacity > 99999 then
     freeCapacity = math.min(9999, math.floor(freeCapacity/1000)) .. "k"
   end
-  capLabel:setText(tr('Cap') .. ':\n' .. freeCapacity)
+  capLabel:setText(tr('Cap') .. ':\n' .. (freeCapacity*100))
 end
 
 function onStatesChange(localPlayer, now, old)
@@ -484,4 +514,26 @@ function onStatesChange(localPlayer, now, old)
       toggleIcon(bitChanged)
     end
   end
+end
+
+function onSkullChange(localPlayer, skull)
+	local icon = conditionPanel:getChildById('skullIcon')
+
+    if skull < SkullGreen then
+	    if icon then
+		    icon:destroy()
+        end
+		return
+	end
+
+    if skull >= SkullGreen or skull <= SkullRed then
+	    local skullIcon = SkullIcons[skull]
+        if not icon then
+	        icon = g_ui.createWidget('ConditionWidget', conditionPanel)
+        end
+        icon:setId(skullIcon.id)
+	    icon:setImageSource(skullIcon.path)
+	    icon:setTooltip(skullIcon.tooltip)
+        return
+    end
 end

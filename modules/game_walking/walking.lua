@@ -102,6 +102,8 @@ function enableWSAD()
     player:lockWalk(100) -- 100 ms walk lock for all directions    
   end
 
+  g_keyboard.unbindKeyDown('Ctrl+S')
+
   bindWalkKey("W", North)
   bindWalkKey("D", East)
   bindWalkKey("S", South)
@@ -123,6 +125,8 @@ function disableWSAD()
     return
   end
   wsadWalking = false
+
+  g_keyboard.bindKeyDown('Ctrl+S', modules.game_skills.toggle)
 
   unbindWalkKey("W")
   unbindWalkKey("D")
