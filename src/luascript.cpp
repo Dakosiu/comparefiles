@@ -1703,7 +1703,7 @@ void LuaScriptInterface::registerEnums()
 
 	registerEnum(WEAPON_NONE)
 	registerEnum(WEAPON_SWORD)
-	registerEnum(WEAPON_CLUB)
+	registerEnum(WEAPON_MELEE)
 	registerEnum(WEAPON_AXE)
 	registerEnum(WEAPON_SHIELD)
 	registerEnum(WEAPON_DISTANCE)
@@ -16667,7 +16667,7 @@ int LuaScriptInterface::luaCreateWeapon(lua_State* L)
 	switch (type) {
 		case WEAPON_SWORD:
 		case WEAPON_AXE:
-		case WEAPON_CLUB: {
+		case WEAPON_MELEE: {
 			WeaponMelee* weapon = new WeaponMelee(getScriptEnv()->getScriptInterface());
 			if (weapon) {
 				pushUserdata<WeaponMelee>(L, weapon);

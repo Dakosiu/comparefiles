@@ -577,15 +577,11 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 	switch (param) {
 		case CONDITION_PARAM_SKILL_MELEE: {
 			skills[SKILL_CLUB] = value;
-			skills[SKILL_AXE] = value;
-			skills[SKILL_SWORD] = value;
 			return true;
 		}
 
 		case CONDITION_PARAM_SKILL_MELEEPERCENT: {
 			skillsPercent[SKILL_CLUB] = value;
-			skillsPercent[SKILL_AXE] = value;
-			skillsPercent[SKILL_SWORD] = value;
 			return true;
 		}
 
@@ -596,36 +592,6 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 
 		case CONDITION_PARAM_SKILL_FISTPERCENT: {
 			skillsPercent[SKILL_FIST] = value;
-			return true;
-		}
-
-		case CONDITION_PARAM_SKILL_CLUB: {
-			skills[SKILL_CLUB] = value;
-			return true;
-		}
-
-		case CONDITION_PARAM_SKILL_CLUBPERCENT: {
-			skillsPercent[SKILL_CLUB] = value;
-			return true;
-		}
-
-		case CONDITION_PARAM_SKILL_SWORD: {
-			skills[SKILL_SWORD] = value;
-			return true;
-		}
-
-		case CONDITION_PARAM_SKILL_SWORDPERCENT: {
-			skillsPercent[SKILL_SWORD] = value;
-			return true;
-		}
-
-		case CONDITION_PARAM_SKILL_AXE: {
-			skills[SKILL_AXE] = value;
-			return true;
-		}
-
-		case CONDITION_PARAM_SKILL_AXEPERCENT: {
-			skillsPercent[SKILL_AXE] = value;
 			return true;
 		}
 
@@ -748,18 +714,6 @@ int32_t ConditionAttributes::getParam(ConditionParam_t param)
 
 		case CONDITION_PARAM_SKILL_CLUBPERCENT:
 			return skillsPercent[SKILL_CLUB];
-
-		case CONDITION_PARAM_SKILL_SWORD:
-			return skills[SKILL_SWORD];
-
-		case CONDITION_PARAM_SKILL_SWORDPERCENT:
-			return skillsPercent[SKILL_SWORD];
-
-		case CONDITION_PARAM_SKILL_AXE:
-			return skills[SKILL_AXE];
-
-		case CONDITION_PARAM_SKILL_AXEPERCENT:
-			return skillsPercent[SKILL_AXE];
 
 		case CONDITION_PARAM_SKILL_DISTANCE:
 			return skills[SKILL_DISTANCE];

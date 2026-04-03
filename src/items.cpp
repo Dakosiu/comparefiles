@@ -65,9 +65,9 @@ const std::unordered_map<std::string, ItemParseAttributes_t> ItemParseAttributes
 	{"managain", ITEM_PARSE_MANAGAIN},
 	{"manaticks", ITEM_PARSE_MANATICKS},
 	{"manashield", ITEM_PARSE_MANASHIELD},
-	{"skillsword", ITEM_PARSE_SKILLSWORD},
-	{"skillaxe", ITEM_PARSE_SKILLAXE},
-	{"skillclub", ITEM_PARSE_SKILLCLUB},
+	{"skillsword", ITEM_PARSE_SKILLMELEE},
+	{"skillaxe", ITEM_PARSE_SKILLMELEE},
+	{"skillclub", ITEM_PARSE_SKILLMELEE},
 	{"skilldist", ITEM_PARSE_SKILLDIST},
 	{"skillfish", ITEM_PARSE_SKILLFISH},
 	{"skillshield", ITEM_PARSE_SKILLSHIELD},
@@ -169,9 +169,10 @@ const std::unordered_map<std::string, RaceType_t> RaceTypesMap = {
 };
 
 const std::unordered_map<std::string, WeaponType_t> WeaponTypesMap = {
-	{"sword", WEAPON_SWORD},
-	{"club", WEAPON_CLUB},
-	{"axe", WEAPON_AXE},
+	{"melee", WEAPON_MELEE},
+	{"sword", WEAPON_MELEE},
+	{"club", WEAPON_MELEE},
+	{"axe", WEAPON_MELEE},
 	{"shield", WEAPON_SHIELD},
 	{"distance", WEAPON_DISTANCE},
 	{"wand", WEAPON_WAND},
@@ -900,17 +901,7 @@ void Items::parseItemNode(const pugi::xml_node& itemNode, uint16_t id)
 					break;
 				}
 
-				case ITEM_PARSE_SKILLSWORD: {
-					abilities.skills[SKILL_SWORD] = pugi::cast<int32_t>(valueAttribute.value());
-					break;
-				}
-
-				case ITEM_PARSE_SKILLAXE: {
-					abilities.skills[SKILL_AXE] = pugi::cast<int32_t>(valueAttribute.value());
-					break;
-				}
-
-				case ITEM_PARSE_SKILLCLUB: {
+				case ITEM_PARSE_SKILLMELEE: {
 					abilities.skills[SKILL_CLUB] = pugi::cast<int32_t>(valueAttribute.value());
 					break;
 				}

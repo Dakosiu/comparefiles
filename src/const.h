@@ -347,7 +347,7 @@ enum Icons_t {
 enum WeaponType_t : uint8_t {
 	WEAPON_NONE,
 	WEAPON_SWORD,
-	WEAPON_CLUB,
+	WEAPON_MELEE,
 	WEAPON_AXE,
 	WEAPON_SHIELD,
 	WEAPON_DISTANCE,
